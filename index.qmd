@@ -1,0 +1,142 @@
+---
+title: PLNT*6800 - Reproducible Ag Data Science with R
+subtitle: "Winter 2025"
+author: "Dr. Adrian Correndo"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    theme:
+      light: flatly
+      dark: darkly
+---
+
+# Course Outline
+
+## 1. Course Information
+
+-   **Course Code:** PLNT6800
+-   **Course Title:** Reproducible Ag Data Science with R
+-   **Term:** Winter
+-   **Credits:** 0.50
+
+### Lecture Schedule
+
+-   **Days:** Wednesdays and Fridays
+-   **Time:** 1:00 pm - 2:20 pm
+-   **Location:** MCKN 310
+
+### Instructor Information
+
+-   **Dr. Adrian Correndo**
+-   **Email:** acorrend@uoguelph.ca
+
+## 2. Course Description
+
+Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
+
+
+### Prerequisite(s)
+
+A basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.
+
+
+### Textbooks and Resources
+
+**Recommended:**
+
+-   *R for Data Science* by Hadley Wickham & Garrett Grolemund
+
+-   Online resources and package documentation will be provided throughout the course.
+
+## 3. Course Learning Outcomes
+
+By the end of this course, students will be able to:
+
+1.  Understand and apply the principles of reproducible research in data science.
+
+2.  Use version control tools like GitHub for managing code and collaborative projects.
+
+3.  Develop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.
+
+4.  Apply statistical models to agricultural data and interpret the results.
+
+5.  Produce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.
+
+## 4. Calendar
+
+The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.
+
+| **Week** | **Date** | **Topic** | **Code** | **Lesson** |
+|-----------|-----------|----------------------------|-----------|-----------|
+| 1 | Jan 8 | Introductions, Reproducibility | 🌐 | 🎥 |
+|  | Jan 10 | Basics of version control & GitHub | 🌐 | 🎥 |
+| 2 | Jan 15 | Fundamentals of R Coding I | 🌐 | 🎥 |
+|  | Jan 17 | Fundamentals of R Coding II | 🌐 | 🎥 |
+| 3 | Jan 22 | Data Wrangling I | 🌐 | 🎥 |
+|  | Jan 24 | Data Wrangling II | 🌐 | 🎥 |
+| 4 | Jan 29 | Data Wrangling III | 🌐 | 🎥 |
+|  | Jan 31 | Iteration: Loops & Mapping | 🌐 | 🎥 |
+| 5 | Feb 5 | Weather Data: Retrieving & Processing | 🌐 | 🎥 |
+|  | Feb 7 | Data Viz I: ggplot2 | 🌐 | 🎥 |
+| 6 | Feb 12 | Data Viz II: Layers & Basic Plots | 🌐 | 🎥 |
+|  | Feb 14 | Data Viz III: Advanced plots, maps | 🌐 | 🎥 |
+|  |  | *Winter Break begins after the end of class* |  |  |
+| 7 | Feb 26 | Models I: Data Types & Distributions | 🌐 | 🎥 |
+|  | Feb 28 | Models II: Explanatory vs. Predictive | 🌐 | 🎥 |
+| 8 | Mar 5 | Models III: Linear Models | 🌐 | 🎥 |
+|  | Mar 7 | Models IV: Fixed vs. Random Effects | 🌐 | 🎥 |
+| 9 | Mar 12 | Models V: Mixed Effect Models | 🌐 | 🎥 |
+|  | Mar 14 | Models VI: Simple Linear Regression | 🌐 | 🎥 |
+| 10 | Mar 19 | Models VII: Multiple Linear Regression | 🌐 | 🎥 |
+|  | Mar 24 | Models VIII: Multivariate Analysis | 🌐 | 🎥 |
+| 11 | Mar 26 | Quarto / Rmarkdown tricks | 🌐 | 🎥 |
+|  | Mar 28 | Review class | 🌐 | 🎥 |
+| 12 | Apr 2 | Semester Projects Presentations I | 🌐 |  |
+|  | Apr 4 | Semester Projects Presentations II | 🌐 |  |
+| 13 | Apr 11 | Final Exam Due (11.59 pm) | 🌐 |  |
+
+###  Last Day to Drop Course
+
+TBD
+
+
+## 5. Assessment Breakdown
+
+| Component | Weight (%) | Details |
+|-----------------|-----------------|--------------------------------------|
+| Weekly Exercises | 30% | Hands-on exercises to practice skills covered in each week's topic. |
+| Semester Project | 50% | Complete data analysis project, report, and presentation. |
+| Final Exam | 20% | Cumulative assessment covering all topics from the course. |
+
+### Final Exam
+
+-   **Date:** Apr 11, 11.59 pm.
+
+## 6. Course Policies
+
+### a. Late Submissions
+
+Assignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.
+
+### b. Use of Devices
+
+Electronic recording of classes is forbidden without prior permission from the instructor.
+
+### c. Academic honesty
+
+Please adhere to the following guidelines when working on assignments for this course:
+
+-   **Individual and Team Assignments**: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.
+
+-   **Exams**: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved. 
+
+-   **Reusing Code**: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed.  Failure to cite reused code will be considered plagiarism.
+
+## 7. Accessibility
+
+Students requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.
+
+## 8. Land Acknowledgement
+
+The University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.
