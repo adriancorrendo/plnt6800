@@ -1,55 +1,30 @@
 ---
-title: PLNT*6800 - Reproducible Ag Data Science with R
-subtitle: "Winter 2025"
+title: PLNT*6800*01 - Special Topics in Plant Science
+subtitle: "Reproducible Ag Data Science with R"
 author: "Dr. Adrian Correndo"
 format: 
   html:
     toc: true
-    toc-depth: 3
+    toc-title: 'Contents'
+    toc-location: left
+    toc-depth: 4
+    number-sections: false
     theme:
-      light: flatly
+      light: journal
       dark: darkly
+    code-tools: true
+    code-fold: true
+    code-summary: 'Show code'
+    code-link: true
+highlight-style: pygments
+smooth-scroll: true
 ---
 
-# Course Outline
-
-## 1. Course Information
-
--   **Course Code:** PLNT6800
--   **Course Title:** Reproducible Ag Data Science with R
--   **Term:** Winter
--   **Credits:** 0.50
-
-### Lecture Schedule
-
--   **Days:** Wednesdays and Fridays
--   **Time:** 1:00 pm - 2:20 pm
--   **Location:** MCKN 310
-
-### Instructor Information
-
--   **Dr. Adrian Correndo**
--   **Email:** acorrend@uoguelph.ca
-
-## 2. Course Description
+## Welcome!
 
 Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
 
-
-### Prerequisite(s)
-
-A basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.
-
-
-### Textbooks and Resources
-
-**Recommended:**
-
--   *R for Data Science* by Hadley Wickham & Garrett Grolemund
-
--   Online resources and package documentation will be provided throughout the course.
-
-## 3. Course Learning Outcomes
+### Course Learning Outcomes
 
 By the end of this course, students will be able to:
 
@@ -63,80 +38,38 @@ By the end of this course, students will be able to:
 
 5.  Produce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.
 
-## 4. Calendar
+### Course Technology Requirements
 
-The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.
+This course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following
 
-| **Week** | **Date** | **Topic** | **Code** | **Lesson** |
-|-----------|-----------|----------------------------|-----------|-----------|
-| 1 | Jan 8 | Introductions, Reproducibility | 🌐 | 🎥 |
-|  | Jan 10 | Basics of version control & GitHub | 🌐 | 🎥 |
-| 2 | Jan 15 | Fundamentals of R Coding I | 🌐 | 🎥 |
-|  | Jan 17 | Fundamentals of R Coding II | 🌐 | 🎥 |
-| 3 | Jan 22 | Data Wrangling I | 🌐 | 🎥 |
-|  | Jan 24 | Data Wrangling II | 🌐 | 🎥 |
-| 4 | Jan 29 | Data Wrangling III | 🌐 | 🎥 |
-|  | Jan 31 | Iteration: Loops & Mapping | 🌐 | 🎥 |
-| 5 | Feb 5 | Weather Data: Retrieving & Processing | 🌐 | 🎥 |
-|  | Feb 7 | Data Viz I: ggplot2 | 🌐 | 🎥 |
-| 6 | Feb 12 | Data Viz II: Layers & Basic Plots | 🌐 | 🎥 |
-|  | Feb 14 | Data Viz III: Advanced plots, maps | 🌐 | 🎥 |
-|  |  | *Winter Break begins after the end of class* |  |  |
-| 7 | Feb 26 | Models I: Data Types & Distributions | 🌐 | 🎥 |
-|  | Feb 28 | Models II: Explanatory vs. Predictive | 🌐 | 🎥 |
-| 8 | Mar 5 | Models III: Linear Models | 🌐 | 🎥 |
-|  | Mar 7 | Models IV: Fixed vs. Random Effects | 🌐 | 🎥 |
-| 9 | Mar 12 | Models V: Mixed Effect Models | 🌐 | 🎥 |
-|  | Mar 14 | Models VI: Simple Linear Regression | 🌐 | 🎥 |
-| 10 | Mar 19 | Models VII: Multiple Linear Regression | 🌐 | 🎥 |
-|  | Mar 24 | Models VIII: Multivariate Analysis | 🌐 | 🎥 |
-| 11 | Mar 26 | Quarto / Rmarkdown tricks | 🌐 | 🎥 |
-|  | Mar 28 | Review class | 🌐 | 🎥 |
-| 12 | Apr 2 | Semester Projects Presentations I | 🌐 |  |
-|  | Apr 4 | Semester Projects Presentations II | 🌐 |  |
-| 13 | Apr 11 | Final Exam Due (11.59 pm) | 🌐 |  |
+#### **1. Communication tools:**
 
-###  Last Day to Drop Course
+**CourseLink**. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink\@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm
 
-TBD
+**Zoom**. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend\@uoguelph.ca).
 
+#### **2. Software & Tools:**
 
-## 5. Assessment Breakdown
+-   **R** (latest stable version, available at CRAN).
 
-| Component | Weight (%) | Details |
-|-----------------|-----------------|--------------------------------------|
-| Weekly Exercises | 30% | Hands-on exercises to practice skills covered in each week's topic. |
-| Semester Project | 50% | Complete data analysis project, report, and presentation. |
-| Final Exam | 20% | Cumulative assessment covering all topics from the course. |
+-   **RStudio/Posit IDE** (desktop or cloud-based version for writing and running R code).
 
-### Final Exam
+-   **Course-Specific Libraries and Packages**: Students will be required to install R packages. Detailed instructions will be provided in class.
 
--   **Date:** Apr 11, 11.59 pm.
+-   **Version Control and Collaboration Tools**: **Git** (for version control) and a free **GitHub** account for collaborative project work and sharing code.
 
-## 6. Course Policies
+#### **3. Computing Requirements:**
 
-### a. Late Submissions
+A laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:
 
-Assignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.
+-   **Processor**: At least a dual-core processor.
 
-### b. Use of Devices
+-   **RAM**: 8 GB or more (16 GB recommended for handling larger datasets).
 
-Electronic recording of classes is forbidden without prior permission from the instructor.
+-   **Storage**: 10 GB of free space for software installation, course files, and datasets.
 
-### c. Academic honesty
+#### **4. Internet Access:**
 
-Please adhere to the following guidelines when working on assignments for this course:
+Reliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).
 
--   **Individual and Team Assignments**: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.
-
--   **Exams**: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved. 
-
--   **Reusing Code**: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed.  Failure to cite reused code will be considered plagiarism.
-
-## 7. Accessibility
-
-Students requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.
-
-## 8. Land Acknowledgement
-
-The University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.
+### 

@@ -1,0 +1,71 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  page-navigation: true
+  title: "PLNT6800 - Winter 2025"
+  description: "Reproducible Ag Data Science with R"
+  site-url: "https://adriancorrendo.github.io/"
+  repo-actions: [edit, issue]
+  
+  open-graph: true
+  twitter-card:
+    creator: "@aacorrendo"
+    
+  page-footer: 
+    left: "<span> Developed by Adrian Correndo using [Quarto](https://quarto.org/). License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). </span>"
+    background: dark
+  
+  navbar:
+    
+    right: 
+      - icon: globe
+        href: https://adriancorrendo.github.io/
+      - icon: github
+        href: https://github.com/adriancorrendo/plnt6800/
+      - icon: twitter
+        href: https://twitter.com/aacorrendo
+      - icon: linkedin
+        href: https://www.linkedin.com/in/adriancorrendo/
+      
+  sidebar:
+    logo: "images/plnt6800_logo.png"
+    pinned: true
+    align: center
+    tools:
+      - icon: github
+        href: https://github.com/adriancorrendo/
+        
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: "Home" 
+      - section: "Slides"
+        contents:
+          - href: slides/day1.qmd
+            text: "Day 1"
+      - section: "Course Outline"
+        contents:
+          - href: outline/outline.qmd
+            text: "Course Outline"
+         
+format:
+  html:
+    theme:
+      light: journal
+      dark: darkly
+    highlight-style: pygments
+    css: styles.css
+    toc: true
+    toc-title: "Content"
+    toc-location: right
+    code-copy: true
+    code-overflow: scroll
+    
+freeze: auto
+
+editor: visual
+

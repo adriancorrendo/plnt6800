@@ -1,0 +1,376 @@
+---
+title: "Reproducible Ag Data Science with R"
+author: "Adrian A. Correndo"
+date: "2025-01-08"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    slide-number: true
+    show-slide-number: all
+    toc: true
+    toc_float: true
+    toc-depth: 1
+    toc-location: body
+    toc-title: "Contents"
+    smaller: false
+    scrollable: true
+    preview-links: auto
+    logo: ../images/statasaurus_logo.png
+    css: styles.css
+    footer: <https://adriancorrendo.github.io>
+    menu:
+      side: right
+      width: wide
+    code-tools:
+      code-block-bg: true
+highlight-style: pygments
+link-citations: TRUE
+---
+
+## Welcome 👋
+
+-   **Goal**: Gain foundational knowledge and understand how data science can improve agricultural practices.
+-   Let's dive into it with an emphasis on reproducibility and data literacy.
+
+:::: fragment
+::: callout-tip
+-   **Remember**: Questions and discussions are encouraged! 💬
+:::
+::::
+
+## Objectives for Today 📌
+
+-   Define core concepts:
+    -   Data Science,
+    -   Data Literacy,
+    -   Reproducibility.
+-   Understand the role of **reproducible data science** in agriculture.
+-   Explore **challenges** and **opportunities**.
+
+# Core concepts
+
+## What is Data Science in Agriculture? 🌱
+
+-   Applying data engineering, analysis, statistics, and machine learning to solve agricultural problems.
+-   **Examples**: Precision agriculture, yield forecasting, environmental monitoring.
+
+## Key Definitions 📖
+
+::::::: columns
+::: {.column width="55%"}
+-   **Data Science**: Extracting insights from data using algorithms and statistical methods. <br/>
+
+-   **Data Literacy**: Skills to read, interpret, and analyze data. <br/>
+
+-   **Reproducibility**: Ensuring analyses can be recreated by others.
+:::
+
+::::: {.column width="45%"}
+:::: fragment
+::: callout-note
+**Why does reproducibility matter?**
+
+-   Trustworthy results,
+
+-   transparency, &
+
+-   collaboration in research.
+:::
+::::
+:::::
+:::::::
+
+## Challenges in Data Literacy 🌐
+
+-   Diverse data sources (weather, soil, crop data)
+-   Standardization issues across datasets
+-   Data skills gap among ag professionals
+
+## Why does it matter?
+
+::: {.column width="55%"}
+-   It is the **#1 skill-gap** in the job market: <br/>
+
+    -   Academia,
+    -   Industry,
+    -   Government, NGOs, etc.
+:::
+
+::: {.column width="45%"}
+![](../images/reproducibility.png){.absolute top="0" right="0" height="65%"}
+:::
+
+-   Is there a REPRODUCIBILITY CRISIS in science?
+
+-   A [Nature survey](https://www.nature.com/articles/533452a) with \~1,600 researchers found that
+
+    -   ***+70%*** failure rate to reproduce another scientist's experiments
+
+    -   ***+50%*** have failed to reproduce their own experiments
+
+    -   ***Main causes***: selective reporting, weak stats, code/data unavailability, etc.
+
+## GOOD NEWS IS...
+
+:::: fragment
+::: {.column width="100%"}
+![](../images/repbrush.png){.absolute top="50" left="200" height="100%"}
+:::
+::::
+
+## **Why Reproducibility in Agriculture?**
+
+-   Agriculture research relies heavily on environmental data, often variable and complex.
+
+-   **We have complex challenges** 🗒️
+
+    -   Variability due to environmental factors, soil types, and weather patterns.
+    -   Complex datasets involving long-term studies, geographical variability.
+
+-   **Opportunities** ✅
+
+    -   Reproducibility helps stakeholders make reliable, data-driven decisions.
+    -   Ensures scientific findings are reliable and valid.
+    -   Facilitates collaboration, accountability, and efficiency among researchers and practitioners.
+
+## Challenges in [Ag-research]{style="color:forestgreen"}
+
+::: fragment
+### [REPRODUCIBILITY]{style="color:#2a9d8f"} 💻
+
+-   Limited capability to reproduce analyses & results
+
+-   DATA are rarely shared, CODES even less
+:::
+
+::: fragment
+### [ACCESSIBILITY]{style="color:#023e8a"} 📲
+
+-   Yet we are not translating enough science into flexible, and transparent decision tools.
+:::
+
+::: fragment
+"But it all starts with ..."
+:::
+
+::: fragment
+### [EDUCATION]{style="color:#BA0C2F"} 🎓
+
+-   Limited curriculum in applied data science
+:::
+
+## Discussion Prompt 💬
+
+::: fragment
+<br/>
+
+### i. Where do you think improved data literacy & reproducibility could impact agriculture the most? {style="color:#bc4749"}
+
+<br/>
+:::
+
+:::: fragment
+::: callout-tip
+-   Consider areas like resource management, market predictions, and farm management.
+:::
+::::
+
+::: fragment
+<br/>
+
+### ii. What practical challenges do you face (or may) in implementing them? {style="color:#457b9d"}
+
+<br/>
+:::
+
+# What is R?
+
+::: fragment
+## What is R? 🧮
+
+-   **R** is a programming language and environment primarily for statistical analysis, data visualization, and data science.
+-   Known for its extensive **statistical libraries**, **data manipulation capabilities**, and **graphics**.
+-   Widely used in fields like **data science**, **bioinformatics**, **agriculture**, and **social sciences**.
+:::
+
+<br/>
+
+::: fragment
+### Brief History of R 📜
+
+-   **Origin**: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.
+-   **Inspiration**: R is an implementation of the S language, designed at Bell Laboratories for data analysis.
+-   **Open Source**: Released as free, open-source software, leading to a large community of users and contributors.
+-   **Popularity**: Today, R is one of the top programming languages for statistical analysis and data science.
+:::
+
+# Alternatives to R
+
+## R vs. Excel for Data Wrangling 📊
+
+::::: columns
+::: {.column width="65%"}
+-   **Excel**: Known for ease of use, popular among business and finance professionals.
+    -   **Pros**: Intuitive, good for small datasets and quick analysis.
+    -   **Cons**: Limited in handling large datasets, lacks reproducibility.
+-   **R**: Provides powerful data manipulation packages (e.g., `dplyr`, `tidyr`).
+    -   **Pros**: Handles large datasets efficiently, supports complex transformations, fully reproducible.
+    -   **Cons**: Requires programming knowledge, steeper learning curve than Excel.
+:::
+
+::: {.column width="35%"}
+![](https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019–present%29.svg){fig-align="right" width="290"}
+:::
+:::::
+
+:::: fragment
+::: callout-tip
+-   **Tip**: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.
+:::
+::::
+
+## R vs. SAS for Statistical Analysis 📉
+
+::::::: columns
+::: {.column width="65%"}
+-   **SAS**: A powerful statistical software suite used widely in industries such as healthcare and finance.
+    -   **Pros**: Robust for regulatory environments, highly standardized.
+    -   **Cons**: Proprietary and costly, limited community contributions.
+-   **R**: Offers a vast array of statistical packages and flexibility in method implementation.
+    -   **Pros**: Free and open-source, customizable, strong community support.
+    -   **Cons**: Requires more coding and configuration for regulatory standards.
+:::
+
+::: {.column width="35%"}
+![](../images/SASlogo.svg){fig-align="right" width="290" title="By SAS Institute - http://www.sas.com, Public Domain, https://commons.wikimedia.org/w/index.php?curid=5291445"}
+:::
+
+:::: fragment
+::: callout-note
+-   **Comparison**: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.
+:::
+::::
+:::::::
+
+## R vs Python  🔍
+
+-   R, & Python are popular languages in data science and research.
+-   Each language has unique strengths, ideal use cases, and licensing considerations.
+
+:::::: columns
+::: {.column width="34%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/1448px-R_logo.svg.png?20240131042527){fig-align="right" width="290"}
+:::
+
+::: {.column width="33%"}
+![](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg){fig-align="right" width="290"}
+:::
+
+
+::::::
+
+## R: Strengths and Use Cases 🧮
+
+:::::: columns
+:::: {.column width="65%"}
+-   **Designed for Statistics**: R is optimized for statistical analysis, making it ideal for research and academia.
+-   **Visualization**: Excellent data visualization libraries like `ggplot2`.
+-   **Licensing**: Licensed under **GPL**; many packages are also GPL, with some using MIT or BSD.
+
+::: fragment
+### Ideal Use Cases:
+
+-   Data analysis, visualization, and complex statistical modeling.
+-   Research and academia where open-source, reproducible code is needed.
+-   **Licensing in Production**: GPL may restrict proprietary use; check package licenses carefully.
+:::
+::::
+
+::: {.column width="35%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/1448px-R_logo.svg.png?20240131042527){fig-align="right" width="290"}
+:::
+::::::
+
+## Python: Strengths and Use Cases 🐍
+
+:::::: columns
+:::: {.column width="65%"}
+-   **General-Purpose Language**: Python is popular for both data science and software development.
+-   **Machine Learning & AI**: Extensive libraries for ML and AI, such as `scikit-learn`, `TensorFlow`.
+-   **Licensing**: PSFL (Python Software Foundation License), highly permissive for proprietary use.
+
+::: fragment
+### Ideal Use Cases:
+
+-   End-to-end development, from data wrangling to ML and web development.
+-   Production-ready ML and AI applications.
+-   **Licensing in Production**: Permissive licenses allow closed-source use, making Python production-friendly.
+:::
+::::
+
+::: {.column width="33%"}
+![](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg){fig-align="right" width="290"}
+:::
+::::::
+
+## Comparison Summary 📊
+
+:::: fragment
+::: callout-note
+-   **R**: Open-source, powerful for data science, statistical analysis, and visualizations.
+-   **Excel**: User-friendly, ideal for simple tasks, but limited for complex data wrangling.
+-   **SAS**: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.
+:::
+::::
+
+<br/>
+
+::: fragment
+| Feature | R | Python |
+|------------------|------------------|-------------------|
+| **Primary Strength** | Statistics & Visualization | General-purpose, ML, AI |
+| **Performance** | Moderate | Moderate |
+| **Licensing** | GPL (core), MIT, BSD (some) | PSFL, highly permissive |
+| **Production Use** | Limited by GPL | Very friendly for proprietary |
+:::
+
+<br/>
+
+:::: fragment
+::: callout-tip
+-   **R**: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.
+-   **Python**: Strong in ML and AI with highly permissive licensing, making it ideal for production.
+:::
+::::
+
+::: fragment
+Choosing the right tool depends on your project's requirements, team skills, and licensing needs for research vs. production.
+:::
+
+------------------------------------------------------------------------
+
+## THANK YOU!
+
+acorrend\@uoguelph.ca
+
+::: {style="text-align: right; font-size: 0.75em"}
+Adrian A. Correndo\
+Assistant Professor\
+Sustainable Cropping Systems\
+Department of Plant Agriculture\
+University of Guelph\
+:::
+
+Rm 226, Crop Science Bldg \| Department of Plant Agriculture
+
+Ontario Agricultural College \| University of Guelph \| 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.
+
+<br/>
+
+### Contact me
+
+|  |  |  |
+|--------------------|----------------------------|-------------------------|
+| [![](../images/X_logo.png.webp){fig-align="center" width="60"}](http://twitter.com/aacorrendo) | [![](../images/linkedin-icon.png){fig-align="center" width="60"}](https://www.linkedin.com/in/adriancorrendo/) | [![](../images/github-brands.svg){fig-align="center" width="60" height="60"}](http://github.com/adriancorrendo) |
+| [![](../images/orcid.png){fig-align="center" width="60"}](https://orcid.org/0000-0002-4172-289X) | [![](../images/768px-Google_Scholar_logo.png){fig-align="center" width="60"}](https://scholar.google.com/citations?user=4h88EXkAAAAJ&hl=en) | [![](../images/ResearchGate_icon.png){fig-align="center" width="60"}](https://www.researchgate.net/profile/Adrian-Correndo-2) |

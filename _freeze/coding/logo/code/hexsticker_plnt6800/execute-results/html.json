@@ -1,0 +1,17 @@
+{
+  "hash": "7d95ac8a572eff72a3448d74cd2d1615",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"2025 logo\"\nauthor: Adrian Correndo\nformat: html\n---\n\n\n\n# Creating the sticker\n\nThis is a short tutorial to easily create your own stickers!\n\nLet's give it a try for this group and find our identity!\n🙃\n\n## 00. Libraries\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(magick)\nlibrary(hexSticker)\nlibrary(datasauRus)\n#install.packages(\"datasauRus\")\nlibrary(sysfonts)\n```\n:::\n\n\n\n## 01. Prepare images\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# datasauRus\ndatasaurus_df <- datasauRus::datasaurus_dozen %>% dplyr::filter(dataset == \"dino\")\n\ndino_plot <- ggplot2::ggplot(datasaurus_df, aes(x = x, y = y)) +\n  geom_point(color = \"grey90\", \n             fill = \"grey65\", shape = 22, size = 0.55) +\n  theme(panel.background = element_rect(fill = NULL, color = NULL),\n        panel.border = element_blank())+\n  theme_void()\n```\n:::\n\n\n\n## 02. Load fonts\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nfonts <- font_files()\n\n# Check font paths\n#font_paths()\n\n# Add the font we want\nfont_add(family = \"DIN Alternate\", \n         regular = \"/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf\")\n```\n:::\n\n\n\n## 03. Stickers\n\n### Defining colors palette\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# define pallete\npalette <- list('background' = '#FFC72A',\n                'font' = '#C20430',\n                'border' = '#000000',\n                'note' = 'grey25')\n\n# Single Palette elements\nbackground_color = '#C20430'\nfont_color = \"#FFC72A\"\nborder_color = \"#000000\"\nnote_color = \"grey25\"\n```\n:::\n\n\n\n\n### ODSR logo\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplnt6800 <- sticker(\n  # Title\n  package = \"PLNT*6800\",\n  # Title attributes\n  p_family = \"DIN Alternate\",\n  p_color = font_color,\n  p_size = 33,\n  p_y = 0.6,\n  # Image\n  subplot = dino_plot,\n  # Image attributes\n  s_width = 0.95,\n  s_height = 0.95,\n  s_x = 1,\n  s_y = 1.2,\n  # Hexagon attributes\n  h_fill = background_color,\n  h_color = border_color,\n  h_size = 2,\n  # Add a link\n  url = \"image: datasauRus package\",\n  u_size = 6,\n  u_color = note_color,\n  # Add spotlight\n  spotlight = T,\n  # Spotlight attributes\n  # add some shadow to the pictures\n  l_y = 1.4,\n  l_x = 0.9,\n  l_width = 2.2,\n  l_height = 2.2,\n  l_alpha = 0.20,\n  # File saving\n  filename = \"plnt6800_logo.png\",\n  dpi = 600,\n  white_around_sticker = FALSE\n  ) \n```\n:::\n\n\n\n::: panel-tabset\n## Final logo\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](hexsticker_plnt6800_files/figure-html/unnamed-chunk-6-1.png){width=672}\n:::\n:::\n\n\n:::\n",
+    "supporting": [
+      "hexsticker_plnt6800_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
