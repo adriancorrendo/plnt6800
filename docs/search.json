@@ -1,0 +1,365 @@
+[
+  {
+    "objectID": "coding/logo/code/hexsticker_plnt6800.html",
+    "href": "coding/logo/code/hexsticker_plnt6800.html",
+    "title": "2025 logo",
+    "section": "",
+    "text": "This is a short tutorial to easily create your own stickers!\nLet’s give it a try for this group and find our identity! 🙃\n\n\n\nlibrary(tidyverse)\nlibrary(magick)\nlibrary(hexSticker)\nlibrary(datasauRus)\n#install.packages(\"datasauRus\")\nlibrary(sysfonts)\n\n\n\n\n\n# datasauRus\ndatasaurus_df &lt;- datasauRus::datasaurus_dozen %&gt;% dplyr::filter(dataset == \"dino\")\n\ndino_plot &lt;- ggplot2::ggplot(datasaurus_df, aes(x = x, y = y)) +\n  geom_point(color = \"grey90\", \n             fill = \"grey65\", shape = 22, size = 0.55) +\n  theme(panel.background = element_rect(fill = NULL, color = NULL),\n        panel.border = element_blank())+\n  theme_void()\n\n\n\n\n\nfonts &lt;- font_files()\n\n# Check font paths\n#font_paths()\n\n# Add the font we want\nfont_add(family = \"DIN Alternate\", \n         regular = \"/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf\")\n\n\n\n\n\n\n\n# define pallete\npalette &lt;- list('background' = '#FFC72A',\n                'font' = '#C20430',\n                'border' = '#000000',\n                'note' = 'grey25')\n\n# Single Palette elements\nbackground_color = '#C20430'\nfont_color = \"#FFC72A\"\nborder_color = \"#000000\"\nnote_color = \"grey25\"\n\n\n\n\n\nplnt6800 &lt;- sticker(\n  # Title\n  package = \"PLNT*6800\",\n  # Title attributes\n  p_family = \"DIN Alternate\",\n  p_color = font_color,\n  p_size = 33,\n  p_y = 0.6,\n  # Image\n  subplot = dino_plot,\n  # Image attributes\n  s_width = 0.95,\n  s_height = 0.95,\n  s_x = 1,\n  s_y = 1.2,\n  # Hexagon attributes\n  h_fill = background_color,\n  h_color = border_color,\n  h_size = 2,\n  # Add a link\n  url = \"image: datasauRus package\",\n  u_size = 6,\n  u_color = note_color,\n  # Add spotlight\n  spotlight = T,\n  # Spotlight attributes\n  # add some shadow to the pictures\n  l_y = 1.4,\n  l_x = 0.9,\n  l_width = 2.2,\n  l_height = 2.2,\n  l_alpha = 0.20,\n  # File saving\n  filename = \"plnt6800_logo.png\",\n  dpi = 600,\n  white_around_sticker = FALSE\n  ) \n\n\nFinal logo"
+  },
+  {
+    "objectID": "coding/logo/code/hexsticker_plnt6800.html#libraries",
+    "href": "coding/logo/code/hexsticker_plnt6800.html#libraries",
+    "title": "2025 logo",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(magick)\nlibrary(hexSticker)\nlibrary(datasauRus)\n#install.packages(\"datasauRus\")\nlibrary(sysfonts)"
+  },
+  {
+    "objectID": "coding/logo/code/hexsticker_plnt6800.html#prepare-images",
+    "href": "coding/logo/code/hexsticker_plnt6800.html#prepare-images",
+    "title": "2025 logo",
+    "section": "",
+    "text": "# datasauRus\ndatasaurus_df &lt;- datasauRus::datasaurus_dozen %&gt;% dplyr::filter(dataset == \"dino\")\n\ndino_plot &lt;- ggplot2::ggplot(datasaurus_df, aes(x = x, y = y)) +\n  geom_point(color = \"grey90\", \n             fill = \"grey65\", shape = 22, size = 0.55) +\n  theme(panel.background = element_rect(fill = NULL, color = NULL),\n        panel.border = element_blank())+\n  theme_void()"
+  },
+  {
+    "objectID": "coding/logo/code/hexsticker_plnt6800.html#load-fonts",
+    "href": "coding/logo/code/hexsticker_plnt6800.html#load-fonts",
+    "title": "2025 logo",
+    "section": "",
+    "text": "fonts &lt;- font_files()\n\n# Check font paths\n#font_paths()\n\n# Add the font we want\nfont_add(family = \"DIN Alternate\", \n         regular = \"/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf\")"
+  },
+  {
+    "objectID": "coding/logo/code/hexsticker_plnt6800.html#stickers",
+    "href": "coding/logo/code/hexsticker_plnt6800.html#stickers",
+    "title": "2025 logo",
+    "section": "",
+    "text": "# define pallete\npalette &lt;- list('background' = '#FFC72A',\n                'font' = '#C20430',\n                'border' = '#000000',\n                'note' = 'grey25')\n\n# Single Palette elements\nbackground_color = '#C20430'\nfont_color = \"#FFC72A\"\nborder_color = \"#000000\"\nnote_color = \"grey25\"\n\n\n\n\n\nplnt6800 &lt;- sticker(\n  # Title\n  package = \"PLNT*6800\",\n  # Title attributes\n  p_family = \"DIN Alternate\",\n  p_color = font_color,\n  p_size = 33,\n  p_y = 0.6,\n  # Image\n  subplot = dino_plot,\n  # Image attributes\n  s_width = 0.95,\n  s_height = 0.95,\n  s_x = 1,\n  s_y = 1.2,\n  # Hexagon attributes\n  h_fill = background_color,\n  h_color = border_color,\n  h_size = 2,\n  # Add a link\n  url = \"image: datasauRus package\",\n  u_size = 6,\n  u_color = note_color,\n  # Add spotlight\n  spotlight = T,\n  # Spotlight attributes\n  # add some shadow to the pictures\n  l_y = 1.4,\n  l_x = 0.9,\n  l_width = 2.2,\n  l_height = 2.2,\n  l_alpha = 0.20,\n  # File saving\n  filename = \"plnt6800_logo.png\",\n  dpi = 600,\n  white_around_sticker = FALSE\n  ) \n\n\nFinal logo"
+  },
+  {
+    "objectID": "slides/day1.html#welcome",
+    "href": "slides/day1.html#welcome",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Welcome 👋",
+    "text": "Welcome 👋\n\nGoal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#objectives-for-today",
+    "href": "slides/day1.html#objectives-for-today",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Objectives for Today 📌",
+    "text": "Objectives for Today 📌\n\nDefine core concepts:\n\nData Science,\nData Literacy,\nReproducibility.\n\nUnderstand the role of reproducible data science in agriculture.\nExplore challenges and opportunities.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#what-is-data-science-in-agriculture",
+    "href": "slides/day1.html#what-is-data-science-in-agriculture",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "What is Data Science in Agriculture? 🌱",
+    "text": "What is Data Science in Agriculture? 🌱\n\nApplying data engineering, analysis, statistics, and machine learning to solve agricultural problems.\nExamples: Precision agriculture, yield forecasting, environmental monitoring.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#key-definitions",
+    "href": "slides/day1.html#key-definitions",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Key Definitions 📖",
+    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#challenges-in-data-literacy",
+    "href": "slides/day1.html#challenges-in-data-literacy",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Challenges in Data Literacy 🌐",
+    "text": "Challenges in Data Literacy 🌐\n\nDiverse data sources (weather, soil, crop data)\nStandardization issues across datasets\nData skills gap among ag professionals",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#why-does-it-matter",
+    "href": "slides/day1.html#why-does-it-matter",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Why does it matter?",
+    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#good-news-is",
+    "href": "slides/day1.html#good-news-is",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "GOOD NEWS IS…",
+    "text": "GOOD NEWS IS…",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#why-reproducibility-in-agriculture",
+    "href": "slides/day1.html#why-reproducibility-in-agriculture",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Why Reproducibility in Agriculture?",
+    "text": "Why Reproducibility in Agriculture?\n\nAgriculture research relies heavily on environmental data, often variable and complex.\nWe have complex challenges 🗒️\n\nVariability due to environmental factors, soil types, and weather patterns.\nComplex datasets involving long-term studies, geographical variability.\n\nOpportunities ✅\n\nReproducibility helps stakeholders make reliable, data-driven decisions.\nEnsures scientific findings are reliable and valid.\nFacilitates collaboration, accountability, and efficiency among researchers and practitioners.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#challenges-in-ag-research",
+    "href": "slides/day1.html#challenges-in-ag-research",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Challenges in Ag-research",
+    "text": "Challenges in Ag-research\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n“But it all starts with …”\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#discussion-prompt",
+    "href": "slides/day1.html#discussion-prompt",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Discussion Prompt 💬",
+    "text": "Discussion Prompt 💬\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nConsider areas like resource management, market predictions, and farm management.\n\n\n\n\n\n\n\nii. What practical challenges do you face (or may) in implementing them?",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#what-is-r-1",
+    "href": "slides/day1.html#what-is-r-1",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "What is R? 🧮",
+    "text": "What is R? 🧮\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-vs.-excel-for-data-wrangling",
+    "href": "slides/day1.html#r-vs.-excel-for-data-wrangling",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R vs. Excel for Data Wrangling 📊",
+    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
+    "href": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R vs. SAS for Statistical Analysis 📉",
+    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-vs-python",
+    "href": "slides/day1.html#r-vs-python",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R vs Python 🔍",
+    "text": "R vs Python 🔍\n\nR, & Python are popular languages in data science and research.\nEach language has unique strengths, ideal use cases, and licensing considerations.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-strengths-and-use-cases",
+    "href": "slides/day1.html#r-strengths-and-use-cases",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R: Strengths and Use Cases 🧮",
+    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#python-strengths-and-use-cases",
+    "href": "slides/day1.html#python-strengths-and-use-cases",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Python: Strengths and Use Cases 🐍",
+    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#comparison-summary",
+    "href": "slides/day1.html#comparison-summary",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Comparison Summary 📊",
+    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\nR: Open-source, powerful for data science, statistical analysis, and visualizations.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#thank-you",
+    "href": "slides/day1.html#thank-you",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "THANK YOU!",
+    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\nContact me",
+    "crumbs": [
+      "Slides",
+      "Day 1"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PLNT680001 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "PLNT680001 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html",
+    "href": "outline/outline.html",
+    "title": "PLNT680001 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-information",
+    "href": "outline/outline.html#course-information",
+    "title": "PLNT680001 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-description",
+    "href": "outline/outline.html#course-description",
+    "title": "PLNT680001 - Course Outline",
+    "section": "2. Course Description",
+    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-learning-outcomes",
+    "href": "outline/outline.html#course-learning-outcomes",
+    "title": "PLNT680001 - Course Outline",
+    "section": "3. Course Learning Outcomes",
+    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#calendar",
+    "href": "outline/outline.html#calendar",
+    "title": "PLNT680001 - Course Outline",
+    "section": "4. Calendar",
+    "text": "4. Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n🌐\n🎥\n\n\n\nJan 10\nFundamentals of R, RStudio\n🌐\n🎥\n\n\n2\nJan 15\nEssentials of R Coding\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 24\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐\n\n\n\n\n\nLast Day to Drop Course\nTBD",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#assessment-breakdown",
+    "href": "outline/outline.html#assessment-breakdown",
+    "title": "PLNT680001 - Course Outline",
+    "section": "5. Assessment Breakdown",
+    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-grading-policies",
+    "href": "outline/outline.html#course-grading-policies",
+    "title": "PLNT680001 - Course Outline",
+    "section": "6. Course Grading Policies",
+    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-statements",
+    "href": "outline/outline.html#course-statements",
+    "title": "PLNT680001 - Course Outline",
+    "section": "7. Course Statements",
+    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#accessibility",
+    "href": "outline/outline.html#accessibility",
+    "title": "PLNT680001 - Course Outline",
+    "section": "8. Accessibility",
+    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#land-acknowledgement",
+    "href": "outline/outline.html#land-acknowledgement",
+    "title": "PLNT680001 - Course Outline",
+    "section": "9. Land Acknowledgement",
+    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  }
+]

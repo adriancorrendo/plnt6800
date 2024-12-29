@@ -14,7 +14,7 @@ website:
     creator: "@aacorrendo"
     
   page-footer: 
-    left: "<span> Developed by Adrian Correndo using [Quarto](https://quarto.org/). License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). </span>"
+    left: "<span> Developed by Adrian Correndo with [Quarto](https://quarto.org/). License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). </span>"
     background: dark
   
   navbar:

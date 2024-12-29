@@ -50,7 +50,7 @@ A basic understanding of R or any programming language is recommended but not re
 
 **Recommended:**
 
--   *R for Data Science* by Hadley Wickham & Garrett Grolemund
+-   *R for Data Science* by Hadley Wickham & Garrett Grolemund.
 
 -   Online resources and package documentation will be provided throughout the course.
 
@@ -73,7 +73,7 @@ By the end of this course, students will be able to:
 The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.
 
 | **Week** | **Date** | **Topic** | **Code** | **Lesson** |
-|--------------|--------------|-----------------|--------------|--------------|
+|---------------|---------------|---------------|---------------|---------------|
 | 1 | Jan 8 | Introductions, Reproducibility | 🌐 | 🎥 |
 |  | Jan 10 | Fundamentals of R, RStudio | 🌐 | 🎥 |
 | 2 | Jan 15 | Essentials of R Coding | 🌐 | 🎥 |
@@ -108,7 +108,7 @@ TBD
 ## 5. Assessment Breakdown
 
 | Component | Weight (%) | Details |
-|------------------|------------------|------------------------------------|
+|-------------------|-------------------|------------------------------------|
 | Weekly Exercises | 30% | Hands-on exercises to practice skills covered in each week's topic. |
 | Semester Project | 50% | Complete data analysis project, report, and presentation. |
 | Final Exam | 20% | Cumulative assessment covering all topics from the course. |
