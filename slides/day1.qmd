@@ -13,8 +13,8 @@ format:
     toc-depth: 1
     toc-location: body
     toc-title: "Contents"
-    smaller: false
-    scrollable: true
+    smaller: true
+    scrollable: false
     preview-links: auto
     logo: ../images/statasaurus_logo.png
     css: styles.css
