@@ -47,7 +47,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -151,7 +150,6 @@ Adrian A. Correndo
 <h2 id="toc-title">Contents</h2>
 <ul>
 <li class="fragment"><a href="#/core-concepts" id="/toc-core-concepts">Core concepts</a></li>
-<li class="fragment"><a href="#/what-is-r" id="/toc-what-is-r">What is R?</a></li>
 <li class="fragment"><a href="#/alternatives-to-r" id="/toc-alternatives-to-r">Alternatives to R</a></li>
 </ul>
 </nav>
@@ -260,6 +258,7 @@ Adrian A. Correndo
 <p><img data-src="../images/reproducibility.png" class="absolute" style="top: 0px; right: 0px; height: 65%; "></p>
 </div><ul>
 <li class="fragment"><p>Is there a REPRODUCIBILITY CRISIS in science?</p></li>
+<li class="fragment"><p>YES</p></li>
 <li class="fragment"><p>A <a href="https://www.nature.com/articles/533452a">Nature survey</a> with ~1,600 researchers found that</p>
 <ul>
 <li class="fragment"><p><strong><em>+70%</em></strong> failure rate to reproduce another scientist’s experiments</p></li>
@@ -341,37 +340,26 @@ Adrian A. Correndo
 </div>
 </div>
 </div>
-<div class="fragment">
-<p><br></p>
-<h3 style="color:#457b9d" id="ii.-what-practical-challenges-do-you-face-or-may-in-implementing-them">ii. What practical challenges do you face (or may) in implementing them?</h3>
-<p><br></p>
-</div>
-</section></section>
-<section>
-<section id="what-is-r" class="title-slide slide level1 center">
-<h1>What is R?</h1>
-
 </section>
-<div class="fragment">
-<section id="what-is-r-1" class="slide level2">
+<section id="what-is-r" class="slide level2">
 <h2>What is R? 🧮</h2>
+<div class="fragment">
 <ul>
 <li class="fragment"><strong>R</strong> is a programming language and environment primarily for statistical analysis, data visualization, and data science.</li>
 <li class="fragment">Known for its extensive <strong>statistical libraries</strong>, <strong>data manipulation capabilities</strong>, and <strong>graphics</strong>.</li>
 <li class="fragment">Widely used in fields like <strong>data science</strong>, <strong>bioinformatics</strong>, <strong>agriculture</strong>, and <strong>social sciences</strong>.</li>
 </ul>
-</section>
 </div>
-<p><br></p>
 <div class="fragment">
-<h3 id="brief-history-of-r">Brief History of R 📜</h3>
+<h3 id="brief-history">Brief History 📜</h3>
 <ul>
 <li class="fragment"><strong>Origin</strong>: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.</li>
 <li class="fragment"><strong>Inspiration</strong>: R is an implementation of the S language, designed at Bell Laboratories for data analysis.</li>
 <li class="fragment"><strong>Open Source</strong>: Released as free, open-source software, leading to a large community of users and contributors.</li>
 <li class="fragment"><strong>Popularity</strong>: Today, R is one of the top programming languages for statistical analysis and data science.</li>
 </ul>
-</div></section>
+</div>
+</section></section>
 <section>
 <section id="alternatives-to-r" class="title-slide slide level1 center">
 <h1>Alternatives to R</h1>
@@ -543,15 +531,15 @@ Adrian A. Correndo
 </div>
 <div class="callout-content">
 <ul>
-<li class="fragment"><strong>R</strong>: Open-source, powerful for data science, statistical analysis, and visualizations.</li>
+<li class="fragment"><strong>R</strong>: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.</li>
 <li class="fragment"><strong>Excel</strong>: User-friendly, ideal for simple tasks, but limited for complex data wrangling.</li>
 <li class="fragment"><strong>SAS</strong>: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.</li>
+<li class="fragment"><strong>Python</strong>: Strong in ML and AI with highly permissive licensing, making it ideal for production.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-<p><br></p>
 <div class="fragment">
 <table class="caption-top">
 <colgroup>
@@ -601,16 +589,10 @@ Adrian A. Correndo
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li class="fragment"><strong>R</strong>: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.</li>
-<li class="fragment"><strong>Python</strong>: Strong in ML and AI with highly permissive licensing, making it ideal for production.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
 <p>Choosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs.&nbsp;production.</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="thank-you" class="slide level2">
@@ -647,7 +629,7 @@ University of Guelph<br>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
-<p><img src="../images/statasaurus_logo.png" class="slide-logo"></p>
+<p><img src="../images/plnt6800_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p><a href="https://adriancorrendo.github.io" class="uri">https://adriancorrendo.github.io</a></p>
 </div>
@@ -682,7 +664,7 @@ University of Guelph<br>
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide"},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,

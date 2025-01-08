@@ -94,7 +94,7 @@
     "href": "slides/day1.html#why-does-it-matter",
     "title": "Reproducible Ag Data Science with R",
     "section": "Why does it matter?",
-    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
+    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
     "crumbs": [
       "Slides",
       "Day 1"
@@ -138,18 +138,18 @@
     "href": "slides/day1.html#discussion-prompt",
     "title": "Reproducible Ag Data Science with R",
     "section": "Discussion Prompt 💬",
-    "text": "Discussion Prompt 💬\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nConsider areas like resource management, market predictions, and farm management.\n\n\n\n\n\n\n\nii. What practical challenges do you face (or may) in implementing them?",
+    "text": "Discussion Prompt 💬\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
     "crumbs": [
       "Slides",
       "Day 1"
     ]
   },
   {
-    "objectID": "slides/day1.html#what-is-r-1",
-    "href": "slides/day1.html#what-is-r-1",
+    "objectID": "slides/day1.html#what-is-r",
+    "href": "slides/day1.html#what-is-r",
     "title": "Reproducible Ag Data Science with R",
     "section": "What is R? 🧮",
-    "text": "What is R? 🧮\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.",
+    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
     "crumbs": [
       "Slides",
       "Day 1"
@@ -215,7 +215,7 @@
     "href": "slides/day1.html#comparison-summary",
     "title": "Reproducible Ag Data Science with R",
     "section": "Comparison Summary 📊",
-    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\nR: Open-source, powerful for data science, statistical analysis, and visualizations.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
+    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
     "crumbs": [
       "Slides",
       "Day 1"

@@ -16,7 +16,7 @@ format:
     smaller: true
     scrollable: false
     preview-links: auto
-    logo: ../images/statasaurus_logo.png
+    logo: ../images/plnt6800_logo.png
     css: styles.css
     footer: <https://adriancorrendo.github.io>
     menu:
@@ -103,6 +103,8 @@ link-citations: TRUE
 
 -   Is there a REPRODUCIBILITY CRISIS in science?
 
+-   YES
+
 -   A [Nature survey](https://www.nature.com/articles/533452a) with \~1,600 researchers found that
 
     -   ***+70%*** failure rate to reproduce another scientist's experiments
@@ -176,28 +178,17 @@ link-citations: TRUE
 :::
 ::::
 
-::: fragment
-<br/>
 
-### ii. What practical challenges do you face (or may) in implementing them? {style="color:#457b9d"}
-
-<br/>
-:::
-
-# What is R?
-
-::: fragment
 ## What is R? 🧮
 
+::: fragment
 -   **R** is a programming language and environment primarily for statistical analysis, data visualization, and data science.
 -   Known for its extensive **statistical libraries**, **data manipulation capabilities**, and **graphics**.
 -   Widely used in fields like **data science**, **bioinformatics**, **agriculture**, and **social sciences**.
 :::
 
-<br/>
-
 ::: fragment
-### Brief History of R 📜
+### Brief History 📜
 
 -   **Origin**: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.
 -   **Inspiration**: R is an implementation of the S language, designed at Bell Laboratories for data analysis.
@@ -318,13 +309,12 @@ link-citations: TRUE
 
 :::: fragment
 ::: callout-note
--   **R**: Open-source, powerful for data science, statistical analysis, and visualizations.
+-   **R**: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.
 -   **Excel**: User-friendly, ideal for simple tasks, but limited for complex data wrangling.
 -   **SAS**: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.
+-   **Python**: Strong in ML and AI with highly permissive licensing, making it ideal for production.
 :::
 ::::
-
-<br/>
 
 ::: fragment
 | Feature | R | Python |
@@ -339,14 +329,9 @@ link-citations: TRUE
 
 :::: fragment
 ::: callout-tip
--   **R**: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.
--   **Python**: Strong in ML and AI with highly permissive licensing, making it ideal for production.
-:::
-::::
-
-::: fragment
 Choosing the right tool depends on your project's requirements, team skills, and licensing needs for research vs. production.
 :::
+::::
 
 ------------------------------------------------------------------------
 
