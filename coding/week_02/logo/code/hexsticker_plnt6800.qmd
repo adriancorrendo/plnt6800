@@ -8,8 +8,7 @@ format: html
 
 This is a short tutorial to easily create your own stickers!
 
-Let's give it a try for this group and find our identity!
-🙃
+Let's give it a try for this group and find our identity! 🙃
 
 ## 00. Libraries
 
@@ -17,10 +16,9 @@ Let's give it a try for this group and find our identity!
 #| warning: false
 #| message: false
 
-library(tidyverse)
-library(magick)
-library(hexSticker)
-library(datasauRus)
+library(tidyverse) # multipackage containing needed data wrangling and plot functions
+library(hexSticker) # package to create hexagon-stickers
+library(datasauRus) # package with funny shapes
 #install.packages("datasauRus")
 library(sysfonts)
 
@@ -75,7 +73,6 @@ border_color = "#000000"
 note_color = "grey25"
 
 ```
-
 
 ### ODSR logo
 

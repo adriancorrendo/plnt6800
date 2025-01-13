@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../slides/day1.html" rel="prev">
+<link href="../coding/week_01/essentials_01.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -211,20 +211,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../slides/day1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 1</span></a>
+ <span class="menu-text">Reproducibility</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Course Outline</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../coding/week_01/essentials_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Essentials of R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Outline</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../outline/outline.html" class="sidebar-item-text sidebar-link active">
@@ -369,13 +386,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="calendar">4. Calendar</h2>
 <p>The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the <em>tentative</em> schedule. Please, note the schedule may vary depending on the progress of the class.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
 <thead>
 <tr class="header">
 <th><strong>Week</strong></th>
@@ -390,20 +400,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1</td>
 <td>Jan 8</td>
 <td>Introductions, Reproducibility</td>
-<td>🌐</td>
-<td>🎥</td>
+<td>-</td>
+<td>-</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>Jan 10</td>
-<td>Fundamentals of R, RStudio</td>
-<td>🌐</td>
-<td>🎥</td>
+<td>Essentials of RStudio, R coding</td>
+<td><a href="https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri" title="Private Repo">🌐</a></td>
+<td><a href="https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View" title="CourseLink - Zoom recording">🎥</a></td>
 </tr>
 <tr class="odd">
 <td>2</td>
 <td>Jan 15</td>
-<td>Essentials of R Coding</td>
+<td>Fundamentals of R packages</td>
 <td>🌐</td>
 <td>🎥</td>
 </tr>
@@ -579,9 +589,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="assessment-breakdown">5. Assessment Breakdown</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 48%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1317,8 +1327,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../slides/day1.html" class="pagination-link" aria-label="Day 1">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 1</span>
+      <a href="../coding/week_01/essentials_01.html" class="pagination-link" aria-label="Essentials of R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Essentials of R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1400,9 +1410,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>| **Week** | **Date** | **Topic** | **Code** | **Lesson** |</span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>|---------------|---------------|---------------|---------------|---------------|</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>| 1 | Jan 8 | Introductions, Reproducibility | 🌐 | 🎥 |</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>|  | Jan 10 | Fundamentals of R, RStudio | 🌐 | 🎥 |</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>| 2 | Jan 15 | Essentials of R Coding | 🌐 | 🎥 |</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>| 1 | Jan 8 | Introductions, Reproducibility | <span class="sc">\-</span> | <span class="sc">\-</span> |</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>|  | Jan 10 | Essentials of RStudio, R coding | <span class="co">[</span><span class="ot">🌐</span><span class="co">](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri "Private Repo")</span> | <span class="co">[</span><span class="ot">🎥</span><span class="co">](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View "CourseLink - Zoom recording")</span> |</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>| 2 | Jan 15 | Fundamentals of R packages | 🌐 | 🎥 |</span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>|  | Jan 17 | Basics of version control &amp; GitHub | 🌐 | 🎥 |</span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>| 3 | Jan 22 | Data Wrangling I | 🌐 | 🎥 |</span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>|  | Jan 24 | Data Wrangling II | 🌐 | 🎥 |</span>
@@ -1434,7 +1444,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Assessment Breakdown</span></span>
 <span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>| Component | Weight (%) | Details |</span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>|-------------------|-------------------|------------------------------------|</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>|-------------------|-------------------|-----------------------------------|</span>
 <span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>| Weekly Exercises | 30% | Hands-on exercises to practice skills covered in each week's topic. |</span>
 <span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>| Semester Project | 50% | Complete data analysis project, report, and presentation. |</span>
 <span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>| Final Exam | 20% | Cumulative assessment covering all topics from the course. |</span>

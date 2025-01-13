@@ -1,5 +1,5 @@
 ---
-title: PLNT*6800*01 - Special Topics in Plant Science
+title: PLNT6800|01 - Special Topics in Plant Science
 subtitle: "Reproducible Ag Data Science with R"
 author: "Dr. Adrian Correndo"
 format: 

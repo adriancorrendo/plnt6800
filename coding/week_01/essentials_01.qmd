@@ -1,0 +1,470 @@
+---
+title: "Essentials of R coding I"
+author: "Dr. Adrian Correndo"
+date: "2025-01-10"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE)
+```
+
+# Introduction
+
+This page provides an overview of the essential types of elements in R, including examples and explanations for each. Use this as a quick reference to understand the basics of data types and operations.
+
+# Type of elements in R
+
+## 01. Numbers
+
+```{r}
+20
+```
+
+## 02. Math Operations
+
+```{r}
+20+1 # addition
+20-4 # subtraction
+20*5 # multiplication
+20/5 # division
+2^2 # exponentials
+sqrt(9) # square root
+
+# Greater exponents for roots
+# notation is: x^(1/n)
+
+# Cubic root of 27
+27^(1/3)  # Result: 3
+
+# 4th root of 16
+16^(1/4)  # Result: 2
+
+# 5th root of 32
+32^(1/5)  # Result: 2
+
+```
+
+## 03. Text or characters (also called strings)
+
+```{r}
+"coding is fun"
+```
+
+But these elements are not stored as objects yet:
+
+## 04. Define objects
+
+```{r}
+a <- 20
+10 -> b
+# We can also use equal:
+c = 15
+# But using "<-", and leave = only for operations (so you can notice the difference) is considered a better coding practice.
+
+```
+
+## 05. Print objects
+
+```{r}
+a
+print(a)
+b
+c
+```
+
+## 06. Vectors
+
+A vector is one of the most basic data structures. It is a sequence of elements of the same type, such as numbers, characters, or logical values. Vectors are used to store and manipulate collections of data efficiently. <br/>
+
+### a. Creating a vector
+
+Vectors can be created using the c() function (combine function):
+
+```{r}
+# Numeric vector
+numeric_vector <- c(1, 2, 3, 4.5)
+numeric_vector
+
+# Character vector
+character_vector <- c("corn", "wheat", "soybean")
+character_vector
+
+# Logical vector
+logical_vector <- c(TRUE, FALSE, TRUE)
+logical_vector
+```
+
+### b. Accessing Elements
+
+You can access elements of a vector using square brackets \[\]:
+
+```{r}
+# Access the first element
+numeric_vector[1]
+
+# Access multiple elements
+numeric_vector[c(1, 3)]
+```
+
+### c. Vectorized Operations
+
+In R, vector-operations are applied to each element automatically:
+
+```{r}
+# Adding a scalar to a vector
+numeric_vector + 2
+
+# Element-wise addition
+numeric_vector + c(10, 20, 30, 40)
+
+```
+
+### d. Common Functions with Vectors
+
+-   **'length()'**: Get the number of elements in a vector.
+-   **'typeof()'** or **'class()'**: Determine the type of elements in a vector.
+-   **'seq()'**: Generate a sequence of numbers.
+-   **'rep()'**: Repeat elements to create a vector.
+
+## 07. Lists
+
+In R, a list is a versatile data structure that can contain elements of different types, including vectors, matrices, data frames, and even other lists. Unlike vectors, which are homogeneous, lists are heterogeneous, meaning their elements can be of different data types and lengths. <br/>
+
+**Key Characteristics of Lists:** <br/>
+
+1.  Heterogeneous: Lists can store elements of varying types (numeric, character, logical, etc.) and structures (vectors, data frames, functions, etc.). <br/>
+
+2.  Indexed: Elements in a list are accessed using double square brackets \[\[ \]\] or named elements using \$.
+
+**Why Use Lists?** <br/>
+
+1.  Flexibility: Lists can store complex and nested data structures. <br/>
+
+2.  Data Wrangling: Useful for handling results from models, nested data, or any mixed-type collections. <br/>
+
+3.  Functions: Functions in R often return their output as lists (e.g., lm()). <br/>
+
+### a. Creating a list
+
+Lists are created using the list() function:
+
+```{r}
+
+# Create a list with different types of elements
+my_list <- list(
+  "numeric_v" = numeric_vector,
+  "character_v" = character_vector,
+  "single_number" = 42,
+  "logical_value" = TRUE
+)
+```
+
+### b. Accessing Elements in a List
+
+You can access elements in a list by their position or name:
+
+By Position:
+
+```{r}
+# Access the first element
+my_list[[1]]
+
+# Access the second element
+my_list[[2]]
+
+```
+
+By name:
+
+```{r}
+# Access by name
+my_list$numeric_v
+my_list$character_v
+
+```
+
+Subelements:
+
+```{r}
+# Access the first value in the numeric vector
+my_list$numeric_vector[1]
+
+```
+
+### c. Some functions for lists
+
+```{r}
+# Number of elements in the list
+length(my_list)
+
+# Names of the elements
+names(my_list)
+
+# Structure of the list
+str(my_list)
+```
+
+## 08. Data frame
+
+In R, a data frame is a two-dimensional data structure used for storing tabular data. It is one of the most commonly used data structures in R for data analysis and manipulation. <br/>
+
+**Key Characteristics of a Data Frame** <br/>
+
+1.  Tabular Structure: Data is organized in rows and columns. <br/>
+
+2.  Heterogeneous Columns: Each column can contain different data types (e.g., numeric, character, logical), but all elements in a column must be of the same type. <br/>
+
+3.  Row and Column Names: Rows and columns can have names for easier identification. <br/>
+
+**Why Use a Data Frame?** <br/>
+
+1.  Data Analysis: It is ideal for representing structured data like spreadsheets or databases. <br/>
+
+2.  Flexible Operations: Columns can be easily added, removed, or modified. <br/>
+
+3.  Integration with R Functions: Many R functions for statistical modeling and analysis expect data frames as input. <br/>
+
+### a. Creating a Data Frame
+
+A data frame can be created using the data.frame() function:
+
+```{r}
+# Create a data frame
+my_data <- data.frame(
+  Crop = c("Corn", "Wheat", "Soybean"), # Character column
+  Yield = c(180, 90, 50), # Numeric column
+  Legume = c(FALSE, FALSE, TRUE) # Logical column
+)
+
+print(my_data)
+```
+
+### b. Accessing data in a data frame
+
+Accessing columns:
+
+```{r}
+# Access a column by name
+my_data$Crop
+
+# Access a column by index
+my_data[, 2]
+```
+
+Accessing rows:
+
+```{r}
+# Access the first row
+my_data[1, ]
+
+# Access specific rows
+my_data[c(1, 3), ]
+```
+
+Accessing specific elements
+
+```{r}
+# Access the element in the 2nd row, 3rd column
+my_data[2, 3]
+
+# Access specific cells by column name
+my_data[2, "Crop"]
+```
+
+### c. Adding a new column
+
+```{r}
+my_data$Season <- c("Summer", "Winter", "Summer")
+```
+
+### d. Modify a column
+
+```{r}
+my_data$Yield <- my_data$Yield + 5
+```
+
+### e. Adding a new row
+
+In base R, we can use rbind() to add rows:
+
+```{r}
+new_row <- data.frame(Crop = "Barley", Yield = 80, Legume = FALSE, Season = "Winter")
+my_data <- rbind(my_data, new_row)
+```
+
+### f. Filtering (rows)
+
+In base R, we can use subset() to filter rows:
+
+```{r}
+subset(my_data, Yield > 150)
+```
+
+We can also use logical conditions:
+
+```{r}
+my_data[my_data$Legume == TRUE, ]
+```
+
+### g. Selecting (columns)
+
+In base R, there is no function to select columns. We need to use brackets \[\] and vectors c():
+
+```{r}
+my_data[c("Crop", "Yield")]
+```
+
+### h. Some functions for data frames
+
+```{r}
+nrow(my_data)        # Number of rows
+ncol(my_data)        # Number of columns
+colnames(my_data)    # Column names
+summary(my_data)     # Summary statistics
+```
+
+## 09. Matrix
+
+In R, a matrix is a two-dimensional, rectangular data structure that stores elements of the same type. It is similar to a data frame in structure but less flexible, as all elements in a matrix must be of a single data type (e.g., numeric, character, or logical). <br/>
+
+**Key Characteristics of a Matrix** <br/>
+
+1.  Homogeneous: All elements in a matrix must be of the same type. <br/>
+
+2.  2D Structure: A matrix has rows and columns, forming a table-like structure. <br/>
+
+3.  Dimensions: Defined by the number of rows and columns. <br/>
+
+**Why Use a Matrix?** <br/>
+
+1.  Mathematical Operations: Ideal for linear algebra and mathematical modeling. <br/>
+
+2.  Efficient Storage: Matrices use less memory compared to more complex structures like data frames. <br/>
+
+3.  Simpler Operations: Homogeneous data ensures consistent behavior across elements. <br/>
+
+### a. Creating a Matrix
+
+You can create a matrix using the matrix() function:
+
+```{r}
+# Create a numeric matrix
+my_matrix <- matrix(
+  data = 1:9,     # Data values
+  nrow = 3,       # Number of rows
+  ncol = 3,       # Number of columns
+)
+
+print(my_matrix)
+```
+
+### b. Accessing elements in a matrix
+
+Accessing rows:
+
+```{r}
+# Access the first row
+my_matrix[1, ]
+```
+
+Accessing columns:
+
+```{r}
+# Access the second column
+my_matrix[, 2]
+```
+
+Accessing specific elements:
+
+```{r}
+# Access the element in the 2nd row, 3rd column
+my_matrix[2, 3]
+```
+
+### c. Adding a new column
+
+```{r}
+new_col <- c(10, 11, 12) # Create the column
+my_matrix <- cbind(my_matrix, new_col) # Paste it to the existing
+```
+
+### d. Adding a new row
+
+```{r}
+new_row <- c(13, 14, 15, 16)
+my_matrix <- rbind(my_matrix, new_row)
+```
+
+## 10. Functions
+
+### a. Create a function
+
+We need to use the syntax function(x) { x as object of a task }. 'x' is considered an "argument", and the function itself is inside the {}. For example:
+
+```{r}
+my_function <- function(x) { x + 1 }
+```
+
+### b. Check the function
+
+```{r}
+my_function(9)
+```
+
+### c. Write a function with 3 arguments
+
+```{r}
+my_xyz_function <- function(x, y, z) { x + y - z }
+```
+
+### d. Order of arguments
+
+*Note: R is order sensitive (if you don't explicitly specify the argument)*
+
+```{r}
+my_xyz_function(12, 3, 4)
+my_xyz_function(12, 4, 3)
+```
+
+### e. Specifying arguments with names
+
+If you specify the argument name as = to, the order doesn't matter:
+
+```{r}
+my_xyz_function(z = 4, x = 12, y = 3)
+```
+
+### f. A more complex function
+
+```{r}
+fx <- function(x, y, remove_na = NULL) {
+        # First operation is a sum, removing NAs
+        first <- sum(c(x, y), na.rm = remove_na)
+        # Add a text message
+        text <- "This function is so cool"
+        # Store result
+        result <- first + x
+        # Print output
+        print(list("Message" = text,
+                   "1st" = first,
+                   "end" = result))
+                   }
+```
+
+Run the function with alternative arguments:
+
+```{r}
+fx(x = a, y = b, remove_na = FALSE)
+fx(x = a, y = b, remove_na = TRUE)
+```
+
+Store the output in an object:
+
+```{r}
+foo <- fx(x=b, y=a)
+```

@@ -46,7 +46,11 @@ website:
       - section: "Slides"
         contents:
           - href: slides/day1.qmd
-            text: "Day 1"
+            text: "Reproducibility"
+      - section: "Lessons"
+        contents:
+          - href: coding/week_01/essentials_01.qmd
+            text: "Essentials of R"
       - section: "Course Outline"
         contents:
           - href: outline/outline.qmd
