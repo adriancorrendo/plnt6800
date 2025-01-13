@@ -1,0 +1,100 @@
+---
+title: "Required Software & Accounts"
+author: "Dr. Adrian Correndo"
+---
+
+::: panel-tabset
+## R & RStudio IDE
+
+Before starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:
+
+Download the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:
+
+i.  <https://rstudio-education.github.io/hopr/starting.html>
+
+ii. <https://www.youtube.com/watch?v=Tb3R4GLJ45U>
+
+## Git
+
+**What is Git?**
+
+Git is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.
+
+**How to Install Git:**
+
+Follow these steps to install Git on your computer:
+
+1.  Visit the official Git website (<https://git-scm.com/>);to download the installer for your operating system.
+
+2.  For detailed guidance, read the official tutorial to install git (<https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>).
+
+3.  You may use these step-by-step videos for installation:
+
+• Installing Git on Windows (<https://www.youtube.com/watch?v=iYkLrXobBbA>)
+
+• Installing Git on Mac (<https://www.youtube.com/watch?v=B4qsvQ5IqWk>)
+
+Once installed, verify by typing git --version in your terminal to ensure Git is ready to use!
+
+## GitHub
+
+**What is GitHub?**
+
+GitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.
+
+For this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:
+
+<https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github>
+
+You may also find multiple useful YouTube tutorials like this one:
+
+<https://www.youtube.com/watch?v=h5cKAd94QNo>
+
+## GitHub Desktop
+
+**What is GitHub Desktop?**
+
+GitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.
+
+**How to Install GitHub Desktop:**
+
+Follow these steps to install GitHub Desktop on your computer:
+
+1.  Visit the GitHub Desktop website (<https://desktop.github.com>); and download the application for your operating system.
+
+2.  Run the installer and follow the on-screen instructions to complete the installation.
+
+3.  After installation, sign in to your GitHub account or create one if you don’t have it.
+
+For additional help, check out these videos:
+
+• Installing GitHub Desktop on Windows (<https://www.youtube.com/watch?v=3JdDAJ2YPeU>)
+
+• Installing GitHub Desktop on Mac (<https://www.youtube.com/watch?v=C0n6O4d0ccw>)
+
+Once installed, you can easily clone repositories, commit changes, and sync your work with GitHub!
+
+## Posit Cloud
+
+**What is Posit Cloud?**
+
+Posit Cloud is an online platform that allows you to run RStudio "online". It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.
+
+How to Create a Free Posit Cloud Account:
+
+Follow these steps to set up your free account:
+
+1.  Visit Posit Cloud website at <https://posit.cloud>.
+
+2.  Click on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!
+
+3.  Complete the registration form and verify your email if required.
+
+4.  Once registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.
+
+5.  More instructions about our course workspace will be provided during the semester.
+
+For a hint of what PositCloud does, you may watch with this video:
+
+<https://www.youtube.com/watch?v=-fzwm4ZhVQQ> With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!
+:::

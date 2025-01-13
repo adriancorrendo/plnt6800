@@ -47,6 +47,10 @@ website:
         contents:
           - href: slides/day1.qmd
             text: "Reproducibility"
+      - section: "Software"
+        contents:
+          - href: software/software.qmd
+            text: "Instructions"
       - section: "Lessons"
         contents:
           - href: coding/week_01/essentials_01.qmd
