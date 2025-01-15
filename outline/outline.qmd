@@ -1,5 +1,5 @@
 ---
-title: PLNT*6800*01 - Course Outline
+title: PLNT6800|01 - Course Outline
 subtitle: "Winter 2025"
 author: "Dr. Adrian Correndo"
 format: 
@@ -79,7 +79,7 @@ TBD
 ## 5. Assessment Breakdown
 
 | Component | Weight (%) | Details |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Weekly Exercises | 30% | Hands-on exercises to practice skills covered in each week's topic. |
 | Semester Project | 50% | Complete data analysis project, report, and presentation. |
 | Final Exam | 20% | Cumulative assessment covering all topics from the course. |

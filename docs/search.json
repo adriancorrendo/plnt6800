@@ -1,126 +1,5 @@
 [
   {
-    "objectID": "coding/week_01/essentials_01.html",
-    "href": "coding/week_01/essentials_01.html",
-    "title": "Essentials of R coding I",
-    "section": "",
-    "text": "This page provides an overview of the essential types of elements in R, including examples and explanations for each. Use this as a quick reference to understand the basics of data types and operations.",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#numbers",
-    "href": "coding/week_01/essentials_01.html#numbers",
-    "title": "Essentials of R coding I",
-    "section": "01. Numbers",
-    "text": "01. Numbers\n\n20\n\n[1] 20",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#math-operations",
-    "href": "coding/week_01/essentials_01.html#math-operations",
-    "title": "Essentials of R coding I",
-    "section": "02. Math Operations",
-    "text": "02. Math Operations\n\n20+1 # addition\n\n[1] 21\n\n20-4 # subtraction\n\n[1] 16\n\n20*5 # multiplication\n\n[1] 100\n\n20/5 # division\n\n[1] 4\n\n2^2 # exponentials\n\n[1] 4\n\nsqrt(9) # square root\n\n[1] 3\n\n# Greater exponents for roots\n# notation is: x^(1/n)\n\n# Cubic root of 27\n27^(1/3)  # Result: 3\n\n[1] 3\n\n# 4th root of 16\n16^(1/4)  # Result: 2\n\n[1] 2\n\n# 5th root of 32\n32^(1/5)  # Result: 2\n\n[1] 2",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
-    "href": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
-    "title": "Essentials of R coding I",
-    "section": "03. Text or characters (also called strings)",
-    "text": "03. Text or characters (also called strings)\n\n\"coding is fun\"\n\n[1] \"coding is fun\"\n\n\nBut these elements are not stored as objects yet:",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#define-objects",
-    "href": "coding/week_01/essentials_01.html#define-objects",
-    "title": "Essentials of R coding I",
-    "section": "04. Define objects",
-    "text": "04. Define objects\n\na &lt;- 20\n10 -&gt; b\n# We can also use equal:\nc = 15\n# But using \"&lt;-\", and leave = only for operations (so you can notice the difference) is considered a better coding practice.",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#print-objects",
-    "href": "coding/week_01/essentials_01.html#print-objects",
-    "title": "Essentials of R coding I",
-    "section": "05. Print objects",
-    "text": "05. Print objects\n\na\n\n[1] 20\n\nprint(a)\n\n[1] 20\n\nb\n\n[1] 10\n\nc\n\n[1] 15",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#vectors",
-    "href": "coding/week_01/essentials_01.html#vectors",
-    "title": "Essentials of R coding I",
-    "section": "06. Vectors",
-    "text": "06. Vectors\nA vector is one of the most basic data structures. It is a sequence of elements of the same type, such as numbers, characters, or logical values. Vectors are used to store and manipulate collections of data efficiently. \n\na. Creating a vector\nVectors can be created using the c() function (combine function):\n\n# Numeric vector\nnumeric_vector &lt;- c(1, 2, 3, 4.5)\nnumeric_vector\n\n[1] 1.0 2.0 3.0 4.5\n\n# Character vector\ncharacter_vector &lt;- c(\"corn\", \"wheat\", \"soybean\")\ncharacter_vector\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n# Logical vector\nlogical_vector &lt;- c(TRUE, FALSE, TRUE)\nlogical_vector\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\nb. Accessing Elements\nYou can access elements of a vector using square brackets []:\n\n# Access the first element\nnumeric_vector[1]\n\n[1] 1\n\n# Access multiple elements\nnumeric_vector[c(1, 3)]\n\n[1] 1 3\n\n\n\n\nc. Vectorized Operations\nIn R, vector-operations are applied to each element automatically:\n\n# Adding a scalar to a vector\nnumeric_vector + 2\n\n[1] 3.0 4.0 5.0 6.5\n\n# Element-wise addition\nnumeric_vector + c(10, 20, 30, 40)\n\n[1] 11.0 22.0 33.0 44.5\n\n\n\n\nd. Common Functions with Vectors\n\n‘length()’: Get the number of elements in a vector.\n‘typeof()’ or ‘class()’: Determine the type of elements in a vector.\n‘seq()’: Generate a sequence of numbers.\n‘rep()’: Repeat elements to create a vector.",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#lists",
-    "href": "coding/week_01/essentials_01.html#lists",
-    "title": "Essentials of R coding I",
-    "section": "07. Lists",
-    "text": "07. Lists\nIn R, a list is a versatile data structure that can contain elements of different types, including vectors, matrices, data frames, and even other lists. Unlike vectors, which are homogeneous, lists are heterogeneous, meaning their elements can be of different data types and lengths. \nKey Characteristics of Lists: \n\nHeterogeneous: Lists can store elements of varying types (numeric, character, logical, etc.) and structures (vectors, data frames, functions, etc.). \nIndexed: Elements in a list are accessed using double square brackets [[ ]] or named elements using $.\n\nWhy Use Lists? \n\nFlexibility: Lists can store complex and nested data structures. \nData Wrangling: Useful for handling results from models, nested data, or any mixed-type collections. \nFunctions: Functions in R often return their output as lists (e.g., lm()). \n\n\na. Creating a list\nLists are created using the list() function:\n\n# Create a list with different types of elements\nmy_list &lt;- list(\n  \"numeric_v\" = numeric_vector,\n  \"character_v\" = character_vector,\n  \"single_number\" = 42,\n  \"logical_value\" = TRUE\n)\n\n\n\nb. Accessing Elements in a List\nYou can access elements in a list by their position or name:\nBy Position:\n\n# Access the first element\nmy_list[[1]]\n\n[1] 1.0 2.0 3.0 4.5\n\n# Access the second element\nmy_list[[2]]\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nBy name:\n\n# Access by name\nmy_list$numeric_v\n\n[1] 1.0 2.0 3.0 4.5\n\nmy_list$character_v\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nSubelements:\n\n# Access the first value in the numeric vector\nmy_list$numeric_vector[1]\n\nNULL\n\n\n\n\nc. Some functions for lists\n\n# Number of elements in the list\nlength(my_list)\n\n[1] 4\n\n# Names of the elements\nnames(my_list)\n\n[1] \"numeric_v\"     \"character_v\"   \"single_number\" \"logical_value\"\n\n# Structure of the list\nstr(my_list)\n\nList of 4\n $ numeric_v    : num [1:4] 1 2 3 4.5\n $ character_v  : chr [1:3] \"corn\" \"wheat\" \"soybean\"\n $ single_number: num 42\n $ logical_value: logi TRUE",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#data-frame",
-    "href": "coding/week_01/essentials_01.html#data-frame",
-    "title": "Essentials of R coding I",
-    "section": "08. Data frame",
-    "text": "08. Data frame\nIn R, a data frame is a two-dimensional data structure used for storing tabular data. It is one of the most commonly used data structures in R for data analysis and manipulation. \nKey Characteristics of a Data Frame \n\nTabular Structure: Data is organized in rows and columns. \nHeterogeneous Columns: Each column can contain different data types (e.g., numeric, character, logical), but all elements in a column must be of the same type. \nRow and Column Names: Rows and columns can have names for easier identification. \n\nWhy Use a Data Frame? \n\nData Analysis: It is ideal for representing structured data like spreadsheets or databases. \nFlexible Operations: Columns can be easily added, removed, or modified. \nIntegration with R Functions: Many R functions for statistical modeling and analysis expect data frames as input. \n\n\na. Creating a Data Frame\nA data frame can be created using the data.frame() function:\n\n# Create a data frame\nmy_data &lt;- data.frame(\n  Crop = c(\"Corn\", \"Wheat\", \"Soybean\"), # Character column\n  Yield = c(180, 90, 50), # Numeric column\n  Legume = c(FALSE, FALSE, TRUE) # Logical column\n)\n\nprint(my_data)\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n2   Wheat    90  FALSE\n3 Soybean    50   TRUE\n\n\n\n\nb. Accessing data in a data frame\nAccessing columns:\n\n# Access a column by name\nmy_data$Crop\n\n[1] \"Corn\"    \"Wheat\"   \"Soybean\"\n\n# Access a column by index\nmy_data[, 2]\n\n[1] 180  90  50\n\n\nAccessing rows:\n\n# Access the first row\nmy_data[1, ]\n\n  Crop Yield Legume\n1 Corn   180  FALSE\n\n# Access specific rows\nmy_data[c(1, 3), ]\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n3 Soybean    50   TRUE\n\n\nAccessing specific elements\n\n# Access the element in the 2nd row, 3rd column\nmy_data[2, 3]\n\n[1] FALSE\n\n# Access specific cells by column name\nmy_data[2, \"Crop\"]\n\n[1] \"Wheat\"\n\n\n\n\nc. Adding a new column\n\nmy_data$Season &lt;- c(\"Summer\", \"Winter\", \"Summer\")\n\n\n\nd. Modify a column\n\nmy_data$Yield &lt;- my_data$Yield + 5\n\n\n\ne. Adding a new row\nIn base R, we can use rbind() to add rows:\n\nnew_row &lt;- data.frame(Crop = \"Barley\", Yield = 80, Legume = FALSE, Season = \"Winter\")\nmy_data &lt;- rbind(my_data, new_row)\n\n\n\nf. Filtering (rows)\nIn base R, we can use subset() to filter rows:\n\nsubset(my_data, Yield &gt; 150)\n\n  Crop Yield Legume Season\n1 Corn   185  FALSE Summer\n\n\nWe can also use logical conditions:\n\nmy_data[my_data$Legume == TRUE, ]\n\n     Crop Yield Legume Season\n3 Soybean    55   TRUE Summer\n\n\n\n\ng. Selecting (columns)\nIn base R, there is no function to select columns. We need to use brackets [] and vectors c():\n\nmy_data[c(\"Crop\", \"Yield\")]\n\n     Crop Yield\n1    Corn   185\n2   Wheat    95\n3 Soybean    55\n4  Barley    80\n\n\n\n\nh. Some functions for data frames\n\nnrow(my_data)        # Number of rows\n\n[1] 4\n\nncol(my_data)        # Number of columns\n\n[1] 4\n\ncolnames(my_data)    # Column names\n\n[1] \"Crop\"   \"Yield\"  \"Legume\" \"Season\"\n\nsummary(my_data)     # Summary statistics\n\n     Crop               Yield          Legume           Season         \n Length:4           Min.   : 55.00   Mode :logical   Length:4          \n Class :character   1st Qu.: 73.75   FALSE:3         Class :character  \n Mode  :character   Median : 87.50   TRUE :1         Mode  :character  \n                    Mean   :103.75                                     \n                    3rd Qu.:117.50                                     \n                    Max.   :185.00",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#matrix",
-    "href": "coding/week_01/essentials_01.html#matrix",
-    "title": "Essentials of R coding I",
-    "section": "09. Matrix",
-    "text": "09. Matrix\nIn R, a matrix is a two-dimensional, rectangular data structure that stores elements of the same type. It is similar to a data frame in structure but less flexible, as all elements in a matrix must be of a single data type (e.g., numeric, character, or logical). \nKey Characteristics of a Matrix \n\nHomogeneous: All elements in a matrix must be of the same type. \n2D Structure: A matrix has rows and columns, forming a table-like structure. \nDimensions: Defined by the number of rows and columns. \n\nWhy Use a Matrix? \n\nMathematical Operations: Ideal for linear algebra and mathematical modeling. \nEfficient Storage: Matrices use less memory compared to more complex structures like data frames. \nSimpler Operations: Homogeneous data ensures consistent behavior across elements. \n\n\na. Creating a Matrix\nYou can create a matrix using the matrix() function:\n\n# Create a numeric matrix\nmy_matrix &lt;- matrix(\n  data = 1:9,     # Data values\n  nrow = 3,       # Number of rows\n  ncol = 3,       # Number of columns\n)\n\nprint(my_matrix)\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    5    8\n[3,]    3    6    9\n\n\n\n\nb. Accessing elements in a matrix\nAccessing rows:\n\n# Access the first row\nmy_matrix[1, ]\n\n[1] 1 4 7\n\n\nAccessing columns:\n\n# Access the second column\nmy_matrix[, 2]\n\n[1] 4 5 6\n\n\nAccessing specific elements:\n\n# Access the element in the 2nd row, 3rd column\nmy_matrix[2, 3]\n\n[1] 8\n\n\n\n\nc. Adding a new column\n\nnew_col &lt;- c(10, 11, 12) # Create the column\nmy_matrix &lt;- cbind(my_matrix, new_col) # Paste it to the existing\n\n\n\nd. Adding a new row\n\nnew_row &lt;- c(13, 14, 15, 16)\nmy_matrix &lt;- rbind(my_matrix, new_row)",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#functions",
-    "href": "coding/week_01/essentials_01.html#functions",
-    "title": "Essentials of R coding I",
-    "section": "10. Functions",
-    "text": "10. Functions\n\na. Create a function\nWe need to use the syntax function(x) { x as object of a task }. ‘x’ is considered an “argument”, and the function itself is inside the {}. For example:\n\nmy_function &lt;- function(x) { x + 1 }\n\n\n\nb. Check the function\n\nmy_function(9)\n\n[1] 10\n\n\n\n\nc. Write a function with 3 arguments\n\nmy_xyz_function &lt;- function(x, y, z) { x + y - z }\n\n\n\nd. Order of arguments\nNote: R is order sensitive (if you don’t explicitly specify the argument)\n\nmy_xyz_function(12, 3, 4)\n\n[1] 11\n\nmy_xyz_function(12, 4, 3)\n\n[1] 13\n\n\n\n\ne. Specifying arguments with names\nIf you specify the argument name as = to, the order doesn’t matter:\n\nmy_xyz_function(z = 4, x = 12, y = 3)\n\n[1] 11\n\n\n\n\nf. A more complex function\n\nfx &lt;- function(x, y, remove_na = NULL) {\n        # First operation is a sum, removing NAs\n        first &lt;- sum(c(x, y), na.rm = remove_na)\n        # Add a text message\n        text &lt;- \"This function is so cool\"\n        # Store result\n        result &lt;- first + x\n        # Print output\n        print(list(\"Message\" = text,\n                   \"1st\" = first,\n                   \"end\" = result))\n                   }\n\nRun the function with alternative arguments:\n\nfx(x = a, y = b, remove_na = FALSE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\nfx(x = a, y = b, remove_na = TRUE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\n\nStore the output in an object:\n\nfoo &lt;- fx(x=b, y=a)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 40",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
     "objectID": "coding/week_02/02_fundamentals_rpackages.html",
     "href": "coding/week_02/02_fundamentals_rpackages.html",
     "title": "Fundamentals of R Packages",
@@ -257,7 +136,7 @@
     "href": "coding/week_02/02_fundamentals_rpackages.html#d.-agricolae",
     "title": "Fundamentals of R Packages",
     "section": "d. agricolae",
-    "text": "d. agricolae\nThe agricolae package in R is a comprehensive toolset designed for statistical analysis and visualization of agricultural experiments. It is particularly useful for researchers and practitioners working in crop science, agronomy, and other fields of agricultural research.\nIt provides methods for designing experiments, analyzing experimental data, and visualizing results, particularly for data collected in agricultural and biological research.\n\n\n\n\n\n\nNote\n\n\n\nIt supports:\n\nExperimental Designs: Generate designs for field experiments like randomized complete block design (RCBD), Latin square, factorial experiments, and others.\nStatistical Analysis: Analyze variance (ANOVA), perform post-hoc tests (e.g., LSD, Tukey HSD), and assess experimental data.\nVisualization: Create plots for results, including mean comparisons, dendrograms, and histograms.\nAgronomic Tools: Calculate indices like stability for crop yields or pest/disease control measures.\n\n\n\n\ni. Data analysis\n\n# Load agricolae package\nlibrary(agricolae)\n\n# Simulate agricultural data\ndata &lt;- data.frame(\n  treatment = rep(c(\"A\", \"B\", \"C\"), each = 5),\n  yield = c(50, 55, 52, 51, 54,   # Yields for Treatment A\n            60, 62, 59, 61, 63,   # Yields for Treatment B\n            48, 46, 50, 49, 47)   # Yields for Treatment C\n)\n\n# Display the dataset\nprint(data)\n\n   treatment yield\n1          A    50\n2          A    55\n3          A    52\n4          A    51\n5          A    54\n6          B    60\n7          B    62\n8          B    59\n9          B    61\n10         B    63\n11         C    48\n12         C    46\n13         C    50\n14         C    49\n15         C    47\n\n# Perform ANOVA\nanova_result &lt;- aov(yield ~ treatment, data = data)\nsummary(anova_result)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ntreatment    2  437.2   218.6   70.52 2.32e-07 ***\nResiduals   12   37.2     3.1                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Perform LSD test for pairwise comparison\nlsd_result &lt;- LSD.test(anova_result, \"treatment\", console = TRUE)\n\n\nStudy: anova_result ~ \"treatment\"\n\nLSD t Test for yield \n\nMean Square Error:  3.1 \n\ntreatment,  means and individual ( 95 %) CI\n\n  yield      std r        se     LCL     UCL Min Max Q25 Q50 Q75\nA  52.4 2.073644 5 0.7874008 50.6844 54.1156  50  55  51  52  54\nB  61.0 1.581139 5 0.7874008 59.2844 62.7156  59  63  60  61  62\nC  48.0 1.581139 5 0.7874008 46.2844 49.7156  46  50  47  48  49\n\nAlpha: 0.05 ; DF Error: 12\nCritical Value of t: 2.178813 \n\nleast Significant Difference: 2.426223 \n\nTreatments with the same letter are not significantly different.\n\n  yield groups\nB  61.0      a\nA  52.4      b\nC  48.0      c\n\n# Could also run Tukey HSD, & Duncan's Test\n\n# Plot LSD results\nplot(lsd_result, main = \"LSD Test Results for Treatment Yields\")\n\n\n\n\n\n\n\n\n\n\nii. Design of experiments\nYou can generate layouts for randomized complete block designs (RCBD), Latin squares, Graeco-Latin squares, factorial experiments, and split-plot designs\n\ndesign &lt;- design.rcbd(trt = c(\"A\", \"B\", \"C\"), r = 3)\nprint(design)\n\n$parameters\n$parameters$design\n[1] \"rcbd\"\n\n$parameters$trt\n[1] \"A\" \"B\" \"C\"\n\n$parameters$r\n[1] 3\n\n$parameters$serie\n[1] 2\n\n$parameters$seed\n[1] -477687894\n\n$parameters$kinds\n[1] \"Super-Duper\"\n\n$parameters[[7]]\n[1] TRUE\n\n\n$sketch\n     [,1] [,2] [,3]\n[1,] \"B\"  \"A\"  \"C\" \n[2,] \"C\"  \"A\"  \"B\" \n[3,] \"C\"  \"B\"  \"A\" \n\n$book\n  plots block c(\"A\", \"B\", \"C\")\n1   101     1                B\n2   102     1                A\n3   103     1                C\n4   201     2                C\n5   202     2                A\n6   203     2                B\n7   301     3                C\n8   302     3                B\n9   303     3                A",
+    "text": "d. agricolae\nThe agricolae package in R is a comprehensive toolset designed for statistical analysis and visualization of agricultural experiments. It is particularly useful for researchers and practitioners working in crop science, agronomy, and other fields of agricultural research.\nIt provides methods for designing experiments, analyzing experimental data, and visualizing results, particularly for data collected in agricultural and biological research.\n\n\n\n\n\n\nNote\n\n\n\nIt supports:\n\nExperimental Designs: Generate designs for field experiments like randomized complete block design (RCBD), Latin square, factorial experiments, and others.\nStatistical Analysis: Analyze variance (ANOVA), perform post-hoc tests (e.g., LSD, Tukey HSD), and assess experimental data.\nVisualization: Create plots for results, including mean comparisons, dendrograms, and histograms.\nAgronomic Tools: Calculate indices like stability for crop yields or pest/disease control measures.\n\n\n\n\ni. Data analysis\n\n# Load agricolae package\nlibrary(agricolae)\n\n# Simulate agricultural data\ndata &lt;- data.frame(\n  treatment = rep(c(\"A\", \"B\", \"C\"), each = 5),\n  yield = c(50, 55, 52, 51, 54,   # Yields for Treatment A\n            60, 62, 59, 61, 63,   # Yields for Treatment B\n            48, 46, 50, 49, 47)   # Yields for Treatment C\n)\n\n# Display the dataset\nprint(data)\n\n   treatment yield\n1          A    50\n2          A    55\n3          A    52\n4          A    51\n5          A    54\n6          B    60\n7          B    62\n8          B    59\n9          B    61\n10         B    63\n11         C    48\n12         C    46\n13         C    50\n14         C    49\n15         C    47\n\n# Perform ANOVA\nanova_result &lt;- aov(yield ~ treatment, data = data)\nsummary(anova_result)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ntreatment    2  437.2   218.6   70.52 2.32e-07 ***\nResiduals   12   37.2     3.1                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Perform LSD test for pairwise comparison\nlsd_result &lt;- LSD.test(anova_result, \"treatment\", console = TRUE)\n\n\nStudy: anova_result ~ \"treatment\"\n\nLSD t Test for yield \n\nMean Square Error:  3.1 \n\ntreatment,  means and individual ( 95 %) CI\n\n  yield      std r        se     LCL     UCL Min Max Q25 Q50 Q75\nA  52.4 2.073644 5 0.7874008 50.6844 54.1156  50  55  51  52  54\nB  61.0 1.581139 5 0.7874008 59.2844 62.7156  59  63  60  61  62\nC  48.0 1.581139 5 0.7874008 46.2844 49.7156  46  50  47  48  49\n\nAlpha: 0.05 ; DF Error: 12\nCritical Value of t: 2.178813 \n\nleast Significant Difference: 2.426223 \n\nTreatments with the same letter are not significantly different.\n\n  yield groups\nB  61.0      a\nA  52.4      b\nC  48.0      c\n\n# Could also run Tukey HSD, & Duncan's Test\n\n# Plot LSD results\nplot(lsd_result, main = \"LSD Test Results for Treatment Yields\")\n\n\n\n\n\n\n\n\n\n\nii. Design of experiments\nYou can generate layouts for randomized complete block designs (RCBD), Latin squares, Graeco-Latin squares, factorial experiments, and split-plot designs\n\ndesign &lt;- design.rcbd(trt = c(\"A\", \"B\", \"C\"), r = 3)\nprint(design)\n\n$parameters\n$parameters$design\n[1] \"rcbd\"\n\n$parameters$trt\n[1] \"A\" \"B\" \"C\"\n\n$parameters$r\n[1] 3\n\n$parameters$serie\n[1] 2\n\n$parameters$seed\n[1] 2000902035\n\n$parameters$kinds\n[1] \"Super-Duper\"\n\n$parameters[[7]]\n[1] TRUE\n\n\n$sketch\n     [,1] [,2] [,3]\n[1,] \"A\"  \"B\"  \"C\" \n[2,] \"A\"  \"C\"  \"B\" \n[3,] \"C\"  \"A\"  \"B\" \n\n$book\n  plots block c(\"A\", \"B\", \"C\")\n1   101     1                A\n2   102     1                B\n3   103     1                C\n4   201     2                A\n5   202     2                C\n6   203     2                B\n7   301     3                C\n8   302     3                A\n9   303     3                B",
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
@@ -275,33 +154,264 @@
     ]
   },
   {
-    "objectID": "outline/calendar.html",
-    "href": "outline/calendar.html",
-    "title": "PLNT6800|01 - Calendar",
+    "objectID": "coding/week_01/essentials_01.html",
+    "href": "coding/week_01/essentials_01.html",
+    "title": "Essentials of R coding I",
     "section": "",
-    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310",
+    "text": "This page provides an overview of the essential types of elements in R, including examples and explanations for each. Use this as a quick reference to understand the basics of data types and operations.",
     "crumbs": [
-      "Calendar",
-      "Calendar"
+      "Lessons",
+      "01-Essentials of R"
     ]
   },
   {
-    "objectID": "outline/calendar.html#calendar",
-    "href": "outline/calendar.html#calendar",
-    "title": "PLNT6800|01 - Calendar",
-    "section": "Calendar",
-    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 24\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
+    "objectID": "coding/week_01/essentials_01.html#numbers",
+    "href": "coding/week_01/essentials_01.html#numbers",
+    "title": "Essentials of R coding I",
+    "section": "01. Numbers",
+    "text": "01. Numbers\n\n20\n\n[1] 20",
     "crumbs": [
-      "Calendar",
-      "Calendar"
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#math-operations",
+    "href": "coding/week_01/essentials_01.html#math-operations",
+    "title": "Essentials of R coding I",
+    "section": "02. Math Operations",
+    "text": "02. Math Operations\n\n20+1 # addition\n\n[1] 21\n\n20-4 # subtraction\n\n[1] 16\n\n20*5 # multiplication\n\n[1] 100\n\n20/5 # division\n\n[1] 4\n\n2^2 # exponentials\n\n[1] 4\n\nsqrt(9) # square root\n\n[1] 3\n\n# Greater exponents for roots\n# notation is: x^(1/n)\n\n# Cubic root of 27\n27^(1/3)  # Result: 3\n\n[1] 3\n\n# 4th root of 16\n16^(1/4)  # Result: 2\n\n[1] 2\n\n# 5th root of 32\n32^(1/5)  # Result: 2\n\n[1] 2",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
+    "href": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
+    "title": "Essentials of R coding I",
+    "section": "03. Text or characters (also called strings)",
+    "text": "03. Text or characters (also called strings)\n\n\"coding is fun\"\n\n[1] \"coding is fun\"\n\n\nBut these elements are not stored as objects yet:",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#define-objects",
+    "href": "coding/week_01/essentials_01.html#define-objects",
+    "title": "Essentials of R coding I",
+    "section": "04. Define objects",
+    "text": "04. Define objects\n\na &lt;- 20\n10 -&gt; b\n# We can also use equal:\nc = 15\n# But using \"&lt;-\", and leave = only for operations (so you can notice the difference) is considered a better coding practice.",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#print-objects",
+    "href": "coding/week_01/essentials_01.html#print-objects",
+    "title": "Essentials of R coding I",
+    "section": "05. Print objects",
+    "text": "05. Print objects\n\na\n\n[1] 20\n\nprint(a)\n\n[1] 20\n\nb\n\n[1] 10\n\nc\n\n[1] 15",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#vectors",
+    "href": "coding/week_01/essentials_01.html#vectors",
+    "title": "Essentials of R coding I",
+    "section": "06. Vectors",
+    "text": "06. Vectors\nA vector is one of the most basic data structures. It is a sequence of elements of the same type, such as numbers, characters, or logical values. Vectors are used to store and manipulate collections of data efficiently. \n\na. Creating a vector\nVectors can be created using the c() function (combine function):\n\n# Numeric vector\nnumeric_vector &lt;- c(1, 2, 3, 4.5)\nnumeric_vector\n\n[1] 1.0 2.0 3.0 4.5\n\n# Character vector\ncharacter_vector &lt;- c(\"corn\", \"wheat\", \"soybean\")\ncharacter_vector\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n# Logical vector\nlogical_vector &lt;- c(TRUE, FALSE, TRUE)\nlogical_vector\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\nb. Accessing Elements\nYou can access elements of a vector using square brackets []:\n\n# Access the first element\nnumeric_vector[1]\n\n[1] 1\n\n# Access multiple elements\nnumeric_vector[c(1, 3)]\n\n[1] 1 3\n\n\n\n\nc. Vectorized Operations\nIn R, vector-operations are applied to each element automatically:\n\n# Adding a scalar to a vector\nnumeric_vector + 2\n\n[1] 3.0 4.0 5.0 6.5\n\n# Element-wise addition\nnumeric_vector + c(10, 20, 30, 40)\n\n[1] 11.0 22.0 33.0 44.5\n\n\n\n\nd. Common Functions with Vectors\n\n‘length()’: Get the number of elements in a vector.\n‘typeof()’ or ‘class()’: Determine the type of elements in a vector.\n‘seq()’: Generate a sequence of numbers.\n‘rep()’: Repeat elements to create a vector.",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#lists",
+    "href": "coding/week_01/essentials_01.html#lists",
+    "title": "Essentials of R coding I",
+    "section": "07. Lists",
+    "text": "07. Lists\nIn R, a list is a versatile data structure that can contain elements of different types, including vectors, matrices, data frames, and even other lists. Unlike vectors, which are homogeneous, lists are heterogeneous, meaning their elements can be of different data types and lengths. \nKey Characteristics of Lists: \n\nHeterogeneous: Lists can store elements of varying types (numeric, character, logical, etc.) and structures (vectors, data frames, functions, etc.). \nIndexed: Elements in a list are accessed using double square brackets [[ ]] or named elements using $.\n\nWhy Use Lists? \n\nFlexibility: Lists can store complex and nested data structures. \nData Wrangling: Useful for handling results from models, nested data, or any mixed-type collections. \nFunctions: Functions in R often return their output as lists (e.g., lm()). \n\n\na. Creating a list\nLists are created using the list() function:\n\n# Create a list with different types of elements\nmy_list &lt;- list(\n  \"numeric_v\" = numeric_vector,\n  \"character_v\" = character_vector,\n  \"single_number\" = 42,\n  \"logical_value\" = TRUE\n)\n\n\n\nb. Accessing Elements in a List\nYou can access elements in a list by their position or name:\nBy Position:\n\n# Access the first element\nmy_list[[1]]\n\n[1] 1.0 2.0 3.0 4.5\n\n# Access the second element\nmy_list[[2]]\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nBy name:\n\n# Access by name\nmy_list$numeric_v\n\n[1] 1.0 2.0 3.0 4.5\n\nmy_list$character_v\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nSubelements:\n\n# Access the first value in the numeric vector\nmy_list$numeric_vector[1]\n\nNULL\n\n\n\n\nc. Some functions for lists\n\n# Number of elements in the list\nlength(my_list)\n\n[1] 4\n\n# Names of the elements\nnames(my_list)\n\n[1] \"numeric_v\"     \"character_v\"   \"single_number\" \"logical_value\"\n\n# Structure of the list\nstr(my_list)\n\nList of 4\n $ numeric_v    : num [1:4] 1 2 3 4.5\n $ character_v  : chr [1:3] \"corn\" \"wheat\" \"soybean\"\n $ single_number: num 42\n $ logical_value: logi TRUE",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#data-frame",
+    "href": "coding/week_01/essentials_01.html#data-frame",
+    "title": "Essentials of R coding I",
+    "section": "08. Data frame",
+    "text": "08. Data frame\nIn R, a data frame is a two-dimensional data structure used for storing tabular data. It is one of the most commonly used data structures in R for data analysis and manipulation. \nKey Characteristics of a Data Frame \n\nTabular Structure: Data is organized in rows and columns. \nHeterogeneous Columns: Each column can contain different data types (e.g., numeric, character, logical), but all elements in a column must be of the same type. \nRow and Column Names: Rows and columns can have names for easier identification. \n\nWhy Use a Data Frame? \n\nData Analysis: It is ideal for representing structured data like spreadsheets or databases. \nFlexible Operations: Columns can be easily added, removed, or modified. \nIntegration with R Functions: Many R functions for statistical modeling and analysis expect data frames as input. \n\n\na. Creating a Data Frame\nA data frame can be created using the data.frame() function:\n\n# Create a data frame\nmy_data &lt;- data.frame(\n  Crop = c(\"Corn\", \"Wheat\", \"Soybean\"), # Character column\n  Yield = c(180, 90, 50), # Numeric column\n  Legume = c(FALSE, FALSE, TRUE) # Logical column\n)\n\nprint(my_data)\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n2   Wheat    90  FALSE\n3 Soybean    50   TRUE\n\n\n\n\nb. Accessing data in a data frame\nAccessing columns:\n\n# Access a column by name\nmy_data$Crop\n\n[1] \"Corn\"    \"Wheat\"   \"Soybean\"\n\n# Access a column by index\nmy_data[, 2]\n\n[1] 180  90  50\n\n\nAccessing rows:\n\n# Access the first row\nmy_data[1, ]\n\n  Crop Yield Legume\n1 Corn   180  FALSE\n\n# Access specific rows\nmy_data[c(1, 3), ]\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n3 Soybean    50   TRUE\n\n\nAccessing specific elements\n\n# Access the element in the 2nd row, 3rd column\nmy_data[2, 3]\n\n[1] FALSE\n\n# Access specific cells by column name\nmy_data[2, \"Crop\"]\n\n[1] \"Wheat\"\n\n\n\n\nc. Adding a new column\n\nmy_data$Season &lt;- c(\"Summer\", \"Winter\", \"Summer\")\n\n\n\nd. Modify a column\n\nmy_data$Yield &lt;- my_data$Yield + 5\n\n\n\ne. Adding a new row\nIn base R, we can use rbind() to add rows:\n\nnew_row &lt;- data.frame(Crop = \"Barley\", Yield = 80, Legume = FALSE, Season = \"Winter\")\nmy_data &lt;- rbind(my_data, new_row)\n\n\n\nf. Filtering (rows)\nIn base R, we can use subset() to filter rows:\n\nsubset(my_data, Yield &gt; 150)\n\n  Crop Yield Legume Season\n1 Corn   185  FALSE Summer\n\n\nWe can also use logical conditions:\n\nmy_data[my_data$Legume == TRUE, ]\n\n     Crop Yield Legume Season\n3 Soybean    55   TRUE Summer\n\n\n\n\ng. Selecting (columns)\nIn base R, there is no function to select columns. We need to use brackets [] and vectors c():\n\nmy_data[c(\"Crop\", \"Yield\")]\n\n     Crop Yield\n1    Corn   185\n2   Wheat    95\n3 Soybean    55\n4  Barley    80\n\n\n\n\nh. Some functions for data frames\n\nnrow(my_data)        # Number of rows\n\n[1] 4\n\nncol(my_data)        # Number of columns\n\n[1] 4\n\ncolnames(my_data)    # Column names\n\n[1] \"Crop\"   \"Yield\"  \"Legume\" \"Season\"\n\nsummary(my_data)     # Summary statistics\n\n     Crop               Yield          Legume           Season         \n Length:4           Min.   : 55.00   Mode :logical   Length:4          \n Class :character   1st Qu.: 73.75   FALSE:3         Class :character  \n Mode  :character   Median : 87.50   TRUE :1         Mode  :character  \n                    Mean   :103.75                                     \n                    3rd Qu.:117.50                                     \n                    Max.   :185.00",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#matrix",
+    "href": "coding/week_01/essentials_01.html#matrix",
+    "title": "Essentials of R coding I",
+    "section": "09. Matrix",
+    "text": "09. Matrix\nIn R, a matrix is a two-dimensional, rectangular data structure that stores elements of the same type. It is similar to a data frame in structure but less flexible, as all elements in a matrix must be of a single data type (e.g., numeric, character, or logical). \nKey Characteristics of a Matrix \n\nHomogeneous: All elements in a matrix must be of the same type. \n2D Structure: A matrix has rows and columns, forming a table-like structure. \nDimensions: Defined by the number of rows and columns. \n\nWhy Use a Matrix? \n\nMathematical Operations: Ideal for linear algebra and mathematical modeling. \nEfficient Storage: Matrices use less memory compared to more complex structures like data frames. \nSimpler Operations: Homogeneous data ensures consistent behavior across elements. \n\n\na. Creating a Matrix\nYou can create a matrix using the matrix() function:\n\n# Create a numeric matrix\nmy_matrix &lt;- matrix(\n  data = 1:9,     # Data values\n  nrow = 3,       # Number of rows\n  ncol = 3,       # Number of columns\n)\n\nprint(my_matrix)\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    5    8\n[3,]    3    6    9\n\n\n\n\nb. Accessing elements in a matrix\nAccessing rows:\n\n# Access the first row\nmy_matrix[1, ]\n\n[1] 1 4 7\n\n\nAccessing columns:\n\n# Access the second column\nmy_matrix[, 2]\n\n[1] 4 5 6\n\n\nAccessing specific elements:\n\n# Access the element in the 2nd row, 3rd column\nmy_matrix[2, 3]\n\n[1] 8\n\n\n\n\nc. Adding a new column\n\nnew_col &lt;- c(10, 11, 12) # Create the column\nmy_matrix &lt;- cbind(my_matrix, new_col) # Paste it to the existing\n\n\n\nd. Adding a new row\n\nnew_row &lt;- c(13, 14, 15, 16)\nmy_matrix &lt;- rbind(my_matrix, new_row)",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#functions",
+    "href": "coding/week_01/essentials_01.html#functions",
+    "title": "Essentials of R coding I",
+    "section": "10. Functions",
+    "text": "10. Functions\n\na. Create a function\nWe need to use the syntax function(x) { x as object of a task }. ‘x’ is considered an “argument”, and the function itself is inside the {}. For example:\n\nmy_function &lt;- function(x) { x + 1 }\n\n\n\nb. Check the function\n\nmy_function(9)\n\n[1] 10\n\n\n\n\nc. Write a function with 3 arguments\n\nmy_xyz_function &lt;- function(x, y, z) { x + y - z }\n\n\n\nd. Order of arguments\nNote: R is order sensitive (if you don’t explicitly specify the argument)\n\nmy_xyz_function(12, 3, 4)\n\n[1] 11\n\nmy_xyz_function(12, 4, 3)\n\n[1] 13\n\n\n\n\ne. Specifying arguments with names\nIf you specify the argument name as = to, the order doesn’t matter:\n\nmy_xyz_function(z = 4, x = 12, y = 3)\n\n[1] 11\n\n\n\n\nf. A more complex function\n\nfx &lt;- function(x, y, remove_na = NULL) {\n        # First operation is a sum, removing NAs\n        first &lt;- sum(c(x, y), na.rm = remove_na)\n        # Add a text message\n        text &lt;- \"This function is so cool\"\n        # Store result\n        result &lt;- first + x\n        # Print output\n        print(list(\"Message\" = text,\n                   \"1st\" = first,\n                   \"end\" = result))\n                   }\n\nRun the function with alternative arguments:\n\nfx(x = a, y = b, remove_na = FALSE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\nfx(x = a, y = b, remove_na = TRUE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\n\nStore the output in an object:\n\nfoo &lt;- fx(x=b, y=a)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 40",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html",
+    "href": "outline/outline.html",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-information",
+    "href": "outline/outline.html#course-information",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-description",
+    "href": "outline/outline.html#course-description",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "2. Course Description",
+    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-learning-outcomes",
+    "href": "outline/outline.html#course-learning-outcomes",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "3. Course Learning Outcomes",
+    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#calendar",
+    "href": "outline/outline.html#calendar",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "4. Calendar",
+    "text": "4. Calendar\nSee http://adriancorrendo.github.io/plnt6800/calendar.html\n\nLast Day to Drop Course\nTBD",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#assessment-breakdown",
+    "href": "outline/outline.html#assessment-breakdown",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "5. Assessment Breakdown",
+    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-grading-policies",
+    "href": "outline/outline.html#course-grading-policies",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "6. Course Grading Policies",
+    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-statements",
+    "href": "outline/outline.html#course-statements",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "7. Course Statements",
+    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#accessibility",
+    "href": "outline/outline.html#accessibility",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "8. Accessibility",
+    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#land-acknowledgement",
+    "href": "outline/outline.html#land-acknowledgement",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "9. Land Acknowledgement",
+    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
+    "crumbs": [
+      "Course Outline",
+      "Course Outline"
+    ]
+  },
+  {
+    "objectID": "software/software.html",
+    "href": "software/software.html",
+    "title": "Required Software & Accounts",
+    "section": "",
+    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
+    "crumbs": [
+      "Software",
+      "Instructions"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html",
+    "href": "slides/day1.html",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "",
+    "text": "Goal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
     ]
   },
   {
     "objectID": "slides/day1.html#welcome",
     "href": "slides/day1.html#welcome",
     "title": "Reproducible Ag Data Science with R",
-    "section": "Welcome 👋",
-    "text": "Welcome 👋\n\nGoal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "section": "",
+    "text": "Goal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -334,7 +444,7 @@
     "href": "slides/day1.html#key-definitions",
     "title": "Reproducible Ag Data Science with R",
     "section": "Key Definitions 📖",
-    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
+    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -356,7 +466,7 @@
     "href": "slides/day1.html#why-does-it-matter",
     "title": "Reproducible Ag Data Science with R",
     "section": "Why does it matter?",
-    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
+    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -389,7 +499,7 @@
     "href": "slides/day1.html#challenges-in-ag-research",
     "title": "Reproducible Ag Data Science with R",
     "section": "Challenges in Ag-research",
-    "text": "Challenges in Ag-research\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n“But it all starts with …”\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
+    "text": "Challenges in Ag-research\n\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n\n“But it all starts with …”\n\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -400,7 +510,7 @@
     "href": "slides/day1.html#discussion-prompt",
     "title": "Reproducible Ag Data Science with R",
     "section": "Discussion Prompt 💬",
-    "text": "Discussion Prompt 💬\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
+    "text": "Discussion Prompt 💬\n\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -411,7 +521,7 @@
     "href": "slides/day1.html#what-is-r",
     "title": "Reproducible Ag Data Science with R",
     "section": "What is R? 🧮",
-    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
+    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -422,7 +532,7 @@
     "href": "slides/day1.html#r-vs.-excel-for-data-wrangling",
     "title": "Reproducible Ag Data Science with R",
     "section": "R vs. Excel for Data Wrangling 📊",
-    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
+    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -433,7 +543,7 @@
     "href": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
     "title": "Reproducible Ag Data Science with R",
     "section": "R vs. SAS for Statistical Analysis 📉",
-    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
+    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -455,7 +565,7 @@
     "href": "slides/day1.html#r-strengths-and-use-cases",
     "title": "Reproducible Ag Data Science with R",
     "section": "R: Strengths and Use Cases 🧮",
-    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
+    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -466,7 +576,7 @@
     "href": "slides/day1.html#python-strengths-and-use-cases",
     "title": "Reproducible Ag Data Science with R",
     "section": "Python: Strengths and Use Cases 🐍",
-    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
+    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -477,7 +587,7 @@
     "href": "slides/day1.html#comparison-summary",
     "title": "Reproducible Ag Data Science with R",
     "section": "Comparison Summary 📊",
-    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
+    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -488,193 +598,32 @@
     "href": "slides/day1.html#thank-you",
     "title": "Reproducible Ag Data Science with R",
     "section": "THANK YOU!",
-    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\nContact me",
+    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\n\nContact me",
     "crumbs": [
       "Slides",
       "Reproducibility"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "objectID": "outline/calendar.html",
+    "href": "outline/calendar.html",
+    "title": "PLNT6800|01 - Calendar",
     "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310",
     "crumbs": [
-      "Home"
+      "Calendar",
+      "Calendar"
     ]
   },
   {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
-    "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "objectID": "outline/calendar.html#calendar",
+    "href": "outline/calendar.html#calendar",
+    "title": "PLNT6800|01 - Calendar",
+    "section": "Calendar",
+    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 24\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
     "crumbs": [
-      "Home"
+      "Calendar",
+      "Calendar"
     ]
-  },
-  {
-    "objectID": "software/software.html",
-    "href": "software/software.html",
-    "title": "Required Software & Accounts",
-    "section": "",
-    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
-    "crumbs": [
-      "Software",
-      "Instructions"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html",
-    "href": "outline/outline.html",
-    "title": "PLNT680001 - Course Outline",
-    "section": "",
-    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-information",
-    "href": "outline/outline.html#course-information",
-    "title": "PLNT680001 - Course Outline",
-    "section": "",
-    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: MCKN 310\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-description",
-    "href": "outline/outline.html#course-description",
-    "title": "PLNT680001 - Course Outline",
-    "section": "2. Course Description",
-    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-learning-outcomes",
-    "href": "outline/outline.html#course-learning-outcomes",
-    "title": "PLNT680001 - Course Outline",
-    "section": "3. Course Learning Outcomes",
-    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#calendar",
-    "href": "outline/outline.html#calendar",
-    "title": "PLNT680001 - Course Outline",
-    "section": "4. Calendar",
-    "text": "4. Calendar\nSee http://adriancorrendo.github.io/plnt6800/calendar.html\n\nLast Day to Drop Course\nTBD",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#assessment-breakdown",
-    "href": "outline/outline.html#assessment-breakdown",
-    "title": "PLNT680001 - Course Outline",
-    "section": "5. Assessment Breakdown",
-    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-grading-policies",
-    "href": "outline/outline.html#course-grading-policies",
-    "title": "PLNT680001 - Course Outline",
-    "section": "6. Course Grading Policies",
-    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-statements",
-    "href": "outline/outline.html#course-statements",
-    "title": "PLNT680001 - Course Outline",
-    "section": "7. Course Statements",
-    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#accessibility",
-    "href": "outline/outline.html#accessibility",
-    "title": "PLNT680001 - Course Outline",
-    "section": "8. Accessibility",
-    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#land-acknowledgement",
-    "href": "outline/outline.html#land-acknowledgement",
-    "title": "PLNT680001 - Course Outline",
-    "section": "9. Land Acknowledgement",
-    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
-    "crumbs": [
-      "Course Outline",
-      "Course Outline"
-    ]
-  },
-  {
-    "objectID": "coding/week_02/logo/code/hexsticker_plnt6800.html",
-    "href": "coding/week_02/logo/code/hexsticker_plnt6800.html",
-    "title": "2025 logo",
-    "section": "",
-    "text": "This is a short tutorial to easily create your own stickers!\nLet’s give it a try for this group and find our identity! 🙃\n\n\n\nlibrary(tidyverse) # multipackage containing needed data wrangling and plot functions\nlibrary(hexSticker) # package to create hexagon-stickers\nlibrary(datasauRus) # package with funny shapes\n#install.packages(\"datasauRus\")\nlibrary(sysfonts)\n\n\n\n\n\n# datasauRus\ndatasaurus_df &lt;- datasauRus::datasaurus_dozen %&gt;% dplyr::filter(dataset == \"dino\")\n\ndino_plot &lt;- ggplot2::ggplot(datasaurus_df, aes(x = x, y = y)) +\n  geom_point(color = \"grey90\", \n             fill = \"grey65\", shape = 22, size = 0.55) +\n  theme(panel.background = element_rect(fill = NULL, color = NULL),\n        panel.border = element_blank())+\n  theme_void()\n\n\n\n\n\nfonts &lt;- font_files()\n\n# Check font paths\n#font_paths()\n\n# Add the font we want\nfont_add(family = \"DIN Alternate\", \n         regular = \"/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf\")\n\n\n\n\n\n\n\n# define pallete\npalette &lt;- list('background' = '#FFC72A',\n                'font' = '#C20430',\n                'border' = '#000000',\n                'note' = 'grey25')\n\n# Single Palette elements\nbackground_color = '#C20430'\nfont_color = \"#FFC72A\"\nborder_color = \"#000000\"\nnote_color = \"grey25\"\n\n\n\n\n\nplnt6800 &lt;- sticker(\n  # Title\n  package = \"PLNT*6800\",\n  # Title attributes\n  p_family = \"DIN Alternate\",\n  p_color = font_color,\n  p_size = 33,\n  p_y = 0.6,\n  # Image\n  subplot = dino_plot,\n  # Image attributes\n  s_width = 0.95,\n  s_height = 0.95,\n  s_x = 1,\n  s_y = 1.2,\n  # Hexagon attributes\n  h_fill = background_color,\n  h_color = border_color,\n  h_size = 2,\n  # Add a link\n  url = \"image: datasauRus package\",\n  u_size = 6,\n  u_color = note_color,\n  # Add spotlight\n  spotlight = T,\n  # Spotlight attributes\n  # add some shadow to the pictures\n  l_y = 1.4,\n  l_x = 0.9,\n  l_width = 2.2,\n  l_height = 2.2,\n  l_alpha = 0.20,\n  # File saving\n  filename = \"plnt6800_logo.png\",\n  dpi = 600,\n  white_around_sticker = FALSE\n  ) \n\n\nFinal logo"
-  },
-  {
-    "objectID": "coding/week_02/logo/code/hexsticker_plnt6800.html#libraries",
-    "href": "coding/week_02/logo/code/hexsticker_plnt6800.html#libraries",
-    "title": "2025 logo",
-    "section": "",
-    "text": "library(tidyverse) # multipackage containing needed data wrangling and plot functions\nlibrary(hexSticker) # package to create hexagon-stickers\nlibrary(datasauRus) # package with funny shapes\n#install.packages(\"datasauRus\")\nlibrary(sysfonts)"
-  },
-  {
-    "objectID": "coding/week_02/logo/code/hexsticker_plnt6800.html#prepare-images",
-    "href": "coding/week_02/logo/code/hexsticker_plnt6800.html#prepare-images",
-    "title": "2025 logo",
-    "section": "",
-    "text": "# datasauRus\ndatasaurus_df &lt;- datasauRus::datasaurus_dozen %&gt;% dplyr::filter(dataset == \"dino\")\n\ndino_plot &lt;- ggplot2::ggplot(datasaurus_df, aes(x = x, y = y)) +\n  geom_point(color = \"grey90\", \n             fill = \"grey65\", shape = 22, size = 0.55) +\n  theme(panel.background = element_rect(fill = NULL, color = NULL),\n        panel.border = element_blank())+\n  theme_void()"
-  },
-  {
-    "objectID": "coding/week_02/logo/code/hexsticker_plnt6800.html#load-fonts",
-    "href": "coding/week_02/logo/code/hexsticker_plnt6800.html#load-fonts",
-    "title": "2025 logo",
-    "section": "",
-    "text": "fonts &lt;- font_files()\n\n# Check font paths\n#font_paths()\n\n# Add the font we want\nfont_add(family = \"DIN Alternate\", \n         regular = \"/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf\")"
-  },
-  {
-    "objectID": "coding/week_02/logo/code/hexsticker_plnt6800.html#stickers",
-    "href": "coding/week_02/logo/code/hexsticker_plnt6800.html#stickers",
-    "title": "2025 logo",
-    "section": "",
-    "text": "# define pallete\npalette &lt;- list('background' = '#FFC72A',\n                'font' = '#C20430',\n                'border' = '#000000',\n                'note' = 'grey25')\n\n# Single Palette elements\nbackground_color = '#C20430'\nfont_color = \"#FFC72A\"\nborder_color = \"#000000\"\nnote_color = \"grey25\"\n\n\n\n\n\nplnt6800 &lt;- sticker(\n  # Title\n  package = \"PLNT*6800\",\n  # Title attributes\n  p_family = \"DIN Alternate\",\n  p_color = font_color,\n  p_size = 33,\n  p_y = 0.6,\n  # Image\n  subplot = dino_plot,\n  # Image attributes\n  s_width = 0.95,\n  s_height = 0.95,\n  s_x = 1,\n  s_y = 1.2,\n  # Hexagon attributes\n  h_fill = background_color,\n  h_color = border_color,\n  h_size = 2,\n  # Add a link\n  url = \"image: datasauRus package\",\n  u_size = 6,\n  u_color = note_color,\n  # Add spotlight\n  spotlight = T,\n  # Spotlight attributes\n  # add some shadow to the pictures\n  l_y = 1.4,\n  l_x = 0.9,\n  l_width = 2.2,\n  l_height = 2.2,\n  l_alpha = 0.20,\n  # File saving\n  filename = \"plnt6800_logo.png\",\n  dpi = 600,\n  white_around_sticker = FALSE\n  ) \n\n\nFinal logo"
-  },
-  {
-    "objectID": "coding/week_02/03_datawrangling_01.html",
-    "href": "coding/week_02/03_datawrangling_01.html",
-    "title": "Transforming Agricultural Data with dplyr",
-    "section": "",
-    "text": "Introduction\nThe dplyr package in R provides powerful tools for transforming and analyzing data. In this tutorial, we’ll use an agricultural dataset to explore some common dplyr functions like filter(), mutate(), summarize(), and group_by().\nWe’ll use the agridat package for our dataset. If you don’t have it installed, you can do so by running:\n\ninstall.packages(\"agridat\")\n\n\n\nExample Dataset: Corn Yields\nFor this tutorial, we’ll use the lasrosas.corn dataset, which contains information on corn varieties, yields, and topographical features. First, let’s load the required packages and inspect the dataset:\n\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(agridat)\n\n# Load dataset\ndata(\"lasrosas.corn\")\ncorn_data &lt;- lasrosas.corn\n\n# Inspect the dataset\nglimpse(corn_data)\n\nRows: 3,443\nColumns: 9\n$ year  &lt;int&gt; 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999…\n$ lat   &lt;dbl&gt; -33.05113, -33.05115, -33.05116, -33.05117, -33.05118, -33.05120…\n$ long  &lt;dbl&gt; -63.84886, -63.84879, -63.84872, -63.84865, -63.84858, -63.84851…\n$ yield &lt;dbl&gt; 72.14, 73.79, 77.25, 76.35, 75.55, 70.24, 76.17, 69.17, 69.77, 6…\n$ nitro &lt;dbl&gt; 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 1…\n$ topo  &lt;fct&gt; W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W…\n$ bv    &lt;dbl&gt; 162.60, 170.49, 168.39, 176.68, 171.46, 170.56, 172.94, 171.86, …\n$ rep   &lt;fct&gt; R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, …\n$ nf    &lt;fct&gt; N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, …\n\n\nThe glimpse() function provides an overview of the dataset, including variable names and data types.\n\n\nFiltering Data\nTo focus on specific data, we can use filter(). For example, let’s filter the data to include only rows where the nitrogen applied (nitro) is greater than 100:\n\n# Filter rows with nitro &gt; 100\nhigh_nitro &lt;- corn_data %&gt;% filter(nitro &gt; 100)\nhead(high_nitro)\n\n  year       lat      long yield nitro topo     bv rep nf\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5\n4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5\n5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5\n6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5\n\n\nThis selects only rows where the nitro column has values greater than 100.\n\n\nAdding New Variables with mutate()\nYou can add new columns to your dataset with mutate(). Let’s calculate the yield in tons per hectare (assuming the current yield is in kilograms):\n\n# Add a column for yield in tons\ncorn_data &lt;- corn_data %&gt;% mutate(yield_tons = yield / 1000)\nhead(corn_data)\n\n  year       lat      long yield nitro topo     bv rep nf yield_tons\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5    0.07214\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5    0.07379\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5    0.07725\n4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5    0.07635\n5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5    0.07555\n6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5    0.07024\n\n\nThis creates a new column, yield_tons, with the transformed yield values.\n\n\nSummarizing Data\nTo get a quick overview of your data, you can use summarize() in combination with group_by(). For example, let’s calculate the average yield for each topographical category (topo):\n\n# Average yield by topography\naverage_yield_topo &lt;- corn_data %&gt;%\n  group_by(topo) %&gt;%\n  summarize(avg_yield = mean(yield, na.rm = TRUE))\naverage_yield_topo\n\n# A tibble: 4 × 2\n  topo  avg_yield\n  &lt;fct&gt;     &lt;dbl&gt;\n1 E          78.7\n2 HT         48.6\n3 LO         84.9\n4 W          66.8\n\n# Average yield by year and topography\naverage_yield_topoyear &lt;- corn_data %&gt;%\n  group_by(year, topo) %&gt;%\n  summarize(avg_yield = mean(yield, na.rm = TRUE))\n\n`summarise()` has grouped output by 'year'. You can override using the\n`.groups` argument.\n\naverage_yield_topoyear\n\n# A tibble: 8 × 3\n# Groups:   year [2]\n   year topo  avg_yield\n  &lt;int&gt; &lt;fct&gt;     &lt;dbl&gt;\n1  1999 E          64.8\n2  1999 HT         53.4\n3  1999 LO         71.2\n4  1999 W          66.0\n5  2001 E          92.7\n6  2001 HT         44.7\n7  2001 LO         99.9\n8  2001 W          67.7\n\n\nThis groups the data by topo and calculates the mean yield for each group.\n\n\nAdditional dplyr Functions\nHere are some other useful dplyr functions:\n\narrange(): Arrange rows by a variable in ascending or descending order.\n\n# Arrange data by yield in descending order\narranged_data &lt;- corn_data %&gt;% arrange(desc(yield))\nhead(arranged_data)\n\n  year       lat      long  yield nitro topo     bv rep nf yield_tons\n1 2001 -33.05086 -63.84317 117.90  99.8   LO 162.17  R3 N4    0.11790\n2 2001 -33.05125 -63.84245 117.19 124.6   LO 165.81  R3 N5    0.11719\n3 2001 -33.05181 -63.84323 116.64 124.6   LO 159.75  R1 N5    0.11664\n4 2001 -33.05084 -63.84324 114.94  99.8   LO 166.27  R3 N4    0.11494\n5 2001 -33.05134 -63.84299 114.46  99.8   LO 164.58  R2 N4    0.11446\n6 2001 -33.05127 -63.84238 114.08 124.6   LO 170.94  R3 N5    0.11408\n\n\nselect(): Select specific columns from the dataset.\n\n# Select specific columns\nselected_data &lt;- corn_data %&gt;% select(yield, nitro, topo)\nhead(selected_data)\n\n  yield nitro topo\n1 72.14 131.5    W\n2 73.79 131.5    W\n3 77.25 131.5    W\n4 76.35 131.5    W\n5 75.55 131.5    W\n6 70.24 131.5    W\n\n\ndistinct(): Find unique values in a column.\n\n# Unique values in topo\nunique_topo &lt;- corn_data %&gt;% distinct(topo)\nunique_topo\n\n  topo\n1    W\n2   HT\n3    E\n4   LO\n\n\ncount(): Count the number of observations in each group.\n\n# Count observations by topo\ntopo_count &lt;- corn_data %&gt;% count(topo)\ntopo_count\n\n  topo    n\n1    E  730\n2   HT  785\n3   LO  885\n4    W 1043\n\n\nrename(): Rename a column.\n\n# Rename a column\nrenamed_data &lt;- corn_data %&gt;% rename(Nitrogen = nitro)\nhead(renamed_data)\n\n  year       lat      long yield Nitrogen topo     bv rep nf yield_tons\n1 1999 -33.05113 -63.84886 72.14    131.5    W 162.60  R1 N5    0.07214\n2 1999 -33.05115 -63.84879 73.79    131.5    W 170.49  R1 N5    0.07379\n3 1999 -33.05116 -63.84872 77.25    131.5    W 168.39  R1 N5    0.07725\n4 1999 -33.05117 -63.84865 76.35    131.5    W 176.68  R1 N5    0.07635\n5 1999 -33.05118 -63.84858 75.55    131.5    W 171.46  R1 N5    0.07555\n6 1999 -33.05120 -63.84851 70.24    131.5    W 170.56  R1 N5    0.07024\n\n\n\n\n\nHands-On Exercise\nTry the following tasks using the lasrosas.corn dataset:\n\nFilter the data to include only rows where the yield is greater than 6000.\nAdd a new column that calculates yield per kilogram of nitrogen applied.\nSummarize the data to find the total yield for each topo category.\nArrange the data by nitro in ascending order.\nUse select() to create a dataset with only the yield, topo, and nitro columns.\n\nSubmit your code and results to the class discussion forum. Happy coding!\n\n\nConclusion\nThe dplyr package simplifies data transformation and analysis tasks, making it easier to work with agricultural datasets like the one in this tutorial. Use these functions and try the hands-on exercise to deepen your understanding.\nHappy coding!"
   }
 ]
