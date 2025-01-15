@@ -54,7 +54,13 @@ website:
       - section: "Lessons"
         contents:
           - href: coding/week_01/essentials_01.qmd
-            text: "Essentials of R"
+            text: "01-Essentials of R"
+          - href: coding/week_02/02_fundamentals_rpackages.qmd
+            text: "02-Fundamentals of packages"
+      - section: "Calendar"
+        contents:
+          - href: outline/calendar.qmd
+            text: "Calendar"
       - section: "Course Outline"
         contents:
           - href: outline/outline.qmd

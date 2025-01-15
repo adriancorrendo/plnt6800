@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr.&nbsp;Adrian Correndo">
 
-<title>Required Software &amp; Accounts – PLNT6800 - Winter 2025</title>
+<title>PLNT6800|01 - Calendar – PLNT6800 - Winter 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../coding/week_01/essentials_01.html" rel="next">
-<link href="../slides/day1.html" rel="prev">
+<link href="../outline/outline.html" rel="next">
+<link href="../coding/week_02/02_fundamentals_rpackages.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,12 +104,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Required Software &amp; Accounts – PLNT6800 - Winter 2025">
+<meta property="og:title" content="PLNT6800|01 - Calendar – PLNT6800 - Winter 2025">
+<meta property="og:description" content="Winter 2025">
 <meta property="og:site_name" content="PLNT6800 - Winter 2025">
-<meta name="twitter:title" content="Required Software &amp; Accounts – PLNT6800 - Winter 2025">
+<meta name="twitter:title" content="PLNT6800|01 - Calendar – PLNT6800 - Winter 2025">
+<meta name="twitter:description" content="Winter 2025">
 <meta name="twitter:creator" content="@aacorrendo">
 <meta name="twitter:card" content="summary">
 </head>
@@ -129,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../software/software.html">Software</a></li><li class="breadcrumb-item"><a href="../software/software.html">Instructions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../outline/calendar.html">Calendar</a></li><li class="breadcrumb-item"><a href="../outline/calendar.html">Calendar</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -182,16 +219,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Software</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../software/software.html" class="sidebar-item-text sidebar-link active">
+  <a href="../software/software.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructions</span></a>
   </div>
 </li>
@@ -222,16 +259,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Calendar</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../outline/calendar.html" class="sidebar-item-text sidebar-link">
+  <a href="../outline/calendar.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Calendar</span></a>
   </div>
 </li>
@@ -256,18 +293,26 @@ ul.task-list li input[type="checkbox"] {
   </li>
     </ul>
     </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#lecture-schedule" id="toc-lecture-schedule" class="nav-link active" data-scroll-target="#lecture-schedule">Lecture Schedule</a></li>
+  <li><a href="#calendar" id="toc-calendar" class="nav-link" data-scroll-target="#calendar">Calendar</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../software/software.html">Software</a></li><li class="breadcrumb-item"><a href="../software/software.html">Instructions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../outline/calendar.html">Calendar</a></li><li class="breadcrumb-item"><a href="../outline/calendar.html">Calendar</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Required Software &amp; Accounts</h1>
+<div class="quarto-title-block"><div><h1 class="title">PLNT6800|01 - Calendar</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Winter 2025</p>
 </div>
 
 
@@ -290,73 +335,217 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R &amp; RStudio IDE</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Git</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">GitHub</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">GitHub Desktop</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Posit Cloud</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Before starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:</p>
-<p>Download the latest version of R from CRAN,&nbsp;here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:</p>
-<ol type="i">
-<li><p><a href="https://rstudio-education.github.io/hopr/starting.html" class="uri">https://rstudio-education.github.io/hopr/starting.html</a></p></li>
-<li><p><a href="https://www.youtube.com/watch?v=Tb3R4GLJ45U" class="uri">https://www.youtube.com/watch?v=Tb3R4GLJ45U</a></p></li>
-</ol>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p><strong>What is Git?</strong></p>
-<p>Git is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.</p>
-<p><strong>How to Install Git:</strong></p>
-<p>Follow these steps to install Git on your computer:</p>
-<ol type="1">
-<li><p>Visit the official Git website (<a href="https://git-scm.com/" class="uri">https://git-scm.com/</a>);to download the installer for your operating system.</p></li>
-<li><p>For detailed guidance, read the official tutorial to install git (<a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" class="uri">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a>).</p></li>
-<li><p>You may use these step-by-step videos for installation:</p></li>
-</ol>
-<p>• Installing Git on Windows (<a href="https://www.youtube.com/watch?v=iYkLrXobBbA" class="uri">https://www.youtube.com/watch?v=iYkLrXobBbA</a>)</p>
-<p>• Installing Git on Mac (<a href="https://www.youtube.com/watch?v=B4qsvQ5IqWk" class="uri">https://www.youtube.com/watch?v=B4qsvQ5IqWk</a>)</p>
-<p>Once installed, verify by typing git –version in your terminal to ensure Git is ready to use!</p>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p><strong>What is GitHub?</strong></p>
-<p>GitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.</p>
-<p>For this course, it is required that you create your GitHub account. Preferably, using your University email (##<span class="citation" data-cites="uoguelph.ca">@uoguelph.ca</span>). Please, follow the steps detailed on this official link from GitHub:</p>
-<p><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github" class="uri">https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github</a></p>
-<p>You may also find multiple useful YouTube tutorials like this one:</p>
-<p><a href="https://www.youtube.com/watch?v=h5cKAd94QNo" class="uri">https://www.youtube.com/watch?v=h5cKAd94QNo</a></p>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p><strong>What is GitHub Desktop?</strong></p>
-<p>GitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.</p>
-<p><strong>How to Install GitHub Desktop:</strong></p>
-<p>Follow these steps to install GitHub Desktop on your computer:</p>
-<ol type="1">
-<li><p>Visit the GitHub Desktop website (<a href="https://desktop.github.com" class="uri">https://desktop.github.com</a>); and download the application for your operating system.</p></li>
-<li><p>Run the installer and follow the on-screen instructions to complete the installation.</p></li>
-<li><p>After installation, sign in to your GitHub account or create one if you don’t have it.</p></li>
-</ol>
-<p>For additional help, check out these videos:</p>
-<p>• Installing GitHub Desktop on Windows (<a href="https://www.youtube.com/watch?v=3JdDAJ2YPeU" class="uri">https://www.youtube.com/watch?v=3JdDAJ2YPeU</a>)</p>
-<p>• Installing GitHub Desktop on Mac (<a href="https://www.youtube.com/watch?v=C0n6O4d0ccw" class="uri">https://www.youtube.com/watch?v=C0n6O4d0ccw</a>)</p>
-<p>Once installed, you can easily clone repositories, commit changes, and sync your work with GitHub!</p>
-</div>
-<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<p><strong>What is Posit Cloud?</strong></p>
-<p>Posit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.</p>
-<p>How to Create a Free Posit Cloud Account:</p>
-<p>Follow these steps to set up your free account:</p>
-<ol type="1">
-<li><p>Visit Posit Cloud website at <a href="https://posit.cloud" class="uri">https://posit.cloud</a>.</p></li>
-<li><p>Click on&nbsp;Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!</p></li>
-<li><p>Complete the registration form and verify your email if required.</p></li>
-<li><p>Once registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.</p></li>
-<li><p>More instructions about our course workspace will be provided during the semester.</p></li>
-</ol>
-<p>For a hint of what PositCloud does, you may watch with this video:</p>
-<p><a href="https://www.youtube.com/watch?v=-fzwm4ZhVQQ" class="uri">https://www.youtube.com/watch?v=-fzwm4ZhVQQ</a> With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!</p>
-</div>
-</div>
-</div>
+<section id="lecture-schedule" class="level3">
+<h3 class="anchored" data-anchor-id="lecture-schedule">Lecture Schedule</h3>
+<ul>
+<li><strong>Days:</strong> Wednesdays and Fridays</li>
+<li><strong>Time:</strong> 1:00 pm - 2:20 pm</li>
+<li><strong>Location:</strong> MCKN 310</li>
+</ul>
+</section>
+<section id="calendar" class="level2">
+<h2 class="anchored" data-anchor-id="calendar">Calendar</h2>
+<p>The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the <em>tentative</em> schedule. Please, note the schedule may vary depending on the progress of the class.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>Week</strong></th>
+<th><strong>Date</strong></th>
+<th><strong>Topic</strong></th>
+<th><strong>Code</strong></th>
+<th><strong>Lesson</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Jan 8</td>
+<td>Introductions, Reproducibility</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Jan 10</td>
+<td>Essentials of RStudio, R coding</td>
+<td><a href="https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri" title="Private Repo">🌐</a></td>
+<td><a href="https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View" title="CourseLink - Zoom recording">🎥</a></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Jan 15</td>
+<td>Fundamentals of R packages</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Jan 17</td>
+<td>Basics of version control &amp; GitHub</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Jan 22</td>
+<td>Data Wrangling I</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Jan 24</td>
+<td>Data Wrangling II</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Jan 29</td>
+<td>Data Wrangling III</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Jan 31</td>
+<td>Iteration: Loops &amp; Mapping</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Feb 5</td>
+<td>Weather Data: Retrieving &amp; Processing</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Feb 7</td>
+<td>Data Viz I: ggplot2 basics</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Feb 12</td>
+<td>Data Viz II: Multiple plots</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Feb 14</td>
+<td>Data Viz III: Advanced plots, maps</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><em>Winter Break begins after the end of class</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Feb 26</td>
+<td>Models I: Key concepts</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Feb 28</td>
+<td>Models II: Explanatory vs.&nbsp;Predictive</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Mar 5</td>
+<td>Models III: Linear Models</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Mar 7</td>
+<td>Models IV: Fixed, Random, Mixed Effects</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>Mar 12</td>
+<td>Models V: Regression I</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Mar 14</td>
+<td>Models VI: Regression II</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Mar 19</td>
+<td>Models VII: Review LMs</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Mar 24</td>
+<td>Models VIII: Principal Components</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>Mar 26</td>
+<td>Quarto / Rmarkdown tricks</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Mar 28</td>
+<td>General Review class</td>
+<td>🌐</td>
+<td>🎥</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Apr 2</td>
+<td>Semester Projects Presentations I</td>
+<td>🌐</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Apr 4</td>
+<td>Semester Projects Presentations II</td>
+<td>🌐</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>Apr 11</td>
+<td>Final Exam Due (11.59 pm)</td>
+<td>🌐</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
+<!-- -->
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -590,6 +779,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -922,16 +1162,77 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../slides/day1.html" class="pagination-link" aria-label="Reproducibility">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reproducibility</span>
+      <a href="../coding/week_02/02_fundamentals_rpackages.html" class="pagination-link" aria-label="02-Fundamentals of packages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-Fundamentals of packages</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../coding/week_01/essentials_01.html" class="pagination-link" aria-label="01-Essentials of R">
-        <span class="nav-page-text">01-Essentials of R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../outline/outline.html" class="pagination-link" aria-label="Course Outline">
+        <span class="nav-page-text">Course Outline</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> PLNT6800|01 - Calendar</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Winter 2025"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Dr. Adrian Correndo"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: 'Contents'</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 4</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    theme:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      light: journal</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      dark: darkly</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: 'Show code'</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    code-link: true</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="an">highlight-style:</span><span class="co"> pygments</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="an">smooth-scroll:</span><span class="co"> true</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lecture Schedule</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Days:** Wednesdays and Fridays</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Time:** 1:00 pm - 2:20 pm</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Location:** MCKN 310</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Calendar</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>| **Week** | **Date** | **Topic** | **Code** | **Lesson** |</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>|---------------|---------------|---------------|---------------|---------------|</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>| 1 | Jan 8 | Introductions, Reproducibility | <span class="sc">\-</span> | <span class="sc">\-</span> |</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>|  | Jan 10 | Essentials of RStudio, R coding | <span class="co">[</span><span class="ot">🌐</span><span class="co">](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri "Private Repo")</span> | <span class="co">[</span><span class="ot">🎥</span><span class="co">](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View "CourseLink - Zoom recording")</span> |</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>| 2 | Jan 15 | Fundamentals of R packages | 🌐 | 🎥 |</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>|  | Jan 17 | Basics of version control &amp; GitHub | 🌐 | 🎥 |</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>| 3 | Jan 22 | Data Wrangling I | 🌐 | 🎥 |</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>|  | Jan 24 | Data Wrangling II | 🌐 | 🎥 |</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>| 4 | Jan 29 | Data Wrangling III | 🌐 | 🎥 |</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>|  | Jan 31 | Iteration: Loops &amp; Mapping | 🌐 | 🎥 |</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>| 5 | Feb 5 | Weather Data: Retrieving &amp; Processing | 🌐 | 🎥 |</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>|  | Feb 7 | Data Viz I: ggplot2 basics | 🌐 | 🎥 |</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>| 6 | Feb 12 | Data Viz II: Multiple plots | 🌐 | 🎥 |</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>|  | Feb 14 | Data Viz III: Advanced plots, maps | 🌐 | 🎥 |</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>|  |  | *Winter Break begins after the end of class* |  |  |</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>| 7 | Feb 26 | Models I: Key concepts | 🌐 | 🎥 |</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>|  | Feb 28 | Models II: Explanatory vs. Predictive | 🌐 | 🎥 |</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>| 8 | Mar 5 | Models III: Linear Models | 🌐 | 🎥 |</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>|  | Mar 7 | Models IV: Fixed, Random, Mixed Effects | 🌐 | 🎥 |</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>| 9 | Mar 12 | Models V: Regression I | 🌐 | 🎥 |</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>|  | Mar 14 | Models VI: Regression II | 🌐 | 🎥 |</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>| 10 | Mar 19 | Models VII: Review LMs | 🌐 | 🎥 |</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>|  | Mar 24 | Models VIII: Principal Components | 🌐 | 🎥 |</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>| 11 | Mar 26 | Quarto / Rmarkdown tricks | 🌐 | 🎥 |</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>|  | Mar 28 | General Review class | 🌐 | 🎥 |</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>| 12 | Apr 2 | Semester Projects Presentations I | 🌐 |  |</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>|  | Apr 4 | Semester Projects Presentations II | 🌐 |  |</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>| 13 | Apr 11 | Final Exam Due (11.59 pm) | 🌐 |  |</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -950,4 +1251,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

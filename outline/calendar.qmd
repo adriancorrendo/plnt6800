@@ -1,0 +1,60 @@
+---
+title: PLNT6800|01 - Calendar
+subtitle: "Winter 2025"
+author: "Dr. Adrian Correndo"
+format: 
+  html:
+    toc: true
+    toc-title: 'Contents'
+    toc-location: left
+    toc-depth: 4
+    number-sections: false
+    theme:
+      light: journal
+      dark: darkly
+    code-tools: true
+    code-fold: true
+    code-summary: 'Show code'
+    code-link: true
+highlight-style: pygments
+smooth-scroll: true
+---
+
+### Lecture Schedule
+
+-   **Days:** Wednesdays and Fridays
+-   **Time:** 1:00 pm - 2:20 pm
+-   **Location:** MCKN 310
+
+## Calendar
+
+The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.
+
+| **Week** | **Date** | **Topic** | **Code** | **Lesson** |
+|---------------|---------------|---------------|---------------|---------------|
+| 1 | Jan 8 | Introductions, Reproducibility | \- | \- |
+|  | Jan 10 | Essentials of RStudio, R coding | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View "CourseLink - Zoom recording") |
+| 2 | Jan 15 | Fundamentals of R packages | 🌐 | 🎥 |
+|  | Jan 17 | Basics of version control & GitHub | 🌐 | 🎥 |
+| 3 | Jan 22 | Data Wrangling I | 🌐 | 🎥 |
+|  | Jan 24 | Data Wrangling II | 🌐 | 🎥 |
+| 4 | Jan 29 | Data Wrangling III | 🌐 | 🎥 |
+|  | Jan 31 | Iteration: Loops & Mapping | 🌐 | 🎥 |
+| 5 | Feb 5 | Weather Data: Retrieving & Processing | 🌐 | 🎥 |
+|  | Feb 7 | Data Viz I: ggplot2 basics | 🌐 | 🎥 |
+| 6 | Feb 12 | Data Viz II: Multiple plots | 🌐 | 🎥 |
+|  | Feb 14 | Data Viz III: Advanced plots, maps | 🌐 | 🎥 |
+|  |  | *Winter Break begins after the end of class* |  |  |
+| 7 | Feb 26 | Models I: Key concepts | 🌐 | 🎥 |
+|  | Feb 28 | Models II: Explanatory vs. Predictive | 🌐 | 🎥 |
+| 8 | Mar 5 | Models III: Linear Models | 🌐 | 🎥 |
+|  | Mar 7 | Models IV: Fixed, Random, Mixed Effects | 🌐 | 🎥 |
+| 9 | Mar 12 | Models V: Regression I | 🌐 | 🎥 |
+|  | Mar 14 | Models VI: Regression II | 🌐 | 🎥 |
+| 10 | Mar 19 | Models VII: Review LMs | 🌐 | 🎥 |
+|  | Mar 24 | Models VIII: Principal Components | 🌐 | 🎥 |
+| 11 | Mar 26 | Quarto / Rmarkdown tricks | 🌐 | 🎥 |
+|  | Mar 28 | General Review class | 🌐 | 🎥 |
+| 12 | Apr 2 | Semester Projects Presentations I | 🌐 |  |
+|  | Apr 4 | Semester Projects Presentations II | 🌐 |  |
+| 13 | Apr 11 | Final Exam Due (11.59 pm) | 🌐 |  |

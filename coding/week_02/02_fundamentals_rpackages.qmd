@@ -1,0 +1,262 @@
+---
+title: "Fundamentals of R Packages"
+author: "Dr. Adrian Correndo"
+date: "2025-01-15"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    toc-location: left
+editor: visual
+---
+
+# Introduction
+
+**i. What Are R Packages?**
+
+R packages are collections of functions, data, and documentation that extend the capabilities of R. They are designed to solve specific problems or add functionalities, such as data visualization, statistical modeling, or handling specific types of data.
+
+Analogy: Think of R as a toolbox 🧰 and packages as individual tools 🔧 you can add to enhance its utility.
+
+::: callout-important
+Core Components:
+
+-   Functions: Ready-made commands to perform tasks.
+
+-   Data: Preloaded datasets for analysis or examples.
+
+-   Documentation: Manuals explaining how to use the package.
+:::
+
+**ii. Why Are R Packages Important?**
+
+-   They extend functionality beyond base features.
+
+-   Enable efficient workflows by using pre-written and optimized code.
+
+-   Provide community-contributed solutions for a wide variety of domains (e.g., agriculture, bioinformatics, machine learning).
+
+**iii. Where to Find R Packages?**
+
+-   CRAN (Comprehensive R Archive Network): The primary repository for R packages. Well-maintained and includes thousands of packages.
+
+-   Bioconductor: Specialized in bioinformatics and genomics.
+
+-   GitHub: A platform where developers host and share experimental or in-development packages.
+
+------------------------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE)
+```
+
+# 01. Managing packages
+
+## a. Installing packages
+
+To install a package from **CRAN**, use:
+
+```{r include=TRUE, eval=FALSE}
+install.packages("dplyr")
+```
+
+To install a **development** version of a package from **GitHub**, use:
+
+```{r include=TRUE, eval=FALSE}
+devtools::install_github("rstudio/ggplot2")
+```
+
+Checking installed packages
+
+```{r eval=FALSE}
+installed.packages()
+```
+
+## b. Loading Packages
+
+Once installed, load a package using:
+
+```{r}
+library(dplyr)
+```
+
+Or alternatively, you may use packages like `pacman`:
+
+```{r eval=TRUE}
+library(pacman)
+pacman::p_load(dplyr, ggplot2)
+```
+
+Or `easypackages`:
+
+```{r eval=FALSE}
+library(easypackages)
+easypackages::libraries(dplyr, ggplot2)
+```
+
+## c. Updating packages
+
+```{r eval=FALSE}
+update.packages()
+```
+
+## d. Unload packages
+
+```{r eval=FALSE}
+detach("package:ggplot2", unload = TRUE)
+```
+
+## e. Uninstall packages
+
+```{r eval=FALSE}
+remove.packages("ggplot2")
+```
+
+# 02. Documentation
+
+To explore the functions within a package, access the help documentation:
+
+```{r eval=FALSE}
+help(package = "dplyr")
+
+# or using the interrogation sign to get help
+?dplyr
+
+```
+
+You can also view detailed tutorials or examples using vignetes:
+
+```{r eval=FALSE}
+vignette(package = "dplyr")
+browseVignettes(package = "dplyr")
+
+```
+
+# 03. Best Packages Practices
+
+## a. Start with the Right Packages:
+
+Use foundational and well supported packages (e.g. [tidyverse](https://www.tidyverse.org), [data.table](https://cran.r-project.org/web/packages/data.table/index.html)).
+
+## b. Stay Curious:
+
+Explore new packages via CRAN Task Views (e.g., [Agriculture Task View](https://cran.r-project.org/web/views/Agriculture.html)).
+
+## c. Version Control:
+
+When becoming an advanced user, you could implement [renv](https://cran.r-project.org/web/packages/renv/index.html) or [packrat](https://rstudio.github.io/packrat/) to manage package versions for reproducible analysis.
+
+# 04. Examples
+
+Let's explore some practical applications of a few packages
+
+## a. ggplot2 for data visualization:
+
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = hp)) + geom_point()
+```
+
+## b. dplyr for data manipulation:
+
+```{r}
+library(dplyr)
+mtcars %>% filter(mpg > 20) %>% summarize(mean_hp = mean(hp))
+```
+
+## c. agridat
+
+The agridat package contains datasets related to agriculture, such as crop yields, experimental designs, and climate data. Let’s use an example from this package:
+
+```{r}
+# Load the package
+library(agridat)
+# Load an example dataset
+data(rothamsted.oats, package = 'agridat')
+head(rothamsted.oats)
+
+# Visualize crop yields
+library(ggplot2)
+ggplot(rothamsted.oats, aes(x = trt, y = grain, fill = as.factor(block))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Grain Yields in Rothamsted Oats Experiment",
+    x = "Treatment",
+    y = "Grain Yield (grams/plot)",
+    fill = "Block"
+  ) +
+  theme_minimal()
+```
+
+## d. agricolae
+
+The agricolae package in R is a comprehensive toolset designed for statistical analysis and visualization of agricultural experiments. It is particularly useful for researchers and practitioners working in crop science, agronomy, and other fields of agricultural research.
+
+It provides methods for designing experiments, analyzing experimental data, and visualizing results, particularly for data collected in agricultural and biological research.
+
+::: callout-note
+It supports:
+
+-   **Experimental Designs**: Generate designs for field experiments like randomized complete block design (RCBD), Latin square, factorial experiments, and others.
+
+-   **Statistical Analysis**: Analyze variance (ANOVA), perform post-hoc tests (e.g., LSD, Tukey HSD), and assess experimental data.
+
+-   **Visualization**: Create plots for results, including mean comparisons, dendrograms, and histograms.
+
+-   **Agronomic Tools**: Calculate indices like stability for crop yields or pest/disease control measures.
+:::
+
+### i. Data analysis
+
+```{r}
+# Load agricolae package
+library(agricolae)
+
+# Simulate agricultural data
+data <- data.frame(
+  treatment = rep(c("A", "B", "C"), each = 5),
+  yield = c(50, 55, 52, 51, 54,   # Yields for Treatment A
+            60, 62, 59, 61, 63,   # Yields for Treatment B
+            48, 46, 50, 49, 47)   # Yields for Treatment C
+)
+
+# Display the dataset
+print(data)
+
+# Perform ANOVA
+anova_result <- aov(yield ~ treatment, data = data)
+summary(anova_result)
+
+# Perform LSD test for pairwise comparison
+lsd_result <- LSD.test(anova_result, "treatment", console = TRUE)
+# Could also run Tukey HSD, & Duncan's Test
+
+# Plot LSD results
+plot(lsd_result, main = "LSD Test Results for Treatment Yields")
+```
+
+### ii. Design of experiments
+
+You can generate layouts for randomized complete block designs (RCBD), Latin squares, Graeco-Latin squares, factorial experiments, and split-plot designs
+
+```{r}
+design <- design.rcbd(trt = c("A", "B", "C"), r = 3)
+print(design)
+```
+
+## e. soiltestcorr
+
+This package assists users on reproducible regression analysis of relationships between crop relative yield (ry) and soil test values (stv) under different approaches.
+
+For example, we can fit a linear-plateu model the a dataset with:
+
+```{r}
+library(soiltestcorr)
+
+data_freitas <- soiltestcorr::freitas1966
+
+plot_lp <- linear_plateau(data = data_freitas,
+                          stv = STK, ry = RY, plot = TRUE)
+
+plot_lp
+```
