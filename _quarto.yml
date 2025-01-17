@@ -57,6 +57,8 @@ website:
             text: "01-Essentials of R"
           - href: coding/week_02/02_fundamentals_rpackages.qmd
             text: "02-Fundamentals of packages"
+          - href: coding/week_02/03_versioncontrol.qmd
+            text: "03-Git & GitHub"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
@@ -64,7 +66,7 @@ website:
       - section: "Course Outline"
         contents:
           - href: outline/outline.qmd
-            text: "Course Outline"
+            text: "Outline"
          
 format:
   html:

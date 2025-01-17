@@ -1,0 +1,234 @@
+---
+title: "🌱 Getting Started with Git and GitHub for Ag Data Science"
+description: "A beginner-friendly introduction to version control and collaboration in R projects using GitHub and GitHub Desktop."
+author: "Dr. Adrian Correndo"
+date: today
+categories: [Git, GitHub, version control, repository, collaboration]
+format:
+  html:
+    toc: true
+    toc-location: left
+    number-sections: true
+---
+
+# Common Problems Without Git & GitHub ❌
+
+Have you ever struggled with:
+
+-   **Messy file versions?** 📂 Naming files like `code.R`, `code_final.R`, `code_final_final.R`, `codefinal3.R`, or `code_seethis.R`? 🤯
+-   **Lost in email threads?** 📧 Collaborating with colleagues by sending multiple file versions via email, leading to confusion and mistakes?
+-   **Untracked changes?** 🔄 Making edits but forgetting what changed and why?
+
+If so, you're not alone! These are common challenges in **agriculture data science** and research projects. Fortunately, **Git and GitHub** provide an efficient way to manage and collaborate on code without the chaos.
+
+------------------------------------------------------------------------
+
+# 🚀 Why use version control? 🔄
+
+::::::: columns
+:::::: {.column width="70%"}
+Version control is essential for **reproducible research** 📑 and collaborative work 🤝. Git and GitHub help:
+
+-   **Track changes** 📝 in your code over time.
+-   **Collaborate** with others without overwriting files.
+-   **Manage projects** efficiently with branches and pull requests.
+-   **Store backups** in the cloud ☁️.
+
+If you work in **agriculture data science**, keeping track of scripts, models, and datasets is crucial for transparency and efficiency. Let's explore how to get started!
+
+------------------------------------------------------------------------
+
+# What are Git and GitHub?
+
+::::: columns
+::: {.column width="70%"}
+-   **Git**
+    -   A version control system that tracks changes in files on your local computer, allowing you to manage versions and revert to previous work.
+-   **GitHub**
+    -   An online platform for hosting Git repositories, enabling easy collaboration, project sharing, and cloud storage.
+:::
+
+::: {.column width="30%"}
+![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg){fig-align="right" width="100"}
+
+<br/>
+
+![](GitHub-logo.png){fig-align="right" width="100"}
+:::
+:::::
+
+# ![](github-brands.svg){width="22" height="22"} What is GitHub?
+
+GitHub is an internet hosting service designed for software development and version control using [Git](https://git-scm.com/). Basically, GitHub facilitates to work in a collaborative manner through multiple features designed to efficiently control changes made by users during a working session.
+
+# 🛠 Setting Up Git and GitHub
+
+## 1️⃣ Install Git
+
+Git is a **version control system** that runs locally on your computer. To install it:
+
+-   📥 **Download** Git from [git-scm.com](https://git-scm.com/downloads)
+-   Follow the installation instructions for your OS (Windows, macOS, Linux)
+-   Open RStudio, go to the "Terminal" tab,
+-   Verify the installation by running this line:
+
+``` bash
+git --version
+```
+
+## 2️⃣ Create a GitHub Account
+
+GitHub is a **cloud-based platform** that stores your Git repositories online.
+
+-   🌍 Go to [GitHub](https://github.com/) and sign up.
+-   Set up your **GitHub profile** and **SSH key** (optional but recommended for authentication).
+
+------------------------------------------------------------------------
+
+# 🔄 Basic Git Workflow
+
+Once Git is installed, you can start managing projects with a simple workflow:
+
+1.  **Initialize a repository** 🏗
+
+    ``` bash
+    git init
+    ```
+
+2.  **Check repository status** 🔍
+
+    ``` bash
+    git status
+    ```
+
+3.  **Add files to staging** 📂
+
+    ``` bash
+    git add filename.R
+    ```
+
+4.  **Commit changes** 💾
+
+    ``` bash
+    git commit -m "Added data processing script"
+    ```
+
+5.  **Push changes to Remote** 🚀
+
+    ``` bash
+    git push origin main
+    ```
+
+#  Key Git VERBS
+
+-   `git commit -m "message"`: Save current version of files to the .git directory
+-   `git push`: Upload your latest commits to the remote repo. First time = **publish**
+-   `git pull`: Download the latest commits from the remote repo
+
+# 📖 GitHub Vocabulary:
+
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| \#    | Concept             | Description                                                                                                                                                                                                                                                                 |
++=======+=====================+=============================================================================================================================================================================================================================================================================+
+| 1     | **version control** | *is the practice of tracking and managing changes to software code*                                                                                                                                                                                                         |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2     | **repository**      | *is a code hosting platform for version control and collaboration.*                                                                                                                                                                                                         |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3     | **branch**          | *is a unique set of code changes with a unique name*.                                                                                                                                                                                                                       |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 5     | **clone**           | is to copy a remote repository into your local                                                                                                                                                                                                                              |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4     | **remote/local**    | *they are Git repositories hosting code at different locations. "Remote" means located on the internet or another network. "Local" means located in your machine.*                                                                                                          |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 5     | **origin**          | *is the remote version of a given repository.*                                                                                                                                                                                                                              |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 6     | **main**/**master** | *is the name of the default branch. In the past "master" was the default. Since 2020, "main" is the default name of all new source code.*                                                                                                                                   |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 7     | **commit**          | *is a "revision" or individual set of changes to a file or group of files within a branch*.                                                                                                                                                                                 |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8     | **pull / fetch**    | *is the action to fetch and download content from a remote repository to update your local repository.*                                                                                                                                                                     |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 9     | **push**            | *is the action to upload content from a local repository to update its remote version (all within a given branch).*                                                                                                                                                         |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 10    | **pull request**    | *is to let the repository owner to know about changes you've made to his code pushing to a new named branch. It allows to discuss, review, accept/reject the changes, and eventually accept and merge your branch to update the old version (normally, the "main" branch).* |
+|       |                     |                                                                                                                                                                                                                                                                             |
+|       |                     | *Note: This action allows users to appear into the "contributors" list of a repository.*                                                                                                                                                                                    |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 11    | **merge**           | *is the action of combining two branches into one, and putting a combined "forked history".*                                                                                                                                                                                |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 12    | **rebase**          | *is moving or combining a sequence of commits to a new base commit.*                                                                                                                                                                                                        |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 13    | **fast-forward**    | *is merging when there is a direct linear path from the source branch (updating from) to the target branch (the one updating to).*                                                                                                                                          |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 14    | **stash\***         | *it temporarily shelves changes you've made to your copy so you can work on something else, and then come back and re-apply them later. \*[very useful when you need to pull and update from the remote but you have been working on your local file]{.underline}.*         |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 15    | **revert**          | *is the "undo" action to safely undoing changes. It creates a new commit that inverses changes.*                                                                                                                                                                            |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 16    | **fork**            | *is to copy others' repository into your account. Your forked repo will act as an independent branch, so you can commit changes and put pull request from the forked repo.*                                                                                                 |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 17    | **Issues**          | *is a section of any GitHub repository that allows to track issues experienced by users. Particularly useful for packages. Issues can be quoted and linked to pull requests.*                                                                                               |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 18    | **PATs**            | stands for Personal Access Tokens, which are an alternative authentication method to passwords and SSH                                                                                                                                                                      |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 19    | **lfs**             | *the lfs stands for Large File Storage. It allows you to track heavy files that are not allowed by default.*                                                                                                                                                                |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 20    | **GitHub Actions**  | is the way to automate continuous integration and delivery (CI/CD). Particularly, CI is a very important a software practice for package development, since it allows to detect errors on different operative systems via multiple automated tests.                         |
++-------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+------------------------------------------------------------------------
+
+# 🖥 Using GitHub Desktop (GUI Approach)
+
+For those who prefer a graphical user interface (GUI), **GitHub Desktop** 🖥 simplifies Git operations. GitHub Desktop is beginner-friendly and helps visualize your repository history 🔄.
+
+🎯 **Steps:** 1. Download and install [GitHub Desktop](https://desktop.github.com/) 2. Sign in with your GitHub account
+
+## ✅ Creating a GitHub Repository
+
+1.  Open [GitHub](https://github.com/) and click **New Repository** ➕.
+2.  Name the repository (e.g., `my-first-repo`) and choose **Public or Private**.
+3.  Click **Create Repository** 🚀.
+
+------------------------------------------------------------------------
+
+## 📂 Creating an R Script and Committing Changes
+
+1.  Open **GitHub Desktop** and click **Clone a Repository**.
+
+2.  Select your repository and choose a local directory.
+
+3.  Open RStudio and create a new file named `hello.R`.
+
+4.  Add the following content:
+
+    ``` r
+    print("Hello R world!")
+    ```
+
+5.  Save the file and return to GitHub Desktop.
+
+6.  You should see the file listed under **Changes**.
+
+7.  Write a commit message (e.g., "Added hello.R") and click **Commit to main**.
+
+8.  Click **Push Origin** to upload the changes to GitHub.
+
+## 🔄 Cloning or Pulling Changes
+
+1.  If you want to work on an existing repository, click **Clone Repository** in GitHub Desktop.
+
+2.  Select a repository and choose a local directory.
+
+3.  
+
+    ## If changes have been made remotely, click **Fetch Origin** and then **Pull Origin** to update your local version.
+
+------------------------------------------------------------------------
+
+# 📚 Further Learning
+
+-   📘 [Pro Git Book (Free)](https://git-scm.com/book/en/v2)
+-   🎥 [GitHub Docs & Tutorials](https://docs.github.com/en/get-started)
+-   🏆 [Awesome GitHub Repositories](https://github.com/topics/git)
+::::::
+:::::::

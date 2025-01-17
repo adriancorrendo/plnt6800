@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_01/essentials_01.html</loc>
-    <lastmod>2025-01-15T17:41:32.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/outline/calendar.html</loc>
-    <lastmod>2025-01-15T17:42:24.738Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/slides/day1.html</loc>
-    <lastmod>2025-01-09T15:02:20.826Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/index.html</loc>
-    <lastmod>2025-01-15T17:40:55.638Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/software/software.html</loc>
-    <lastmod>2025-01-13T00:20:04.963Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/outline/outline.html</loc>
-    <lastmod>2025-01-15T17:42:24.170Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/coding/week_02/02_fundamentals_rpackages.html</loc>
-    <lastmod>2025-01-15T17:41:57.099Z</lastmod>
+    <loc>https://adriancorrendo.github.io/coding/week_02/version control/03_versioncontrol.html</loc>
+    <lastmod>2025-01-17T05:03:22.494Z</lastmod>
   </url>
 </urlset>
