@@ -8,6 +8,7 @@ format:
   html:
     toc: true
     toc-location: left
+    toc-depth: 4
     number-sections: true
 ---
 
@@ -53,11 +54,11 @@ If you work in **agriculture data science**, keeping track of scripts, models, a
 
 <br/>
 
-![](GitHub-logo.png){fig-align="right" width="100"}
+![](images/GitHub-logo.png){fig-align="right" width="100"}
 :::
 :::::
 
-# ![](github-brands.svg){width="22" height="22"} What is GitHub?
+# ![](images/github-brands.svg){width="22" height="22"} What is GitHub?
 
 GitHub is an internet hosting service designed for software development and version control using [Git](https://git-scm.com/). Basically, GitHub facilitates to work in a collaborative manner through multiple features designed to efficiently control changes made by users during a working session.
 
@@ -119,7 +120,7 @@ Once Git is installed, you can start managing projects with a simple workflow:
     git push origin main
     ```
 
-#  Key Git VERBS
+# Key Git VERBS
 
 -   `git commit -m "message"`: Save current version of files to the .git directory
 -   `git push`: Upload your latest commits to the remote repo. First time = **publish**
@@ -219,9 +220,7 @@ For those who prefer a graphical user interface (GUI), **GitHub Desktop** 🖥 s
 
 2.  Select a repository and choose a local directory.
 
-3.  
-
-    ## If changes have been made remotely, click **Fetch Origin** and then **Pull Origin** to update your local version.
+3.  If changes have been made remotely, click **Fetch Origin** and then **Pull Origin** to update your local version.
 
 ------------------------------------------------------------------------
 
