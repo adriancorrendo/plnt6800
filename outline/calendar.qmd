@@ -35,7 +35,7 @@ The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the 
 | 1 | Jan 8 | Introductions, Reproducibility | \- | \- |
 |  | Jan 10 | Essentials of RStudio, R coding | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View "CourseLink - Zoom recording") |
 | 2 | Jan 15 | Fundamentals of R packages | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_02/wed "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4057115/View) |
-|  | Jan 17 | Basics of version control & GitHub | 🌐 | 🎥 |
+|  | Jan 17 | Basics of version control & GitHub | [🌐](https://github.com/adriancorrendo/my-first-repo) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4058352/View) |
 | 3 | Jan 22 | Data Wrangling I | 🌐 | 🎥 |
 |  | Jan 24 | Data Wrangling II | 🌐 | 🎥 |
 | 4 | Jan 29 | Data Wrangling III | 🌐 | 🎥 |

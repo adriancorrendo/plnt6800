@@ -59,10 +59,12 @@ website:
             text: "02-Fundamentals of packages"
           - href: coding/week_02/03_versioncontrol.qmd
             text: "03-Git & GitHub"
+          - href: coding/week_03/04_datawrangling_01.qmd
+            text: "04-Data Wrangling I"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
-            text: "Calendar"
+            text: "Schedule"
       - section: "Course Outline"
         contents:
           - href: outline/outline.qmd

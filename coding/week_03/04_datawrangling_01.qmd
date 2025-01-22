@@ -1,0 +1,358 @@
+---
+title: "Transforming Ag data with dplyr"
+author: "Dr. Adrian Correndo"
+date: "2025-01-22"
+categories: [dplyr, data wrangling, mutate, filter, select, arrange]
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    number-sections: true
+    table-class: "table table-striped table-hover"
+  pdf:
+    number-sections: true
+editor: source
+smooth-scroll: true
+bibliography: ../../references.bib
+link-citations: TRUE
+---
+
+# Description
+
+This lesson introduces the concept of tidy data, and a few basic data wrangling techniques using `dplyr` package. Today, we are using `dplyr` and datasets from the `agridat` package. If you don't have them installed, you can do so by running:
+
+## Required packages for today
+```{r eval=FALSE}
+library(pacman)
+p_load(agridat) # Agridat datasets
+p_load(dplyr) # dplyr for data wrangling
+p_load(skimr) # skimr for quick exploration of the data
+```
+
+```{r eval=TRUE, include=FALSE}
+library(pacman)
+p_load(agridat) # Agridat datasets
+p_load(dplyr) # dplyr for data wrangling
+p_load(skimr) # skimr for quick exploration of the data
+```
+
+# Why TIDY?
+
+Well, from the hand of [Tidyverse](https://www.tidyverse.org/), the "tidy data" framework changed the way we code and work in R for data science. Tidy datasets are easy to manipulate, model and visualize, and have a specific structure [@wickham2014]:
+
+-   Each variable is a column,
+
+-   Each observation is a row, and
+
+-   Each value have its own cell.
+
+![](images/tidy-1.png) **Tidy-data structure**. Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells. Source: [@Wickham2017R].
+
+Example of tidy data:
+```{r}
+# Example of tidy data
+tidy_data <- data.frame(
+  subject = c(1, 2, 3),
+  gender = c("M", "F", "F"),
+  score = c(90, 95, 88)
+)
+
+tidy_data
+```
+
+### Free HTML books
+
+::: {layout-ncol="2"}
+[![](images/cover.png){height="300"}](https://r4ds.had.co.nz/)
+
+[![](images/cover-01.png){height="300"}](https://www.tmwr.org/)
+:::
+
+## What is a Data Frame?
+
+A data frame is a two-dimensional table-like structure in R, where columns can contain different types of data (e.g., numeric, character). It is the default structure for datasets loaded from CSV files or data packages.
+
+### open a data frame
+```{r}
+# Load the wheat dataset from agricolae (which is a data frame)
+wheat_data <- agridat::payne.wheat
+
+# Check the structure of the data frame
+str(wheat_data)
+```
+
+## What is a Tibble?
+
+A tibble is a modern version of a data frame, introduced by the tibble package. It offers several improvements:
+
+	•	Tibbles don’t convert characters to factors by default.
+	•	Printing is more concise and doesn’t overwhelm you with too much data.
+	•	Tibbles are more explicit with column types when printed.
+
+### create a tibble
+```{r}
+# Convert the wheat data frame to a tibble
+wheat_tibble <- as_tibble(wheat_data)
+
+# Check the structure of the tibble
+wheat_tibble
+```
+
+## iii. Key Differences between Data Frames and Tibbles
+
+	1.	**Printing**:
+	
+  •	Data Frames print the entire dataset unless you limit the number of rows. No information about column types is displayed.
+	•	Tibbles print only the first 10 rows and automatically show column types.
+	
+### Example:
+```{r}
+# Print the entire data frame
+print(wheat_data)
+
+# Print the tibble (shows only first 10 rows and column types)
+print(wheat_tibble)
+```
+
+# A package for data manipulation...🚀
+
+![](https://dplyr.tidyverse.org/logo.png){.absolute top=0 right=0 height="30%"}
+
+The `dplyr` package in R provides powerful tools for transforming and analyzing data. In this tutorial, we'll use an agricultural dataset to explore some common `dplyr` functions like `filter()`, `mutate()`, `summarize()`, and `group_by()`.
+
+## Why using R Packages? 💡
+
+- **Efficiency**: Avoid rewriting code for common tasks.
+- **Consistency**: Standardized code structure and naming conventions.
+- **Reproducibility**: Ensures that your work is easier to share and reproduce.
+- **Intuitive**: R packages use functions with intuitive names of functions, so you can spend less time learning the code & more time learning to solve practical problems. 
+
+## Example 1: mutate()
+
+::: {.column width="65%"}
+Packages like `dplyr` simplify tasks by providing clean, concise code for data manipulation. 
+:::
+
+::: {.fragment}
+::: {.column width="65%"}
+**1. Create a new column**: `total`, which is the sum of two existing columns (`var1` and `var2`).
+:::
+:::
+
+#### Base R version
+::: {.fragment}
+::: {.column width="80%"}
+```r
+# Sample data
+df <- data.frame(var1 = c(1, 2, 3), var2 = c(4, 5, 6))
+
+# Adding a new column using base R
+df$total <- df$var1 + df$var2
+```
+:::
+:::
+
+::: {.fragment}
+#### dplyr package (Tidyverse)
+```r
+library(dplyr)
+
+# Using mutate to add a new column
+df <- df %>%
+  mutate(total = var1 + var2)
+
+```
+:::
+
+## Example 2: filter()
+
+::: {.fragment}
+**2. Filtering**: get values of `var1` greater than 2.
+:::
+
+::: {.fragment}
+
+
+#### Base R version
+::: {.column width="65%"}
+```r
+# Filter rows using base R
+filtered_df <- df[df$var1 > 2, ]
+```
+:::
+:::
+
+::: {.fragment}
+#### dplyr package (Tidyverse)
+```r
+# Filter rows using dplyr
+filtered_df <- filter(data = df, var1 > 2)
+```
+:::
+
+## Example 3: select()
+
+::: {.fragment}
+**3. Select specific variables**: get `var1` and `var3`.
+:::
+
+<br/>
+
+::: {.fragment}
+#### Base R version
+```r
+# Select columns using base R
+selected_df <- df[ , c("var1","var3")]
+```
+:::
+
+::: {.fragment}
+
+<br/>
+
+#### dplyr package (Tidyverse)
+```r
+# Filter rows using dplyr
+filtered_df <- select(data = df, var1, var3)
+```
+:::
+
+# Corn Dataset:
+
+For this tutorial, we'll use the `lasrosas.corn` dataset from the 'agridat' package, which contains information on corn varieties, yields, and topographical features. First, let's load the required packages and inspect the dataset:
+## Read data
+```{r}
+# Load dataset
+data("lasrosas.corn") # This creates an object with the name of the dataset "lasrosas.corn"
+
+# Store the data with another name
+corn_data <- lasrosas.corn
+```
+
+## Inspect data
+### glimpse
+The `glimpse()` function provides an overview of the dataset, including variable names and data types.
+```{r}
+# Inspect the dataset
+glimpse(corn_data)
+```
+### skim
+The `skim()` function from the 'skimr' allows to take a deeper look to all the variables (columns), creating a quick summary that reports the presence of missing values, etc., etc.
+```{r}
+skimr::skim(corn_data)
+```
+## Adding New Variables with `mutate()`
+
+You can add new columns to your dataset with `mutate()`. Let's calculate the yield in tons per hectare (assuming the current yield is in kilograms):
+
+```{r}
+# Add a column for yield in tons
+corn_data <- corn_data %>% 
+  # New column, `yield_tons`, with the transformed yield values.
+  mutate(yield_tons = yield / 1000)
+
+head(corn_data)
+```
+
+## Filtering Data
+To focus on specific data, we can use `filter()`. For example, let's filter the data to include only rows where the nitrogen applied (`nitro`) is greater than 100:
+
+```{r}
+# Filter rows with nitro > 100
+high_nitro <- corn_data %>%
+  # only rows where the `nitro` column has values greater than 100.
+  filter(nitro > 100)
+
+head(high_nitro)
+```
+
+## Selecting columns
+
+To select specific variables, we use `select()`, which selects specific columns from the dataset.
+
+```{r}
+# Select specific columns
+selected_data <- corn_data %>% select(yield, nitro, topo)
+head(selected_data)
+```
+
+## Renaming columns
+When we need to change names of columns, we can use `rename()`:
+
+```{r}
+# Rename a column
+renamed_data <- corn_data %>% rename(Nitrogen = nitro)
+head(renamed_data)
+```
+
+## Arranging data
+
+To reorder the data based on specific criteria, we can use `arrange()`, which will arrange rows by a variable in ascending or descending order.
+
+```{r}
+# Arrange data by yield in descending order
+arranged_data <- corn_data %>% arrange(desc(yield))
+head(arranged_data)
+```
+
+## Finding unique values
+To find out what are the unique values of a variable, we can use `distinct()`, which will return the unique values within a column.
+
+```{r}
+# Unique values in topo
+unique_topo <- corn_data %>% distinct(topo)
+unique_topo
+```
+
+## Counting
+
+The function `count()` counts the number of observations within a group.
+
+```{r}
+# Count observations by topo
+topo_count <- corn_data %>% count(topo)
+topo_count
+```
+
+## Summarizing Data
+
+To get a quick overview of your data, you can use `summarize()` in combination with `group_by()`. For example, let's calculate the average yield for each topographical category (`topo`):
+
+```{r}
+# Average yield by topography
+average_yield_topo <- corn_data %>%
+  group_by(topo) %>%
+  summarize(avg_yield = mean(yield, na.rm = TRUE))
+average_yield_topo
+
+# Average yield by year and topography
+average_yield_topoyear <- corn_data %>%
+  group_by(year, topo) %>%
+  summarize(avg_yield = mean(yield, na.rm = TRUE))
+average_yield_topoyear
+```
+
+This groups the data by `topo` and calculates the mean yield for each group.
+
+
+
+
+
+# Hands-On Exercise
+
+Try the following tasks using the `lasrosas.corn` dataset:
+
+1.  Filter the data to include only rows where the yield is greater than 6000.
+2.  Add a new column that calculates yield per kilogram of nitrogen applied.
+3.  Summarize the data to find the total yield for each `topo` category.
+4.  Arrange the data by `nitro` in ascending order.
+5.  Use `select()` to create a dataset with only the `yield`, `topo`, and `nitro` columns.
+
+Submit your code and results to the class discussion forum. Happy coding!
+
+# Conclusion
+
+The `dplyr` package simplifies data transformation and analysis tasks, making it easier to work with agricultural datasets like the one in this tutorial. Use these functions and try the hands-on exercise to deepen your understanding.
+
+Happy coding!
