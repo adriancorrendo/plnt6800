@@ -31,7 +31,7 @@ smooth-scroll: true
 
 -   **Days:** Wednesdays and Fridays
 -   **Time:** 1:00 pm - 2:20 pm
--   **Location:** MCKN 310
+-   **Location:** CRSC 202
 
 ### Instructor Information
 
