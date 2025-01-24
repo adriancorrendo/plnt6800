@@ -187,25 +187,331 @@
     ]
   },
   {
-    "objectID": "outline/calendar.html",
-    "href": "outline/calendar.html",
-    "title": "PLNT6800|01 - Calendar",
+    "objectID": "coding/week_03/05_datawrangling_02.html",
+    "href": "coding/week_03/05_datawrangling_02.html",
+    "title": "Transforming Ag data in R II",
     "section": "",
-    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202",
+    "text": "This lesson builds on our previous session by introducing more advanced data wrangling techniques using tidyr, stringr, and forcats. We will explore how to manipulate and transform data for efficient analysis. Additionally, we introduce lubridate for handling dates effectively.\n\n\n\nlibrary(pacman)\np_load(agridat, dplyr, tidyr, stringr, forcats, skimr, lubridate)",
     "crumbs": [
-      "Calendar",
-      "Schedule"
+      "Lessons",
+      "04-Data Wrangling II"
     ]
   },
   {
-    "objectID": "outline/calendar.html#calendar",
-    "href": "outline/calendar.html#calendar",
-    "title": "PLNT6800|01 - Calendar",
-    "section": "Calendar",
-    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 21\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
+    "objectID": "coding/week_03/05_datawrangling_02.html#required-packages-for-today",
+    "href": "coding/week_03/05_datawrangling_02.html#required-packages-for-today",
+    "title": "Transforming Ag data in R II",
+    "section": "",
+    "text": "library(pacman)\np_load(agridat, dplyr, tidyr, stringr, forcats, skimr, lubridate)",
     "crumbs": [
-      "Calendar",
-      "Schedule"
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#aggregation-with-group_by-and-summarize",
+    "href": "coding/week_03/05_datawrangling_02.html#aggregation-with-group_by-and-summarize",
+    "title": "Transforming Ag data in R II",
+    "section": "2.1 Aggregation with group_by() and summarize()",
+    "text": "2.1 Aggregation with group_by() and summarize()\n\ndata_corn &lt;- agridat::lasrosas.corn\nsummary_data &lt;- data_corn %&gt;% \n  group_by(topo, year) %&gt;% \n  summarize(mean_yield = mean(yield, na.rm = TRUE), .groups = \"drop\")\nsummary_data\n\n# A tibble: 8 × 3\n  topo   year mean_yield\n  &lt;fct&gt; &lt;int&gt;      &lt;dbl&gt;\n1 E      1999       64.8\n2 E      2001       92.7\n3 HT     1999       53.4\n4 HT     2001       44.7\n5 LO     1999       71.2\n6 LO     2001       99.9\n7 W      1999       66.0\n8 W      2001       67.7",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#applying-functions-to-multiple-columns-using-across",
+    "href": "coding/week_03/05_datawrangling_02.html#applying-functions-to-multiple-columns-using-across",
+    "title": "Transforming Ag data in R II",
+    "section": "2.2 Applying Functions to Multiple Columns using across()",
+    "text": "2.2 Applying Functions to Multiple Columns using across()\n\ndata_across &lt;- data_corn %&gt;% \n  mutate(across(c(lat, long), ~ round(.x, digits=1), .names = \"rounded_{.col}\")) # Rounding values to 1 decimal place for better readability\nhead(data_across)\n\n  year       lat      long yield nitro topo     bv rep nf rounded_lat\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5       -33.1\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5       -33.1\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5       -33.1\n4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5       -33.1\n5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5       -33.1\n6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5       -33.1\n  rounded_long\n1        -63.8\n2        -63.8\n3        -63.8\n4        -63.8\n5        -63.8\n6        -63.8",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#creating-conditional-columns-with-case_when",
+    "href": "coding/week_03/05_datawrangling_02.html#creating-conditional-columns-with-case_when",
+    "title": "Transforming Ag data in R II",
+    "section": "2.3 Creating Conditional Columns with case_when()",
+    "text": "2.3 Creating Conditional Columns with case_when()\n\ndata_casewhen &lt;- data_corn %&gt;% \n  mutate(yield_category = case_when(\n    yield &gt; 10 ~ \"High\",\n    yield &gt; 5 ~ \"Medium\",\n    TRUE ~ \"Low\"\n  ))\nhead(data_casewhen)\n\n  year       lat      long yield nitro topo     bv rep nf yield_category\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5           High\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5           High\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5           High\n4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5           High\n5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5           High\n6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5           High",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#slicing-data-with-slice",
+    "href": "coding/week_03/05_datawrangling_02.html#slicing-data-with-slice",
+    "title": "Transforming Ag data in R II",
+    "section": "2.4 Slicing data with slice():",
+    "text": "2.4 Slicing data with slice():\n\n# Selecting the first 3 rows\nfirst_rows &lt;- data_corn %&gt;% slice(1:3)\nhead(first_rows)\n\n  year       lat      long yield nitro topo     bv rep nf\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5\n\n# Selecting the last 3 rows\nlast_rows &lt;- data_corn %&gt;% slice_tail(n = 3)\nhead(last_rows)\n\n  year       lat      long yield nitro topo     bv rep nf\n1 2001 -33.05110 -63.84189 92.33    39   LO 166.75  R3 N1\n2 2001 -33.05112 -63.84182 88.98    39   LO 163.59  R3 N1\n3 2001 -33.05115 -63.84175 85.74    39   LO 163.48  R3 N1\n\n# Selecting 3 random rows\nrandom_rows &lt;- data_corn %&gt;% slice_sample(n = 3)\nhead(random_rows)\n\n  year       lat      long yield nitro topo     bv rep nf\n1 2001 -33.04934 -63.84794 98.34 124.6    W 172.03  R3 N5\n2 1999 -33.05098 -63.84433 63.53   0.0    E 170.32  R3 N0\n3 1999 -33.05118 -63.84607 57.66  66.0   HT 185.94  R2 N3\n\n# Selecting every 2nd row\nevery_second_row &lt;- data_corn %&gt;% slice(seq(1, n(), by = 2))\nhead(every_second_row)\n\n  year       lat      long yield nitro topo     bv rep nf\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5\n2 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5\n3 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5\n4 1999 -33.05121 -63.84844 76.17 131.5    W 172.94  R1 N5\n5 1999 -33.05123 -63.84830 69.77 131.5    W 171.88  R1 N5\n6 1999 -33.05126 -63.84816 71.05 131.5    W 173.02  R1 N5",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#working-with-time-series-data-lead-and-lag",
+    "href": "coding/week_03/05_datawrangling_02.html#working-with-time-series-data-lead-and-lag",
+    "title": "Transforming Ag data in R II",
+    "section": "2.5 Working with Time-Series Data: lead() and lag()",
+    "text": "2.5 Working with Time-Series Data: lead() and lag()\n\ndata_lag &lt;- data_corn %&gt;% \n  arrange(year, topo) %&gt;% \n  mutate(yield_change = yield - lag(yield))\nhead(data_lag)\n\n  year       lat      long yield nitro topo     bv rep nf yield_change\n1 1999 -33.05174 -63.84532 59.94 131.5    E 182.12  R1 N5           NA\n2 1999 -33.05175 -63.84525 58.96 131.5    E 182.57  R1 N5        -0.98\n3 1999 -33.05176 -63.84518 61.77 131.5    E 178.07  R1 N5         2.81\n4 1999 -33.05178 -63.84511 66.41 131.5    E 177.83  R1 N5         4.64\n5 1999 -33.05179 -63.84504 66.06 131.5    E 176.17  R1 N5        -0.35\n6 1999 -33.05180 -63.84497 62.13 131.5    E 176.56  R1 N5        -3.93",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#gathering-and-spreading-data",
+    "href": "coding/week_03/05_datawrangling_02.html#gathering-and-spreading-data",
+    "title": "Transforming Ag data in R II",
+    "section": "3.1 Gathering and Spreading Data",
+    "text": "3.1 Gathering and Spreading Data\n\n# Convert from wide to long format using pivot_longer\nlong_data &lt;- data_corn %&gt;% \n  pivot_longer(cols = c(yield, nitro), \n               names_to = \"measurement\", # name of the column with description\n               values_to = \"value\") # name of the column with values\nhead(long_data)\n\n# A tibble: 6 × 9\n   year   lat  long topo     bv rep   nf    measurement value\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;chr&gt;       &lt;dbl&gt;\n1  1999 -33.1 -63.8 W      163. R1    N5    yield        72.1\n2  1999 -33.1 -63.8 W      163. R1    N5    nitro       132. \n3  1999 -33.1 -63.8 W      170. R1    N5    yield        73.8\n4  1999 -33.1 -63.8 W      170. R1    N5    nitro       132. \n5  1999 -33.1 -63.8 W      168. R1    N5    yield        77.2\n6  1999 -33.1 -63.8 W      168. R1    N5    nitro       132. \n\n# Convert back from long to wide format using pivot_wider\nwide_data &lt;- long_data %&gt;% \n  pivot_wider(names_from = measurement, \n              values_from = value)\nhead(wide_data)\n\n# A tibble: 6 × 9\n   year   lat  long topo     bv rep   nf    yield nitro\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;\n1  1999 -33.1 -63.8 W      163. R1    N5     72.1  132.\n2  1999 -33.1 -63.8 W      170. R1    N5     73.8  132.\n3  1999 -33.1 -63.8 W      168. R1    N5     77.2  132.\n4  1999 -33.1 -63.8 W      177. R1    N5     76.4  132.\n5  1999 -33.1 -63.8 W      171. R1    N5     75.6  132.\n6  1999 -33.1 -63.8 W      171. R1    N5     70.2  132.",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#separating-and-uniting-columns",
+    "href": "coding/week_03/05_datawrangling_02.html#separating-and-uniting-columns",
+    "title": "Transforming Ag data in R II",
+    "section": "3.2 Separating and Uniting Columns",
+    "text": "3.2 Separating and Uniting Columns\n\n# Example dataset with a combined column\nexample_data &lt;- data_corn %&gt;% \n  mutate(topo_year = paste(topo, year, sep = \"_\"))\n\n# Splitting 'topo_year' into two columns\nseparated_data &lt;- example_data %&gt;% \n  separate(topo_year, into = c(\"topo\", \"year\"), sep = \"_\")\nhead(separated_data)\n\n        lat      long yield nitro     bv rep nf topo year\n1 -33.05113 -63.84886 72.14 131.5 162.60  R1 N5    W 1999\n2 -33.05115 -63.84879 73.79 131.5 170.49  R1 N5    W 1999\n3 -33.05116 -63.84872 77.25 131.5 168.39  R1 N5    W 1999\n4 -33.05117 -63.84865 76.35 131.5 176.68  R1 N5    W 1999\n5 -33.05118 -63.84858 75.55 131.5 171.46  R1 N5    W 1999\n6 -33.05120 -63.84851 70.24 131.5 170.56  R1 N5    W 1999\n\n# Combining 'topo' and 'year' back into a single column\nunited_data &lt;- separated_data %&gt;% \n  unite(\"topo_year\", topo, year, sep = \"-\")\nhead(united_data)\n\n        lat      long yield nitro     bv rep nf topo_year\n1 -33.05113 -63.84886 72.14 131.5 162.60  R1 N5    W-1999\n2 -33.05115 -63.84879 73.79 131.5 170.49  R1 N5    W-1999\n3 -33.05116 -63.84872 77.25 131.5 168.39  R1 N5    W-1999\n4 -33.05117 -63.84865 76.35 131.5 176.68  R1 N5    W-1999\n5 -33.05118 -63.84858 75.55 131.5 171.46  R1 N5    W-1999\n6 -33.05120 -63.84851 70.24 131.5 170.56  R1 N5    W-1999",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#nesting-and-unnesting-data",
+    "href": "coding/week_03/05_datawrangling_02.html#nesting-and-unnesting-data",
+    "title": "Transforming Ag data in R II",
+    "section": "3.3 Nesting and Unnesting Data",
+    "text": "3.3 Nesting and Unnesting Data\n\nnested_data &lt;- data_corn %&gt;% \n  group_by(topo) %&gt;% \n  nest()\nhead(nested_data)\n\n# A tibble: 4 × 2\n# Groups:   topo [4]\n  topo  data                \n  &lt;fct&gt; &lt;list&gt;              \n1 W     &lt;tibble [1,043 × 8]&gt;\n2 HT    &lt;tibble [785 × 8]&gt;  \n3 E     &lt;tibble [730 × 8]&gt;  \n4 LO    &lt;tibble [885 × 8]&gt;  \n\nunnested_data &lt;- nested_data %&gt;% \n  unnest(cols = c(data))\nhead(unnested_data)\n\n# A tibble: 6 × 9\n# Groups:   topo [1]\n  topo   year   lat  long yield nitro    bv rep   nf   \n  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;\n1 W      1999 -33.1 -63.8  72.1  132.  163. R1    N5   \n2 W      1999 -33.1 -63.8  73.8  132.  170. R1    N5   \n3 W      1999 -33.1 -63.8  77.2  132.  168. R1    N5   \n4 W      1999 -33.1 -63.8  76.4  132.  177. R1    N5   \n5 W      1999 -33.1 -63.8  75.6  132.  171. R1    N5   \n6 W      1999 -33.1 -63.8  70.2  132.  171. R1    N5",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#detecting-and-extracting-strings",
+    "href": "coding/week_03/05_datawrangling_02.html#detecting-and-extracting-strings",
+    "title": "Transforming Ag data in R II",
+    "section": "4.1 Detecting and Extracting Strings",
+    "text": "4.1 Detecting and Extracting Strings\n\nnames &lt;- c(\"Wheat Field\", \"Corn Field\", \"Soybean Farm\")\nstr_detect(names, \"Field\") # Check if 'Field' is present\n\n[1]  TRUE  TRUE FALSE\n\nstr_subset(names, \"Corn\") # Extract values containing 'Corn'\n\n[1] \"Corn Field\"",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#modifying-strings",
+    "href": "coding/week_03/05_datawrangling_02.html#modifying-strings",
+    "title": "Transforming Ag data in R II",
+    "section": "4.2 Modifying Strings",
+    "text": "4.2 Modifying Strings\n\nnames &lt;- str_replace(names, \"Field\", \"Plot\")\nnames\n\n[1] \"Wheat Plot\"   \"Corn Plot\"    \"Soybean Farm\"\n\ncapitalized_names &lt;- str_to_title(names)\nhead(capitalized_names)\n\n[1] \"Wheat Plot\"   \"Corn Plot\"    \"Soybean Farm\"\n\ndata_clean &lt;- data_corn %&gt;% \n  mutate(topo_clean = str_replace_all(topo, \"[^a-zA-Z0-9]\", \"_\"))\n\nhead(data_clean)\n\n  year       lat      long yield nitro topo     bv rep nf topo_clean\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5          W\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5          W\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5          W\n4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5          W\n5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5          W\n6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5          W",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#splitting-strings",
+    "href": "coding/week_03/05_datawrangling_02.html#splitting-strings",
+    "title": "Transforming Ag data in R II",
+    "section": "4.3 Splitting Strings",
+    "text": "4.3 Splitting Strings\n\nwords &lt;- \"Wheat,Corn,Soybean\"\nsplit_words &lt;- str_split(words, \",\")\nhead(split_words)\n\n[[1]]\n[1] \"Wheat\"   \"Corn\"    \"Soybean\"",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#reordering-factors",
+    "href": "coding/week_03/05_datawrangling_02.html#reordering-factors",
+    "title": "Transforming Ag data in R II",
+    "section": "5.1 Reordering Factors",
+    "text": "5.1 Reordering Factors\n\nlibrary(forcats)\ncrops &lt;- factor(c(\"soybean\", \"corn\", \"wheat\"), levels = c(\"wheat\", \"corn\", \"soybean\"))\ncrops &lt;- fct_relevel(crops, \"corn\") # Moves 'corn' to first position\nhead(crops)\n\n[1] soybean corn    wheat  \nLevels: corn wheat soybean",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#lump-rare-categories-together",
+    "href": "coding/week_03/05_datawrangling_02.html#lump-rare-categories-together",
+    "title": "Transforming Ag data in R II",
+    "section": "5.2 Lump Rare Categories Together",
+    "text": "5.2 Lump Rare Categories Together\n\nset.seed(123)\ndata &lt;- data.frame(crop = sample(c(\"corn\", \"soybean\", \"wheat\", \"barley\", \"oats\"), 20, replace = TRUE))\n\n# Using mutate() to lump rare categories together\nfactor_data &lt;- data %&gt;%\n  mutate(crop_lumped = fct_lump_n(crop, n = 3)) # Keep top 3 categories, lump others into 'Other'\nfactor_data\n\n      crop crop_lumped\n1    wheat       wheat\n2    wheat       wheat\n3  soybean     soybean\n4  soybean     soybean\n5    wheat       wheat\n6     oats       Other\n7   barley       Other\n8     corn        corn\n9  soybean     soybean\n10   wheat       wheat\n11    oats       Other\n12   wheat       wheat\n13   wheat       wheat\n14    corn        corn\n15  barley       Other\n16    corn        corn\n17    corn        corn\n18    oats       Other\n19   wheat       wheat\n20 soybean     soybean",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#extracting-date-components",
+    "href": "coding/week_03/05_datawrangling_02.html#extracting-date-components",
+    "title": "Transforming Ag data in R II",
+    "section": "6.1 Extracting Date Components",
+    "text": "6.1 Extracting Date Components\n\nyear(parsed_dates)\n\n[1] 2023 2024 2025\n\nmonth(parsed_dates)\n\n[1] 6 1 7\n\nday(parsed_dates)\n\n[1] 15 20  4",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "coding/week_03/05_datawrangling_02.html#parsing-and-extracting-date-components",
+    "href": "coding/week_03/05_datawrangling_02.html#parsing-and-extracting-date-components",
+    "title": "Transforming Ag data in R II",
+    "section": "6.2 Parsing and Extracting Date Components",
+    "text": "6.2 Parsing and Extracting Date Components\n\ndates_corn &lt;- data_corn %&gt;% \n  mutate(date = ymd(paste(year, \"01\", \"01\", sep = \"-\")))\nhead(dates_corn)\n\n  year       lat      long yield nitro topo     bv rep nf       date\n1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5 1999-01-01\n2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5 1999-01-01\n3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5 1999-01-01\n4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5 1999-01-01\n5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5 1999-01-01\n6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5 1999-01-01",
+    "crumbs": [
+      "Lessons",
+      "04-Data Wrangling II"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html",
+    "href": "outline/outline.html",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-information",
+    "href": "outline/outline.html#course-information",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-description",
+    "href": "outline/outline.html#course-description",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "2. Course Description",
+    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-learning-outcomes",
+    "href": "outline/outline.html#course-learning-outcomes",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "3. Course Learning Outcomes",
+    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#calendar",
+    "href": "outline/outline.html#calendar",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "4. Calendar",
+    "text": "4. Calendar\nSee http://adriancorrendo.github.io/plnt6800/calendar.html\n\nLast Day to Drop Course\nTBD",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#assessment-breakdown",
+    "href": "outline/outline.html#assessment-breakdown",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "5. Assessment Breakdown",
+    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-grading-policies",
+    "href": "outline/outline.html#course-grading-policies",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "6. Course Grading Policies",
+    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-statements",
+    "href": "outline/outline.html#course-statements",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "7. Course Statements",
+    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#accessibility",
+    "href": "outline/outline.html#accessibility",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "8. Accessibility",
+    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#land-acknowledgement",
+    "href": "outline/outline.html#land-acknowledgement",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "9. Land Acknowledgement",
+    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "software/software.html",
+    "href": "software/software.html",
+    "title": "Required Software & Accounts",
+    "section": "",
+    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
+    "crumbs": [
+      "Software",
+      "Instructions"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -407,144 +713,25 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "objectID": "outline/calendar.html",
+    "href": "outline/calendar.html",
+    "title": "PLNT6800|01 - Calendar",
     "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202",
     "crumbs": [
-      "Home"
+      "Calendar",
+      "Schedule"
     ]
   },
   {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
-    "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "objectID": "outline/calendar.html#calendar",
+    "href": "outline/calendar.html#calendar",
+    "title": "PLNT6800|01 - Calendar",
+    "section": "Calendar",
+    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 21\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
     "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "software/software.html",
-    "href": "software/software.html",
-    "title": "Required Software & Accounts",
-    "section": "",
-    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
-    "crumbs": [
-      "Software",
-      "Instructions"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html",
-    "href": "outline/outline.html",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "",
-    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-information",
-    "href": "outline/outline.html#course-information",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "",
-    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-description",
-    "href": "outline/outline.html#course-description",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "2. Course Description",
-    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-learning-outcomes",
-    "href": "outline/outline.html#course-learning-outcomes",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "3. Course Learning Outcomes",
-    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#calendar",
-    "href": "outline/outline.html#calendar",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "4. Calendar",
-    "text": "4. Calendar\nSee http://adriancorrendo.github.io/plnt6800/calendar.html\n\nLast Day to Drop Course\nTBD",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#assessment-breakdown",
-    "href": "outline/outline.html#assessment-breakdown",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "5. Assessment Breakdown",
-    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-grading-policies",
-    "href": "outline/outline.html#course-grading-policies",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "6. Course Grading Policies",
-    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-statements",
-    "href": "outline/outline.html#course-statements",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "7. Course Statements",
-    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#accessibility",
-    "href": "outline/outline.html#accessibility",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "8. Accessibility",
-    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#land-acknowledgement",
-    "href": "outline/outline.html#land-acknowledgement",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "9. Land Acknowledgement",
-    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
+      "Calendar",
+      "Schedule"
     ]
   },
   {

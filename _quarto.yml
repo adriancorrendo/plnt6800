@@ -61,6 +61,8 @@ website:
             text: "03-Git & GitHub"
           - href: coding/week_03/04_datawrangling_01.qmd
             text: "04-Data Wrangling I"
+          - href: coding/week_03/05_datawrangling_02.qmd
+            text: "04-Data Wrangling II"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd

@@ -1,0 +1,235 @@
+---
+title: "Transforming Ag data in R II"
+author: "Dr. Adrian Correndo"
+date: "2025-01-24"
+categories: [data wrangling, dplyr, tidyr, stringr, lubridate, forcats]
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    number-sections: true
+    table-class: "table table-striped table-hover"
+  pdf:
+    number-sections: true
+editor: source
+smooth-scroll: true
+bibliography: ../../references.bib
+link-citations: TRUE
+---
+
+# More packages for data manipulation...🚀
+
+This lesson builds on our previous session by introducing more advanced data wrangling techniques using `tidyr`, `stringr`, and `forcats`. We will explore how to manipulate and transform data for efficient analysis. Additionally, we introduce `lubridate` for handling dates effectively.
+
+## Required packages for today
+```{r eval=TRUE, warning=FALSE, message=FALSE}
+library(pacman)
+p_load(agridat, dplyr, tidyr, stringr, forcats, skimr, lubridate)
+```
+
+# Advanced `dplyr` Functions
+![](https://dplyr.tidyverse.org/logo.png){.absolute top=0 right=0 height="25%"}
+
+## Aggregation with `group_by()` and `summarize()`
+```{r}
+data_corn <- agridat::lasrosas.corn
+summary_data <- data_corn %>% 
+  group_by(topo, year) %>% 
+  summarize(mean_yield = mean(yield, na.rm = TRUE), .groups = "drop")
+summary_data
+```
+
+## Applying Functions to Multiple Columns using `across()`
+```{r}
+data_across <- data_corn %>% 
+  mutate(across(c(lat, long), ~ round(.x, digits=1), .names = "rounded_{.col}")) # Rounding values to 1 decimal place for better readability
+head(data_across)
+```
+
+## Creating Conditional Columns with `case_when()`
+```{r}
+data_casewhen <- data_corn %>% 
+  mutate(yield_category = case_when(
+    yield > 10 ~ "High",
+    yield > 5 ~ "Medium",
+    TRUE ~ "Low"
+  ))
+head(data_casewhen)
+```
+## Slicing data with `slice()`:
+```{r}
+# Selecting the first 3 rows
+first_rows <- data_corn %>% slice(1:3)
+head(first_rows)
+
+# Selecting the last 3 rows
+last_rows <- data_corn %>% slice_tail(n = 3)
+head(last_rows)
+
+# Selecting 3 random rows
+random_rows <- data_corn %>% slice_sample(n = 3)
+head(random_rows)
+
+# Selecting every 2nd row
+every_second_row <- data_corn %>% slice(seq(1, n(), by = 2))
+head(every_second_row)
+```
+
+
+
+## Working with Time-Series Data: `lead()` and `lag()`
+```{r}
+data_lag <- data_corn %>% 
+  arrange(year, topo) %>% 
+  mutate(yield_change = yield - lag(yield))
+head(data_lag)
+```
+
+# Data Tidying with `tidyr`
+
+![](https://tidyr.tidyverse.org/logo.png){.absolute top=0 right=0 height="25%"}
+
+`tidyr` helps reshape data into a tidy format. Some key functions:
+
+## Gathering and Spreading Data
+```{r}
+# Convert from wide to long format using pivot_longer
+long_data <- data_corn %>% 
+  pivot_longer(cols = c(yield, nitro), 
+               names_to = "measurement", # name of the column with description
+               values_to = "value") # name of the column with values
+head(long_data)
+
+# Convert back from long to wide format using pivot_wider
+wide_data <- long_data %>% 
+  pivot_wider(names_from = measurement, 
+              values_from = value)
+head(wide_data)
+```
+
+## Separating and Uniting Columns
+```{r}
+# Example dataset with a combined column
+example_data <- data_corn %>% 
+  mutate(topo_year = paste(topo, year, sep = "_"))
+
+# Splitting 'topo_year' into two columns
+separated_data <- example_data %>% 
+  separate(topo_year, into = c("topo", "year"), sep = "_")
+head(separated_data)
+
+# Combining 'topo' and 'year' back into a single column
+united_data <- separated_data %>% 
+  unite("topo_year", topo, year, sep = "-")
+head(united_data)
+```
+
+## Nesting and Unnesting Data
+```{r}
+nested_data <- data_corn %>% 
+  group_by(topo) %>% 
+  nest()
+head(nested_data)
+
+unnested_data <- nested_data %>% 
+  unnest(cols = c(data))
+head(unnested_data)
+```
+
+# String Manipulation with `stringr`
+
+![](https://stringr.tidyverse.org/logo.png){.absolute top=0 right=0 height="25%"}
+
+The `stringr` package provides a consistent way to work with character strings.
+
+## Detecting and Extracting Strings
+```{r}
+names <- c("Wheat Field", "Corn Field", "Soybean Farm")
+str_detect(names, "Field") # Check if 'Field' is present
+str_subset(names, "Corn") # Extract values containing 'Corn'
+```
+
+## Modifying Strings
+```{r}
+names <- str_replace(names, "Field", "Plot")
+names
+
+capitalized_names <- str_to_title(names)
+head(capitalized_names)
+
+data_clean <- data_corn %>% 
+  mutate(topo_clean = str_replace_all(topo, "[^a-zA-Z0-9]", "_"))
+
+head(data_clean)
+
+```
+
+## Splitting Strings
+```{r}
+words <- "Wheat,Corn,Soybean"
+split_words <- str_split(words, ",")
+head(split_words)
+```
+
+# Factor Handling with `forcats`
+
+![](https://forcats.tidyverse.org/logo.png){.absolute top=0 right=0 height="25%"}
+`forcats` provides tools to manipulate categorical data effectively.
+
+## Reordering Factors
+```{r}
+library(forcats)
+crops <- factor(c("soybean", "corn", "wheat"), levels = c("wheat", "corn", "soybean"))
+crops <- fct_relevel(crops, "corn") # Moves 'corn' to first position
+head(crops)
+```
+
+## Lump Rare Categories Together
+```{r}
+set.seed(123)
+data <- data.frame(crop = sample(c("corn", "soybean", "wheat", "barley", "oats"), 20, replace = TRUE))
+
+# Using mutate() to lump rare categories together
+factor_data <- data %>%
+  mutate(crop_lumped = fct_lump_n(crop, n = 3)) # Keep top 3 categories, lump others into 'Other'
+factor_data
+
+```
+
+# Date Handling with `lubridate`
+
+![](https://lubridate.tidyverse.org/logo.png){.absolute top=0 right=0 height="25%"}
+
+The `lubridate` package simplifies working with dates and times in R.
+
+### Parsing Dates
+```{r}
+dates <- c("2023-06-15", "2024-01-20", "2025-07-04")
+parsed_dates <- ymd(dates)
+parsed_dates
+```
+
+## Extracting Date Components
+```{r}
+year(parsed_dates)
+month(parsed_dates)
+day(parsed_dates)
+```
+
+## Parsing and Extracting Date Components
+```{r}
+dates_corn <- data_corn %>% 
+  mutate(date = ymd(paste(year, "01", "01", sep = "-")))
+head(dates_corn)
+```
+
+# Summary
+
+Today, we explored:
+- `tidyr` for reshaping and tidying data, including `nest()` and `unnest()`.
+- `stringr` for working with text data.
+- `forcats` for handling categorical variables.
+- `lubridate` for working with date data.
+
+These functions will help you work efficiently with real-world agricultural data. Next session, we will integrate these skills into a full data processing workflow!
