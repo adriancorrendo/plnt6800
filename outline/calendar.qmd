@@ -37,7 +37,7 @@ The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the 
 | 2 | Jan 15 | Fundamentals of R packages | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_02/wed "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4057115/View) |
 |  | Jan 17 | Basics of version control & GitHub | [🌐](https://github.com/adriancorrendo/my-first-repo) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4058352/View) |
 | 3 | Jan 22 | Data Wrangling I | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_03 "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4063612/View) |
-|  | Jan 24 | Data Wrangling II | [🌐]() | [🎥]() |
+|  | Jan 24 | Data Wrangling II | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_03/fri/05_dw "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4064215/View) |
 | 4 | Jan 29 | Data Wrangling III | [🌐]() | [🎥]() |
 |  | Jan 31 | Iteration: Loops & Mapping | [🌐]() | [🎥]() |
 | 5 | Feb 5 | Weather Data: Retrieving & Processing | [🌐]() | [🎥]() |
