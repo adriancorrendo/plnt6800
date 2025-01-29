@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Adrian Correndo">
+<meta name="dcterms.date" content="2025-01-29">
 
-<title>Required Software &amp; Accounts – PLNT6800 - Winter 2025</title>
+<title>Advanced Data Wrangling in R – PLNT6800 - Winter 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,28 +22,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../coding/week_01/essentials_01.html" rel="next">
-<link href="../slides/day1.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f2a1071e85750ec973bbb8a8f120da0f.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e759c8361f0112bf6e2955a60a6c0828.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-5ccce6f18d703cb4568c738a25a74289.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../outline/calendar.html" rel="next">
+<link href="../../coding/week_03/05_datawrangling_02.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f2a1071e85750ec973bbb8a8f120da0f.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e759c8361f0112bf6e2955a60a6c0828.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-5ccce6f18d703cb4568c738a25a74289.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,12 +105,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Required Software &amp; Accounts – PLNT6800 - Winter 2025">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Advanced Data Wrangling in R – PLNT6800 - Winter 2025">
+<meta property="og:description" content="Reproducible Ag Data Science with R">
 <meta property="og:site_name" content="PLNT6800 - Winter 2025">
-<meta name="twitter:title" content="Required Software &amp; Accounts – PLNT6800 - Winter 2025">
+<meta name="twitter:title" content="Advanced Data Wrangling in R – PLNT6800 - Winter 2025">
+<meta name="twitter:description" content="Reproducible Ag Data Science with R">
 <meta name="twitter:creator" content="@aacorrendo">
 <meta name="twitter:card" content="summary">
 </head>
@@ -87,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">PLNT6800 - Winter 2025</span>
     </a>
   </div>
@@ -129,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../software/software.html">Software</a></li><li class="breadcrumb-item"><a href="../software/software.html">Instructions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../coding/week_01/essentials_01.html">Lessons</a></li><li class="breadcrumb-item"><a href="../../coding/week_04/06_datawrangling_03.html">06-Data Wrangling III</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -143,8 +181,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../images/plnt6800_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../images/plnt6800_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main">
     <a href="https://github.com/adriancorrendo/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
@@ -159,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -174,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/day1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../slides/day1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reproducibility</span></a>
   </div>
 </li>
@@ -182,16 +220,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Software</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../software/software.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../software/software.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructions</span></a>
   </div>
 </li>
@@ -199,46 +237,46 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Lessons</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../coding/week_01/essentials_01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../coding/week_01/essentials_01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">01-Essentials of R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../coding/week_02/02_fundamentals_rpackages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../coding/week_02/02_fundamentals_rpackages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">02-Fundamentals of packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../coding/week_02/03_versioncontrol.html" class="sidebar-item-text sidebar-link">
+  <a href="../../coding/week_02/03_versioncontrol.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">03-Git &amp; GitHub</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../coding/week_03/04_datawrangling_01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../coding/week_03/04_datawrangling_01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">04-Data Wrangling I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../coding/week_03/05_datawrangling_02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../coding/week_03/05_datawrangling_02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">05-Data Wrangling II</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../coding/week_04/06_datawrangling_03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../coding/week_04/06_datawrangling_03.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">06-Data Wrangling III</span></a>
   </div>
 </li>
@@ -255,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../outline/calendar.html" class="sidebar-item-text sidebar-link">
+  <a href="../../outline/calendar.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -272,7 +310,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../outline/outline.html" class="sidebar-item-text sidebar-link">
+  <a href="../../outline/outline.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Outline</span></a>
   </div>
 </li>
@@ -280,19 +318,39 @@ ul.task-list li input[type="checkbox"] {
   </li>
     </ul>
     </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Content</h2>
+   
+  <ul>
+  <li><a href="#review-of-previous-lessons" id="toc-review-of-previous-lessons" class="nav-link active" data-scroll-target="#review-of-previous-lessons"><span class="header-section-number">1</span> Review of Previous Lessons</a></li>
+  <li><a href="#complex-joins" id="toc-complex-joins" class="nav-link" data-scroll-target="#complex-joins"><span class="header-section-number">2</span> Complex Joins</a>
+  <ul>
+  <li><a href="#example-merging-weather-and-crop-yield-data" id="toc-example-merging-weather-and-crop-yield-data" class="nav-link" data-scroll-target="#example-merging-weather-and-crop-yield-data"><span class="header-section-number">2.1</span> Example: Merging Weather and Crop Yield Data</a></li>
+  </ul></li>
+  <li><a href="#date-handling-with-lubridate" id="toc-date-handling-with-lubridate" class="nav-link" data-scroll-target="#date-handling-with-lubridate"><span class="header-section-number">3</span> Date Handling with <code>lubridate</code></a></li>
+  <li><a href="#data-cleaning-with-janitor" id="toc-data-cleaning-with-janitor" class="nav-link" data-scroll-target="#data-cleaning-with-janitor"><span class="header-section-number">4</span> Data Cleaning with <code>janitor</code></a></li>
+  <li><a href="#checking-data-quality" id="toc-checking-data-quality" class="nav-link" data-scroll-target="#checking-data-quality"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+  <li><a href="#final-thoughts-and-resources" id="toc-final-thoughts-and-resources" class="nav-link" data-scroll-target="#final-thoughts-and-resources"><span class="header-section-number">6</span> Final Thoughts and Resources</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="06_datawrangling_03.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../software/software.html">Software</a></li><li class="breadcrumb-item"><a href="../software/software.html">Instructions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../coding/week_01/essentials_01.html">Lessons</a></li><li class="breadcrumb-item"><a href="../../coding/week_04/06_datawrangling_03.html">06-Data Wrangling III</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Required Software &amp; Accounts</h1>
-</div>
+<h1 class="title">Advanced Data Wrangling in R</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data wrangling</div>
+    <div class="quarto-category">dplyr</div>
+    <div class="quarto-category">tidyr</div>
+    <div class="quarto-category">case study</div>
+  </div>
+  </div>
 
 
 
@@ -305,6 +363,12 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 29, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -314,73 +378,202 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>Description</strong> <br></p>
+<p>This class dives deeper into the world of R data wrangling, covering advanced techniques and their applications. We’ll explore complex functions and join operations essential for real-world data analysis.</p>
+<p><strong>Required packages for today</strong> <br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(dplyr, tidyr, stringr, lubridate, janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="review-of-previous-lessons" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Review of Previous Lessons</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><img src="https://dplyr.tidyverse.org/logo.png" class="absolute" style="height:45.0%" data-top="0" data-right="0"></td>
+<td><img src="https://tidyr.tidyverse.org/logo.png" class="absolute" style="height:45.0%" data-top="0" data-right="0"></td>
+</tr>
+</tbody>
+</table>
+<p>Quick recap of essential data wrangling functions:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R &amp; RStudio IDE</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Git</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">GitHub</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">GitHub Desktop</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Posit Cloud</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page"><code>dplyr</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><code>tidyr</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false"><code>skimr</code></a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Before starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:</p>
-<p>Download the latest version of R from CRAN,&nbsp;here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:</p>
-<ol type="i">
-<li><p><a href="https://rstudio-education.github.io/hopr/starting.html" class="uri">https://rstudio-education.github.io/hopr/starting.html</a></p></li>
-<li><p><a href="https://www.youtube.com/watch?v=Tb3R4GLJ45U" class="uri">https://www.youtube.com/watch?v=Tb3R4GLJ45U</a></p></li>
-</ol>
+<ul>
+<li><p><code>mutate()</code></p></li>
+<li><p><code>filter()</code></p></li>
+<li><p><code>select()</code></p></li>
+<li><p><code>slice()</code>, <code>slice_head()</code>, <code>slice_tail()</code>, <code>slice_sample()</code></p></li>
+<li><p><code>rename()</code></p></li>
+<li><p><code>arrange()</code></p></li>
+<li><p><code>distinct()</code></p></li>
+<li><p><code>count()</code></p></li>
+<li><p><code>glimpse()</code></p></li>
+<li><p><code>summarise()</code></p></li>
+<li><p><code>group_by</code></p></li>
+</ul>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p><strong>What is Git?</strong></p>
-<p>Git is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.</p>
-<p><strong>How to Install Git:</strong></p>
-<p>Follow these steps to install Git on your computer:</p>
-<ol type="1">
-<li><p>Visit the official Git website (<a href="https://git-scm.com/" class="uri">https://git-scm.com/</a>);to download the installer for your operating system.</p></li>
-<li><p>For detailed guidance, read the official tutorial to install git (<a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" class="uri">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a>).</p></li>
-<li><p>You may use these step-by-step videos for installation:</p></li>
-</ol>
-<p>• Installing Git on Windows (<a href="https://www.youtube.com/watch?v=iYkLrXobBbA" class="uri">https://www.youtube.com/watch?v=iYkLrXobBbA</a>)</p>
-<p>• Installing Git on Mac (<a href="https://www.youtube.com/watch?v=B4qsvQ5IqWk" class="uri">https://www.youtube.com/watch?v=B4qsvQ5IqWk</a>)</p>
-<p>Once installed, verify by typing git –version in your terminal to ensure Git is ready to use!</p>
+<ul>
+<li><code>unite()</code></li>
+<li><code>separate()</code></li>
+<li><code>pivot_longer()</code></li>
+<li><code>pivot_wider()</code></li>
+<li><code>case_when()</code></li>
+<li><code>nest()</code></li>
+<li><code>unnest()</code></li>
+</ul>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p><strong>What is GitHub?</strong></p>
-<p>GitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.</p>
-<p>For this course, it is required that you create your GitHub account. Preferably, using your University email (##<span class="citation" data-cites="uoguelph.ca">@uoguelph.ca</span>). Please, follow the steps detailed on this official link from GitHub:</p>
-<p><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github" class="uri">https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github</a></p>
-<p>You may also find multiple useful YouTube tutorials like this one:</p>
-<p><a href="https://www.youtube.com/watch?v=h5cKAd94QNo" class="uri">https://www.youtube.com/watch?v=h5cKAd94QNo</a></p>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p><strong>What is GitHub Desktop?</strong></p>
-<p>GitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.</p>
-<p><strong>How to Install GitHub Desktop:</strong></p>
-<p>Follow these steps to install GitHub Desktop on your computer:</p>
-<ol type="1">
-<li><p>Visit the GitHub Desktop website (<a href="https://desktop.github.com" class="uri">https://desktop.github.com</a>); and download the application for your operating system.</p></li>
-<li><p>Run the installer and follow the on-screen instructions to complete the installation.</p></li>
-<li><p>After installation, sign in to your GitHub account or create one if you don’t have it.</p></li>
-</ol>
-<p>For additional help, check out these videos:</p>
-<p>• Installing GitHub Desktop on Windows (<a href="https://www.youtube.com/watch?v=3JdDAJ2YPeU" class="uri">https://www.youtube.com/watch?v=3JdDAJ2YPeU</a>)</p>
-<p>• Installing GitHub Desktop on Mac (<a href="https://www.youtube.com/watch?v=C0n6O4d0ccw" class="uri">https://www.youtube.com/watch?v=C0n6O4d0ccw</a>)</p>
-<p>Once installed, you can easily clone repositories, commit changes, and sync your work with GitHub!</p>
-</div>
-<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<p><strong>What is Posit Cloud?</strong></p>
-<p>Posit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.</p>
-<p>How to Create a Free Posit Cloud Account:</p>
-<p>Follow these steps to set up your free account:</p>
-<ol type="1">
-<li><p>Visit Posit Cloud website at <a href="https://posit.cloud" class="uri">https://posit.cloud</a>.</p></li>
-<li><p>Click on&nbsp;Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!</p></li>
-<li><p>Complete the registration form and verify your email if required.</p></li>
-<li><p>Once registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.</p></li>
-<li><p>More instructions about our course workspace will be provided during the semester.</p></li>
-</ol>
-<p>For a hint of what PositCloud does, you may watch with this video:</p>
-<p><a href="https://www.youtube.com/watch?v=-fzwm4ZhVQQ" class="uri">https://www.youtube.com/watch?v=-fzwm4ZhVQQ</a> With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!</p>
+<ul>
+<li><code>skim()</code></li>
+</ul>
 </div>
 </div>
 </div>
+</section>
+<section id="complex-joins" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Complex Joins</h1>
+<p>In data analysis, combining data from different sources is often necessary. Here, we’ll use <code>dplyr</code>’s join functions to merge datasets based on common keys.</p>
+<section id="example-merging-weather-and-crop-yield-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="example-merging-weather-and-crop-yield-data"><span class="header-section-number">2.1</span> Example: Merging Weather and Crop Yield Data</h2>
+<ul>
+<li><code>left_join()</code>: Includes all records from the left dataset and the matched records from the right dataset. If there is no match, the result is NA in the columns of the right dataset.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2024-04-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-10-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">precipitation =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">50</span>, <span class="dv">30</span>, <span class="dv">2</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">16</span>, <span class="dv">12</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>forage_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2024-04-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-10-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">forage_yield =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">1200</span>, <span class="dv">3000</span>, <span class="dv">4000</span>, <span class="dv">2800</span>, <span class="dv">1500</span>, <span class="dv">0</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge data</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>left_joined_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(weather_data, forage_data, <span class="at">by =</span> <span class="st">"date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>right_join()</code>: Includes all records from the right dataset and the matched records from the left dataset. If there is no match, the result is NA in the columns of the left dataset.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>right_joined_data <span class="ot">&lt;-</span> <span class="fu">right_join</span>(weather_data, forage_data, <span class="at">by =</span> <span class="st">"date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>full_join()</code>: Includes all records when there is a match in the keys of the left or right datasets. If there is no match, the result is NA in the columns of the dataset that does not have a match.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>full_joined_data <span class="ot">&lt;-</span> <span class="fu">full_join</span>(weather_data, forage_data, <span class="at">by =</span> <span class="st">"date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="date-handling-with-lubridate" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Date Handling with <code>lubridate</code></h1>
+<p><img src="https://lubridate.tidyverse.org/logo.png" class="absolute" style="height:25.0%" data-top="0" data-right="0"></p>
+<p>Using <code>lubridate</code>, we can extract various date components for analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weather_data_dates <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_month_day =</span> <span class="fu">format</span>(date, <span class="st">"%Y_%m_%d"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_year =</span> <span class="fu">yday</span>(date),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_month =</span> <span class="fu">mday</span>(date),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">week_of_year =</span> <span class="fu">week</span>(date),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">month_name =</span> <span class="fu">month</span>(date, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(weather_data_dates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 7
+Columns: 8
+$ date           &lt;date&gt; 2024-04-01, 2024-05-01, 2024-06-01, 2024-07-01, 2024-0…
+$ precipitation  &lt;dbl&gt; 20, 40, 60, 80, 50, 30, 2
+$ temperature    &lt;dbl&gt; 15, 18, 25, 30, 22, 16, 12
+$ year_month_day &lt;chr&gt; "2024_04_01", "2024_05_01", "2024_06_01", "2024_07_01",…
+$ day_of_year    &lt;dbl&gt; 92, 122, 153, 183, 214, 245, 275
+$ day_of_month   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1
+$ week_of_year   &lt;dbl&gt; 14, 18, 22, 27, 31, 35, 40
+$ month_name     &lt;ord&gt; April, May, June, July, August, September, October</code></pre>
+</div>
+</div>
+</section>
+<section id="data-cleaning-with-janitor" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Data Cleaning with <code>janitor</code></h1>
+<p><img src="https://sfirke.github.io/janitor/reference/figures/logo_small.png" class="absolute" style="height:25.0%" data-top="0" data-right="0"></p>
+<p>Sometimes, datasets come with inconsistent column names, which can cause issues in analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>messy_weather_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Date Recorded</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2024-04-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-10-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Precipitation (mm)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">50</span>, <span class="dv">30</span>, <span class="dv">2</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Temperature..(C,)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">16</span>, <span class="dv">12</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>clean_weather_data <span class="ot">&lt;-</span> messy_weather_data <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>()</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>clean_weather_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  date_recorded precipitation_mm temperature_c
+  &lt;date&gt;                   &lt;dbl&gt;         &lt;dbl&gt;
+1 2024-04-01                  20            15
+2 2024-05-01                  40            18
+3 2024-06-01                  60            25
+4 2024-07-01                  80            30
+5 2024-08-01                  50            22
+6 2024-09-01                  30            16
+7 2024-10-01                   2            12</code></pre>
+</div>
+</div>
+</section>
+<section id="checking-data-quality" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Checking Data Quality</h1>
+<p>After merging, it’s crucial to check for missing values and duplicates:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_quality_summary <span class="ot">&lt;-</span> full_joined_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)), <span class="at">.names =</span> <span class="st">"missing_{.col}"</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>duplicate_rows <span class="ot">&lt;-</span> full_joined_data <span class="sc">%&gt;%</span> <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No variable names specified - using all columns.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No duplicate combinations found of: date, precipitation, temperature, forage_yield</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data_quality_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  missing_date missing_precipitation missing_temperature missing_forage_yield
+         &lt;int&gt;                 &lt;int&gt;               &lt;int&gt;                &lt;int&gt;
+1            0                     0                   0                    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>duplicate_rows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 5
+# ℹ 5 variables: date &lt;date&gt;, precipitation &lt;dbl&gt;, temperature &lt;dbl&gt;,
+#   forage_yield &lt;dbl&gt;, dupe_count &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="final-thoughts-and-resources" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Final Thoughts and Resources</h1>
+<p>Data wrangling is a crucial step in data analysis, ensuring datasets are clean, structured, and ready for further exploration. By leveraging <code>dplyr</code>, <code>tidyr</code>, <code>janitor</code>, and <code>lubridate</code>, we can efficiently manage and transform our data to extract meaningful insights.</p>
+<p>For further reading and practice, consider the following resources:</p>
+<ul>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a> by Hadley Wickham &amp; Garrett Grolemund</li>
+<li><a href="https://www.tidyverse.org/">tidyverse documentation</a></li>
+<li><a href="https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf">lubridate cheatsheet</a></li>
+<li><a href="https://rstudio-conf-2020.github.io/data-wrangling/">Data Wrangling with R</a> - A comprehensive tutorial</li>
+</ul>
+<p>Keep practicing and experimenting with different datasets to solidify your understanding. Happy coding!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -946,13 +1139,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../slides/day1.html" class="pagination-link" aria-label="Reproducibility">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reproducibility</span>
+      <a href="../../coding/week_03/05_datawrangling_02.html" class="pagination-link" aria-label="05-Data Wrangling II">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">05-Data Wrangling II</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../coding/week_01/essentials_01.html" class="pagination-link" aria-label="01-Essentials of R">
-        <span class="nav-page-text">01-Essentials of R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../outline/calendar.html" class="pagination-link" aria-label="Schedule">
+        <span class="nav-page-text">Schedule</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -974,4 +1167,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
