@@ -66,7 +66,7 @@ website:
           - href: coding/week_04/06_datawrangling_03.qmd
             text: "06-Data Wrangling III"
           - href: coding/week_04/07_ggplot2_intro.qmd
-            text: "06-Data Wrangling III"
+            text: "07-Data viz I"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd

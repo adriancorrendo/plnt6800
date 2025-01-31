@@ -1,71 +1,5 @@
 [
   {
-    "objectID": "coding/week_04/07_ggplot2_intro.html",
-    "href": "coding/week_04/07_ggplot2_intro.html",
-    "title": "Data Viz I",
-    "section": "",
-    "text": "Description\nIn this class, we will explore advanced visualization techniques using ggplot2. You’ll learn how to fine-tune plots by modifying shapes, lines, legends, and adding custom titles and annotations. We will continue working with the agridat::lasrosas.corn dataset.",
-    "crumbs": [
-      "Lessons",
-      "06-Data Wrangling III"
-    ]
-  },
-  {
-    "objectID": "coding/week_04/07_ggplot2_intro.html#define-custom-palettes",
-    "href": "coding/week_04/07_ggplot2_intro.html#define-custom-palettes",
-    "title": "Data Viz I",
-    "section": "3.1 Define custom palettes",
-    "text": "3.1 Define custom palettes\n\nmy_colors &lt;- c(\"#1e6091\", \"#f9c74f\", \"#9b2226\",  \"#599999\",  \"#8e5572\")",
-    "crumbs": [
-      "Lessons",
-      "06-Data Wrangling III"
-    ]
-  },
-  {
-    "objectID": "coding/week_04/07_ggplot2_intro.html#histogram-with-adjusted-transparency-and-custom-bins",
-    "href": "coding/week_04/07_ggplot2_intro.html#histogram-with-adjusted-transparency-and-custom-bins",
-    "title": "Data Viz I",
-    "section": "3.2 Histogram with Adjusted Transparency and Custom Bins",
-    "text": "3.2 Histogram with Adjusted Transparency and Custom Bins\n\n# Density\ndensity_01 &lt;- \ncorn_data %&gt;% \nggplot(aes(x = yield)) +\n  geom_density(aes(fill = Year), color = \"grey15\", alpha = 0.5)+\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  theme_classic()\n\n# Histogram\nhisto_01 &lt;-\nggplot(corn_data, aes(x = yield)) +\n  geom_histogram(aes(fill = Year), bins = 20, alpha = 0.6, color = \"black\") +\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  geom_rug(aes(color = Year), alpha = 0.5)+\n  scale_color_manual(values = my_colors)+\n  theme_classic()\n\nhisto_01\n\n\n\n\n\n\n\n# Faceting by Year\nhisto_02 &lt;-\ncorn_data %&gt;% \nggplot(aes(x = yield)) +\n  geom_histogram(aes(fill = Year), bins = 30, alpha = 0.6, color = \"black\") +\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  geom_rug(aes(color = topo), alpha = 0.5)+\n  scale_color_manual(values = my_colors)+\n  facet_wrap(~topo)+\n  theme_classic()+\n  theme(legend.position = \"none\")\nhisto_02\n\n\n\n\n\n\n\ncorn_data %&gt;% \nggplot(aes(x = yield)) +\n  geom_histogram(aes(fill = topo), bins = 20, alpha = 0.6, color = \"black\") +\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  geom_rug(aes(color = topo), alpha = 0.5)+\n  scale_color_manual(values = my_colors)+\n  facet_wrap(~topo)+\n  theme_classic()+\n  theme(legend.position = \"none\")",
-    "crumbs": [
-      "Lessons",
-      "06-Data Wrangling III"
-    ]
-  },
-  {
-    "objectID": "coding/week_04/07_ggplot2_intro.html#columnbar-plot",
-    "href": "coding/week_04/07_ggplot2_intro.html#columnbar-plot",
-    "title": "Data Viz I",
-    "section": "3.3 Column/Bar plot",
-    "text": "3.3 Column/Bar plot\n\n# Prepare summarized data frame\naggregated_corn &lt;- corn_data %&gt;% group_by(Year, year, nitro, nf) %&gt;% \n  summarize(yield_mean = mean(yield),\n            sd_yield = sd(yield))\n\n`summarise()` has grouped output by 'Year', 'year', 'nitro'. You can override\nusing the `.groups` argument.\n\n# Column plot\ncolplot_01 &lt;- \n  aggregated_corn %&gt;% \nggplot() +\n  geom_col(aes(x = nf, y = yield_mean, fill = Year), \n           color = \"grey25\") + # Triangle shape\n  scale_fill_manual(values = my_colors)+\n  labs(title = \"Yield vs. Nitrogen Levels\", x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  facet_wrap(~Year)+\n  theme_classic()\n\ncolplot_01\n\n\n\n\n\n\n\n# Add SD bars\ncolplot_02 &lt;-\ncolplot_01 +\n  geom_errorbar(data = aggregated_corn, \n                aes(ymin = yield_mean - sd_yield,\n                    ymax = yield_mean + sd_yield, \n                    x = nf),\n                width = .25)\n  \n\ncolplot_02\n\n\n\n\n\n\n\n# facet by topography\naggregated_topo &lt;- corn_data %&gt;% group_by(Year, year, nitro, nf, topo) %&gt;% \n  summarize(yield_mean = mean(yield),\n            sd_yield = sd(yield))\n\n`summarise()` has grouped output by 'Year', 'year', 'nitro', 'nf'. You can\noverride using the `.groups` argument.\n\n# dacet by topography and Year\ncolplot_03 &lt;- \naggregated_topo %&gt;% \nggplot() +\n  geom_col(aes(x = nf, y = yield_mean, fill = topo), \n           color = \"grey25\", alpha = 0.5) + # Triangle shape\n  geom_errorbar(aes(ymin = yield_mean - sd_yield,\n                    ymax = yield_mean + sd_yield, x = nf),\n                width = .25)+\n  labs(title = \"Yield vs. Nitrogen Levels\", x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  facet_grid(topo~Year)+\n  scale_fill_manual(values = my_colors)+\n  theme_classic()\n\ncolplot_03",
-    "crumbs": [
-      "Lessons",
-      "06-Data Wrangling III"
-    ]
-  },
-  {
-    "objectID": "coding/week_04/07_ggplot2_intro.html#scatter-plot-with-custom-shapes-and-line-types",
-    "href": "coding/week_04/07_ggplot2_intro.html#scatter-plot-with-custom-shapes-and-line-types",
-    "title": "Data Viz I",
-    "section": "3.4 Scatter Plot with Custom Shapes and Line Types",
-    "text": "3.4 Scatter Plot with Custom Shapes and Line Types\n\ncorn_data %&gt;%\nggplot(aes(x = nitro, y = yield, color = factor(year))) +\n  geom_point(size = 3, shape = 17) + # Triangle shape\n  geom_smooth(method = \"lm\", se = FALSE, linetype = \"dashed\") +\n  labs(title = \"Yield vs. Nitrogen Levels\", x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  theme_minimal()\n\n`geom_smooth()` using formula = 'y ~ x'",
-    "crumbs": [
-      "Lessons",
-      "06-Data Wrangling III"
-    ]
-  },
-  {
-    "objectID": "coding/week_04/07_ggplot2_intro.html#boxplot-with-custom-shapes-and-line-types",
-    "href": "coding/week_04/07_ggplot2_intro.html#boxplot-with-custom-shapes-and-line-types",
-    "title": "Data Viz I",
-    "section": "3.5 BoxPlot with Custom Shapes and Line Types",
-    "text": "3.5 BoxPlot with Custom Shapes and Line Types\n\ncorn_data %&gt;% \nggplot(aes(x = nf, y = yield)) +\n  geom_boxplot(aes(fill = Year), color = \"grey15\", size = 0.5) +\n  geom_jitter(aes(x = nf, y = yield, color=Year), size = 0.1)+\n  scale_fill_brewer(palette=2, type = \"qual\")+\n  scale_color_brewer(palette=2, type = \"qual\")+\n  labs(title = \"Yield vs. Nitrogen Levels\", \n       x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  facet_wrap(~Year)+\n  theme_classic()",
-    "crumbs": [
-      "Lessons",
-      "06-Data Wrangling III"
-    ]
-  },
-  {
     "objectID": "coding/week_01/essentials_01.html",
     "href": "coding/week_01/essentials_01.html",
     "title": "Essentials of R coding I",
@@ -440,245 +374,69 @@
     ]
   },
   {
-    "objectID": "outline/calendar.html",
-    "href": "outline/calendar.html",
-    "title": "PLNT6800|01 - Calendar",
+    "objectID": "coding/week_04/07_ggplot2_intro.html",
+    "href": "coding/week_04/07_ggplot2_intro.html",
+    "title": "Data Viz I",
     "section": "",
-    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202",
+    "text": "Description\nIn this class, we will explore advanced visualization techniques using ggplot2. You’ll learn how to fine-tune plots by modifying shapes, lines, legends, and adding custom titles and annotations. We will continue working with the agridat::lasrosas.corn dataset.",
     "crumbs": [
-      "Calendar",
-      "Schedule"
+      "Lessons",
+      "07-Data viz I"
     ]
   },
   {
-    "objectID": "outline/calendar.html#calendar",
-    "href": "outline/calendar.html#calendar",
-    "title": "PLNT6800|01 - Calendar",
-    "section": "Calendar",
-    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 21\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
+    "objectID": "coding/week_04/07_ggplot2_intro.html#define-custom-palettes",
+    "href": "coding/week_04/07_ggplot2_intro.html#define-custom-palettes",
+    "title": "Data Viz I",
+    "section": "3.1 Define custom palettes",
+    "text": "3.1 Define custom palettes\n\nmy_colors &lt;- c(\"#1e6091\", \"#f9c74f\", \"#9b2226\",  \"#599999\",  \"#8e5572\")",
     "crumbs": [
-      "Calendar",
-      "Schedule"
+      "Lessons",
+      "07-Data viz I"
     ]
   },
   {
-    "objectID": "slides/day1.html",
-    "href": "slides/day1.html",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "",
-    "text": "Goal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "objectID": "coding/week_04/07_ggplot2_intro.html#histogram-with-adjusted-transparency-and-custom-bins",
+    "href": "coding/week_04/07_ggplot2_intro.html#histogram-with-adjusted-transparency-and-custom-bins",
+    "title": "Data Viz I",
+    "section": "3.2 Histogram with Adjusted Transparency and Custom Bins",
+    "text": "3.2 Histogram with Adjusted Transparency and Custom Bins\n\n# Density\ndensity_01 &lt;- \ncorn_data %&gt;% \nggplot(aes(x = yield)) +\n  geom_density(aes(fill = Year), color = \"grey15\", alpha = 0.5)+\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  theme_classic()\n\n# Histogram\nhisto_01 &lt;-\nggplot(corn_data, aes(x = yield)) +\n  geom_histogram(aes(fill = Year), bins = 20, alpha = 0.6, color = \"black\") +\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  geom_rug(aes(color = Year), alpha = 0.5)+\n  scale_color_manual(values = my_colors)+\n  theme_classic()\n\nhisto_01\n\n\n\n\n\n\n\n# Faceting by Year\nhisto_02 &lt;-\ncorn_data %&gt;% \nggplot(aes(x = yield)) +\n  geom_histogram(aes(fill = Year), bins = 30, alpha = 0.6, color = \"black\") +\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  geom_rug(aes(color = topo), alpha = 0.5)+\n  scale_color_manual(values = my_colors)+\n  facet_wrap(~topo)+\n  theme_classic()+\n  theme(legend.position = \"none\")\nhisto_02\n\n\n\n\n\n\n\ncorn_data %&gt;% \nggplot(aes(x = yield)) +\n  geom_histogram(aes(fill = topo), bins = 20, alpha = 0.6, color = \"black\") +\n  labs(title = \"Yield Distribution Across Years\", x = \"Yield (qq/ha)\", y = \"Count\") +\n  scale_fill_manual(values = my_colors)+\n  geom_rug(aes(color = topo), alpha = 0.5)+\n  scale_color_manual(values = my_colors)+\n  facet_wrap(~topo)+\n  theme_classic()+\n  theme(legend.position = \"none\")",
     "crumbs": [
-      "Slides",
-      "Reproducibility"
+      "Lessons",
+      "07-Data viz I"
     ]
   },
   {
-    "objectID": "slides/day1.html#welcome",
-    "href": "slides/day1.html#welcome",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "",
-    "text": "Goal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "objectID": "coding/week_04/07_ggplot2_intro.html#columnbar-plot",
+    "href": "coding/week_04/07_ggplot2_intro.html#columnbar-plot",
+    "title": "Data Viz I",
+    "section": "3.3 Column/Bar plot",
+    "text": "3.3 Column/Bar plot\n\n# Prepare summarized data frame\naggregated_corn &lt;- corn_data %&gt;% group_by(Year, year, nitro, nf) %&gt;% \n  summarize(yield_mean = mean(yield),\n            sd_yield = sd(yield))\n\n`summarise()` has grouped output by 'Year', 'year', 'nitro'. You can override\nusing the `.groups` argument.\n\n# Column plot\ncolplot_01 &lt;- \n  aggregated_corn %&gt;% \nggplot() +\n  geom_col(aes(x = nf, y = yield_mean, fill = Year), \n           color = \"grey25\") + # Triangle shape\n  scale_fill_manual(values = my_colors)+\n  labs(title = \"Yield vs. Nitrogen Levels\", x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  facet_wrap(~Year)+\n  theme_classic()\n\ncolplot_01\n\n\n\n\n\n\n\n# Add SD bars\ncolplot_02 &lt;-\ncolplot_01 +\n  geom_errorbar(data = aggregated_corn, \n                aes(ymin = yield_mean - sd_yield,\n                    ymax = yield_mean + sd_yield, \n                    x = nf),\n                width = .25)\n  \n\ncolplot_02\n\n\n\n\n\n\n\n# facet by topography\naggregated_topo &lt;- corn_data %&gt;% group_by(Year, year, nitro, nf, topo) %&gt;% \n  summarize(yield_mean = mean(yield),\n            sd_yield = sd(yield))\n\n`summarise()` has grouped output by 'Year', 'year', 'nitro', 'nf'. You can\noverride using the `.groups` argument.\n\n# dacet by topography and Year\ncolplot_03 &lt;- \naggregated_topo %&gt;% \nggplot() +\n  geom_col(aes(x = nf, y = yield_mean, fill = topo), \n           color = \"grey25\", alpha = 0.5) + # Triangle shape\n  geom_errorbar(aes(ymin = yield_mean - sd_yield,\n                    ymax = yield_mean + sd_yield, x = nf),\n                width = .25)+\n  labs(title = \"Yield vs. Nitrogen Levels\", x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  facet_grid(topo~Year)+\n  scale_fill_manual(values = my_colors)+\n  theme_classic()\n\ncolplot_03",
     "crumbs": [
-      "Slides",
-      "Reproducibility"
+      "Lessons",
+      "07-Data viz I"
     ]
   },
   {
-    "objectID": "slides/day1.html#objectives-for-today",
-    "href": "slides/day1.html#objectives-for-today",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Objectives for Today 📌",
-    "text": "Objectives for Today 📌\n\nDefine core concepts:\n\nData Science,\nData Literacy,\nReproducibility.\n\nUnderstand the role of reproducible data science in agriculture.\nExplore challenges and opportunities.",
+    "objectID": "coding/week_04/07_ggplot2_intro.html#scatter-plot-with-custom-shapes-and-line-types",
+    "href": "coding/week_04/07_ggplot2_intro.html#scatter-plot-with-custom-shapes-and-line-types",
+    "title": "Data Viz I",
+    "section": "3.4 Scatter Plot with Custom Shapes and Line Types",
+    "text": "3.4 Scatter Plot with Custom Shapes and Line Types\n\ncorn_data %&gt;%\nggplot(aes(x = nitro, y = yield, color = factor(year))) +\n  geom_point(size = 3, shape = 17) + # Triangle shape\n  geom_smooth(method = \"lm\", se = FALSE, linetype = \"dashed\") +\n  labs(title = \"Yield vs. Nitrogen Levels\", x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  theme_minimal()\n\n`geom_smooth()` using formula = 'y ~ x'",
     "crumbs": [
-      "Slides",
-      "Reproducibility"
+      "Lessons",
+      "07-Data viz I"
     ]
   },
   {
-    "objectID": "slides/day1.html#what-is-data-science-in-agriculture",
-    "href": "slides/day1.html#what-is-data-science-in-agriculture",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "What is Data Science in Agriculture? 🌱",
-    "text": "What is Data Science in Agriculture? 🌱\n\nApplying data engineering, analysis, statistics, and machine learning to solve agricultural problems.\nExamples: Precision agriculture, yield forecasting, environmental monitoring.",
+    "objectID": "coding/week_04/07_ggplot2_intro.html#boxplot-with-custom-shapes-and-line-types",
+    "href": "coding/week_04/07_ggplot2_intro.html#boxplot-with-custom-shapes-and-line-types",
+    "title": "Data Viz I",
+    "section": "3.5 BoxPlot with Custom Shapes and Line Types",
+    "text": "3.5 BoxPlot with Custom Shapes and Line Types\n\ncorn_data %&gt;% \nggplot(aes(x = nf, y = yield)) +\n  geom_boxplot(aes(fill = Year), color = \"grey15\", size = 0.5) +\n  geom_jitter(aes(x = nf, y = yield, color=Year), size = 0.1)+\n  scale_fill_brewer(palette=2, type = \"qual\")+\n  scale_color_brewer(palette=2, type = \"qual\")+\n  labs(title = \"Yield vs. Nitrogen Levels\", \n       x = \"Nitrogen (kg/ha)\", y = \"Yield (qq/ha)\") +\n  facet_wrap(~Year)+\n  theme_classic()",
     "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#key-definitions",
-    "href": "slides/day1.html#key-definitions",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Key Definitions 📖",
-    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#challenges-in-data-literacy",
-    "href": "slides/day1.html#challenges-in-data-literacy",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Challenges in Data Literacy 🌐",
-    "text": "Challenges in Data Literacy 🌐\n\nDiverse data sources (weather, soil, crop data)\nStandardization issues across datasets\nData skills gap among ag professionals",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#why-does-it-matter",
-    "href": "slides/day1.html#why-does-it-matter",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Why does it matter?",
-    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#good-news-is",
-    "href": "slides/day1.html#good-news-is",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "GOOD NEWS IS…",
-    "text": "GOOD NEWS IS…",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#why-reproducibility-in-agriculture",
-    "href": "slides/day1.html#why-reproducibility-in-agriculture",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Why Reproducibility in Agriculture?",
-    "text": "Why Reproducibility in Agriculture?\n\nAgriculture research relies heavily on environmental data, often variable and complex.\nWe have complex challenges 🗒️\n\nVariability due to environmental factors, soil types, and weather patterns.\nComplex datasets involving long-term studies, geographical variability.\n\nOpportunities ✅\n\nReproducibility helps stakeholders make reliable, data-driven decisions.\nEnsures scientific findings are reliable and valid.\nFacilitates collaboration, accountability, and efficiency among researchers and practitioners.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#challenges-in-ag-research",
-    "href": "slides/day1.html#challenges-in-ag-research",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Challenges in Ag-research",
-    "text": "Challenges in Ag-research\n\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n\n“But it all starts with …”\n\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#discussion-prompt",
-    "href": "slides/day1.html#discussion-prompt",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Discussion Prompt 💬",
-    "text": "Discussion Prompt 💬\n\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#what-is-r",
-    "href": "slides/day1.html#what-is-r",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "What is R? 🧮",
-    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#r-vs.-excel-for-data-wrangling",
-    "href": "slides/day1.html#r-vs.-excel-for-data-wrangling",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "R vs. Excel for Data Wrangling 📊",
-    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
-    "href": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "R vs. SAS for Statistical Analysis 📉",
-    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#r-vs-python",
-    "href": "slides/day1.html#r-vs-python",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "R vs Python 🔍",
-    "text": "R vs Python 🔍\n\nR, & Python are popular languages in data science and research.\nEach language has unique strengths, ideal use cases, and licensing considerations.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#r-strengths-and-use-cases",
-    "href": "slides/day1.html#r-strengths-and-use-cases",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "R: Strengths and Use Cases 🧮",
-    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#python-strengths-and-use-cases",
-    "href": "slides/day1.html#python-strengths-and-use-cases",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Python: Strengths and Use Cases 🐍",
-    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#comparison-summary",
-    "href": "slides/day1.html#comparison-summary",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "Comparison Summary 📊",
-    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "slides/day1.html#thank-you",
-    "href": "slides/day1.html#thank-you",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "THANK YOU!",
-    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\n\nContact me",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
-    "objectID": "software/software.html",
-    "href": "software/software.html",
-    "title": "Required Software & Accounts",
-    "section": "",
-    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
-    "crumbs": [
-      "Software",
-      "Instructions"
+      "Lessons",
+      "07-Data viz I"
     ]
   },
   {
@@ -789,6 +547,257 @@
     "crumbs": [
       "Course Outline",
       "Outline"
+    ]
+  },
+  {
+    "objectID": "software/software.html",
+    "href": "software/software.html",
+    "title": "Required Software & Accounts",
+    "section": "",
+    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
+    "crumbs": [
+      "Software",
+      "Instructions"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#welcome",
+    "href": "slides/day1.html#welcome",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Welcome 👋",
+    "text": "Welcome 👋\n\nGoal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#objectives-for-today",
+    "href": "slides/day1.html#objectives-for-today",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Objectives for Today 📌",
+    "text": "Objectives for Today 📌\n\nDefine core concepts:\n\nData Science,\nData Literacy,\nReproducibility.\n\nUnderstand the role of reproducible data science in agriculture.\nExplore challenges and opportunities.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#what-is-data-science-in-agriculture",
+    "href": "slides/day1.html#what-is-data-science-in-agriculture",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "What is Data Science in Agriculture? 🌱",
+    "text": "What is Data Science in Agriculture? 🌱\n\nApplying data engineering, analysis, statistics, and machine learning to solve agricultural problems.\nExamples: Precision agriculture, yield forecasting, environmental monitoring.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#key-definitions",
+    "href": "slides/day1.html#key-definitions",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Key Definitions 📖",
+    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#challenges-in-data-literacy",
+    "href": "slides/day1.html#challenges-in-data-literacy",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Challenges in Data Literacy 🌐",
+    "text": "Challenges in Data Literacy 🌐\n\nDiverse data sources (weather, soil, crop data)\nStandardization issues across datasets\nData skills gap among ag professionals",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#why-does-it-matter",
+    "href": "slides/day1.html#why-does-it-matter",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Why does it matter?",
+    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#good-news-is",
+    "href": "slides/day1.html#good-news-is",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "GOOD NEWS IS…",
+    "text": "GOOD NEWS IS…",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#why-reproducibility-in-agriculture",
+    "href": "slides/day1.html#why-reproducibility-in-agriculture",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Why Reproducibility in Agriculture?",
+    "text": "Why Reproducibility in Agriculture?\n\nAgriculture research relies heavily on environmental data, often variable and complex.\nWe have complex challenges 🗒️\n\nVariability due to environmental factors, soil types, and weather patterns.\nComplex datasets involving long-term studies, geographical variability.\n\nOpportunities ✅\n\nReproducibility helps stakeholders make reliable, data-driven decisions.\nEnsures scientific findings are reliable and valid.\nFacilitates collaboration, accountability, and efficiency among researchers and practitioners.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#challenges-in-ag-research",
+    "href": "slides/day1.html#challenges-in-ag-research",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Challenges in Ag-research",
+    "text": "Challenges in Ag-research\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n“But it all starts with …”\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#discussion-prompt",
+    "href": "slides/day1.html#discussion-prompt",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Discussion Prompt 💬",
+    "text": "Discussion Prompt 💬\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#what-is-r",
+    "href": "slides/day1.html#what-is-r",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "What is R? 🧮",
+    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-vs.-excel-for-data-wrangling",
+    "href": "slides/day1.html#r-vs.-excel-for-data-wrangling",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R vs. Excel for Data Wrangling 📊",
+    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
+    "href": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R vs. SAS for Statistical Analysis 📉",
+    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-vs-python",
+    "href": "slides/day1.html#r-vs-python",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R vs Python 🔍",
+    "text": "R vs Python 🔍\n\nR, & Python are popular languages in data science and research.\nEach language has unique strengths, ideal use cases, and licensing considerations.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#r-strengths-and-use-cases",
+    "href": "slides/day1.html#r-strengths-and-use-cases",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "R: Strengths and Use Cases 🧮",
+    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#python-strengths-and-use-cases",
+    "href": "slides/day1.html#python-strengths-and-use-cases",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Python: Strengths and Use Cases 🐍",
+    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#comparison-summary",
+    "href": "slides/day1.html#comparison-summary",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "Comparison Summary 📊",
+    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "slides/day1.html#thank-you",
+    "href": "slides/day1.html#thank-you",
+    "title": "Reproducible Ag Data Science with R",
+    "section": "THANK YOU!",
+    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\nContact me",
+    "crumbs": [
+      "Slides",
+      "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "outline/calendar.html",
+    "href": "outline/calendar.html",
+    "title": "PLNT6800|01 - Calendar",
+    "section": "",
+    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202",
+    "crumbs": [
+      "Calendar",
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "outline/calendar.html#calendar",
+    "href": "outline/calendar.html#calendar",
+    "title": "PLNT6800|01 - Calendar",
+    "section": "Calendar",
+    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n5\nFeb 5\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\nFeb 7\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n6\nFeb 12\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 14\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 21\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
+    "crumbs": [
+      "Calendar",
+      "Schedule"
     ]
   },
   {
