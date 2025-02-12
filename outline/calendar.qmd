@@ -38,13 +38,13 @@ The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the 
 |  | Jan 17 | Basics of version control & GitHub | [🌐](https://github.com/adriancorrendo/my-first-repo) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4058352/View) |
 | 3 | Jan 22 | Data Wrangling I | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_03 "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4063612/View) |
 |  | Jan 24 | Data Wrangling II | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_03/fri/05_dw "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4064215/View) |
-| 4 | Jan 29 | Data Wrangling III | [🌐]() | [🎥]() |
-|  | Jan 31 | Iteration: Loops & Mapping | [🌐]() | [🎥]() |
-| 5 | Feb 5 | Weather Data: Retrieving & Processing | [🌐]() | [🎥]() |
-|  | Feb 7 | Data Viz I: ggplot2 basics | [🌐]() | [🎥]() |
-| 6 | Feb 12 | Data Viz II: Multiple plots | [🌐]() | [🎥]() |
-|  | Feb 14 | Data Viz III: Advanced plots, maps | [🌐]() | [🎥]() |
-|  |  | *Winter Break begins after the end of class* |  |  |
+| 4 | Jan 29 | Data Wrangling III | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_04/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4068091/View) |
+|  | Jan 31 | Data Viz I: ggplot2 basics | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_04/fri/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4072220/View) |
+| 5 | Feb 5 | Data Viz II: Multiple plots | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4074843/View) |
+|  | Feb 7 | Data Viz III: Advanced plots, maps | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/fri/) | [🎥](https://zoom.us/rec/share/e9BMAGYi6OuOM5ThIpNBjhLYl6XeEbGr0FPr4syMaRMUKxCjYpuubrXcNkJTjobu.QT2dfMIa7iDMLYZe) |
+| 6 | Feb 12 | Iteration: Loops & Mapping | [🌐]() | [🎥]() |
+|   | Feb 14 | Weather Data: Retrieving & Processing | [🌐]() | [🎥]() |
+|   |  | *Winter Break begins after the end of class* |  |  |
 | 7 | Feb 26 | Models I: Key concepts | [🌐]() | [🎥]() |
 |  | Feb 28 | Models II: Explanatory vs. Predictive | [🌐]() | [🎥]() |
 | 8 | Mar 5 | Models III: Linear Models | [🌐]() | [🎥]() |

@@ -292,6 +292,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">08-Data viz II</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_05/09_ggplot2_plus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-Data viz III</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -371,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7</span> Summary</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="05_datawrangling_02.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -527,9 +533,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(random_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  year       lat      long yield nitro topo     bv rep nf
-1 2001 -33.04934 -63.84794 98.34 124.6    W 172.03  R3 N5
-2 1999 -33.05098 -63.84433 63.53   0.0    E 170.32  R3 N0
-3 1999 -33.05118 -63.84607 57.66  66.0   HT 185.94  R2 N3</code></pre>
+1 2001 -33.05006 -63.84804 90.68  75.4    W 193.82  R1 N3
+2 1999 -33.05079 -63.84613 58.94  66.0   HT 181.90  R3 N3
+3 1999 -33.05155 -63.84387 66.83  66.0    E 171.07  R2 N3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting every 2nd row</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>every_second_row <span class="ot">&lt;-</span> data_corn <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">n</span>(), <span class="at">by =</span> <span class="dv">2</span>))</span>

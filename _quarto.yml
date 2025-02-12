@@ -69,6 +69,8 @@ website:
             text: "07-Data viz I"
           - href: coding/week_05/08_ggplot2_adv.qmd
             text: "08-Data viz II"
+          - href: coding/week_05/09_ggplot2_plus.qmd
+            text: "09-Data viz III"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd

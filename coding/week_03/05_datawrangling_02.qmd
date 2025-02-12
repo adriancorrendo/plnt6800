@@ -10,8 +10,6 @@ format:
     toc-depth: 4
     number-sections: true
     table-class: "table table-striped table-hover"
-  pdf:
-    number-sections: true
 editor: source
 smooth-scroll: true
 bibliography: ../../references.bib
