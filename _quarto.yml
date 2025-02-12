@@ -71,6 +71,8 @@ website:
             text: "08-Data viz II"
           - href: coding/week_05/09_ggplot2_plus.qmd
             text: "09-Data viz III"
+          - href: coding/week_06/10_iteration.qmd
+            text: "10-Iteration"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
