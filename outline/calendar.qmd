@@ -31,7 +31,7 @@ smooth-scroll: true
 The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.
 
 | **Week** | **Date** | **Topic** | **Code** | **Lesson** |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | 1 | Jan 8 | Introductions, Reproducibility | \- | \- |
 |  | Jan 10 | Essentials of RStudio, R coding | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View "CourseLink - Zoom recording") |
 | 2 | Jan 15 | Fundamentals of R packages | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_02/wed "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4057115/View) |
@@ -42,9 +42,9 @@ The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the 
 |  | Jan 31 | Data Viz I: ggplot2 basics | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_04/fri/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4072220/View) |
 | 5 | Feb 5 | Data Viz II: Multiple plots | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4074843/View) |
 |  | Feb 7 | Data Viz III: Advanced plots, maps | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/fri/) | [🎥](https://zoom.us/rec/share/e9BMAGYi6OuOM5ThIpNBjhLYl6XeEbGr0FPr4syMaRMUKxCjYpuubrXcNkJTjobu.QT2dfMIa7iDMLYZe) |
-| 6 | Feb 12 | Iteration: Loops & Mapping | [🌐]() | [🎥]() |
-|   | Feb 14 | Weather Data: Retrieving & Processing | [🌐]() | [🎥]() |
-|   |  | *Winter Break begins after the end of class* |  |  |
+| 6 | Feb 12 | Iteration: Loops & Mapping | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_06/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4077032/View) |
+|  | Feb 14 | Weather Data: Retrieving & Processing | [🌐]() | [🎥]() |
+|  |  | *Winter Break begins after the end of class* |  |  |
 | 7 | Feb 26 | Models I: Key concepts | [🌐]() | [🎥]() |
 |  | Feb 28 | Models II: Explanatory vs. Predictive | [🌐]() | [🎥]() |
 | 8 | Mar 5 | Models III: Linear Models | [🌐]() | [🎥]() |

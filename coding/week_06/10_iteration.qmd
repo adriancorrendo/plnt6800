@@ -96,7 +96,7 @@ The `purrr` package provides several mapping functions to facilitate iteration:
 - **`map2(x, y, f)`**: Applies a function `f` to corresponding elements of `x` and `y`.
 - **`pmap(list, f)`**: Applies a function `f` to multiple arguments provided as a list of vectors or data frames.
 
-#### Practical Application
+## Practical Application
 
 A common workflow involves combining `group_by()` and `nest()` to create nested data frames for iteration. You can then use `mutate()` along with `map()` to apply a function to each nested data frame:
 

@@ -1481,5 +1481,16 @@
       "Lessons",
       "10-Iteration"
     ]
+  },
+  {
+    "objectID": "coding/week_06/10_iteration.html#practical-application",
+    "href": "coding/week_06/10_iteration.html#practical-application",
+    "title": "Iteration in R: The Power of purrr",
+    "section": "5.1 Practical Application",
+    "text": "5.1 Practical Application\nA common workflow involves combining group_by() and nest() to create nested data frames for iteration. You can then use mutate() along with map() to apply a function to each nested data frame:\nlibrary(dplyr)\nlibrary(purrr)\nlibrary(tidyr)\n\ndata %&gt;%\n  group_by(group_variable) %&gt;%\n  nest() %&gt;%\n  mutate(results = map(data, your_function))\nThis approach is very powerful for applying custom functions to subsets of data efficiently.\nLet’s see that in practice…",
+    "crumbs": [
+      "Lessons",
+      "10-Iteration"
+    ]
   }
 ]

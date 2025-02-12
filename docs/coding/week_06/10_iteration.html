@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#using-the-purrr-package-for-iteration" id="toc-using-the-purrr-package-for-iteration" class="nav-link" data-scroll-target="#using-the-purrr-package-for-iteration"><span class="header-section-number">5</span> Using the <code>purrr</code> Package for Iteration</a>
   <ul>
-  <li><a href="#practical-application" id="toc-practical-application" class="nav-link" data-scroll-target="#practical-application"><span class="header-section-number">5.0.0.1</span> Practical Application</a></li>
+  <li><a href="#practical-application" id="toc-practical-application" class="nav-link" data-scroll-target="#practical-application"><span class="header-section-number">5.1</span> Practical Application</a></li>
   </ul></li>
   <li><a href="#working-with-the-agridat-dataset" id="toc-working-with-the-agridat-dataset" class="nav-link" data-scroll-target="#working-with-the-agridat-dataset"><span class="header-section-number">6</span> Working with the <code>agridat</code> Dataset</a>
   <ul>
@@ -561,8 +561,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><code>map2(x, y, f)</code></strong>: Applies a function <code>f</code> to corresponding elements of <code>x</code> and <code>y</code>.</li>
 <li><strong><code>pmap(list, f)</code></strong>: Applies a function <code>f</code> to multiple arguments provided as a list of vectors or data frames.</li>
 </ul>
-<section id="practical-application" class="level4" data-number="5.0.0.1">
-<h4 data-number="5.0.0.1" class="anchored" data-anchor-id="practical-application"><span class="header-section-number">5.0.0.1</span> Practical Application</h4>
+<section id="practical-application" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="practical-application"><span class="header-section-number">5.1</span> Practical Application</h2>
 <p>A common workflow involves combining <code>group_by()</code> and <code>nest()</code> to create nested data frames for iteration. You can then use <code>mutate()</code> along with <code>map()</code> to apply a function to each nested data frame:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
