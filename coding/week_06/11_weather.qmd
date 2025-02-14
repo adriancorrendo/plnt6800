@@ -1,8 +1,8 @@
 ---
-title: "Retrieving and Processing Agrometeorological Data Using R"
+title: "Retrieving and Processing Weather Data with R"
 author: "Dr. Adrian Correndo"
 date: "2025-02-12"
-categories: [weather data, API, data wrangling, climate]
+categories: [weather data, API, data wrangling, daymetr]
 format:
   html:
     toc: true
