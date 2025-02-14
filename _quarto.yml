@@ -73,6 +73,8 @@ website:
             text: "09-Data viz III"
           - href: coding/week_06/10_iteration.qmd
             text: "10-Iteration"
+          - href: coding/week_06/11_weather.qmd
+            text: "11-Weather data"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
