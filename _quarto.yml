@@ -75,6 +75,8 @@ website:
             text: "10-Iteration"
           - href: coding/week_06/11_weather.qmd
             text: "11-Weather data"
+          - href: coding/week_08/models_01.qmd
+            text: "12-Models I"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
