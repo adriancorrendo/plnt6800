@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_06/11_weather.html</loc>
-    <lastmod>2025-02-14T17:16:58.821Z</lastmod>
-  </url>
-  <url>
     <loc>https://adriancorrendo.github.io/coding/week_01/essentials_01.html</loc>
     <lastmod>2025-01-15T17:41:32.128Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adriancorrendo.github.io/coding/week_06/11_weather.html</loc>
+    <lastmod>2025-02-14T19:40:34.152Z</lastmod>
   </url>
   <url>
     <loc>https://adriancorrendo.github.io/coding/week_05/09_ggplot2_plus.html</loc>
@@ -26,11 +26,15 @@
   </url>
   <url>
     <loc>https://adriancorrendo.github.io/outline/calendar.html</loc>
-    <lastmod>2025-02-12T20:11:50.083Z</lastmod>
+    <lastmod>2025-02-17T22:59:39.571Z</lastmod>
   </url>
   <url>
     <loc>https://adriancorrendo.github.io/slides/day1.html</loc>
     <lastmod>2025-01-09T15:02:20.826Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adriancorrendo.github.io/index.html</loc>
+    <lastmod>2025-02-14T17:05:50.772Z</lastmod>
   </url>
   <url>
     <loc>https://adriancorrendo.github.io/software/software.html</loc>
@@ -57,11 +61,11 @@
     <lastmod>2025-02-12T17:47:25.048Z</lastmod>
   </url>
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_06/10_iteration.html</loc>
-    <lastmod>2025-02-14T15:56:49.363Z</lastmod>
+    <loc>https://adriancorrendo.github.io/coding/week_08/models_01.html</loc>
+    <lastmod>2025-02-26T14:48:36.979Z</lastmod>
   </url>
   <url>
-    <loc>https://adriancorrendo.github.io/index.html</loc>
-    <lastmod>2025-02-14T17:05:50.772Z</lastmod>
+    <loc>https://adriancorrendo.github.io/coding/week_06/10_iteration.html</loc>
+    <lastmod>2025-02-14T15:56:49.363Z</lastmod>
   </url>
 </urlset>

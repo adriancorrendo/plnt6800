@@ -43,7 +43,7 @@ The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the 
 | 5 | Feb 5 | Data Viz II: Multiple plots | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4074843/View) |
 |  | Feb 7 | Data Viz III: Advanced plots, maps | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/fri/) | [🎥](https://zoom.us/rec/share/e9BMAGYi6OuOM5ThIpNBjhLYl6XeEbGr0FPr4syMaRMUKxCjYpuubrXcNkJTjobu.QT2dfMIa7iDMLYZe) |
 | 6 | Feb 12 | Iteration: Loops & Mapping | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_06/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4077032/View) |
-|  | Feb 14 | Weather Data: Retrieving & Processing | [🌐]() | [🎥]() |
+|  | Feb 14 | Weather Data: Retrieving & Processing | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_06/fri) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4078612/View) |
 |  |  | *Winter Break begins after the end of class* |  |  |
 | 7 | Feb 26 | Models I: Key concepts | [🌐]() | [🎥]() |
 |  | Feb 28 | Models II: Explanatory vs. Predictive | [🌐]() | [🎥]() |

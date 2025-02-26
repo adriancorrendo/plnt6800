@@ -1,5 +1,126 @@
 [
   {
+    "objectID": "coding/week_01/essentials_01.html",
+    "href": "coding/week_01/essentials_01.html",
+    "title": "Essentials of R coding I",
+    "section": "",
+    "text": "This page provides an overview of the essential types of elements in R, including examples and explanations for each. Use this as a quick reference to understand the basics of data types and operations.",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#numbers",
+    "href": "coding/week_01/essentials_01.html#numbers",
+    "title": "Essentials of R coding I",
+    "section": "01. Numbers",
+    "text": "01. Numbers\n\n20\n\n[1] 20",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#math-operations",
+    "href": "coding/week_01/essentials_01.html#math-operations",
+    "title": "Essentials of R coding I",
+    "section": "02. Math Operations",
+    "text": "02. Math Operations\n\n20+1 # addition\n\n[1] 21\n\n20-4 # subtraction\n\n[1] 16\n\n20*5 # multiplication\n\n[1] 100\n\n20/5 # division\n\n[1] 4\n\n2^2 # exponentials\n\n[1] 4\n\nsqrt(9) # square root\n\n[1] 3\n\n# Greater exponents for roots\n# notation is: x^(1/n)\n\n# Cubic root of 27\n27^(1/3)  # Result: 3\n\n[1] 3\n\n# 4th root of 16\n16^(1/4)  # Result: 2\n\n[1] 2\n\n# 5th root of 32\n32^(1/5)  # Result: 2\n\n[1] 2",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
+    "href": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
+    "title": "Essentials of R coding I",
+    "section": "03. Text or characters (also called strings)",
+    "text": "03. Text or characters (also called strings)\n\n\"coding is fun\"\n\n[1] \"coding is fun\"\n\n\nBut these elements are not stored as objects yet:",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#define-objects",
+    "href": "coding/week_01/essentials_01.html#define-objects",
+    "title": "Essentials of R coding I",
+    "section": "04. Define objects",
+    "text": "04. Define objects\n\na &lt;- 20\n10 -&gt; b\n# We can also use equal:\nc = 15\n# But using \"&lt;-\", and leave = only for operations (so you can notice the difference) is considered a better coding practice.",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#print-objects",
+    "href": "coding/week_01/essentials_01.html#print-objects",
+    "title": "Essentials of R coding I",
+    "section": "05. Print objects",
+    "text": "05. Print objects\n\na\n\n[1] 20\n\nprint(a)\n\n[1] 20\n\nb\n\n[1] 10\n\nc\n\n[1] 15",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#vectors",
+    "href": "coding/week_01/essentials_01.html#vectors",
+    "title": "Essentials of R coding I",
+    "section": "06. Vectors",
+    "text": "06. Vectors\nA vector is one of the most basic data structures. It is a sequence of elements of the same type, such as numbers, characters, or logical values. Vectors are used to store and manipulate collections of data efficiently. \n\na. Creating a vector\nVectors can be created using the c() function (combine function):\n\n# Numeric vector\nnumeric_vector &lt;- c(1, 2, 3, 4.5)\nnumeric_vector\n\n[1] 1.0 2.0 3.0 4.5\n\n# Character vector\ncharacter_vector &lt;- c(\"corn\", \"wheat\", \"soybean\")\ncharacter_vector\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n# Logical vector\nlogical_vector &lt;- c(TRUE, FALSE, TRUE)\nlogical_vector\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\nb. Accessing Elements\nYou can access elements of a vector using square brackets []:\n\n# Access the first element\nnumeric_vector[1]\n\n[1] 1\n\n# Access multiple elements\nnumeric_vector[c(1, 3)]\n\n[1] 1 3\n\n\n\n\nc. Vectorized Operations\nIn R, vector-operations are applied to each element automatically:\n\n# Adding a scalar to a vector\nnumeric_vector + 2\n\n[1] 3.0 4.0 5.0 6.5\n\n# Element-wise addition\nnumeric_vector + c(10, 20, 30, 40)\n\n[1] 11.0 22.0 33.0 44.5\n\n\n\n\nd. Common Functions with Vectors\n\n‘length()’: Get the number of elements in a vector.\n‘typeof()’ or ‘class()’: Determine the type of elements in a vector.\n‘seq()’: Generate a sequence of numbers.\n‘rep()’: Repeat elements to create a vector.",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#lists",
+    "href": "coding/week_01/essentials_01.html#lists",
+    "title": "Essentials of R coding I",
+    "section": "07. Lists",
+    "text": "07. Lists\nIn R, a list is a versatile data structure that can contain elements of different types, including vectors, matrices, data frames, and even other lists. Unlike vectors, which are homogeneous, lists are heterogeneous, meaning their elements can be of different data types and lengths. \nKey Characteristics of Lists: \n\nHeterogeneous: Lists can store elements of varying types (numeric, character, logical, etc.) and structures (vectors, data frames, functions, etc.). \nIndexed: Elements in a list are accessed using double square brackets [[ ]] or named elements using $.\n\nWhy Use Lists? \n\nFlexibility: Lists can store complex and nested data structures. \nData Wrangling: Useful for handling results from models, nested data, or any mixed-type collections. \nFunctions: Functions in R often return their output as lists (e.g., lm()). \n\n\na. Creating a list\nLists are created using the list() function:\n\n# Create a list with different types of elements\nmy_list &lt;- list(\n  \"numeric_v\" = numeric_vector,\n  \"character_v\" = character_vector,\n  \"single_number\" = 42,\n  \"logical_value\" = TRUE\n)\n\n\n\nb. Accessing Elements in a List\nYou can access elements in a list by their position or name:\nBy Position:\n\n# Access the first element\nmy_list[[1]]\n\n[1] 1.0 2.0 3.0 4.5\n\n# Access the second element\nmy_list[[2]]\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nBy name:\n\n# Access by name\nmy_list$numeric_v\n\n[1] 1.0 2.0 3.0 4.5\n\nmy_list$character_v\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nSubelements:\n\n# Access the first value in the numeric vector\nmy_list$numeric_vector[1]\n\nNULL\n\n\n\n\nc. Some functions for lists\n\n# Number of elements in the list\nlength(my_list)\n\n[1] 4\n\n# Names of the elements\nnames(my_list)\n\n[1] \"numeric_v\"     \"character_v\"   \"single_number\" \"logical_value\"\n\n# Structure of the list\nstr(my_list)\n\nList of 4\n $ numeric_v    : num [1:4] 1 2 3 4.5\n $ character_v  : chr [1:3] \"corn\" \"wheat\" \"soybean\"\n $ single_number: num 42\n $ logical_value: logi TRUE",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#data-frame",
+    "href": "coding/week_01/essentials_01.html#data-frame",
+    "title": "Essentials of R coding I",
+    "section": "08. Data frame",
+    "text": "08. Data frame\nIn R, a data frame is a two-dimensional data structure used for storing tabular data. It is one of the most commonly used data structures in R for data analysis and manipulation. \nKey Characteristics of a Data Frame \n\nTabular Structure: Data is organized in rows and columns. \nHeterogeneous Columns: Each column can contain different data types (e.g., numeric, character, logical), but all elements in a column must be of the same type. \nRow and Column Names: Rows and columns can have names for easier identification. \n\nWhy Use a Data Frame? \n\nData Analysis: It is ideal for representing structured data like spreadsheets or databases. \nFlexible Operations: Columns can be easily added, removed, or modified. \nIntegration with R Functions: Many R functions for statistical modeling and analysis expect data frames as input. \n\n\na. Creating a Data Frame\nA data frame can be created using the data.frame() function:\n\n# Create a data frame\nmy_data &lt;- data.frame(\n  Crop = c(\"Corn\", \"Wheat\", \"Soybean\"), # Character column\n  Yield = c(180, 90, 50), # Numeric column\n  Legume = c(FALSE, FALSE, TRUE) # Logical column\n)\n\nprint(my_data)\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n2   Wheat    90  FALSE\n3 Soybean    50   TRUE\n\n\n\n\nb. Accessing data in a data frame\nAccessing columns:\n\n# Access a column by name\nmy_data$Crop\n\n[1] \"Corn\"    \"Wheat\"   \"Soybean\"\n\n# Access a column by index\nmy_data[, 2]\n\n[1] 180  90  50\n\n\nAccessing rows:\n\n# Access the first row\nmy_data[1, ]\n\n  Crop Yield Legume\n1 Corn   180  FALSE\n\n# Access specific rows\nmy_data[c(1, 3), ]\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n3 Soybean    50   TRUE\n\n\nAccessing specific elements\n\n# Access the element in the 2nd row, 3rd column\nmy_data[2, 3]\n\n[1] FALSE\n\n# Access specific cells by column name\nmy_data[2, \"Crop\"]\n\n[1] \"Wheat\"\n\n\n\n\nc. Adding a new column\n\nmy_data$Season &lt;- c(\"Summer\", \"Winter\", \"Summer\")\n\n\n\nd. Modify a column\n\nmy_data$Yield &lt;- my_data$Yield + 5\n\n\n\ne. Adding a new row\nIn base R, we can use rbind() to add rows:\n\nnew_row &lt;- data.frame(Crop = \"Barley\", Yield = 80, Legume = FALSE, Season = \"Winter\")\nmy_data &lt;- rbind(my_data, new_row)\n\n\n\nf. Filtering (rows)\nIn base R, we can use subset() to filter rows:\n\nsubset(my_data, Yield &gt; 150)\n\n  Crop Yield Legume Season\n1 Corn   185  FALSE Summer\n\n\nWe can also use logical conditions:\n\nmy_data[my_data$Legume == TRUE, ]\n\n     Crop Yield Legume Season\n3 Soybean    55   TRUE Summer\n\n\n\n\ng. Selecting (columns)\nIn base R, there is no function to select columns. We need to use brackets [] and vectors c():\n\nmy_data[c(\"Crop\", \"Yield\")]\n\n     Crop Yield\n1    Corn   185\n2   Wheat    95\n3 Soybean    55\n4  Barley    80\n\n\n\n\nh. Some functions for data frames\n\nnrow(my_data)        # Number of rows\n\n[1] 4\n\nncol(my_data)        # Number of columns\n\n[1] 4\n\ncolnames(my_data)    # Column names\n\n[1] \"Crop\"   \"Yield\"  \"Legume\" \"Season\"\n\nsummary(my_data)     # Summary statistics\n\n     Crop               Yield          Legume           Season         \n Length:4           Min.   : 55.00   Mode :logical   Length:4          \n Class :character   1st Qu.: 73.75   FALSE:3         Class :character  \n Mode  :character   Median : 87.50   TRUE :1         Mode  :character  \n                    Mean   :103.75                                     \n                    3rd Qu.:117.50                                     \n                    Max.   :185.00",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#matrix",
+    "href": "coding/week_01/essentials_01.html#matrix",
+    "title": "Essentials of R coding I",
+    "section": "09. Matrix",
+    "text": "09. Matrix\nIn R, a matrix is a two-dimensional, rectangular data structure that stores elements of the same type. It is similar to a data frame in structure but less flexible, as all elements in a matrix must be of a single data type (e.g., numeric, character, or logical). \nKey Characteristics of a Matrix \n\nHomogeneous: All elements in a matrix must be of the same type. \n2D Structure: A matrix has rows and columns, forming a table-like structure. \nDimensions: Defined by the number of rows and columns. \n\nWhy Use a Matrix? \n\nMathematical Operations: Ideal for linear algebra and mathematical modeling. \nEfficient Storage: Matrices use less memory compared to more complex structures like data frames. \nSimpler Operations: Homogeneous data ensures consistent behavior across elements. \n\n\na. Creating a Matrix\nYou can create a matrix using the matrix() function:\n\n# Create a numeric matrix\nmy_matrix &lt;- matrix(\n  data = 1:9,     # Data values\n  nrow = 3,       # Number of rows\n  ncol = 3,       # Number of columns\n)\n\nprint(my_matrix)\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    5    8\n[3,]    3    6    9\n\n\n\n\nb. Accessing elements in a matrix\nAccessing rows:\n\n# Access the first row\nmy_matrix[1, ]\n\n[1] 1 4 7\n\n\nAccessing columns:\n\n# Access the second column\nmy_matrix[, 2]\n\n[1] 4 5 6\n\n\nAccessing specific elements:\n\n# Access the element in the 2nd row, 3rd column\nmy_matrix[2, 3]\n\n[1] 8\n\n\n\n\nc. Adding a new column\n\nnew_col &lt;- c(10, 11, 12) # Create the column\nmy_matrix &lt;- cbind(my_matrix, new_col) # Paste it to the existing\n\n\n\nd. Adding a new row\n\nnew_row &lt;- c(13, 14, 15, 16)\nmy_matrix &lt;- rbind(my_matrix, new_row)",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
+    "objectID": "coding/week_01/essentials_01.html#functions",
+    "href": "coding/week_01/essentials_01.html#functions",
+    "title": "Essentials of R coding I",
+    "section": "10. Functions",
+    "text": "10. Functions\n\na. Create a function\nWe need to use the syntax function(x) { x as object of a task }. ‘x’ is considered an “argument”, and the function itself is inside the {}. For example:\n\nmy_function &lt;- function(x) { x + 1 }\n\n\n\nb. Check the function\n\nmy_function(9)\n\n[1] 10\n\n\n\n\nc. Write a function with 3 arguments\n\nmy_xyz_function &lt;- function(x, y, z) { x + y - z }\n\n\n\nd. Order of arguments\nNote: R is order sensitive (if you don’t explicitly specify the argument)\n\nmy_xyz_function(12, 3, 4)\n\n[1] 11\n\nmy_xyz_function(12, 4, 3)\n\n[1] 13\n\n\n\n\ne. Specifying arguments with names\nIf you specify the argument name as = to, the order doesn’t matter:\n\nmy_xyz_function(z = 4, x = 12, y = 3)\n\n[1] 11\n\n\n\n\nf. A more complex function\n\nfx &lt;- function(x, y, remove_na = NULL) {\n        # First operation is a sum, removing NAs\n        first &lt;- sum(c(x, y), na.rm = remove_na)\n        # Add a text message\n        text &lt;- \"This function is so cool\"\n        # Store result\n        result &lt;- first + x\n        # Print output\n        print(list(\"Message\" = text,\n                   \"1st\" = first,\n                   \"end\" = result))\n                   }\n\nRun the function with alternative arguments:\n\nfx(x = a, y = b, remove_na = FALSE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\nfx(x = a, y = b, remove_na = TRUE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\n\nStore the output in an object:\n\nfoo &lt;- fx(x=b, y=a)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 40",
+    "crumbs": [
+      "Lessons",
+      "01-Essentials of R"
+    ]
+  },
+  {
     "objectID": "coding/week_06/11_weather.html",
     "href": "coding/week_06/11_weather.html",
     "title": "Retrieving and Processing Weather Data with R",
@@ -129,127 +250,6 @@
     "crumbs": [
       "Lessons",
       "11-Weather data"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html",
-    "href": "coding/week_01/essentials_01.html",
-    "title": "Essentials of R coding I",
-    "section": "",
-    "text": "This page provides an overview of the essential types of elements in R, including examples and explanations for each. Use this as a quick reference to understand the basics of data types and operations.",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#numbers",
-    "href": "coding/week_01/essentials_01.html#numbers",
-    "title": "Essentials of R coding I",
-    "section": "01. Numbers",
-    "text": "01. Numbers\n\n20\n\n[1] 20",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#math-operations",
-    "href": "coding/week_01/essentials_01.html#math-operations",
-    "title": "Essentials of R coding I",
-    "section": "02. Math Operations",
-    "text": "02. Math Operations\n\n20+1 # addition\n\n[1] 21\n\n20-4 # subtraction\n\n[1] 16\n\n20*5 # multiplication\n\n[1] 100\n\n20/5 # division\n\n[1] 4\n\n2^2 # exponentials\n\n[1] 4\n\nsqrt(9) # square root\n\n[1] 3\n\n# Greater exponents for roots\n# notation is: x^(1/n)\n\n# Cubic root of 27\n27^(1/3)  # Result: 3\n\n[1] 3\n\n# 4th root of 16\n16^(1/4)  # Result: 2\n\n[1] 2\n\n# 5th root of 32\n32^(1/5)  # Result: 2\n\n[1] 2",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
-    "href": "coding/week_01/essentials_01.html#text-or-characters-also-called-strings",
-    "title": "Essentials of R coding I",
-    "section": "03. Text or characters (also called strings)",
-    "text": "03. Text or characters (also called strings)\n\n\"coding is fun\"\n\n[1] \"coding is fun\"\n\n\nBut these elements are not stored as objects yet:",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#define-objects",
-    "href": "coding/week_01/essentials_01.html#define-objects",
-    "title": "Essentials of R coding I",
-    "section": "04. Define objects",
-    "text": "04. Define objects\n\na &lt;- 20\n10 -&gt; b\n# We can also use equal:\nc = 15\n# But using \"&lt;-\", and leave = only for operations (so you can notice the difference) is considered a better coding practice.",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#print-objects",
-    "href": "coding/week_01/essentials_01.html#print-objects",
-    "title": "Essentials of R coding I",
-    "section": "05. Print objects",
-    "text": "05. Print objects\n\na\n\n[1] 20\n\nprint(a)\n\n[1] 20\n\nb\n\n[1] 10\n\nc\n\n[1] 15",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#vectors",
-    "href": "coding/week_01/essentials_01.html#vectors",
-    "title": "Essentials of R coding I",
-    "section": "06. Vectors",
-    "text": "06. Vectors\nA vector is one of the most basic data structures. It is a sequence of elements of the same type, such as numbers, characters, or logical values. Vectors are used to store and manipulate collections of data efficiently. \n\na. Creating a vector\nVectors can be created using the c() function (combine function):\n\n# Numeric vector\nnumeric_vector &lt;- c(1, 2, 3, 4.5)\nnumeric_vector\n\n[1] 1.0 2.0 3.0 4.5\n\n# Character vector\ncharacter_vector &lt;- c(\"corn\", \"wheat\", \"soybean\")\ncharacter_vector\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n# Logical vector\nlogical_vector &lt;- c(TRUE, FALSE, TRUE)\nlogical_vector\n\n[1]  TRUE FALSE  TRUE\n\n\n\n\nb. Accessing Elements\nYou can access elements of a vector using square brackets []:\n\n# Access the first element\nnumeric_vector[1]\n\n[1] 1\n\n# Access multiple elements\nnumeric_vector[c(1, 3)]\n\n[1] 1 3\n\n\n\n\nc. Vectorized Operations\nIn R, vector-operations are applied to each element automatically:\n\n# Adding a scalar to a vector\nnumeric_vector + 2\n\n[1] 3.0 4.0 5.0 6.5\n\n# Element-wise addition\nnumeric_vector + c(10, 20, 30, 40)\n\n[1] 11.0 22.0 33.0 44.5\n\n\n\n\nd. Common Functions with Vectors\n\n‘length()’: Get the number of elements in a vector.\n‘typeof()’ or ‘class()’: Determine the type of elements in a vector.\n‘seq()’: Generate a sequence of numbers.\n‘rep()’: Repeat elements to create a vector.",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#lists",
-    "href": "coding/week_01/essentials_01.html#lists",
-    "title": "Essentials of R coding I",
-    "section": "07. Lists",
-    "text": "07. Lists\nIn R, a list is a versatile data structure that can contain elements of different types, including vectors, matrices, data frames, and even other lists. Unlike vectors, which are homogeneous, lists are heterogeneous, meaning their elements can be of different data types and lengths. \nKey Characteristics of Lists: \n\nHeterogeneous: Lists can store elements of varying types (numeric, character, logical, etc.) and structures (vectors, data frames, functions, etc.). \nIndexed: Elements in a list are accessed using double square brackets [[ ]] or named elements using $.\n\nWhy Use Lists? \n\nFlexibility: Lists can store complex and nested data structures. \nData Wrangling: Useful for handling results from models, nested data, or any mixed-type collections. \nFunctions: Functions in R often return their output as lists (e.g., lm()). \n\n\na. Creating a list\nLists are created using the list() function:\n\n# Create a list with different types of elements\nmy_list &lt;- list(\n  \"numeric_v\" = numeric_vector,\n  \"character_v\" = character_vector,\n  \"single_number\" = 42,\n  \"logical_value\" = TRUE\n)\n\n\n\nb. Accessing Elements in a List\nYou can access elements in a list by their position or name:\nBy Position:\n\n# Access the first element\nmy_list[[1]]\n\n[1] 1.0 2.0 3.0 4.5\n\n# Access the second element\nmy_list[[2]]\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nBy name:\n\n# Access by name\nmy_list$numeric_v\n\n[1] 1.0 2.0 3.0 4.5\n\nmy_list$character_v\n\n[1] \"corn\"    \"wheat\"   \"soybean\"\n\n\nSubelements:\n\n# Access the first value in the numeric vector\nmy_list$numeric_vector[1]\n\nNULL\n\n\n\n\nc. Some functions for lists\n\n# Number of elements in the list\nlength(my_list)\n\n[1] 4\n\n# Names of the elements\nnames(my_list)\n\n[1] \"numeric_v\"     \"character_v\"   \"single_number\" \"logical_value\"\n\n# Structure of the list\nstr(my_list)\n\nList of 4\n $ numeric_v    : num [1:4] 1 2 3 4.5\n $ character_v  : chr [1:3] \"corn\" \"wheat\" \"soybean\"\n $ single_number: num 42\n $ logical_value: logi TRUE",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#data-frame",
-    "href": "coding/week_01/essentials_01.html#data-frame",
-    "title": "Essentials of R coding I",
-    "section": "08. Data frame",
-    "text": "08. Data frame\nIn R, a data frame is a two-dimensional data structure used for storing tabular data. It is one of the most commonly used data structures in R for data analysis and manipulation. \nKey Characteristics of a Data Frame \n\nTabular Structure: Data is organized in rows and columns. \nHeterogeneous Columns: Each column can contain different data types (e.g., numeric, character, logical), but all elements in a column must be of the same type. \nRow and Column Names: Rows and columns can have names for easier identification. \n\nWhy Use a Data Frame? \n\nData Analysis: It is ideal for representing structured data like spreadsheets or databases. \nFlexible Operations: Columns can be easily added, removed, or modified. \nIntegration with R Functions: Many R functions for statistical modeling and analysis expect data frames as input. \n\n\na. Creating a Data Frame\nA data frame can be created using the data.frame() function:\n\n# Create a data frame\nmy_data &lt;- data.frame(\n  Crop = c(\"Corn\", \"Wheat\", \"Soybean\"), # Character column\n  Yield = c(180, 90, 50), # Numeric column\n  Legume = c(FALSE, FALSE, TRUE) # Logical column\n)\n\nprint(my_data)\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n2   Wheat    90  FALSE\n3 Soybean    50   TRUE\n\n\n\n\nb. Accessing data in a data frame\nAccessing columns:\n\n# Access a column by name\nmy_data$Crop\n\n[1] \"Corn\"    \"Wheat\"   \"Soybean\"\n\n# Access a column by index\nmy_data[, 2]\n\n[1] 180  90  50\n\n\nAccessing rows:\n\n# Access the first row\nmy_data[1, ]\n\n  Crop Yield Legume\n1 Corn   180  FALSE\n\n# Access specific rows\nmy_data[c(1, 3), ]\n\n     Crop Yield Legume\n1    Corn   180  FALSE\n3 Soybean    50   TRUE\n\n\nAccessing specific elements\n\n# Access the element in the 2nd row, 3rd column\nmy_data[2, 3]\n\n[1] FALSE\n\n# Access specific cells by column name\nmy_data[2, \"Crop\"]\n\n[1] \"Wheat\"\n\n\n\n\nc. Adding a new column\n\nmy_data$Season &lt;- c(\"Summer\", \"Winter\", \"Summer\")\n\n\n\nd. Modify a column\n\nmy_data$Yield &lt;- my_data$Yield + 5\n\n\n\ne. Adding a new row\nIn base R, we can use rbind() to add rows:\n\nnew_row &lt;- data.frame(Crop = \"Barley\", Yield = 80, Legume = FALSE, Season = \"Winter\")\nmy_data &lt;- rbind(my_data, new_row)\n\n\n\nf. Filtering (rows)\nIn base R, we can use subset() to filter rows:\n\nsubset(my_data, Yield &gt; 150)\n\n  Crop Yield Legume Season\n1 Corn   185  FALSE Summer\n\n\nWe can also use logical conditions:\n\nmy_data[my_data$Legume == TRUE, ]\n\n     Crop Yield Legume Season\n3 Soybean    55   TRUE Summer\n\n\n\n\ng. Selecting (columns)\nIn base R, there is no function to select columns. We need to use brackets [] and vectors c():\n\nmy_data[c(\"Crop\", \"Yield\")]\n\n     Crop Yield\n1    Corn   185\n2   Wheat    95\n3 Soybean    55\n4  Barley    80\n\n\n\n\nh. Some functions for data frames\n\nnrow(my_data)        # Number of rows\n\n[1] 4\n\nncol(my_data)        # Number of columns\n\n[1] 4\n\ncolnames(my_data)    # Column names\n\n[1] \"Crop\"   \"Yield\"  \"Legume\" \"Season\"\n\nsummary(my_data)     # Summary statistics\n\n     Crop               Yield          Legume           Season         \n Length:4           Min.   : 55.00   Mode :logical   Length:4          \n Class :character   1st Qu.: 73.75   FALSE:3         Class :character  \n Mode  :character   Median : 87.50   TRUE :1         Mode  :character  \n                    Mean   :103.75                                     \n                    3rd Qu.:117.50                                     \n                    Max.   :185.00",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#matrix",
-    "href": "coding/week_01/essentials_01.html#matrix",
-    "title": "Essentials of R coding I",
-    "section": "09. Matrix",
-    "text": "09. Matrix\nIn R, a matrix is a two-dimensional, rectangular data structure that stores elements of the same type. It is similar to a data frame in structure but less flexible, as all elements in a matrix must be of a single data type (e.g., numeric, character, or logical). \nKey Characteristics of a Matrix \n\nHomogeneous: All elements in a matrix must be of the same type. \n2D Structure: A matrix has rows and columns, forming a table-like structure. \nDimensions: Defined by the number of rows and columns. \n\nWhy Use a Matrix? \n\nMathematical Operations: Ideal for linear algebra and mathematical modeling. \nEfficient Storage: Matrices use less memory compared to more complex structures like data frames. \nSimpler Operations: Homogeneous data ensures consistent behavior across elements. \n\n\na. Creating a Matrix\nYou can create a matrix using the matrix() function:\n\n# Create a numeric matrix\nmy_matrix &lt;- matrix(\n  data = 1:9,     # Data values\n  nrow = 3,       # Number of rows\n  ncol = 3,       # Number of columns\n)\n\nprint(my_matrix)\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    5    8\n[3,]    3    6    9\n\n\n\n\nb. Accessing elements in a matrix\nAccessing rows:\n\n# Access the first row\nmy_matrix[1, ]\n\n[1] 1 4 7\n\n\nAccessing columns:\n\n# Access the second column\nmy_matrix[, 2]\n\n[1] 4 5 6\n\n\nAccessing specific elements:\n\n# Access the element in the 2nd row, 3rd column\nmy_matrix[2, 3]\n\n[1] 8\n\n\n\n\nc. Adding a new column\n\nnew_col &lt;- c(10, 11, 12) # Create the column\nmy_matrix &lt;- cbind(my_matrix, new_col) # Paste it to the existing\n\n\n\nd. Adding a new row\n\nnew_row &lt;- c(13, 14, 15, 16)\nmy_matrix &lt;- rbind(my_matrix, new_row)",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
-    ]
-  },
-  {
-    "objectID": "coding/week_01/essentials_01.html#functions",
-    "href": "coding/week_01/essentials_01.html#functions",
-    "title": "Essentials of R coding I",
-    "section": "10. Functions",
-    "text": "10. Functions\n\na. Create a function\nWe need to use the syntax function(x) { x as object of a task }. ‘x’ is considered an “argument”, and the function itself is inside the {}. For example:\n\nmy_function &lt;- function(x) { x + 1 }\n\n\n\nb. Check the function\n\nmy_function(9)\n\n[1] 10\n\n\n\n\nc. Write a function with 3 arguments\n\nmy_xyz_function &lt;- function(x, y, z) { x + y - z }\n\n\n\nd. Order of arguments\nNote: R is order sensitive (if you don’t explicitly specify the argument)\n\nmy_xyz_function(12, 3, 4)\n\n[1] 11\n\nmy_xyz_function(12, 4, 3)\n\n[1] 13\n\n\n\n\ne. Specifying arguments with names\nIf you specify the argument name as = to, the order doesn’t matter:\n\nmy_xyz_function(z = 4, x = 12, y = 3)\n\n[1] 11\n\n\n\n\nf. A more complex function\n\nfx &lt;- function(x, y, remove_na = NULL) {\n        # First operation is a sum, removing NAs\n        first &lt;- sum(c(x, y), na.rm = remove_na)\n        # Add a text message\n        text &lt;- \"This function is so cool\"\n        # Store result\n        result &lt;- first + x\n        # Print output\n        print(list(\"Message\" = text,\n                   \"1st\" = first,\n                   \"end\" = result))\n                   }\n\nRun the function with alternative arguments:\n\nfx(x = a, y = b, remove_na = FALSE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\nfx(x = a, y = b, remove_na = TRUE)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 50\n\n\nStore the output in an object:\n\nfoo &lt;- fx(x=b, y=a)\n\n$Message\n[1] \"This function is so cool\"\n\n$`1st`\n[1] 30\n\n$end\n[1] 40",
-    "crumbs": [
-      "Lessons",
-      "01-Essentials of R"
     ]
   },
   {
@@ -814,22 +814,11 @@
     ]
   },
   {
-    "objectID": "slides/day1.html",
-    "href": "slides/day1.html",
-    "title": "Reproducible Ag Data Science with R",
-    "section": "",
-    "text": "Goal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
-    "crumbs": [
-      "Slides",
-      "Reproducibility"
-    ]
-  },
-  {
     "objectID": "slides/day1.html#welcome",
     "href": "slides/day1.html#welcome",
     "title": "Reproducible Ag Data Science with R",
-    "section": "",
-    "text": "Goal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
+    "section": "Welcome 👋",
+    "text": "Welcome 👋\n\nGoal: Gain foundational knowledge and understand how data science can improve agricultural practices.\nLet’s dive into it with an emphasis on reproducibility and data literacy.\n\n\n\n\n\n\n\n\nTip\n\n\n\nRemember: Questions and discussions are encouraged! 💬",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -862,7 +851,7 @@
     "href": "slides/day1.html#key-definitions",
     "title": "Reproducible Ag Data Science with R",
     "section": "Key Definitions 📖",
-    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
+    "text": "Key Definitions 📖\n\n\n\nData Science: Extracting insights from data using algorithms and statistical methods. \nData Literacy: Skills to read, interpret, and analyze data. \nReproducibility: Ensuring analyses can be recreated by others.\n\n\n\n\n\n\n\n\n\nNote\n\n\nWhy does reproducibility matter?\n\nTrustworthy results,\ntransparency, &\ncollaboration in research.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -884,7 +873,7 @@
     "href": "slides/day1.html#why-does-it-matter",
     "title": "Reproducible Ag Data Science with R",
     "section": "Why does it matter?",
-    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
+    "text": "Why does it matter?\n\n\nIt is the #1 skill-gap in the job market: \n\nAcademia,\nIndustry,\nGovernment, NGOs, etc.\n\n\n\n\n\nIs there a REPRODUCIBILITY CRISIS in science?\nYES\nA Nature survey with ~1,600 researchers found that\n\n+70% failure rate to reproduce another scientist’s experiments\n+50% have failed to reproduce their own experiments\nMain causes: selective reporting, weak stats, code/data unavailability, etc.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -917,7 +906,7 @@
     "href": "slides/day1.html#challenges-in-ag-research",
     "title": "Reproducible Ag Data Science with R",
     "section": "Challenges in Ag-research",
-    "text": "Challenges in Ag-research\n\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n\n“But it all starts with …”\n\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
+    "text": "Challenges in Ag-research\n\nREPRODUCIBILITY 💻\n\nLimited capability to reproduce analyses & results\nDATA are rarely shared, CODES even less\n\n\n\nACCESSIBILITY 📲\n\nYet we are not translating enough science into flexible, and transparent decision tools.\n\n\n\n“But it all starts with …”\n\n\nEDUCATION 🎓\n\nLimited curriculum in applied data science",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -928,7 +917,7 @@
     "href": "slides/day1.html#discussion-prompt",
     "title": "Reproducible Ag Data Science with R",
     "section": "Discussion Prompt 💬",
-    "text": "Discussion Prompt 💬\n\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
+    "text": "Discussion Prompt 💬\n\n\ni. Where do you think improved data literacy & reproducibility could impact agriculture the most?\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nConsider areas like resource management, market predictions, and farm management.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -939,7 +928,7 @@
     "href": "slides/day1.html#what-is-r",
     "title": "Reproducible Ag Data Science with R",
     "section": "What is R? 🧮",
-    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
+    "text": "What is R? 🧮\n\n\nR is a programming language and environment primarily for statistical analysis, data visualization, and data science.\nKnown for its extensive statistical libraries, data manipulation capabilities, and graphics.\nWidely used in fields like data science, bioinformatics, agriculture, and social sciences.\n\n\n\nBrief History 📜\n\nOrigin: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.\nInspiration: R is an implementation of the S language, designed at Bell Laboratories for data analysis.\nOpen Source: Released as free, open-source software, leading to a large community of users and contributors.\nPopularity: Today, R is one of the top programming languages for statistical analysis and data science.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -950,7 +939,7 @@
     "href": "slides/day1.html#r-vs.-excel-for-data-wrangling",
     "title": "Reproducible Ag Data Science with R",
     "section": "R vs. Excel for Data Wrangling 📊",
-    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
+    "text": "R vs. Excel for Data Wrangling 📊\n\n\n\nExcel: Known for ease of use, popular among business and finance professionals.\n\nPros: Intuitive, good for small datasets and quick analysis.\nCons: Limited in handling large datasets, lacks reproducibility.\n\nR: Provides powerful data manipulation packages (e.g., dplyr, tidyr).\n\nPros: Handles large datasets efficiently, supports complex transformations, fully reproducible.\nCons: Requires programming knowledge, steeper learning curve than Excel.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTip: R is highly scalable and is ideal for projects requiring automation, reproducibility, and handling large datasets.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -961,7 +950,7 @@
     "href": "slides/day1.html#r-vs.-sas-for-statistical-analysis",
     "title": "Reproducible Ag Data Science with R",
     "section": "R vs. SAS for Statistical Analysis 📉",
-    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
+    "text": "R vs. SAS for Statistical Analysis 📉\n\n\n\nSAS: A powerful statistical software suite used widely in industries such as healthcare and finance.\n\nPros: Robust for regulatory environments, highly standardized.\nCons: Proprietary and costly, limited community contributions.\n\nR: Offers a vast array of statistical packages and flexibility in method implementation.\n\nPros: Free and open-source, customizable, strong community support.\nCons: Requires more coding and configuration for regulatory standards.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nComparison: R is often chosen for research and academia due to its flexibility and customization, while SAS remains strong in industries needing strict compliance and control.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -983,7 +972,7 @@
     "href": "slides/day1.html#r-strengths-and-use-cases",
     "title": "Reproducible Ag Data Science with R",
     "section": "R: Strengths and Use Cases 🧮",
-    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
+    "text": "R: Strengths and Use Cases 🧮\n\n\n\nDesigned for Statistics: R is optimized for statistical analysis, making it ideal for research and academia.\nVisualization: Excellent data visualization libraries like ggplot2.\nLicensing: Licensed under GPL; many packages are also GPL, with some using MIT or BSD.\n\n\nIdeal Use Cases:\n\nData analysis, visualization, and complex statistical modeling.\nResearch and academia where open-source, reproducible code is needed.\nLicensing in Production: GPL may restrict proprietary use; check package licenses carefully.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -994,7 +983,7 @@
     "href": "slides/day1.html#python-strengths-and-use-cases",
     "title": "Reproducible Ag Data Science with R",
     "section": "Python: Strengths and Use Cases 🐍",
-    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
+    "text": "Python: Strengths and Use Cases 🐍\n\n\n\nGeneral-Purpose Language: Python is popular for both data science and software development.\nMachine Learning & AI: Extensive libraries for ML and AI, such as scikit-learn, TensorFlow.\nLicensing: PSFL (Python Software Foundation License), highly permissive for proprietary use.\n\n\nIdeal Use Cases:\n\nEnd-to-end development, from data wrangling to ML and web development.\nProduction-ready ML and AI applications.\nLicensing in Production: Permissive licenses allow closed-source use, making Python production-friendly.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -1005,7 +994,7 @@
     "href": "slides/day1.html#comparison-summary",
     "title": "Reproducible Ag Data Science with R",
     "section": "Comparison Summary 📊",
-    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
+    "text": "Comparison Summary 📊\n\n\n\n\n\n\n\nNote\n\n\n\nR: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.\nExcel: User-friendly, ideal for simple tasks, but limited for complex data wrangling.\nSAS: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.\nPython: Strong in ML and AI with highly permissive licensing, making it ideal for production.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFeature\nR\nPython\n\n\n\n\nPrimary Strength\nStatistics & Visualization\nGeneral-purpose, ML, AI\n\n\nPerformance\nModerate\nModerate\n\n\nLicensing\nGPL (core), MIT, BSD (some)\nPSFL, highly permissive\n\n\nProduction Use\nLimited by GPL\nVery friendly for proprietary\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nChoosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs. production.",
     "crumbs": [
       "Slides",
       "Reproducibility"
@@ -1016,10 +1005,30 @@
     "href": "slides/day1.html#thank-you",
     "title": "Reproducible Ag Data Science with R",
     "section": "THANK YOU!",
-    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\n\nContact me",
+    "text": "THANK YOU!\nacorrend@uoguelph.ca\n\nAdrian A. Correndo\nAssistant Professor\nSustainable Cropping Systems\nDepartment of Plant Agriculture\nUniversity of Guelph\n\n\nRm 226, Crop Science Bldg | Department of Plant Agriculture\nOntario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.\n\nContact me",
     "crumbs": [
       "Slides",
       "Reproducibility"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -1507,6 +1516,48 @@
     ]
   },
   {
+    "objectID": "coding/week_08/models_01.html",
+    "href": "coding/week_08/models_01.html",
+    "title": "Statistical Models with R: I - Essentials",
+    "section": "",
+    "text": "Statistical modeling is a process of developing and analyzing mathematical models to represent real-world phenomena. In agricultural research, statistical modeling plays a crucial role in understanding the relationships between environmental variables, management practices, and crop responses. By leveraging statistical models, researchers can make informed decisions about optimizing yield, improving resource efficiency, and enhancing sustainability in agriculture.\nIn this lesson, we focus on the essentials of statistical modeling using R, with examples relevant to ag-data science. We will explore the use of statistical models to analyze field experiments, evaluate treatment effects, and understand interactions between genotype, environment, and management practices. The examples will utilize datasets from the agridat package, particularly the lasrosas.corn dataset, and introduce key functions from stats, nlme, lme4, car, multcomp, and agricolae.\n\n\n\nData Collection and Exploratory Data Analysis (EDA)\n\nStatistical modeling starts with data collection and EDA. In agricultural experiments, this involves gathering data on yield, soil properties, weather conditions, and management practices. EDA helps identify patterns, trends, and relationships between variables while detecting outliers or anomalies.\n\nTypes of Statistical Models\n\nIn agricultural research, common models include:\n\nRegression Models: For predicting continuous outcomes like crop yield based on variables such as soil nutrients or precipitation.\nTime Series Models: To analyze temporal data like seasonal growth patterns or yield trends over years.\nMixed-Effects Models: Ideal for experimental designs with hierarchical structures, such as split-plot designs or repeated measures.\n\n\nModel Selection and Assumptions\n\nThe choice of model depends on the data type, research question, and assumptions about the data. For example:\n\nLinear Regression assumes a linear relationship between predictors and outcome, suitable for continuous variables like yield or biomass. We call it linear because we are basically comparing “lines”, where the lines represent the “means”.\nGeneralized Linear Models (GLM) are used for non-normal distributions, such as count data (e.g., pest counts) or binary outcomes (e.g., disease presence).\n\n\nModel Evaluation\n\nEvaluating model performance is crucial to ensure accurate predictions and inferences. In agricultural modeling, common metrics include:\n\nR-squared (R²): Measures the proportion of variation explained by the model. But it is NOT always recommended as a criterion the “select models”.\nMean Squared Error (MSE) and Root Mean Squared Error (RMSE): Assess prediction accuracy.\nAIC and BIC: For model comparison and selection. These two are recommended when selecting a model.\n\n\nApplication in Agricultural Research\n\nStatistical models provide insights into complex agricultural systems, enabling researchers to:\n\nIdentify Key Drivers: Determine which factors most influence crop performance, such as genotype-environment interactions.\nPredict Future Trends: Forecast yield potential under different climate scenarios or management practices.\nOptimize Inputs: Inform decision-making for fertilizer application, irrigation scheduling, or pest management."
+  },
+  {
+    "objectID": "coding/week_08/models_01.html#introduction",
+    "href": "coding/week_08/models_01.html#introduction",
+    "title": "Statistical Models with R: I - Essentials",
+    "section": "",
+    "text": "Statistical modeling is a process of developing and analyzing mathematical models to represent real-world phenomena. In agricultural research, statistical modeling plays a crucial role in understanding the relationships between environmental variables, management practices, and crop responses. By leveraging statistical models, researchers can make informed decisions about optimizing yield, improving resource efficiency, and enhancing sustainability in agriculture.\nIn this lesson, we focus on the essentials of statistical modeling using R, with examples relevant to ag-data science. We will explore the use of statistical models to analyze field experiments, evaluate treatment effects, and understand interactions between genotype, environment, and management practices. The examples will utilize datasets from the agridat package, particularly the lasrosas.corn dataset, and introduce key functions from stats, nlme, lme4, car, multcomp, and agricolae.\n\n\n\nData Collection and Exploratory Data Analysis (EDA)\n\nStatistical modeling starts with data collection and EDA. In agricultural experiments, this involves gathering data on yield, soil properties, weather conditions, and management practices. EDA helps identify patterns, trends, and relationships between variables while detecting outliers or anomalies.\n\nTypes of Statistical Models\n\nIn agricultural research, common models include:\n\nRegression Models: For predicting continuous outcomes like crop yield based on variables such as soil nutrients or precipitation.\nTime Series Models: To analyze temporal data like seasonal growth patterns or yield trends over years.\nMixed-Effects Models: Ideal for experimental designs with hierarchical structures, such as split-plot designs or repeated measures.\n\n\nModel Selection and Assumptions\n\nThe choice of model depends on the data type, research question, and assumptions about the data. For example:\n\nLinear Regression assumes a linear relationship between predictors and outcome, suitable for continuous variables like yield or biomass. We call it linear because we are basically comparing “lines”, where the lines represent the “means”.\nGeneralized Linear Models (GLM) are used for non-normal distributions, such as count data (e.g., pest counts) or binary outcomes (e.g., disease presence).\n\n\nModel Evaluation\n\nEvaluating model performance is crucial to ensure accurate predictions and inferences. In agricultural modeling, common metrics include:\n\nR-squared (R²): Measures the proportion of variation explained by the model. But it is NOT always recommended as a criterion the “select models”.\nMean Squared Error (MSE) and Root Mean Squared Error (RMSE): Assess prediction accuracy.\nAIC and BIC: For model comparison and selection. These two are recommended when selecting a model.\n\n\nApplication in Agricultural Research\n\nStatistical models provide insights into complex agricultural systems, enabling researchers to:\n\nIdentify Key Drivers: Determine which factors most influence crop performance, such as genotype-environment interactions.\nPredict Future Trends: Forecast yield potential under different climate scenarios or management practices.\nOptimize Inputs: Inform decision-making for fertilizer application, irrigation scheduling, or pest management."
+  },
+  {
+    "objectID": "coding/week_08/models_01.html#essential-r-packages",
+    "href": "coding/week_08/models_01.html#essential-r-packages",
+    "title": "Statistical Models with R: I - Essentials",
+    "section": "2 Essential R Packages",
+    "text": "2 Essential R Packages\n\nlibrary(pacman)\np_load(agridat, agricolae)\np_load(dplyr, tidyr)\np_load(ggplot2)\np_load(nlme, lme4, car, multcomp)"
+  },
+  {
+    "objectID": "coding/week_08/models_01.html#data",
+    "href": "coding/week_08/models_01.html#data",
+    "title": "Statistical Models with R: I - Essentials",
+    "section": "3 Data",
+    "text": "3 Data\n\ndata_corn &lt;- agridat::lasrosas.corn\n# Check data structure and variables\nglimpse(data_corn)\n\nRows: 3,443\nColumns: 9\n$ year  &lt;int&gt; 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999…\n$ lat   &lt;dbl&gt; -33.05113, -33.05115, -33.05116, -33.05117, -33.05118, -33.05120…\n$ long  &lt;dbl&gt; -63.84886, -63.84879, -63.84872, -63.84865, -63.84858, -63.84851…\n$ yield &lt;dbl&gt; 72.14, 73.79, 77.25, 76.35, 75.55, 70.24, 76.17, 69.17, 69.77, 6…\n$ nitro &lt;dbl&gt; 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 1…\n$ topo  &lt;fct&gt; W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W…\n$ bv    &lt;dbl&gt; 162.60, 170.49, 168.39, 176.68, 171.46, 170.56, 172.94, 171.86, …\n$ rep   &lt;fct&gt; R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, …\n$ nf    &lt;fct&gt; N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, …"
+  },
+  {
+    "objectID": "coding/week_08/models_01.html#key-statistical-models",
+    "href": "coding/week_08/models_01.html#key-statistical-models",
+    "title": "Statistical Models with R: I - Essentials",
+    "section": "4 Key Statistical Models",
+    "text": "4 Key Statistical Models\n\n4.1 Linear Models (LM)\nLinear regression models are fundamental for analyzing relationships between variables. The term “regression” could be confusing because it means we are working with a “continous response variable”, but it could also mean we using a “continuous covariate” (or independent / or explanatory variable) (e.g. a “regressor”).\n\n4.1.1 Categorical covariate/s as independent variable/s\n\n# Complete Randomized\nlm_fit_01 &lt;- lm(yield ~ nf, data = data_corn)\n# See summary\nsummary(lm_fit_01)\n\n\nCall:\nlm(formula = yield ~ nf, data = data_corn)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-52.313 -15.344  -3.126  13.563  45.337 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  64.9729     0.8218  79.060  &lt; 2e-16 ***\nnfN1          3.6435     1.1602   3.140   0.0017 ** \nnfN2          4.6774     1.1632   4.021 5.92e-05 ***\nnfN3          5.3630     1.1612   4.618 4.01e-06 ***\nnfN4          7.5901     1.1627   6.528 7.65e-11 ***\nnfN5          7.8589     1.1612   6.768 1.53e-11 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 19.67 on 3437 degrees of freedom\nMultiple R-squared:  0.01771,   Adjusted R-squared:  0.01629 \nF-statistic:  12.4 on 5 and 3437 DF,  p-value: 6.075e-12\n\n# Alternative models\n# Blocks (as fixed)\nlm_fit_02 &lt;- lm(yield ~ nf + rep , data = data_corn)\n# Add year (as fixed)\nlm_fit_03 &lt;- lm(yield ~ nf + rep + year, data = data_corn)\n# Add topography (as fixed)\nlm_fit_04 &lt;- lm(yield ~ nf + rep + year + topo, data = data_corn)\n# Different order \nlm_fit_05 &lt;- lm(yield ~ nf + year + topo + rep, data = data_corn)\n\n\n\n4.1.2 Continuous covariate/s as independent variable/s\n\n# Nitrogen (independent variable) as continuous predictor\nlm_reg_01 &lt;- lm(yield ~ nitro, data = data_corn)\n# See summary\nsummary(lm_reg_01)\n\n\nCall:\nlm(formula = yield ~ nitro, data = data_corn)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-53.183 -15.341  -3.079  13.725  45.897 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 65.843213   0.608573 108.193  &lt; 2e-16 ***\nnitro        0.061717   0.007868   7.845 5.75e-15 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 19.66 on 3441 degrees of freedom\nMultiple R-squared:  0.01757,   Adjusted R-squared:  0.01728 \nF-statistic: 61.54 on 1 and 3441 DF,  p-value: 5.754e-15\n\n# Compare to N as a categorical variable\nsummary(lm_fit_01)\n\n\nCall:\nlm(formula = yield ~ nf, data = data_corn)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-52.313 -15.344  -3.126  13.563  45.337 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  64.9729     0.8218  79.060  &lt; 2e-16 ***\nnfN1          3.6435     1.1602   3.140   0.0017 ** \nnfN2          4.6774     1.1632   4.021 5.92e-05 ***\nnfN3          5.3630     1.1612   4.618 4.01e-06 ***\nnfN4          7.5901     1.1627   6.528 7.65e-11 ***\nnfN5          7.8589     1.1612   6.768 1.53e-11 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 19.67 on 3437 degrees of freedom\nMultiple R-squared:  0.01771,   Adjusted R-squared:  0.01629 \nF-statistic:  12.4 on 5 and 3437 DF,  p-value: 6.075e-12\n\n\n\n\n\n4.2 Generalized Linear Models (GLM)\nGLMs extend linear models to handle non-normal response distributions. In agricultural research, they are useful for modeling yield data with non-constant variance or non-normal residuals.\n\n4.2.1 Example using GLM as an LM\nlm() is just a special case of glm where the distribution of error is assumed to be Gaussian (i.e. normal)\n\nglm_fit_01 &lt;- glm(yield ~ nf + rep, data = data_corn, family = gaussian)\n# See summary\nsummary(glm_fit_01)\n\n\nCall:\nglm(formula = yield ~ nf + rep, family = gaussian, data = data_corn)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  64.7216     0.9486  68.225  &lt; 2e-16 ***\nnfN1          3.6395     1.1600   3.138  0.00172 ** \nnfN2          4.6679     1.1630   4.014 6.11e-05 ***\nnfN3          5.3600     1.1610   4.617 4.04e-06 ***\nnfN4          7.5916     1.1625   6.530 7.53e-11 ***\nnfN5          7.8559     1.1610   6.767 1.54e-11 ***\nrepR2        -0.3301     0.8213  -0.402  0.68775    \nrepR3         1.0915     0.8210   1.329  0.18377    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 386.8527)\n\n    Null deviance: 1354097  on 3442  degrees of freedom\nResidual deviance: 1328839  on 3435  degrees of freedom\nAIC: 30294\n\nNumber of Fisher Scoring iterations: 2\n\n# Compare to lm\nsummary(lm_fit_02)\n\n\nCall:\nlm(formula = yield ~ nf + rep, data = data_corn)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-52.062 -15.476  -3.079  13.468  44.495 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  64.7216     0.9486  68.225  &lt; 2e-16 ***\nnfN1          3.6395     1.1600   3.138  0.00172 ** \nnfN2          4.6679     1.1630   4.014 6.11e-05 ***\nnfN3          5.3600     1.1610   4.617 4.04e-06 ***\nnfN4          7.5916     1.1625   6.530 7.53e-11 ***\nnfN5          7.8559     1.1610   6.767 1.54e-11 ***\nrepR2        -0.3301     0.8213  -0.402  0.68775    \nrepR3         1.0915     0.8210   1.329  0.18377    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 19.67 on 3435 degrees of freedom\nMultiple R-squared:  0.01865,   Adjusted R-squared:  0.01665 \nF-statistic: 9.327 on 7 and 3435 DF,  p-value: 1.708e-11\n\n\n\n\n4.2.2 Example using the Gaussian family with log link:\nThese approaches are particularly useful when yield data exhibit heteroscedasticity or skewness.\n\nFor this first approach, the model assumes a multiplicative relationship between predictors and yield, modeling the expected value as an exponential function. If you want to stabilize variance or normalize the residuals, use the first approach.\n\n\n# Using log link without manually transforming yield\nglm_fit_02 &lt;- glm(yield ~ nf + rep, data = data_corn, \n                  family = gaussian(link = \"log\"))\nsummary(glm_fit_02)\n\n\nCall:\nglm(formula = yield ~ nf + rep, family = gaussian(link = \"log\"), \n    data = data_corn)\n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  4.170242   0.014369 290.223  &lt; 2e-16 ***\nnfN1         0.054586   0.017387   3.140  0.00171 ** \nnfN2         0.069457   0.017308   4.013 6.12e-05 ***\nnfN3         0.079305   0.017202   4.610 4.17e-06 ***\nnfN4         0.110495   0.016981   6.507 8.79e-11 ***\nnfN5         0.114107   0.016934   6.738 1.87e-11 ***\nrepR2       -0.004492   0.011824  -0.380  0.70404    \nrepR3        0.015601   0.011702   1.333  0.18254    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 386.8745)\n\n    Null deviance: 1354097  on 3442  degrees of freedom\nResidual deviance: 1328857  on 3435  degrees of freedom\nAIC: 30294\n\nNumber of Fisher Scoring iterations: 4\n\n\nAlternatively, you may want to manually log-transform the response:\n\nFor this second approach, the log-transformed yield is modeled as a linear function of the predictors, stabilizing variance or normalizing residuals. If you believe the relationship between predictors and the expected value of yield is multiplicative, use the second approach.\n\n\n# Manually log-transforming yield\nglm_fit_03 &lt;- glm(log(yield) ~ nf + rep, data = lasrosas.corn, \n                  family = gaussian(link = \"identity\"))\nsummary(glm_fit_03)\n\n\nCall:\nglm(formula = log(yield) ~ nf + rep, family = gaussian(link = \"identity\"), \n    data = lasrosas.corn)\n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  4.114234   0.013869 296.650  &lt; 2e-16 ***\nnfN1         0.070491   0.016959   4.157 3.31e-05 ***\nnfN2         0.086082   0.017003   5.063 4.35e-07 ***\nnfN3         0.096942   0.016974   5.711 1.22e-08 ***\nnfN4         0.130277   0.016996   7.665 2.31e-14 ***\nnfN5         0.129767   0.016974   7.645 2.69e-14 ***\nrepR2       -0.004546   0.012007  -0.379    0.705    \nrepR3        0.019599   0.012002   1.633    0.103    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 0.08268533)\n\n    Null deviance: 291.07  on 3442  degrees of freedom\nResidual deviance: 284.02  on 3435  degrees of freedom\nAIC: 1198.4\n\nNumber of Fisher Scoring iterations: 2\n\n\n** Key Difference: ** - In the first case, the model is: $(Y) = X+ $, which is a linear model on the log-transformed outcome.\n\nIn the second case, the model is: \\(E(Y) = \\exp(X\\beta)\\) , where the expected value of yield is modeled as an exponential function of the predictors.\n\n\n\n\n4.3 Mixed-Effects Models\nMixed-effects models account for both fixed and random effects, often used in agricultural experiments.\nUsing nlme:\n\nlme_fit &lt;- lme(yield ~ nf, random = ~1 | rep, data = data_corn)\nsummary(lme_fit)\n\nLinear mixed-effects model fit by REML\n  Data: data_corn \n       AIC      BIC    logLik\n  30286.69 30335.83 -15135.34\n\nRandom effects:\n Formula: ~1 | rep\n        (Intercept) Residual\nStdDev:   0.4656023 19.66857\n\nFixed effects:  yield ~ nf \n               Value Std.Error   DF  t-value p-value\n(Intercept) 64.97387 0.8645219 3435 75.15584  0.0000\nnfN1         3.64192 1.1599967 3435  3.13960  0.0017\nnfN2         4.67371 1.1630343 3435  4.01855  0.0001\nnfN3         5.36182 1.1610011 3435  4.61827  0.0000\nnfN4         7.59070 1.1625194 3435  6.52953  0.0000\nnfN5         7.85772 1.1610011 3435  6.76805  0.0000\n Correlation: \n     (Intr) nfN1   nfN2   nfN3   nfN4  \nnfN1 -0.673                            \nnfN2 -0.671  0.500                     \nnfN3 -0.673  0.501  0.500              \nnfN4 -0.672  0.501  0.499  0.500       \nnfN5 -0.673  0.501  0.500  0.501  0.500\n\nStandardized Within-Group Residuals:\n       Min         Q1        Med         Q3        Max \n-2.6547157 -0.7871554 -0.1563133  0.6960595  2.2882930 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\n\nUsing lme4:\n\nlmer_fit &lt;- lmer(yield ~ nf + (1 | rep), data = data_corn)\nsummary(lmer_fit)\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: yield ~ nf + (1 | rep)\n   Data: data_corn\n\nREML criterion at convergence: 30270.7\n\nScaled residuals: \n    Min      1Q  Median      3Q     Max \n-2.6547 -0.7872 -0.1563  0.6961  2.2883 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n rep      (Intercept)   0.2168  0.4656 \n Residual             386.8526 19.6686 \nNumber of obs: 3443, groups:  rep, 3\n\nFixed effects:\n            Estimate Std. Error t value\n(Intercept)  64.9739     0.8645  75.156\nnfN1          3.6419     1.1600   3.140\nnfN2          4.6737     1.1630   4.019\nnfN3          5.3618     1.1610   4.618\nnfN4          7.5907     1.1625   6.530\nnfN5          7.8577     1.1610   6.768\n\nCorrelation of Fixed Effects:\n     (Intr) nfN1   nfN2   nfN3   nfN4  \nnfN1 -0.673                            \nnfN2 -0.671  0.500                     \nnfN3 -0.673  0.501  0.500              \nnfN4 -0.672  0.501  0.499  0.500       \nnfN5 -0.673  0.501  0.500  0.501  0.500\n\n\n\n\n4.4 Choosing Between nlme and lme4\n\nnlme: Suitable for models that are linear and nonlinear mixed-effects models. It provides robust tools for analyzing data with nested random effects and handling different types of correlation structures within the data. It can handle heterogeneous variance models.\nlme4: Best for fitting large linear mixed-effects models. It does not handle nonlinear mixed-effects models or autoregressive correlation structures but is highly efficient with large datasets and complex random effects structures. It cannot handle heterogeneous variance models.\n\n\n\n4.5 Analysis of Variance (ANOVA)\nAnalysis of Variance (ANOVA) is widely used in agricultural research to compare the means of multiple groups and to understand the influence of categorical factors on continuous outcomes, such as yield or biomass. In R, there are multiple ways to perform ANOVA:\n\nanova(): Sequential (Type I) ANOVA\naov(): Similar for balanced designs\ncar::Anova(): Flexible ANOVA with options for Type II and Type III Sum of Squares\n\n\n4.5.1 Using anova()\nanova() performs Type I Sum of Squares (sequential). It tests each term sequentially, considering the order of the terms in the model.\n\nlm_fit &lt;- lm(yield ~ rep + nf + year + topo, data = data_corn)\nanova(lm_fit)  # Type I Sum of Squares\n\nAnalysis of Variance Table\n\nResponse: yield\n            Df Sum Sq Mean Sq   F value  Pr(&gt;F)    \nrep          2   1271     635    3.7264 0.02418 *  \nnf           5  23987    4797   28.1334 &lt; 2e-16 ***\nyear         1  97313   97313  570.6692 &lt; 2e-16 ***\ntopo         3 646456  215485 1263.6625 &lt; 2e-16 ***\nResiduals 3431 585070     171                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n4.5.2 Using aov()\naov() is similar to lm() but is designed for balanced experimental designs. It also uses Type I Sum of Squares.\n\naov_fit &lt;- aov(yield ~ nf + year + topo + rep, data = data_corn)\nsummary(aov_fit)  # Type I Sum of Squares\n\n              Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nnf             5  23987    4797   28.13  &lt; 2e-16 ***\nyear           1  97321   97321  570.71  &lt; 2e-16 ***\ntopo           3 643667  214556 1258.21  &lt; 2e-16 ***\nrep            2   4053    2027   11.88 7.18e-06 ***\nResiduals   3431 585070     171                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n4.5.3 Using car::Anova()\nThe Anova() function from the car package allows for Type II and Type III Sum of Squares:\n\nType II: Assumes no interaction between factors and tests each main effect after the other main effects.\nType III: Tests each main effect and interaction after all other terms, typically used with dummy coding.\n\n\ncar::Anova(lm_fit, type = 2)  # Type II Sum of Squares\n\nAnova Table (Type II tests)\n\nResponse: yield\n          Sum Sq   Df  F value    Pr(&gt;F)    \nrep         4053    2   11.885 7.183e-06 ***\nnf         21727    5   25.483 &lt; 2.2e-16 ***\nyear      120660    1  707.584 &lt; 2.2e-16 ***\ntopo      646456    3 1263.662 &lt; 2.2e-16 ***\nResiduals 585070 3431                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\ncar::Anova(lm_fit, type = 3)  # Type III Sum of Squares\n\nAnova Table (Type III tests)\n\nResponse: yield\n            Sum Sq   Df  F value    Pr(&gt;F)    \n(Intercept) 119183    1  698.920 &lt; 2.2e-16 ***\nrep           4053    2   11.885 7.183e-06 ***\nnf           21727    5   25.483 &lt; 2.2e-16 ***\nyear        120660    1  707.584 &lt; 2.2e-16 ***\ntopo        646456    3 1263.662 &lt; 2.2e-16 ***\nResiduals   585070 3431                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n4.5.4 Comparison of anova() vs. Anova()\n\n# For the anova(), the order of factors matter\nanova(lm_fit_01)\n\nAnalysis of Variance Table\n\nResponse: yield\n            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nnf           5   23987  4797.4  12.396 6.075e-12 ***\nResiduals 3437 1330110   387.0                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nanova(lm_fit_02)\n\nAnalysis of Variance Table\n\nResponse: yield\n            Df  Sum Sq Mean Sq F value   Pr(&gt;F)    \nnf           5   23987  4797.4 12.4011 6.01e-12 ***\nrep          2    1271   635.6  1.6429   0.1936    \nResiduals 3435 1328839   386.9                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nanova(lm_fit_03)\n\nAnalysis of Variance Table\n\nResponse: yield\n            Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    \nnf           5   23987    4797  13.3771 6.105e-13 ***\nrep          2    1271     636   1.7722    0.1701    \nyear         1   97313   97313 271.3489 &lt; 2.2e-16 ***\nResiduals 3434 1231526     359                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nanova(lm_fit_04)\n\nAnalysis of Variance Table\n\nResponse: yield\n            Df Sum Sq Mean Sq   F value  Pr(&gt;F)    \nnf           5  23987    4797   28.1331 &lt; 2e-16 ***\nrep          2   1271     636    3.7272 0.02416 *  \nyear         1  97313   97313  570.6692 &lt; 2e-16 ***\ntopo         3 646456  215485 1263.6625 &lt; 2e-16 ***\nResiduals 3431 585070     171                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nanova(lm_fit_05)\n\nAnalysis of Variance Table\n\nResponse: yield\n            Df Sum Sq Mean Sq  F value    Pr(&gt;F)    \nnf           5  23987    4797   28.133 &lt; 2.2e-16 ***\nyear         1  97321   97321  570.714 &lt; 2.2e-16 ***\ntopo         3 643667  214556 1258.209 &lt; 2.2e-16 ***\nrep          2   4053    2027   11.885 7.183e-06 ***\nResiduals 3431 585070     171                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# For the Anova(type=3), the order of factors doesn't matter\ncar::Anova(lm_fit_01, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: yield\n             Sum Sq   Df  F value    Pr(&gt;F)    \n(Intercept) 2418907    1 6250.447 &lt; 2.2e-16 ***\nnf            23987    5   12.396 6.075e-12 ***\nResiduals   1330110 3437                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\ncar::Anova(lm_fit_02, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: yield\n             Sum Sq   Df   F value    Pr(&gt;F)    \n(Intercept) 1800690    1 4654.7170 &lt; 2.2e-16 ***\nnf            23987    5   12.4012 6.009e-12 ***\nrep            1271    2    1.6429    0.1936    \nResiduals   1328839 3435                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\ncar::Anova(lm_fit_03, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: yield\n             Sum Sq   Df  F value    Pr(&gt;F)    \n(Intercept)   96132    1 268.0552 &lt; 2.2e-16 ***\nnf            23836    5  13.2930 7.436e-13 ***\nrep            1264    2   1.7616    0.1719    \nyear          97313    1 271.3489 &lt; 2.2e-16 ***\nResiduals   1231526 3434                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\ncar::Anova(lm_fit_04, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: yield\n            Sum Sq   Df  F value    Pr(&gt;F)    \n(Intercept) 119183    1  698.920 &lt; 2.2e-16 ***\nnf           21727    5   25.483 &lt; 2.2e-16 ***\nrep           4053    2   11.885 7.183e-06 ***\nyear        120660    1  707.584 &lt; 2.2e-16 ***\ntopo        646456    3 1263.662 &lt; 2.2e-16 ***\nResiduals   585070 3431                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\ncar::Anova(lm_fit_05, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: yield\n            Sum Sq   Df  F value    Pr(&gt;F)    \n(Intercept) 119183    1  698.920 &lt; 2.2e-16 ***\nnf           21727    5   25.483 &lt; 2.2e-16 ***\nyear        120660    1  707.584 &lt; 2.2e-16 ***\ntopo        646456    3 1263.662 &lt; 2.2e-16 ***\nrep           4053    2   11.885 7.183e-06 ***\nResiduals   585070 3431                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nIn agricultural research, Type III Sum of Squares is particularly useful for unbalanced designs, such as field trials with missing data or unequal replications.\n\n\n\n4.6 Post-hoc Tests\nAfter detecting significant differences with ANOVA, post-hoc tests can be conducted to identify specific group differences.\nUsing multcomp for multiple comparisons:\n\n# Using glht() function\ncomp &lt;- glht(aov_fit, linfct = mcp(nf = \"Tukey\"))\nsummary(comp)\n\n\n     Simultaneous Tests for General Linear Hypotheses\n\nMultiple Comparisons of Means: Tukey Contrasts\n\n\nFit: aov(formula = yield ~ nf + year + topo + rep, data = data_corn)\n\nLinear Hypotheses:\n             Estimate Std. Error t value Pr(&gt;|t|)    \nN1 - N0 == 0   3.8048     0.7702   4.940  &lt; 0.001 ***\nN2 - N0 == 0   4.8232     0.7722   6.246  &lt; 0.001 ***\nN3 - N0 == 0   5.0724     0.7709   6.580  &lt; 0.001 ***\nN4 - N0 == 0   7.4876     0.7718   9.701  &lt; 0.001 ***\nN5 - N0 == 0   7.3672     0.7709   9.556  &lt; 0.001 ***\nN2 - N1 == 0   1.0184     0.7708   1.321  0.77334    \nN3 - N1 == 0   1.2676     0.7696   1.647  0.56709    \nN4 - N1 == 0   3.6828     0.7705   4.779  &lt; 0.001 ***\nN5 - N1 == 0   3.5624     0.7697   4.628  &lt; 0.001 ***\nN3 - N2 == 0   0.2492     0.7716   0.323  0.99954    \nN4 - N2 == 0   2.6644     0.7726   3.449  0.00759 ** \nN5 - N2 == 0   2.5440     0.7717   3.297  0.01271 *  \nN4 - N3 == 0   2.4152     0.7712   3.132  0.02173 *  \nN5 - N3 == 0   2.2948     0.7702   2.980  0.03452 *  \nN5 - N4 == 0  -0.1204     0.7712  -0.156  0.99999    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n(Adjusted p values reported -- single-step method)\n\n\n\n\n4.7 Nonlinear Models\nNonlinear models are useful when the relationship between the predictor and response variables is not linear. In agricultural research, these models are commonly used to model yield response to inputs, such as nitrogen fertilizer.\nFor nonlinear relationships, we could use nls(). Let’s see an example using a power function:\n\nnls_fit &lt;- nls(yield ~ a * nitro^b, data = data_corn, start = list(a = 1, b = 1))\nsummary(nls_fit)\n\n\nFormula: yield ~ a * nitro^b\n\nParameters:\n  Estimate Std. Error t value Pr(&gt;|t|)    \na 55.71689    4.33102  12.865  &lt; 2e-16 ***\nb  0.05641    0.01811   3.116  0.00185 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 32.99 on 3441 degrees of freedom\n\nNumber of iterations to convergence: 15 \nAchieved convergence tolerance: 1.822e-07\n\n# Alternative exponential\n# nls_mitscherlich &lt;- nls(yield ~ a * (1 - exp(-b * nitro)), data = data_corn, start = list(a = 55, b = 0.05))\n\nVisualizing the model’s predictions can help in understanding the fitted curve and the data’s behavior.\n\n# Creating a data frame with predictions\ndata_corn &lt;- data_corn %&gt;% \n  mutate(pred = predict(nls_fit))\n\n# Plotting observed vs. predicted yield\ndata_corn %&gt;% \nggplot(aes(x = nitro, y = yield)) +\n  geom_point(color = \"blue\", size = 2) +  # Observed data\n  geom_line(aes(y = pred), color = \"red\", size = 1) +  # Fitted curve\n  geom_smooth()+\n  labs(title = \"Yield Response to Nitrogen\",\n       x = \"Nitrogen (kg/ha)\",\n       y = \"Yield (qq/ha)\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "coding/week_08/models_01.html#conclusion",
+    "href": "coding/week_08/models_01.html#conclusion",
+    "title": "Statistical Models with R: I - Essentials",
+    "section": "5 Conclusion",
+    "text": "5 Conclusion\nThis lesson introduced essential statistical models in R for agricultural research, providing practical code examples. In the next session, we will delve deeper into model diagnostics and interpretation."
+  },
+  {
     "objectID": "coding/week_06/10_iteration.html",
     "href": "coding/week_06/10_iteration.html",
     "title": "Iteration in R: The Power of purrr",
@@ -1614,26 +1665,6 @@
     "crumbs": [
       "Lessons",
       "10-Iteration"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
-    "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
-    "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
-    "crumbs": [
-      "Home"
     ]
   }
 ]

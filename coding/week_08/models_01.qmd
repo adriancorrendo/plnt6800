@@ -1,0 +1,296 @@
+---
+title: "Statistical Models with R: I - Essentials"
+author: "Dr. Adrian Correndo"
+date: "2025-02-26"
+categories: [statistical modelling, R, agriculture, agridat, agricolae]
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    number-sections: true
+    table-class: "table table-striped table-hover"
+editor: source
+execute:
+  echo: true
+  warning: false
+  message: false
+smooth-scroll: true
+---
+
+## Introduction
+
+Statistical modeling is a process of developing and analyzing mathematical models to represent real-world phenomena. In agricultural research, statistical modeling plays a crucial role in understanding the relationships between environmental variables, management practices, and crop responses. By leveraging statistical models, researchers can make informed decisions about optimizing yield, improving resource efficiency, and enhancing sustainability in agriculture.
+
+In this lesson, we focus on the essentials of statistical modeling using R, with examples relevant to ag-data science. We will explore the use of statistical models to analyze field experiments, evaluate treatment effects, and understand interactions between genotype, environment, and management practices. The examples will utilize datasets from the `agridat` package, particularly the `lasrosas.corn` dataset, and introduce key functions from `stats`, `nlme`, `lme4`, `car`, `multcomp`, and `agricolae`.
+
+### Statistical Modeling Process
+
+1. **Data Collection and Exploratory Data Analysis (EDA)**
+   - Statistical modeling starts with data collection and EDA. In agricultural experiments, this involves gathering data on yield, soil properties, weather conditions, and management practices. EDA helps identify patterns, trends, and relationships between variables while detecting outliers or anomalies.
+
+2. **Types of Statistical Models**
+   - In agricultural research, common models include:
+     - **Regression Models**: For predicting continuous outcomes like crop yield based on variables such as soil nutrients or precipitation.
+     - **Time Series Models**: To analyze temporal data like seasonal growth patterns or yield trends over years.
+     - **Mixed-Effects Models**: Ideal for experimental designs with hierarchical structures, such as split-plot designs or repeated measures.
+
+3. **Model Selection and Assumptions**
+   - The choice of model depends on the data type, research question, and assumptions about the data. For example:
+     - **Linear Regression** assumes a linear relationship between predictors and outcome, suitable for continuous variables like yield or biomass. We call it linear because we are basically comparing "lines", where the lines represent the "means".
+     - **Generalized Linear Models (GLM)** are used for non-normal distributions, such as count data (e.g., pest counts) or binary outcomes (e.g., disease presence).
+
+4. **Model Evaluation**
+   - Evaluating model performance is crucial to ensure accurate predictions and inferences. In agricultural modeling, common metrics include:
+     - **R-squared (R²)**: Measures the proportion of variation explained by the model. But it is NOT always recommended as a criterion the "select models".
+     - **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMSE)**: Assess prediction accuracy.
+     - **AIC and BIC**: For model comparison and selection. These two are recommended when selecting a model.
+
+5. **Application in Agricultural Research**
+   - Statistical models provide insights into complex agricultural systems, enabling researchers to:
+     - **Identify Key Drivers**: Determine which factors most influence crop performance, such as genotype-environment interactions.
+     - **Predict Future Trends**: Forecast yield potential under different climate scenarios or management practices.
+     - **Optimize Inputs**: Inform decision-making for fertilizer application, irrigation scheduling, or pest management.
+
+## Essential R Packages
+```{r}
+library(pacman)
+p_load(agridat, agricolae)
+p_load(dplyr, tidyr)
+p_load(ggplot2)
+p_load(nlme, lme4, car, multcomp)
+```
+## Data
+```{r}
+data_corn <- agridat::lasrosas.corn
+# Check data structure and variables
+glimpse(data_corn)
+```
+
+
+
+## Key Statistical Models
+
+### Linear Models (LM)
+
+Linear regression models are fundamental for analyzing relationships between variables. The term "regression" could be confusing because it means we are working with a "continous response variable", but it could also mean we using a "continuous covariate" (or independent / or explanatory variable) (e.g. a "regressor").
+
+#### Categorical covariate/s as independent variable/s
+```{r}
+
+# Complete Randomized
+lm_fit_01 <- lm(yield ~ nf, data = data_corn)
+# See summary
+summary(lm_fit_01)
+
+# Alternative models
+# Blocks (as fixed)
+lm_fit_02 <- lm(yield ~ nf + rep , data = data_corn)
+# Add year (as fixed)
+lm_fit_03 <- lm(yield ~ nf + rep + year, data = data_corn)
+# Add topography (as fixed)
+lm_fit_04 <- lm(yield ~ nf + rep + year + topo, data = data_corn)
+# Different order 
+lm_fit_05 <- lm(yield ~ nf + year + topo + rep, data = data_corn)
+
+```
+#### Continuous covariate/s as independent variable/s
+```{r}
+# Nitrogen (independent variable) as continuous predictor
+lm_reg_01 <- lm(yield ~ nitro, data = data_corn)
+# See summary
+summary(lm_reg_01)
+# Compare to N as a categorical variable
+summary(lm_fit_01)
+
+```
+
+### Generalized Linear Models (GLM)
+
+GLMs extend linear models to handle non-normal response distributions. In agricultural research, they are useful for modeling yield data with non-constant variance or non-normal residuals.
+
+#### Example using GLM as an LM
+
+lm() is just a special case of glm where the distribution of error is assumed to be Gaussian (i.e. normal)
+```{r}
+glm_fit_01 <- glm(yield ~ nf + rep, data = data_corn, family = gaussian)
+# See summary
+summary(glm_fit_01)
+
+# Compare to lm
+summary(lm_fit_02)
+```
+
+#### Example using the Gaussian family with log link:
+
+These approaches are particularly useful when yield data exhibit heteroscedasticity or skewness.
+
+- For this first approach, the model assumes a multiplicative relationship between predictors and yield, modeling the expected value as an exponential function. If you want to stabilize variance or normalize the residuals, use the first approach.
+```{r}
+# Using log link without manually transforming yield
+glm_fit_02 <- glm(yield ~ nf + rep, data = data_corn, 
+                  family = gaussian(link = "log"))
+summary(glm_fit_02)
+```
+
+Alternatively, you may want to manually log-transform the response:
+
+- For this second approach, the log-transformed yield is modeled as a linear function of the predictors, stabilizing variance or normalizing residuals. If you believe the relationship between predictors and the expected value of yield is multiplicative, use the second approach.
+
+```{r}
+# Manually log-transforming yield
+glm_fit_03 <- glm(log(yield) ~ nf + rep, data = lasrosas.corn, 
+                  family = gaussian(link = "identity"))
+summary(glm_fit_03)
+```
+
+** Key Difference: **
+- In the first case, the model is:  $\log(Y) = X\beta + \epsilon $, which is a linear model on the log-transformed outcome.
+
+- In the second case, the model is:  $E(Y) = \exp(X\beta)$ , where the expected value of yield is modeled as an exponential function of the predictors.
+
+
+### Mixed-Effects Models
+
+Mixed-effects models account for both fixed and random effects, often used in agricultural experiments.
+
+Using `nlme`:
+
+```{r}
+lme_fit <- lme(yield ~ nf, random = ~1 | rep, data = data_corn)
+summary(lme_fit)
+```
+
+Using `lme4`:
+
+```{r}
+lmer_fit <- lmer(yield ~ nf + (1 | rep), data = data_corn)
+summary(lmer_fit)
+```
+
+### Choosing Between `nlme` and `lme4`
+- **nlme**: Suitable for models that are linear and nonlinear mixed-effects models. It provides robust tools for analyzing data with nested random effects and handling different types of correlation structures within the data. It can handle heterogeneous variance models.
+
+- **lme4**: Best for fitting large linear mixed-effects models. It does not handle nonlinear mixed-effects models or autoregressive correlation structures but is highly efficient with large datasets and complex random effects structures. It cannot handle heterogeneous variance models.
+
+### Analysis of Variance (ANOVA)
+
+Analysis of Variance (ANOVA) is widely used in agricultural research to compare the means of multiple groups and to understand the influence of categorical factors on continuous outcomes, such as yield or biomass. In R, there are multiple ways to perform ANOVA:
+
+- `anova()`: Sequential (Type I) ANOVA
+- `aov()`: Similar for balanced designs
+- `car::Anova()`: Flexible ANOVA with options for Type II and Type III Sum of Squares
+
+#### Using `anova()`
+
+`anova()` performs Type I Sum of Squares (sequential). It tests each term sequentially, considering the order of the terms in the model.
+
+```{r}
+lm_fit <- lm(yield ~ rep + nf + year + topo, data = data_corn)
+anova(lm_fit)  # Type I Sum of Squares
+```
+
+#### Using `aov()`
+
+`aov()` is similar to `lm()` but is designed for balanced experimental designs. It also uses Type I Sum of Squares.
+
+```{r}
+aov_fit <- aov(yield ~ nf + year + topo + rep, data = data_corn)
+summary(aov_fit)  # Type I Sum of Squares
+```
+
+#### Using `car::Anova()`
+
+The `Anova()` function from the `car` package allows for Type II and Type III Sum of Squares:
+
+- **Type II**: Assumes no interaction between factors and tests each main effect after the other main effects.
+- **Type III**: Tests each main effect and interaction after all other terms, typically used with dummy coding.
+
+```{r}
+car::Anova(lm_fit, type = 2)  # Type II Sum of Squares
+car::Anova(lm_fit, type = 3)  # Type III Sum of Squares
+```
+
+#### Comparison of anova() vs. Anova()
+```{r}
+# For the anova(), the order of factors matter
+anova(lm_fit_01)
+anova(lm_fit_02)
+anova(lm_fit_03)
+anova(lm_fit_04)
+anova(lm_fit_05)
+
+# For the Anova(type=3), the order of factors doesn't matter
+car::Anova(lm_fit_01, type = 3)
+car::Anova(lm_fit_02, type = 3)
+car::Anova(lm_fit_03, type = 3)
+car::Anova(lm_fit_04, type = 3)
+car::Anova(lm_fit_05, type = 3)
+```
+
+In agricultural research, Type III Sum of Squares is particularly useful for unbalanced designs, such as field trials with missing data or unequal replications.
+
+### Post-hoc Tests
+
+After detecting significant differences with ANOVA, post-hoc tests can be conducted to identify specific group differences.
+
+Using `multcomp` for multiple comparisons:
+
+```{r}
+# Using glht() function
+comp <- glht(aov_fit, linfct = mcp(nf = "Tukey"))
+summary(comp)
+```
+
+### Nonlinear Models
+
+Nonlinear models are useful when the relationship between the predictor and response variables is not linear. In agricultural research, these models are commonly used to model yield response to inputs, such as nitrogen fertilizer.
+
+For nonlinear relationships, we could use `nls()`. Let's see an example using a power function:
+
+```{r}
+nls_fit <- nls(yield ~ a * nitro^b, data = data_corn, start = list(a = 1, b = 1))
+summary(nls_fit)
+
+# Alternative exponential
+# nls_mitscherlich <- nls(yield ~ a * (1 - exp(-b * nitro)), data = data_corn, start = list(a = 55, b = 0.05))
+```
+Visualizing the model's predictions can help in understanding the fitted curve and the data's behavior.
+
+```{r}
+# Creating a data frame with predictions
+data_corn <- data_corn %>% 
+  mutate(pred = predict(nls_fit))
+
+# Plotting observed vs. predicted yield
+data_corn %>% 
+ggplot(aes(x = nitro, y = yield)) +
+  geom_point(color = "blue", size = 2) +  # Observed data
+  geom_line(aes(y = pred), color = "red", size = 1) +  # Fitted curve
+  geom_smooth()+
+  labs(title = "Yield Response to Nitrogen",
+       x = "Nitrogen (kg/ha)",
+       y = "Yield (qq/ha)") +
+  theme_minimal()
+```
+
+
+
+
+## Conclusion
+
+This lesson introduced essential statistical models in R for agricultural research, providing practical code examples. In the next session, we will delve deeper into model diagnostics and interpretation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
