@@ -78,7 +78,9 @@ website:
           - href: coding/week_08/models_01.qmd
             text: "12-Models I"
           - href: coding/week_08/models_02.qmd
-            text: "132-Models II"
+            text: "13-Models II"
+          - href: coding/week_09/models_03.qmd
+            text: "14-Models III"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd

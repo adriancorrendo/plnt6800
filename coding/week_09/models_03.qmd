@@ -1,0 +1,252 @@
+---
+title: "Models III: Linear Models in Ag-Data Science"
+author: "Dr. Adrian Correndo"
+date: "2025-03-05"
+categories: [linear models, R, statistics, agriculture]
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    number-sections: true
+    table-class: "table table-striped table-hover"
+editor: source
+execute:
+  echo: true
+  warning: false
+  message: false
+smooth-scroll: true
+---
+
+## Introduction
+
+Linear models are foundational in statistical analysis, particularly in agricultural data science. These models allow researchers to evaluate relationships between variables and assess treatment effects in experiments. This document covers the essentials of linear modeling in R using `stats`, `car`, `broom`, `emmeans`, `multcomp`, and `cld` for statistical inference and means comparisons.
+
+## What is a Linear Model?
+
+A **linear model** is a mathematical equation describing the relationship between a response variable (dependent) and one or more explanatory variables (independent). The simplest form is:
+
+$$ Y = \beta_0 + \beta_1 X + ... + \beta_2 X ... + \epsilon $$
+
+where:
+
+$$Y$$ is the dependent variable (response variable), <br/>
+$$X$$ is the independent variable (matrix of experimental design), <br/>
+$$ \beta_0 $$ is the intercept, <br/>
+$$ \beta_1 $$ is the effect of factor #1 on Y (i.e. slope (regression) or mean effect (anova)), <br/>
+$$ \beta_2 $$ is the effect of factor #2 on Y (i.e. slope (regression) or mean effect (anova)), <br/>
+$$ \epsilon $$ represents error (unexplained variation). <br/>
+
+Note: A polynomial term–a quadratic (squared or $2^{nd}$ order) or cubic ($3^{rd}$ order) term turns a linear regression model into a curve. But because it is X that is squared or cubed, not the Beta coefficient ($ \beta $), it still qualifies as a linear model.
+
+### Regression vs. ANOVA
+
+-   **Regression Analysis**: Used when the explanatory variable(s) are continuous (e.g., predicting yield from nitrogen levels).
+
+-   **ANOVA (Analysis of Variance)**: Used when at least one explanatory variable is categorical (e.g., comparing mean yields across different treatments).
+
+-   Technically, ANOVA is a type of linear model, but its focus is on comparing means across groups (made from categorical predictors), while regression aims to quantify the relationship between continuous variables.
+
+We will use the `data_corn` dataset from the `agridat` package.
+
+```{r}
+# Load required packages
+library(pacman)
+p_load(dplyr, tidyr)
+p_load(agridat)
+p_load(broom)
+p_load(emmeans)
+p_load(multcomp, multcompView)
+p_load(car) # for assumption checks
+p_load(performance) # for assumption checks
+```
+
+**Load dataset:**
+
+```{r}
+data_corn <- agridat::lasrosas.corn
+
+# Inspect dataset
+glimpse(data_corn)
+```
+
+## Model Fitting: Linear Regression & ANOVA
+
+### Simple Linear Regression (Continuous Predictor)
+
+```{r}
+reg_fit <- lm(yield ~ nitro, data = data_corn)
+summary(reg_fit)
+# Comparing analysis of variance options
+anova(reg_fit)
+Anova(reg_fit, type = 2)
+Anova(reg_fit, type = 3)
+```
+
+### Linear Regression, no-intercept
+
+```{r}
+reg_noint <- lm(yield ~ -1 + nf, data = data_corn)
+summary(reg_noint)
+
+# Comparing analysis of variance options
+anova(reg_noint)
+Anova(reg_noint, type = 3)
+Anova(reg_noint, type = 2)
+```
+
+### ANOVA (Categorical Predictors)
+
+```{r}
+anova_fit <- lm(yield ~ nf + rep, data = data_corn)
+Anova(anova_fit, type = 3)
+Anova(anova_fit, type = 2)
+```
+
+### ANOVA, no-intercept
+
+```{r}
+anova_noint <- lm(yield ~ -1 + nf + rep, data = data_corn)
+Anova(anova_noint)
+```
+
+## Model Assumptions
+
+Linear models assume:
+
+1.  **Linearity**: Relationship between predictors and response is linear (continuous).
+
+```{r}
+# Residual diagnostics
+par(mfrow=c(2,2))
+plot(anova_fit)
+```
+
+2.  **Normality of Residuals**: Residuals should be normally distributed.
+
+```{r}
+# Normality test
+shapiro.test(resid(anova_fit))
+```
+
+3.  **Homoscedasticity**: Equal variance across all levels of predictors.
+
+```{r eval=FALSE}
+# Homoscedasticity check
+leveneTest(anova_fit)
+```
+
+4.  **Independence**: Observations are independent (i.e. the “error” of replications is independent).
+
+There is no test for independence. You have to make sure you specify the error-structure correctly for potential autocorrelation (e.g. blocks, split-plots, repeated measures, etc.).
+
+5.  **Performance package**
+With the `performance` package, we could check all at once.
+```{r fig.width = 8, fig.height = 9}
+performance::check_model(anova_fit)
+```
+
+## Model Selection: AIC/BIC Criteria
+
+### Candidate models
+
+```{r}
+# null model
+lm_00 <- lm(yield ~ 1, data = data_corn)
+# Simplest model
+lm_01 <- lm(yield ~ nf + rep, data = data_corn)
+# Add year
+lm_02 <- lm(yield ~ nf + year + rep, data = data_corn)
+# Add topo
+lm_03 <- lm(yield ~ nf + topo + rep, data = data_corn)
+# Add year and topo
+lm_04 <- lm(yield ~ nf + year + topo + rep, data = data_corn)
+
+# Main effects and interactions
+lm_05 <- lm(yield ~ nf*year*topo + rep, data = data_corn)
+
+```
+
+### Selection criteria
+#### F-Test
+- **F-tests** evaluate if added predictors significantly improve model fit via sum of squares and degrees of freedom.
+```{r}
+anova(lm_01, lm_02, lm_03, lm_04, lm_05)
+```
+
+#### AIC (Akaike Information Criterion)
+- **AIC** balances goodness of fit with model complexity.
+```{r}
+AIC(lm_01, lm_02, lm_03, lm_04, lm_05)
+```
+
+#### BIC (Bayesian Information criterion)
+- **BIC** applies a stricter penalty for complexity, favoring simpler models.
+```{r}
+BIC(lm_01, lm_02, lm_03, lm_04, lm_05)
+```
+
+## Significance of effects
+
+```{r}
+# Compare Anova sum of squares
+Anova(lm_05, type = 2)
+Anova(lm_05, type = 3)
+```
+
+## Means Comparisons with `emmeans` and `cld`
+### Interaction
+```{r}
+# Pairwise comparisons among treatment means
+emmeans(lm_05, pairwise ~ year:topo) %>% 
+  cld(., level = 0.05, decreasing = FALSE)
+```
+### Alternative 
+Using the same model, same sum of squares we could group comparisons differently. In this case, showing comparisons of topo means, grouped by "year"
+```{r}
+emmeans(lm_05, pairwise ~ topo, by = "year") %>% 
+  cld(., level = 0.05, decreasing = FALSE, Letters = letters) # add letters
+
+# By default in R
+LETTERS
+letters
+```
+
+## Interpreting Coefficients
+### Regression
+-   **Intercept**: Baseline value of the dependent variable.
+
+-   **Slope**: Change in response variable per unit increase in predictor.
+
+-   **p-value**: Significance of predictor effect.
+
+We can extract regression coefficient estimates with the 'coef()' function, or with the 'tidy()' function of the "broom" package.
+```{r}
+# Extracting coefficients with coef()
+coef(reg_fit)
+
+# Tidy summary of coefficients
+broom::tidy(reg_fit)
+```
+
+### ANOVA
+-   **Intercept**: the reference or benchmark level (baseline mean) for categorical predictors.
+-   **Factor Levels**: estimates of mean differences "with respect to" the intercept (if any, if not, from zero).
+-   **p-value**: whether a factor significantly differs from baseline.
+
+We can also extract ANOVA coefficient estimates with the 'coef()' function, or with the 'tidy()' function of the "broom" package.
+```{r}
+# Extracting coefficients with coef()
+coef(lm_05)
+
+broom::tidy(lm_05)
+```
+
+
+
+
+
+
+## Conclusion
+
+Linear models are essential for agricultural research, helping to quantify relationships and test hypotheses. This quick guide covered essentials for regression (continuous predictors), ANOVA (categorical predictors), assumption checks, model selection, and means comparisons using `emmeans`, and coefficients' extraction with `broom`.
