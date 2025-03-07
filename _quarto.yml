@@ -81,6 +81,8 @@ website:
             text: "13-Models II"
           - href: coding/week_09/models_03.qmd
             text: "14-Models III"
+          - href: coding/week_09/models_04.qmd
+            text: "15-Models IV"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd

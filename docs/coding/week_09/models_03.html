@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../outline/calendar.html" rel="next">
+<link href="../../coding/week_09/models_04.html" rel="next">
 <link href="../../coding/week_08/models_02.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -363,6 +363,12 @@ window.Quarto = {
  <span class="menu-text">14-Models III</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_09/models_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-Models IV</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -544,12 +550,12 @@ $ nf    &lt;fct&gt; N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, 
 <section id="simple-linear-regression-continuous-predictor" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="simple-linear-regression-continuous-predictor"><span class="header-section-number">3.1</span> Simple Linear Regression (Continuous Predictor)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reg_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nitro, <span class="at">data =</span> data_corn)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reg_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> nitro, <span class="at">data =</span> data_corn)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = yield ~ nitro, data = data_corn)
+lm(formula = yield ~ 1 + nitro, data = data_corn)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -578,7 +584,7 @@ Residuals 3441 1330307   386.6
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(reg_fit, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(reg_fit, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
@@ -589,7 +595,7 @@ Residuals 1330307 3441
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(reg_fit, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(reg_fit, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
@@ -606,63 +612,79 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="linear-regression-no-intercept" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="linear-regression-no-intercept"><span class="header-section-number">3.2</span> Linear Regression, no-intercept</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> nf, <span class="at">data =</span> data_corn)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> nitro, <span class="at">data =</span> data_corn)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = yield ~ -1 + nf, data = data_corn)
+lm(formula = yield ~ 1 + nitro, data = data_corn)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--52.313 -15.344  -3.126  13.563  45.337 
+-53.183 -15.341  -3.079  13.725  45.897 
 
 Coefficients:
-     Estimate Std. Error t value Pr(&gt;|t|)    
-nfN0  64.9729     0.8218   79.06   &lt;2e-16 ***
-nfN1  68.6164     0.8190   83.78   &lt;2e-16 ***
-nfN2  69.6503     0.8233   84.60   &lt;2e-16 ***
-nfN3  70.3359     0.8204   85.73   &lt;2e-16 ***
-nfN4  72.5630     0.8225   88.22   &lt;2e-16 ***
-nfN5  72.8318     0.8204   88.78   &lt;2e-16 ***
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 65.843213   0.608573 108.193  &lt; 2e-16 ***
+nitro        0.061717   0.007868   7.845 5.75e-15 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 19.67 on 3437 degrees of freedom
-Multiple R-squared:  0.9267,    Adjusted R-squared:  0.9266 
-F-statistic:  7240 on 6 and 3437 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 19.66 on 3441 degrees of freedom
+Multiple R-squared:  0.01757,   Adjusted R-squared:  0.01728 
+F-statistic: 61.54 on 1 and 3441 DF,  p-value: 5.754e-15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing analysis of variance options</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = yield ~ -1 + nitro, data = data_corn)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-64.435  -7.134  20.741  45.962 108.840 
+
+Coefficients:
+      Estimate Std. Error t value Pr(&gt;|t|)    
+nitro 0.772271   0.009088   84.98   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 41.25 on 3442 degrees of freedom
+Multiple R-squared:  0.6772,    Adjusted R-squared:  0.6771 
+F-statistic:  7222 on 1 and 3442 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing analysis of variance options</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
 Response: yield
-            Df   Sum Sq Mean Sq F value    Pr(&gt;F)    
-nf           6 16812032 2802005  7240.4 &lt; 2.2e-16 ***
-Residuals 3437  1330110     387                      
+            Df   Sum Sq  Mean Sq F value    Pr(&gt;F)    
+nitro        1 12286371 12286371  7221.9 &lt; 2.2e-16 ***
+Residuals 3442  5855771     1701                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(reg_noint, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(reg_noint, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
 Response: yield
             Sum Sq   Df F value    Pr(&gt;F)    
-nf        16812032    6  7240.4 &lt; 2.2e-16 ***
-Residuals  1330110 3437                      
+nitro     12286371    1  7221.9 &lt; 2.2e-16 ***
+Residuals  5855771 3442                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(reg_noint, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(reg_noint, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
 Response: yield
             Sum Sq   Df F value    Pr(&gt;F)    
-nf        16812032    6  7240.4 &lt; 2.2e-16 ***
-Residuals  1330110 3437                      
+nitro     12286371    1  7221.9 &lt; 2.2e-16 ***
+Residuals  5855771 3442                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -671,29 +693,34 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="anova-categorical-predictors" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="anova-categorical-predictors"><span class="header-section-number">3.3</span> ANOVA (Categorical Predictors)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>anova_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(anova_fit, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>anova_crd <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf, <span class="at">data =</span> data_corn) <span class="co"># assuming CRD</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>anova_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn) <span class="co"># assuming RCBD</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>anova_03 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf<span class="sc">*</span>rep, <span class="at">data =</span> data_corn) <span class="co"># assuming RCBD</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(anova_crd, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: yield
+             Sum Sq   Df  F value    Pr(&gt;F)    
+(Intercept) 2418907    1 6250.447 &lt; 2.2e-16 ***
+nf            23987    5   12.396 6.075e-12 ***
+Residuals   1330110 3437                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Anova(anova_fit, type = 3)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(anova_03, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
 Response: yield
              Sum Sq   Df   F value    Pr(&gt;F)    
-(Intercept) 1800690    1 4654.7170 &lt; 2.2e-16 ***
-nf            23987    5   12.4012 6.009e-12 ***
-rep            1271    2    1.6429    0.1936    
-Residuals   1328839 3435                        
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(anova_fit, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Anova Table (Type II tests)
-
-Response: yield
-           Sum Sq   Df F value    Pr(&gt;F)    
-nf          23987    5 12.4012 6.009e-12 ***
-rep          1271    2  1.6429    0.1936    
-Residuals 1328839 3435                      
+(Intercept)  799899    1 2063.2074 &lt; 2.2e-16 ***
+nf             7035    5    3.6290  0.002818 ** 
+rep              88    2    0.1139  0.892378    
+nf:rep          977   10    0.2520  0.990548    
+Residuals   1327862 3425                        
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -702,10 +729,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="anova-no-intercept" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="anova-no-intercept"><span class="header-section-number">3.4</span> ANOVA, no-intercept</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>anova_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(anova_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>anova_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(anova_noint, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Anova Table (Type II tests)
+<pre><code>Anova Table (Type III tests)
 
 Response: yield
            Sum Sq   Df   F value Pr(&gt;F)    
@@ -714,6 +741,60 @@ rep          1271    2    1.6429 0.1936
 Residuals 1328839 3435                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = yield ~ nf + rep, data = data_corn)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-52.062 -15.476  -3.079  13.468  44.495 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  64.7216     0.9486  68.225  &lt; 2e-16 ***
+nfN1          3.6395     1.1600   3.138  0.00172 ** 
+nfN2          4.6679     1.1630   4.014 6.11e-05 ***
+nfN3          5.3600     1.1610   4.617 4.04e-06 ***
+nfN4          7.5916     1.1625   6.530 7.53e-11 ***
+nfN5          7.8559     1.1610   6.767 1.54e-11 ***
+repR2        -0.3301     0.8213  -0.402  0.68775    
+repR3         1.0915     0.8210   1.329  0.18377    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 19.67 on 3435 degrees of freedom
+Multiple R-squared:  0.01865,   Adjusted R-squared:  0.01665 
+F-statistic: 9.327 on 7 and 3435 DF,  p-value: 1.708e-11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = yield ~ -1 + nf + rep, data = data_corn)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-52.062 -15.476  -3.079  13.468  44.495 
+
+Coefficients:
+      Estimate Std. Error t value Pr(&gt;|t|)    
+nfN0   64.7216     0.9486  68.225   &lt;2e-16 ***
+nfN1   68.3611     0.9464  72.235   &lt;2e-16 ***
+nfN2   69.3895     0.9495  73.082   &lt;2e-16 ***
+nfN3   70.0816     0.9478  73.940   &lt;2e-16 ***
+nfN4   72.3132     0.9491  76.195   &lt;2e-16 ***
+nfN5   72.5775     0.9478  76.573   &lt;2e-16 ***
+repR2  -0.3301     0.8213  -0.402    0.688    
+repR3   1.0915     0.8210   1.329    0.184    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 19.67 on 3435 degrees of freedom
+Multiple R-squared:  0.9268,    Adjusted R-squared:  0.9266 
+F-statistic:  5433 on 8 and 3435 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -725,9 +806,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><strong>Linearity</strong>: Relationship between predictors and response is linear (continuous).</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual diagnostics</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual diagnostics</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -740,8 +821,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><strong>Normality of Residuals</strong>: Residuals should be normally distributed.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(anova_fit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(anova_fit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -754,8 +835,9 @@ W = 0.94724, p-value &lt; 2.2e-16</code></pre>
 <li><strong>Homoscedasticity</strong>: Equal variance across all levels of predictors.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homoscedasticity check</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homoscedasticity check</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(anova_crd) <span class="co">#1-way anova, only nf and CRD</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(anova_fit) <span class="co">#2-way anova including blocks</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li><strong>Independence</strong>: Observations are independent (i.e.&nbsp;the “error” of replications is independent).</li>
@@ -765,7 +847,7 @@ W = 0.94724, p-value &lt; 2.2e-16</code></pre>
 <li><strong>Performance package</strong> With the <code>performance</code> package, we could check all at once.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -779,20 +861,22 @@ W = 0.94724, p-value &lt; 2.2e-16</code></pre>
 <h2 data-number="5" class="anchored" data-anchor-id="model-selection-aicbic-criteria"><span class="header-section-number">5</span> Model Selection: AIC/BIC Criteria</h2>
 <section id="candidate-models" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="candidate-models"><span class="header-section-number">5.1</span> Candidate models</h3>
+<p>These are all fixed-effect models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># null model</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>lm_00 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data_corn)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplest model</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>lm_01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add year</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>lm_02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> year <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add topo</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>lm_03 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> topo <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add year and topo</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>lm_04 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> year <span class="sc">+</span> topo <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects and interactions</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>lm_05 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf<span class="sc">*</span>year<span class="sc">*</span>topo <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># null model</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>lm_00 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data_corn)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplest model</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>lm_01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add year</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>lm_02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> year <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add topo</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>lm_03 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> topo <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add year and topo</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>lm_04 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> year <span class="sc">+</span> topo <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects and interactions</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>lm_05 <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> nf<span class="sc">*</span>year<span class="sc">*</span>topo <span class="sc">+</span> rep, <span class="at">data =</span> data_corn)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">#lm_05 &lt;- lm(yield ~ nf + year + topo + nf:year + nf:topo + year:topo + nf:year:topo + rep, data = data_corn)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="selection-criteria" class="level3" data-number="5.2">
@@ -803,7 +887,7 @@ W = 0.94724, p-value &lt; 2.2e-16</code></pre>
 <li><strong>F-tests</strong> evaluate if added predictors significantly improve model fit via sum of squares and degrees of freedom.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_01, lm_02, lm_03, lm_04, lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_01, lm_02, lm_03, lm_04, lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -829,7 +913,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><strong>AIC</strong> balances goodness of fit with model complexity.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lm_01, lm_02, lm_03, lm_04, lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(lm_01, lm_02, lm_03, lm_04, lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      df      AIC
 lm_01  9 30294.35
@@ -846,7 +930,7 @@ lm_05 51 25893.36</code></pre>
 <li><strong>BIC</strong> applies a stricter penalty for complexity, favoring simpler models.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(lm_01, lm_02, lm_03, lm_04, lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(lm_01, lm_02, lm_03, lm_04, lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      df      BIC
 lm_01  9 30349.64
@@ -862,8 +946,8 @@ lm_05 51 26206.71</code></pre>
 <section id="significance-of-effects" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="significance-of-effects"><span class="header-section-number">6</span> Significance of effects</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare Anova sum of squares</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(lm_05, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare Anova sum of squares</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(lm_05, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
@@ -881,7 +965,7 @@ Residuals    361197 3393
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(lm_05, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(lm_05, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
@@ -907,9 +991,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="interaction" class="level3" data-number="7.1">
 <h3 data-number="7.1" class="anchored" data-anchor-id="interaction"><span class="header-section-number">7.1</span> Interaction</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons among treatment means</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(lm_05, pairwise <span class="sc">~</span> year<span class="sc">:</span>topo) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(., <span class="at">level =</span> <span class="fl">0.05</span>, <span class="at">decreasing =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons among treatment means</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(lm_05, pairwise <span class="sc">~</span> year<span class="sc">:</span>topo) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(., <span class="at">level =</span> <span class="fl">0.05</span>, <span class="at">decreasing =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> year topo emmean    SE   df lower.CL upper.CL .group  
  2001 HT     44.6 0.497 3393     44.6     44.6  1      
@@ -935,8 +1019,8 @@ NOTE: If two or more means share the same grouping symbol,
 <h3 data-number="7.2" class="anchored" data-anchor-id="alternative"><span class="header-section-number">7.2</span> Alternative</h3>
 <p>Using the same model, same sum of squares we could group comparisons differently. In this case, showing comparisons of topo means, grouped by “year”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(lm_05, pairwise <span class="sc">~</span> topo, <span class="at">by =</span> <span class="st">"year"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(., <span class="at">level =</span> <span class="fl">0.05</span>, <span class="at">decreasing =</span> <span class="cn">FALSE</span>, <span class="at">Letters =</span> letters) <span class="co"># add letters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(lm_05, pairwise <span class="sc">~</span> topo, <span class="at">by =</span> <span class="st">"year"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(., <span class="at">level =</span> <span class="fl">0.05</span>, <span class="at">decreasing =</span> <span class="cn">FALSE</span>, <span class="at">Letters =</span> letters) <span class="co"># add letters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>year = 1999:
  topo emmean    SE   df lower.CL upper.CL .group
@@ -960,13 +1044,13 @@ NOTE: If two or more means share the same grouping symbol,
       then we cannot show them to be different.
       But we also did not show them to be the same. </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By default in R</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>LETTERS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By default in R</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>LETTERS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S"
 [20] "T" "U" "V" "W" "X" "Y" "Z"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 [20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
@@ -979,20 +1063,21 @@ NOTE: If two or more means share the same grouping symbol,
 <section id="regression" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="regression"><span class="header-section-number">8.1</span> Regression</h3>
 <ul>
-<li><p><strong>Intercept</strong>: Baseline value of the dependent variable.</p></li>
-<li><p><strong>Slope</strong>: Change in response variable per unit increase in predictor.</p></li>
+<li><p><strong>Intercept (<span class="math inline">\(\beta_0\)</span>)</strong>: Baseline value of the dependent variable. Is the value of Y, when X = 0.</p></li>
+<li><p><strong>Slope (<span class="math inline">\(\beta_1\)</span>)</strong>: Change in response variable (Y) per unit increase in predictor (X).</p></li>
 <li><p><strong>p-value</strong>: Significance of predictor effect.</p></li>
 </ul>
 <p>We can extract regression coefficient estimates with the ‘coef()’ function, or with the ‘tidy()’ function of the “broom” package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting coefficients with coef()</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(reg_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting coefficients with coef()</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(reg_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)       nitro 
 65.84321305  0.06171718 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy summary of coefficients</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(reg_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy summary of coefficients</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>reg_coefs <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(reg_fit)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>reg_coefs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic  p.value
@@ -1011,8 +1096,8 @@ NOTE: If two or more means share the same grouping symbol,
 </ul>
 <p>We can also extract ANOVA coefficient estimates with the ‘coef()’ function, or with the ‘tidy()’ function of the “broom” package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting coefficients with coef()</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting coefficients with coef()</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept)             nfN1             nfN2             nfN3 
    -2.930444e+04     7.134866e+01     4.085152e+02     3.143485e+03 
@@ -1041,7 +1126,9 @@ nfN5:year:topoLO  nfN1:year:topoW  nfN2:year:topoW  nfN3:year:topoW
  nfN4:year:topoW  nfN5:year:topoW 
    -1.636535e+00    -7.268434e-01 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy summary of coefficients</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>anova_coefs <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lm_05)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>anova_coefs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 50 × 5
    term        estimate std.error statistic  p.value
@@ -1057,6 +1144,42 @@ nfN5:year:topoLO  nfN1:year:topoW  nfN2:year:topoW  nfN3:year:topoW
  9 topoLO        -839.   2527.      -0.332  7.40e- 1
 10 topoW        25181.   2438.      10.3    1.23e-24
 # ℹ 40 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(lm_00)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Linear Regression
+       R2: 0.000
+  adj. R2: 0.000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(lm_01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Linear Regression
+       R2: 0.019
+  adj. R2: 0.017</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(lm_02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Linear Regression
+       R2: 0.091
+  adj. R2: 0.088</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(lm_03)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Linear Regression
+       R2: 0.479
+  adj. R2: 0.477</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(lm_04)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Linear Regression
+       R2: 0.568
+  adj. R2: 0.567</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(lm_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Linear Regression
+       R2: 0.733
+  adj. R2: 0.729</code></pre>
 </div>
 </div>
 </section>
@@ -1637,8 +1760,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../outline/calendar.html" class="pagination-link" aria-label="Schedule">
-        <span class="nav-page-text">Schedule</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../coding/week_09/models_04.html" class="pagination-link" aria-label="15-Models IV">
+        <span class="nav-page-text">15-Models IV</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

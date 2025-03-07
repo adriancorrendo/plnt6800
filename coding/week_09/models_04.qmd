@@ -1,0 +1,516 @@
+---
+title: "Models IV: Mixed Models I"
+author: "Dr. Adrian Correndo"
+date: "2025-03-07"
+categories: [linear models, R, statistics, agriculture]
+abstract-title: 'Summary'
+abstract: 'This tutorial provides a workflow to analyze two very common types of mixed models data in agriculture: Blocks and Split-Plots.'
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    number-sections: true
+    table-class: "table table-striped table-hover"
+editor: source
+execute:
+  echo: true
+  warning: false
+  message: false
+smooth-scroll: true
+bibliography: references.bib
+link-citations: TRUE
+---
+
+```{r setup, include=FALSE}
+#| include: false
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  tidy = TRUE
+  )
+
+```
+
+# Introduction
+
+After planning the experimental design, identifying dependent variable, independent variable(s), conducting the experiment, and collecting the data...the expected path would be as follows:
+
+```{mermaid}
+%%| echo: true
+
+flowchart LR
+  A[Dig the data] --> B{Model Selection}
+  B --> C[Significant\nEffects?]
+  subgraph Inference
+  C -->|Yes| D[Comparisons]
+  end
+  
+```
+
+# What are Mixed Models?
+
+In simple words, the rationale behind mixed models is the simultaneous presence of components that model the EXPECTED VALUE (fixed) as well as the VARIANCE (random).
+
+Specifically, today we are going to cover LINEAR MIXED MODELS, which make the following assumptions [@Bolker_etal_2022]:
+
+-   The **expected values** of the responses are **linear combinations** of the fixed predictor variables and the random effects.
+
+-   The conditional distribution of the variable response is Gaussian (equivalently, the errors are "Normal").
+
+-   The random effects are normally distributed. Normally, we assume that the expected value of a random effect is equal to zero, but with a positive variance.
+
+::: callout-note
+We are going to employ the most used packages and/or functions for `frequentist` LMMs:
+
+-   **nlme**: nlme::lme() provides REML or ML estimation. Allows multiple nested random effects, and provides structures for modeling heteroscedastic and/or correlated errors (spoiler for repeated measures analysis). This is already part of base R.
+-   **lme4**: lmer4::lmer() provides REML or ML estimation. Allows multiple nested or crossed random effects, can compute profile confidence intervals and conduct parametric bootstrapping.
+:::
+
+For more information about mixed models in R, please, check out the new [CRAN Task View: Mixed, Multilevel, and Hierarchical Models in R](https://cran.r-project.org/web/views/MixedModels.html).
+
+
+
+This workflow has been created using [mermaid](https://mermaid-js.github.io/mermaid/#/)
+
+# Required packages for today
+
+```{r packages}
+#| echo: true
+#| collapse: true
+
+library(pacman)
+p_load("readxl") # To open/save excel files
+p_load('dplyr', "tidyr","purrr", "forcats", "stringr") # Data wrangling
+p_load("nlme", "lme4") # Mixed models libraries
+p_load("broom", "broom.mixed") # Managing models results
+p_load("performance") # Check assumptions and performance
+p_load("emmeans","multcomp","multcompView",
+         "car", "multilevelmod") # Aov and mult comp
+p_load("ggplot2") # Figures
+p_load("agricolae") # Miscellaneous functions
+p_load("agridat") # For data
+```
+
+Among many packages we are going to use today, there is one from the [tidymodels family](https://www.tidymodels.org/) that was specially designed to convert statistical objects into tidy format: the *broom* package [@broom]. Particularly for mixed models, we will also need its `spinoff`: the *broom.mixed* package [@broom.mixed] .
+
+The broom package offer three key functions to manipulate models' outcomes:
+
+-   `glance()` to report information about the entire model
+
+-   `tidy()` to summarize information about model components, and
+
+-   `augment()` to add information about observations to a dataset
+
+# What is a design in Blocks?
+## Corn Data
+```{r}
+data_corn <- agridat::lasrosas.corn
+```
+
+
+First, the most important step is ALWAYS to write down the model.
+
+##  Block as Fixed
+
+In a traditional approach blocks are defined as fixed, affecting the mean of the expected value. Yet there is no consensus about treating blocks as fixed or as random. For more information, read @Dixon_2016.
+
+Let's define the model. For simplification (and avoid writing interaction terms), here we are going to consider that $\tau_i$ is the "treatment".
+
+$$ y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij} $$
+
+$$ \epsilon_{ij} \sim N(0, \sigma^2_{e} )$$ where $\mu$ represents the overall mean (if intercept is used), $\tau_i$ is the effect of treatment-j over $\mu$, $\beta_j$ is the effect of block-j over $\mu$, and $\epsilon_{ij}$ is the random effect of each experimental unit.
+
+```{r block_fixed}
+# SIMPLEST MODEL
+block_fixed <- lm(
+  # Response variable
+  yield ~ 
+    # Fixed
+    nf + rep,
+  # Data
+  data = data_corn)
+
+car::Anova(block_fixed, type=3)
+```
+
+## Block as Random
+
+An alternative approach is considering a MIXED MODEL, where blocks are considered "random". Basically, we add a term to the model that it is expected to show a "null" overall effect over the mean of the variable of interest but introduces "noise". By convention, a random effect is expected to have an expected value equal to zero but a positive variance as follows: $$ y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij} $$ $$ \beta_j \sim N(0, \sigma^2_{b} )$$ $$ \epsilon_{ij} \sim N(0, \sigma^2_{e} )$$ Similar than before, $\mu$ represents the overall mean (if intercept is used), $\tau_i$ is the effect of treatment-j over $\mu$, $\beta_j$ is the "random" effect of block-j over $\mu$, and $\epsilon_{ij}$ is the random effect of each experimental unit.
+
+So what's the difference? Simply specifying this component: $$ \beta_j \sim N(0, \sigma^2_b) $$, which serves to model the variance.
+
+How do we write that?
+
+### nlme
+```{r block_random_nlme}
+# RANDOM BLOCK
+block_random_nlme <- 
+  nlme::lme(
+    # Fixed
+    yield ~ nf,
+    # Random
+    random = ~1|rep,
+    # Data
+    data = data_corn)
+
+# ANOVA
+car::Anova(block_random_nlme, type=3)
+```
+
+### lme4
+```{r block_random_lme4}
+# RANDOM BLOCK
+block_random_lme4 <- 
+  lme4::lmer(# Response variable
+                   yield ~ 
+                   # Fixed (Removing intercept? Why?)
+                   nf +
+                   # Random
+                   (1|rep), 
+                   # Data
+                   data=data_corn)
+
+# ANOVA
+car::Anova(block_random_lme4, type=3)
+```
+
+
+# What is a SPLIT-PLOT?
+
+Split-plot arrangement is frequently used in experiments including several factors (factorial). The main characteristic is that the arrangement follows a hierarchy: there are main plots (a.k.a. whole plots) covering one of the factors, and then there are "subplots" within each level of the main that include levels of a second factor, and so on. Therefore, the main plot serves as a "block" for the subplots, and thus, we are setting boundaries to ("restricting") the randomization of the subplot factor.
+
+::: callout-important
+-   **DESIGN**: We intentionally call split-plot "arrangement" because they can fit into multiple "designs" such as completely randomized (CRD), randomized complete blocks design (RCBD), or latin-squares design (LSD).
+
+-   **INFERENCE POWER**: What happens with split-plot design is that the main plot has less degrees of freedom than the factor at the subplot, and thus, we have more inference power at the factor in the subplot hierarchy (and the interaction). So consider this before it's too late!
+:::
+
+## Create a split-plot design
+
+The *agricolae* package [@agricolae] brings a set of very useful functions to generate different experimental designs, among them, the split-plot. Let's see an example:
+
+```{r agricolae}
+
+# Example with agricolae
+
+# Define plots
+mainplot <- c(0,50,80,110,140)
+subplot <- c("Var_1", "Var_2", "Var_3")
+
+# Produce
+sp_design <- agricolae::design.split(
+                        trt1 = mainplot, trt2 = subplot, 
+                        design = "rcbd", r = 3, 
+                        randomization = TRUE, seed = 4561)
+
+#View(sp_design)
+
+#View(sp_design$book)
+
+```
+
+## Split-Plot as a Mixed Model
+
+When moving to a Split-Plot design, an additional source of error is introduced: Main plot error (\sigma^2_m), which accounts for variation among the whole plots within each block.
+
+$$y_{ijk} = \mu + \alpha_i + \tau_k + (\alpha\tau){ik} + \beta_j + \gamma{ij} + \epsilon_{ijk}$$
+
+where:
+	•	$\alpha_i$ = Fixed effect of the main-plot factor (e.g., tillage), <br/>
+	
+	•	$\tau_k$ = Fixed effect of the subplot factor (e.g., nitrogen rate),  <br/>
+	
+	•	$(\alpha\tau)_{ik}$ = Fixed interaction effect between main and subplot factors,  <br/>
+	
+	•	$\beta_j \sim N(0, \sigma^2_b)$ = Random effect of block,  <br/>
+	
+	•	$\gamma_{ij} \sim N(0, \sigma^2_m)$ = Random effect of main plot within block (main-plot error),  <br/>
+	
+	•	$\epsilon_{ijk} \sim N(0, \sigma^2_e)$ = Random error of experimental unit.  <br/>
+	
+
+Thus, three sources of variability are modeled:
+	1.	Block-to-block variation → $\sigma^2_b$
+	2.	Main-plot variation (whole plot error) → $\sigma^2_m$
+	3.	Residual variation (subplot error) → $\sigma^2_e$
+
+## Data
+
+The following is just a fake data set where we have a split-splot arrangement within an RCBD (BLOCK), where at the main plot corresponds to nitrogen rate (NRATE, with 5 levels), and the subplot to wheat variety (VARIETY, with 3 levels).
+
+```{r split_plot_data}
+
+# Read csv
+#split_plot_data_0 <- read.csv(file = "../data/01_split_plot_data.csv", header = TRUE)
+
+# File online? Try this...(remove "#")
+url_split <- "https://raw.githubusercontent.com/adriancorrendo/tidymixedmodelsweb/master/data/01_split_plot_data.csv"
+
+split_plot_data_0 <- read.csv(url_split)
+
+
+# Data hierarchy
+split_plot_data <- 
+  split_plot_data_0 %>% 
+  mutate(NRATE = factor(NRATE)) %>% 
+  # Identify Main Plot
+  #mutate(main = factor(BLOCK:NRATE)) %>% 
+  dplyr::select(BLOCK, NRATE, VARIETY, YIELD)
+
+#View(split_plot_data)
+
+```
+
+## Explore the data
+
+Now, let's use several functions to explore the data.
+
+### glimpse()
+
+For example, the `glimpse()` function from the dplyr package [@dplyr] allows to take a quick look to the columns in our data frame (it's like a transposed version of `print()`)
+
+```{r sp_glimpse}
+
+# Glimpse from dplyr
+dplyr::glimpse(split_plot_data)
+
+```
+
+### skim()
+
+Then, the `skim()` function from the skimr package [@skimr] allows to take a deeper look to all the variables (columns), creating a quick summary that reports the presence of missing values, etc., etc.
+
+```{r sp_skimr}
+
+# Skim from skimr
+skimr::skim(split_plot_data)
+
+```
+
+### ggplot()
+
+Of course, we shouldn't miss to use ggplot2 for a better look
+
+```{r sp_ggplot}
+
+# Boxplot
+split_plot_data %>% 
+  # Plot
+ggplot() + 
+  # Boxplots
+  geom_boxplot(aes(x = NRATE, y = YIELD, fill = VARIETY))+
+  geom_jitter(aes(x = NRATE, y = YIELD, fill = VARIETY))+
+  # Plot by site
+  facet_wrap(~VARIETY)+
+  scale_y_continuous(limits = c(0,10000), breaks = seq(0,10000, by=2000))+
+  # Change theme
+  theme_bw()
+
+```
+
+## Models
+
+For the analysis of split-plot designs we basically need to specify an error term that otherwise the model will not see: the MAIN PLOT ERROR TERM (see Venables and Ripley (2002), pg. 283). By default, the random term that the computer will identify is the one happening at the lowest level in the hierarchy (replication). However, we need to specify that the main plot serves as a kind of block to the design.
+
+### nlme::lme
+
+```{r sp_nlme}
+
+# Model without split component
+no_split <- nlme::lme(# Response variable
+                 YIELD ~
+                   # Fixed
+                   0 + NRATE*VARIETY,
+                   # Random error of MAINPLOT (NRATE nested in BLOCK)
+                   random = ~1|BLOCK, 
+                   # Data
+                   data = split_plot_data,
+                   # Method
+                   method = "REML")
+
+# Model with split component
+split_nlme <- nlme::lme(# Response variable
+                 YIELD ~
+                   # Fixed (Removing intercept? Why?)
+                   0 + NRATE*VARIETY,
+                   # Random error of MAINPLOT (NRATE nested in BLOCK)
+                   random = ~1|BLOCK/NRATE, 
+                   # Data
+                   data = split_plot_data,
+                   # Method
+                   method = "REML")
+
+# Type 3 (when interaction is present)
+car::Anova(split_nlme, type = 3)
+
+# Let's see the difference between models in terms of DFs
+summary(no_split)
+
+summary(split_nlme)
+```
+
+### lmer code (lme4)
+
+```{r sp_lme4}
+
+split_lme4 <- lme4::lmer(# Response variable
+                   YIELD ~ 
+                   # Fixed (Removing intercept? Why?)
+                   0+NRATE*VARIETY +
+                   # Random
+                   (1|BLOCK/NRATE), 
+                   # Data
+                   data=split_plot_data,
+                   contrasts = list(NRATE = "contr.sum", VARIETY = "contr.sum"
+                   )
+)
+
+# Alternative (being more explicit with the syntax)
+# split_lme4 <- lme4::lmer(YIELD ~ NRATE * VARIETY + (1|BLOCK) + (1|BLOCK:NRATE), data=split_plot_data)
+
+# Type 3
+car::Anova(split_lme4, type = 3)
+
+# Adjusting options for constrasts
+options(contrasts = c("contr.sum", "contr.poly")) # Ensure correct contrasts for Type 3
+
+car::Anova(split_nlme, type = 3)
+
+```
+
+## Check assumptions
+
+```{r  sp_check}
+#| fig.height: 10
+#| fig.width: 6
+
+# Single tests
+performance::check_normality(split_lme4)
+performance::check_homogeneity(split_lme4)
+performance::check_autocorrelation(split_lme4)
+performance::check_outliers(split_lme4)
+performance::check_collinearity(split_lme4)
+
+# Check Plots
+performance::check_model(split_lme4)
+
+```
+
+## Comparisons
+
+```{r sp_comparisons_1}
+
+# Estimate the comparisons (pairwise)
+split_lm4_comparisons <-  
+  split_lme4 %>% 
+  # ~ specifies the level of comparison (marginal or interaction)
+  # Since interaction was significant we specify ~ Interaction (Factor1*Factor2)
+  emmeans(., ~ NRATE*VARIETY)
+
+# Add letters
+split_lm4_comparisons %>% 
+  # Compact Letters Display (cld)
+  cld(., 
+      # Specify grouped comparisons by...
+      #by = "NRATE", 
+      # Order
+      decreasing = TRUE, details=FALSE, reversed=TRUE, 
+      # Specs
+      alpha=0.05,  adjust = "tukey", Letters=LETTERS)
+
+```
+
+# Split-split plot
+
+Compared to a split-plot, a split-split one is adding another hierarchy of nested effects to the model.
+
+## Data
+### Details
+An interesting split-split plot experiment in which the sub-plot treatments have a 2*5 factorial structure.
+
+An experiment was conducted in 1932 on the experimental field of the Dominion Rust Research Laboratory. The study was designed to determine the effect on the incidence of root rot, of variety of wheat, kinds of dust for seed treatment, method of application of the dust, and efficacy of soil inoculation with the root-rot organism.
+
+The field had 4 blocks.
+
+Each block has 2 whole plots for the genotypes.
+
+Each whole-plot had 10 sub-plots for the 5 different kinds of dust and 2 methods of application.
+
+Each sub-plot had 2 sub-sub-plots, one for inoculated soil and the other one for uninoculated soil.
+
+**C. H. Goulden**, (1939). Methods of statistical analysis, 1st ed. Page 18. https://archive.org/stream/methodsofstatist031744mbp
+
+```{r}
+splitsplit_data <- agridat::goulden.splitsplit
+
+glimpse(splitsplit_data)
+
+# Make sure all factors are not numbers or integers.
+splitsplit_data <- splitsplit_data %>% 
+  mutate(trt = as.factor(trt))
+
+```
+
+
+## Models
+### nlme
+```{r}
+# Model with split component
+splitsplit_nlme <- nlme::lme(# Response variable
+                 yield ~
+                   # Fixed (Removing intercept? Why?)
+                   0 + gen*trt*inoc,
+                   # Random error of MAINPLOT (NRATE nested in BLOCK)
+                   random = ~1|block/gen/trt, 
+                   # Data
+                   data = splitsplit_data,
+                   # Method
+                   method = "REML")
+
+# Type 3 (when interaction is present)
+car::Anova(splitsplit_nlme, type = 3)
+
+```
+
+### lme4
+```{r}
+splitsplit_lme4 <- lme4::lmer(# Response variable
+                   yield ~ 
+                   # Fixed (Removing intercept? Why?)
+                   0+gen*trt*inoc +
+                   # Random
+                   (1|block/gen/trt), 
+                   # Data
+                   data=splitsplit_data)
+
+# Type 3 (when interaction is present)
+car::Anova(splitsplit_lme4, type = 3)
+```
+
+## Comparisons
+
+```{r sp_comparisons_2}
+
+# Estimate the comparisons (pairwise)
+splitsplit_lm4_comparisons <-  
+  splitsplit_lme4 %>% 
+  # ~ specifies the level of comparison (marginal or interaction)
+  # Since interaction was significant we specify ~ Interaction (Factor1*Factor2)
+  emmeans(., ~ trt:inoc)
+
+# Add letters
+splitsplit_lm4_comparisons %>% 
+  # Compact Letters Display (cld)
+  cld(., 
+      # Specify grouped comparisons by...
+      by = "trt", 
+      # Order
+      decreasing = TRUE, details=FALSE, reversed=TRUE, 
+      # Specs
+      alpha=0.05,  adjust = "tukey", Letters=LETTERS)
+
+```
+
+

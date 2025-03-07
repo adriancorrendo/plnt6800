@@ -75,18 +75,20 @@ glimpse(data_corn)
 ### Simple Linear Regression (Continuous Predictor)
 
 ```{r}
-reg_fit <- lm(yield ~ nitro, data = data_corn)
+reg_fit <- lm(yield ~ 1 + nitro, data = data_corn)
 summary(reg_fit)
+
 # Comparing analysis of variance options
 anova(reg_fit)
-Anova(reg_fit, type = 2)
-Anova(reg_fit, type = 3)
+car::Anova(reg_fit, type = 2)
+car::Anova(reg_fit, type = 3)
 ```
 
 ### Linear Regression, no-intercept
 
 ```{r}
-reg_noint <- lm(yield ~ -1 + nf, data = data_corn)
+reg_noint <- lm(yield ~ -1 + nitro, data = data_corn)
+summary(reg_fit)
 summary(reg_noint)
 
 # Comparing analysis of variance options
@@ -98,16 +100,24 @@ Anova(reg_noint, type = 2)
 ### ANOVA (Categorical Predictors)
 
 ```{r}
-anova_fit <- lm(yield ~ nf + rep, data = data_corn)
-Anova(anova_fit, type = 3)
-Anova(anova_fit, type = 2)
+anova_crd <- lm(yield ~ nf, data = data_corn) # assuming CRD
+anova_fit <- lm(yield ~ nf + rep, data = data_corn) # assuming RCBD
+anova_03 <- lm(yield ~ nf*rep, data = data_corn) # assuming RCBD
+
+Anova(anova_crd, type = 3)
+#Anova(anova_fit, type = 3)
+Anova(anova_03, type = 3)
+
 ```
 
 ### ANOVA, no-intercept
 
 ```{r}
 anova_noint <- lm(yield ~ -1 + nf + rep, data = data_corn)
-Anova(anova_noint)
+Anova(anova_noint, type = 3)
+
+summary(anova_fit)
+summary(anova_noint)
 ```
 
 ## Model Assumptions
@@ -133,7 +143,8 @@ shapiro.test(resid(anova_fit))
 
 ```{r eval=FALSE}
 # Homoscedasticity check
-leveneTest(anova_fit)
+leveneTest(anova_crd) #1-way anova, only nf and CRD
+leveneTest(anova_fit) #2-way anova including blocks
 ```
 
 4.  **Independence**: Observations are independent (i.e. the “error” of replications is independent).
@@ -149,7 +160,7 @@ performance::check_model(anova_fit)
 ## Model Selection: AIC/BIC Criteria
 
 ### Candidate models
-
+These are all fixed-effect models.
 ```{r}
 # null model
 lm_00 <- lm(yield ~ 1, data = data_corn)
@@ -164,6 +175,7 @@ lm_04 <- lm(yield ~ nf + year + topo + rep, data = data_corn)
 
 # Main effects and interactions
 lm_05 <- lm(yield ~ nf*year*topo + rep, data = data_corn)
+#lm_05 <- lm(yield ~ nf + year + topo + nf:year + nf:topo + year:topo + nf:year:topo + rep, data = data_corn)
 
 ```
 
@@ -199,7 +211,7 @@ Anova(lm_05, type = 3)
 ```{r}
 # Pairwise comparisons among treatment means
 emmeans(lm_05, pairwise ~ year:topo) %>% 
-  cld(., level = 0.05, decreasing = FALSE)
+  cld(., level = 0.05, decreasing = F)
 ```
 ### Alternative 
 Using the same model, same sum of squares we could group comparisons differently. In this case, showing comparisons of topo means, grouped by "year"
@@ -214,9 +226,9 @@ letters
 
 ## Interpreting Coefficients
 ### Regression
--   **Intercept**: Baseline value of the dependent variable.
+-   **Intercept ($\beta_0$)**: Baseline value of the dependent variable. Is the value of Y, when X = 0.
 
--   **Slope**: Change in response variable per unit increase in predictor.
+-   **Slope ($\beta_1$)**: Change in response variable (Y) per unit increase in predictor (X).
 
 -   **p-value**: Significance of predictor effect.
 
@@ -226,7 +238,8 @@ We can extract regression coefficient estimates with the 'coef()' function, or w
 coef(reg_fit)
 
 # Tidy summary of coefficients
-broom::tidy(reg_fit)
+reg_coefs <- broom::tidy(reg_fit)
+reg_coefs
 ```
 
 ### ANOVA
@@ -239,7 +252,16 @@ We can also extract ANOVA coefficient estimates with the 'coef()' function, or w
 # Extracting coefficients with coef()
 coef(lm_05)
 
-broom::tidy(lm_05)
+# Tidy summary of coefficients
+anova_coefs <- broom::tidy(lm_05)
+anova_coefs
+
+performance::r2(lm_00)
+performance::r2(lm_01)
+performance::r2(lm_02)
+performance::r2(lm_03)
+performance::r2(lm_04)
+performance::r2(lm_05)
 ```
 
 
