@@ -217,20 +217,8 @@ When moving to a Split-Plot design, an additional source of error is introduced:
 
 $$y_{ijk} = \mu + \alpha_i + \tau_k + (\alpha\tau){ik} + \beta_j + \gamma{ij} + \epsilon_{ijk}$$
 
-where:
-	•	$\alpha_i$ = Fixed effect of the main-plot factor (e.g., tillage), <br/>
+where: $\alpha_i$ = Fixed effect of the main-plot factor (e.g., tillage), $\tau_k$ = Fixed effect of the subplot factor (e.g., nitrogen rate), $(\alpha\tau)_{ik}$ = Fixed interaction effect between main and subplot factors, $\beta_j \sim N(0, \sigma^2_b)$ = Random effect of block, $\gamma_{ij} \sim N(0, \sigma^2_m)$ = Random effect of main plot within block (main-plot error),	$\epsilon_{ijk} \sim N(0, \sigma^2_e)$ = Random error of experimental unit.
 	
-	•	$\tau_k$ = Fixed effect of the subplot factor (e.g., nitrogen rate),  <br/>
-	
-	•	$(\alpha\tau)_{ik}$ = Fixed interaction effect between main and subplot factors,  <br/>
-	
-	•	$\beta_j \sim N(0, \sigma^2_b)$ = Random effect of block,  <br/>
-	
-	•	$\gamma_{ij} \sim N(0, \sigma^2_m)$ = Random effect of main plot within block (main-plot error),  <br/>
-	
-	•	$\epsilon_{ijk} \sim N(0, \sigma^2_e)$ = Random error of experimental unit.  <br/>
-	
-
 Thus, three sources of variability are modeled:
 	1.	Block-to-block variation → $\sigma^2_b$
 	2.	Main-plot variation (whole plot error) → $\sigma^2_m$

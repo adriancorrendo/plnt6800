@@ -743,8 +743,11 @@ F-statistic: 9.327 on 7 and 3435 DF,  p-value: 1.708e-11</code></pre>
 <h4 data-number="4.2.2" class="anchored" data-anchor-id="example-using-the-gaussian-family-with-log-link"><span class="header-section-number">4.2.2</span> Example using the Gaussian family with log link:</h4>
 <p>These approaches are particularly useful when yield data exhibit heteroscedasticity or skewness.</p>
 <ul>
-<li>For this first approach, the model assumes a multiplicative relationship between predictors and yield, modeling the expected value as an exponential function. If you want to stabilize variance or normalize the residuals, use the first approach.</li>
+<li>For this first approach, the model assumes a multiplicative relationship between predictors and yield, modeling the expected value as an exponential function.</li>
 </ul>
+<p>Thus, the underlying model is:<br>
+<span class="math display">\[E(Y) = \exp(X\beta)\]</span> , where the expected value of yield, <span class="math inline">\(E(Y)\)</span>, is modeled as an exponential function of the predictors <span class="math inline">\(\exp(X\beta)\)</span>.</p>
+<p>If you believe the relationship between predictors and the expected value of yield is multiplicative, use this approach.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using log link without manually transforming yield</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>glm_fit_02 <span class="ot">&lt;-</span> <span class="fu">glm</span>(yield <span class="sc">~</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> data_corn, </span>
@@ -780,8 +783,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>Alternatively, you may want to manually log-transform the response:</p>
 <ul>
-<li>For this second approach, the log-transformed yield is modeled as a linear function of the predictors, stabilizing variance or normalizing residuals. If you believe the relationship between predictors and the expected value of yield is multiplicative, use the second approach.</li>
+<li>For this second approach, the log-transformed yield is modeled as a linear function of the predictors, stabilizing variance or normalizing residuals.</li>
 </ul>
+<p>In the second case, the model is:<br>
+<span class="math display">\[\log(Y) = X\beta + \epsilon \]</span>,</p>
+<p>which is a linear model <span class="math inline">\(X\beta + \epsilon\)</span> on the log-transformed outcome, <span class="math inline">\(\log(Y)\)</span>.</p>
+<p>If you want to stabilize variance or normalize the residuals, use this second approach.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually log-transforming yield</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>glm_fit_03 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">log</span>(yield) <span class="sc">~</span> nf <span class="sc">+</span> rep, <span class="at">data =</span> lasrosas.corn, </span>
@@ -815,10 +822,6 @@ AIC: 1198.4
 Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
-<p>** Key Difference: ** - In the first case, the model is: $(Y) = X+ $, which is a linear model on the log-transformed outcome.</p>
-<ul>
-<li>In the second case, the model is: <span class="math inline">\(E(Y) = \exp(X\beta)\)</span> , where the expected value of yield is modeled as an exponential function of the predictors.</li>
-</ul>
 </section>
 </section>
 <section id="mixed-effects-models" class="level3" data-number="4.3">
@@ -1162,15 +1165,15 @@ N2 - N0 == 0   4.8232     0.7722   6.246  &lt; 0.001 ***
 N3 - N0 == 0   5.0724     0.7709   6.580  &lt; 0.001 ***
 N4 - N0 == 0   7.4876     0.7718   9.701  &lt; 0.001 ***
 N5 - N0 == 0   7.3672     0.7709   9.556  &lt; 0.001 ***
-N2 - N1 == 0   1.0184     0.7708   1.321  0.77334    
-N3 - N1 == 0   1.2676     0.7696   1.647  0.56709    
+N2 - N1 == 0   1.0184     0.7708   1.321  0.77337    
+N3 - N1 == 0   1.2676     0.7696   1.647  0.56708    
 N4 - N1 == 0   3.6828     0.7705   4.779  &lt; 0.001 ***
 N5 - N1 == 0   3.5624     0.7697   4.628  &lt; 0.001 ***
 N3 - N2 == 0   0.2492     0.7716   0.323  0.99954    
-N4 - N2 == 0   2.6644     0.7726   3.449  0.00759 ** 
+N4 - N2 == 0   2.6644     0.7726   3.449  0.00754 ** 
 N5 - N2 == 0   2.5440     0.7717   3.297  0.01271 *  
-N4 - N3 == 0   2.4152     0.7712   3.132  0.02173 *  
-N5 - N3 == 0   2.2948     0.7702   2.980  0.03452 *  
+N4 - N3 == 0   2.4152     0.7712   3.132  0.02166 *  
+N5 - N3 == 0   2.2948     0.7702   2.980  0.03450 *  
 N5 - N4 == 0  -0.1204     0.7712  -0.156  0.99999    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

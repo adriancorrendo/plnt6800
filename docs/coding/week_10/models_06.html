@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Adrian Correndo">
+<meta name="dcterms.date" content="2025-03-14">
+
+<title>Non-Linear Regression with R – PLNT6800 - Winter 2025</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../outline/calendar.html" rel="next">
+<link href="../../coding/week_10/models_05.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f2a1071e85750ec973bbb8a8f120da0f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f2a1071e85750ec973bbb8a8f120da0f.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e759c8361f0112bf6e2955a60a6c0828.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-5ccce6f18d703cb4568c738a25a74289.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Non-Linear Regression with R – PLNT6800 - Winter 2025">
+<meta property="og:description" content="This tutorial provides an overview of non-linear regression models in R using agricultural data. We will explore different non-linear models, their applications, and how to implement them with both nls() and nlme() functions.">
+<meta property="og:image" content="https://adriancorrendo.github.io/coding/week_10/models_06_files/figure-html/unnamed-chunk-3-1.png">
+<meta property="og:site_name" content="PLNT6800 - Winter 2025">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+<meta name="twitter:title" content="Non-Linear Regression with R – PLNT6800 - Winter 2025">
+<meta name="twitter:description" content="This tutorial provides an overview of non-linear regression models in R using agricultural data. We will explore different non-linear models, their applications, and how to implement them with both nls() and nlme() functions.">
+<meta name="twitter:image" content="https://adriancorrendo.github.io/coding/week_10/models_06_files/figure-html/unnamed-chunk-3-1.png">
+<meta name="twitter:creator" content="@aacorrendo">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">PLNT6800 - Winter 2025</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://adriancorrendo.github.io/"> <i class="bi bi-globe" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/adriancorrendo/plnt6800/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/aacorrendo"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/adriancorrendo/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../coding/week_01/essentials_01.html">Lessons</a></li><li class="breadcrumb-item"><a href="../../coding/week_10/models_06.html">17-Models VI</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../images/plnt6800_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://github.com/adriancorrendo/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/day1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../software/software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_01/essentials_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-Essentials of R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_02/02_fundamentals_rpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-Fundamentals of packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_02/03_versioncontrol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-Git &amp; GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_03/04_datawrangling_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-Data Wrangling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_03/05_datawrangling_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-Data Wrangling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_04/06_datawrangling_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-Data Wrangling III</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_04/07_ggplot2_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-Data viz I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_05/08_ggplot2_adv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-Data viz II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_05/09_ggplot2_plus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-Data viz III</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_06/10_iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-Iteration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_06/11_weather.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-Weather data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_08/models_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-Models I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_08/models_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-Models II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_09/models_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-Models III</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_09/models_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-Models IV</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_10/models_05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-Models V</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_10/models_06.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">17-Models VI</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Calendar</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../outline/calendar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course Outline</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../outline/outline.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Outline</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Content</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul>
+  <li><a href="#why-non-linear-regression" id="toc-why-non-linear-regression" class="nav-link" data-scroll-target="#why-non-linear-regression"><span class="header-section-number">1.1</span> Why Non-Linear Regression?</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2</span> Data</a>
+  <ul>
+  <li><a href="#visualizing-the-data" id="toc-visualizing-the-data" class="nav-link" data-scroll-target="#visualizing-the-data"><span class="header-section-number">2.1</span> Visualizing the Data</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-non-linear-model-using-nls" id="toc-fitting-a-non-linear-model-using-nls" class="nav-link" data-scroll-target="#fitting-a-non-linear-model-using-nls"><span class="header-section-number">3</span> Fitting a Non-Linear Model using <code>nls()</code></a></li>
+  <li><a href="#fitting-a-non-linear-mixed-model-using-nlme" id="toc-fitting-a-non-linear-mixed-model-using-nlme" class="nav-link" data-scroll-target="#fitting-a-non-linear-mixed-model-using-nlme"><span class="header-section-number">4</span> Fitting a Non-Linear Mixed Model using <code>nlme()</code></a>
+  <ul>
+  <li><a href="#only-topo" id="toc-only-topo" class="nav-link" data-scroll-target="#only-topo"><span class="header-section-number">4.1</span> only topo</a></li>
+  <li><a href="#only-year" id="toc-only-year" class="nav-link" data-scroll-target="#only-year"><span class="header-section-number">4.2</span> only year</a></li>
+  <li><a href="#topo-year" id="toc-topo-year" class="nav-link" data-scroll-target="#topo-year"><span class="header-section-number">4.3</span> topo + year</a></li>
+  <li><a href="#minpack.lm" id="toc-minpack.lm" class="nav-link" data-scroll-target="#minpack.lm"><span class="header-section-number">4.4</span> minpack.lm</a></li>
+  <li><a href="#topoyear" id="toc-topoyear" class="nav-link" data-scroll-target="#topoyear"><span class="header-section-number">4.5</span> topo*year</a></li>
+  </ul></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="header-section-number">5</span> Model selection</a>
+  <ul>
+  <li><a href="#aic" id="toc-aic" class="nav-link" data-scroll-target="#aic"><span class="header-section-number">5.1</span> AIC:</a></li>
+  <li><a href="#aicc" id="toc-aicc" class="nav-link" data-scroll-target="#aicc"><span class="header-section-number">5.2</span> AICc:</a></li>
+  <li><a href="#delta-aicc-and-aicc-weights" id="toc-delta-aicc-and-aicc-weights" class="nav-link" data-scroll-target="#delta-aicc-and-aicc-weights"><span class="header-section-number">5.3</span> Delta AICc and AICc Weights</a></li>
+  <li><a href="#using-aiccmodavg-in-r" id="toc-using-aiccmodavg-in-r" class="nav-link" data-scroll-target="#using-aiccmodavg-in-r"><span class="header-section-number">5.4</span> Using <code>AICcmodavg</code> in R</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5.5</span> Conclusion</a></li>
+  </ul></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">6</span> Visualization</a></li>
+  <li><a href="#other-alternatives" id="toc-other-alternatives" class="nav-link" data-scroll-target="#other-alternatives"><span class="header-section-number">7</span> Other alternatives</a>
+  <ul>
+  <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping"><span class="header-section-number">7.0.1</span> Bootstrapping</a></li>
+  </ul></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1"><span class="header-section-number">8</span> Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../coding/week_01/essentials_01.html">Lessons</a></li><li class="breadcrumb-item"><a href="../../coding/week_10/models_06.html">17-Models VI</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Non-Linear Regression with R</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nonlinear models</div>
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">statistics</div>
+    <div class="quarto-category">agriculture</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Adrian Correndo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 14, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Summary</div>
+    This tutorial provides an overview of non-linear regression models in R using agricultural data. We will explore different non-linear models, their applications, and how to implement them with both <code>nls()</code> and <code>nlme()</code> functions.
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Non-linear regression is a statistical technique used to model relationships that cannot be well-represented by a straight line. Unlike linear regression, which assumes a constant rate of change, non-linear models accommodate curves and complex relationships in data.</p>
+<p>This tutorial will:</p>
+<ul>
+<li>Introduce the concept of non-linear regression. <br></li>
+<li>Show how to fit non-linear models in R using <code>nls()</code> and <code>nlme()</code>. <br></li>
+<li>Try the minpack.lm package for starting values. <br></li>
+<li>Conduct model selection using AIC and AICc. <br></li>
+<li>Apply these concepts to the <code>agridat::lasrosas.corn</code> dataset. <br></li>
+</ul>
+<section id="why-non-linear-regression" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="why-non-linear-regression"><span class="header-section-number">1.1</span> Why Non-Linear Regression?</h2>
+<p>Many real-world relationships are inherently non-linear. Examples include:</p>
+<ul>
+<li>Growth models (e.g., exponential or power functions).</li>
+<li>Yield response to fertilizers.</li>
+<li>Enzyme kinetics in biological systems.</li>
+</ul>
+<p><strong>Required packages for today</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(dplyr, tidyr) <span class="co"># data wrangling</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(ggplot2) <span class="co">#plots</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(agridat) <span class="co"># dataset</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(nls, nlme) <span class="co"># non-linear models</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(minpack.lm) <span class="co"># convergence help for nl models</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(AICcmodavg) <span class="co"># corrected AIC performance</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(soiltestcorr) <span class="co"># nl models for soil fertility</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="data" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Data</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_corn <span class="ot">&lt;-</span> agridat<span class="sc">::</span>lasrosas.corn <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topo =</span> <span class="fu">as.factor</span>(topo),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect data</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_corn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year       lat      long yield nitro topo     bv rep nf
+1 1999 -33.05113 -63.84886 72.14 131.5    W 162.60  R1 N5
+2 1999 -33.05115 -63.84879 73.79 131.5    W 170.49  R1 N5
+3 1999 -33.05116 -63.84872 77.25 131.5    W 168.39  R1 N5
+4 1999 -33.05117 -63.84865 76.35 131.5    W 176.68  R1 N5
+5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5
+6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_corn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   year           lat              long            yield       
+ 1999:1738   Min.   :-33.05   Min.   :-63.85   Min.   : 12.66  
+ 2001:1705   1st Qu.:-33.05   1st Qu.:-63.85   1st Qu.: 54.54  
+             Median :-33.05   Median :-63.85   Median : 66.63  
+             Mean   :-33.05   Mean   :-63.85   Mean   : 69.83  
+             3rd Qu.:-33.05   3rd Qu.:-63.84   3rd Qu.: 84.69  
+             Max.   :-33.05   Max.   :-63.84   Max.   :117.90  
+     nitro        topo            bv         rep        nf     
+ Min.   :  0.00   E : 730   Min.   : 91.74   R1:1147   N0:573  
+ 1st Qu.: 29.00   HT: 785   1st Qu.:168.48   R2:1147   N1:577  
+ Median : 66.00   LO: 885   Median :173.08   R3:1149   N2:571  
+ Mean   : 64.57   W :1043   Mean   :174.42             N3:575  
+ 3rd Qu.:106.00             3rd Qu.:179.39             N4:572  
+ Max.   :131.50             Max.   :213.82             N5:575  </code></pre>
+</div>
+</div>
+<section id="visualizing-the-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="visualizing-the-data"><span class="header-section-number">2.1</span> Visualizing the Data</h2>
+<p>To determine if a non-linear model is needed, we first visualize the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Global scatter plot</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Corn Yield vs Nitrogen"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouped scatter plot</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> topo, <span class="at">shape =</span> year)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> topo, <span class="at">linetype =</span> year), <span class="at">se=</span>F)<span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Corn Yield vs Nitrogen"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-a-non-linear-model-using-nls" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Fitting a Non-Linear Model using <code>nls()</code></h1>
+<p>We fit an <strong>Exponential Growth Model</strong>:</p>
+<p><span class="math display">\[Y = a X^b\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\((Y)\)</span> is the yield.</li>
+<li><span class="math inline">\((X)\)</span> is the nitrogen applied.</li>
+<li><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are parameters to estimate.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model with nls</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nls_model <span class="ot">&lt;-</span> <span class="fu">nls</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, <span class="at">data =</span> data_corn,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">50</span>, <span class="at">b =</span> <span class="fl">0.05</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nls_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Formula: yield ~ a * nitro^b
+
+Parameters:
+  Estimate Std. Error t value Pr(&gt;|t|)    
+a 55.71691    4.33102  12.865  &lt; 2e-16 ***
+b  0.05641    0.01811   3.116  0.00185 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 32.99 on 3441 degrees of freedom
+
+Number of iterations to convergence: 3 
+Achieved convergence tolerance: 1.209e-07</code></pre>
+</div>
+</div>
+</section>
+<section id="fitting-a-non-linear-mixed-model-using-nlme" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Fitting a Non-Linear Mixed Model using <code>nlme()</code></h1>
+<p>The idea here is to be able to account for variability among replicates (<code>rep</code>), so we extend our model to:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model with nlme</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nlme_model <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> data_corn,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">random =</span> a <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="fu">coef</span>(nls_model)[[<span class="dv">1</span>]], <span class="at">b =</span> <span class="fu">coef</span>(nls_model)[[<span class="dv">2</span>]]) )</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nonlinear mixed-effects model fit by maximum likelihood
+  Model: yield ~ a * nitro^b 
+  Data: data_corn 
+       AIC      BIC    logLik
+  33852.62 33877.19 -16922.31
+
+Random effects:
+ Formula: a ~ 1 | rep
+                  a Residual
+StdDev: 0.001414344 32.98493
+
+Fixed effects:  a + b ~ 1 
+     Value Std.Error   DF  t-value p-value
+a 55.71691  4.331020 3439 12.86461  0.0000
+b  0.05641  0.018106 3439  3.11551  0.0019
+ Correlation: 
+  a     
+b -0.994
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-1.567168803 -0.383887822  0.003849285  0.919014405  3.299688776 
+
+Number of Observations: 3443
+Number of Groups: 3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nls_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33850.62</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nlme_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33852.62</code></pre>
+</div>
+</div>
+<section id="only-topo" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="only-topo"><span class="header-section-number">4.1</span> only topo</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>nlme_model_topo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nonlinear mixed-effects model fit by maximum likelihood
+  Model: yield ~ a * nitro^b 
+  Data: data_corn 
+       AIC      BIC    logLik
+  33377.94 33451.67 -16676.97
+
+Random effects:
+ Formula: list(a ~ 1, b ~ 1)
+ Level: rep
+ Structure: General positive-definite, Log-Cholesky parametrization
+              StdDev       Corr  
+a.(Intercept) 4.358860e-01 a.(In)
+b.(Intercept) 5.329321e-09 0.475 
+Residual      3.071279e+01       
+
+Fixed effects:  a + b ~ topo 
+                  Value Std.Error   DF   t-value p-value
+a.(Intercept)  65.83564  9.195307 3433  7.159700  0.0000
+a.topoHT      -25.49439 12.649071 3433 -2.015515  0.0439
+a.topoLO        1.40690 12.133727 3433  0.115949  0.9077
+a.topoW       -12.09268 11.787969 3433 -1.025849  0.3050
+b.(Intercept)   0.04413  0.032635 3433  1.352101  0.1764
+b.topoHT        0.00672  0.060009 3433  0.112046  0.9108
+b.topoLO        0.01297  0.042594 3433  0.304426  0.7608
+b.topoW         0.01019  0.045655 3433  0.223244  0.8234
+ Correlation: 
+              a.(In) a.tpHT a.tpLO a.topW b.(In) b.tpHT b.tpLO
+a.topoHT      -0.726                                          
+a.topoLO      -0.757  0.550                                   
+a.topoW       -0.779  0.567  0.591                            
+b.(Intercept) -0.993  0.722  0.753  0.775                     
+b.topoHT       0.540 -0.966 -0.409 -0.421 -0.544              
+b.topoLO       0.761 -0.553 -0.994 -0.594 -0.766  0.417       
+b.topoW        0.710 -0.516 -0.538 -0.989 -0.715  0.389  0.548
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.5734100 -0.3300691  0.0845198  0.6716186  3.5438008 
+
+Number of Observations: 3443
+Number of Groups: 3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   a.(Intercept)  a.topoHT a.topoLO   a.topoW b.(Intercept)    b.topoHT
+R1      65.65141 -25.49439 1.406899 -12.09268    0.04412586 0.006723821
+R2      65.72720 -25.49439 1.406899 -12.09268    0.04412586 0.006723821
+R3      66.12830 -25.49439 1.406899 -12.09268    0.04412586 0.006723821
+     b.topoLO    b.topoW
+R1 0.01296678 0.01019221
+R2 0.01296678 0.01019221
+R3 0.01296678 0.01019221</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some components of broom mixed doesn't work yet for non-linear models</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># broom.mixed::tidy(nlme_model_topo)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="only-year" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="only-year"><span class="header-section-number">4.2</span> only year</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nlme_model_year <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> year,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">50</span>, <span class="at">b_Intercept =</span> <span class="fl">0.05</span>, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">a_2001 =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="topo-year" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="topo-year"><span class="header-section-number">4.3</span> topo + year</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>nlme_model_topoyear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">+</span> year,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">50</span>, <span class="at">b_Intercept =</span> <span class="fl">0.05</span>, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, <span class="at">a_2001 =</span> <span class="dv">0</span>, </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="minpack.lm" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="minpack.lm"><span class="header-section-number">4.4</span> minpack.lm</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using nlsLM() instead of nls()</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nls_fit <span class="ot">&lt;-</span> <span class="fu">nlsLM</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> data_corn, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.8</span>)) </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract better initial estimates</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nls_fit)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>nlme_model_topoyear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> data_corn, </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">+</span> year, </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep, </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="fu">coef</span>(nls_fit)[<span class="dv">1</span>], </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_Intercept =</span> <span class="fu">coef</span>(nls_fit)[<span class="dv">2</span>], </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">a_HT =</span> <span class="fl">0.5</span>, <span class="at">a_LO =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">a_W =</span> <span class="fl">0.8</span>, <span class="at">a_2001 =</span> <span class="fl">0.3</span>, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_HT =</span> <span class="fl">0.1</span>, <span class="at">b_LO =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">b_W =</span> <span class="fl">0.2</span>, <span class="at">b_2001 =</span> <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="topoyear" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="topoyear"><span class="header-section-number">4.5</span> topo*year</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nlme_model_interaction <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_corn,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">*</span> year, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, <span class="at">a_2001 =</span> <span class="dv">0</span>, </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">a_HT_2001 =</span> <span class="dv">0</span>, <span class="at">a_LO_2001 =</span> <span class="dv">0</span>, <span class="at">a_W_2001 =</span> <span class="dv">0</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>, </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">b_HT_2001 =</span> <span class="dv">0</span>, <span class="at">b_LO_2001 =</span> <span class="dv">0</span>, <span class="at">b_W_2001 =</span> <span class="dv">0</span>))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nonlinear mixed-effects model fit by maximum likelihood
+  Model: yield ~ a * nitro^b 
+  Data: data_corn 
+       AIC      BIC    logLik
+  33089.36 33212.24 -16524.68
+
+Random effects:
+ Formula: list(a ~ 1, b ~ 1)
+ Level: rep
+ Structure: General positive-definite, Log-Cholesky parametrization
+              StdDev       Corr  
+a.(Intercept) 4.218854e-01 a.(In)
+b.(Intercept) 5.341360e-09 0.423 
+Residual      2.938401e+01       
+
+Fixed effects:  a + b ~ topo * year 
+                      Value Std.Error   DF   t-value p-value
+a.(Intercept)      55.24845 11.382004 3425  4.854018  0.0000
+a.topoHT          -18.91198 14.663476 3425 -1.289734  0.1972
+a.topoLO            5.95162 15.329161 3425  0.388255  0.6979
+a.topoW            -4.92420 14.134876 3425 -0.348373  0.7276
+a.year2001         34.48361 19.939592 3425  1.729404  0.0838
+a.topoHT:year2001 -25.47476 26.755473 3425 -0.952133  0.3411
+a.topoLO:year2001 -13.67997 25.911191 3425 -0.527956  0.5976
+a.topoW:year2001  -24.38799 25.267053 3425 -0.965209  0.3345
+b.(Intercept)       0.04102  0.048357 3425  0.848201  0.3964
+b.topoHT            0.05674  0.076614 3425  0.740538  0.4590
+b.topoLO           -0.00215  0.062256 3425 -0.034577  0.9724
+b.topoW             0.02704  0.061999 3425  0.436191  0.6627
+b.year2001         -0.03186  0.064449 3425 -0.494372  0.6211
+b.topoHT:year2001  -0.06188  0.117790 3425 -0.525302  0.5994
+b.topoLO:year2001   0.04040  0.083879 3425  0.481585  0.6301
+b.topoW:year2001   -0.00726  0.090420 3425 -0.080283  0.9360
+ Correlation: 
+                  a.(In) a.tpHT a.tpLO a.topW a.2001 a.HT:2 a.LO:2 a.W:20
+a.topoHT          -0.776                                                 
+a.topoLO          -0.742  0.576                                          
+a.topoW           -0.805  0.625  0.598                                   
+a.year2001        -0.571  0.443  0.424  0.459                            
+a.topoHT:year2001  0.425 -0.548 -0.316 -0.342 -0.745                     
+a.topoLO:year2001  0.439 -0.341 -0.592 -0.354 -0.770  0.573              
+a.topoW:year2001   0.450 -0.349 -0.334 -0.559 -0.789  0.588  0.607       
+b.(Intercept)     -0.992  0.770  0.737  0.799  0.566 -0.422 -0.436 -0.447
+b.topoHT           0.626 -0.971 -0.465 -0.504 -0.357  0.532  0.275  0.282
+b.topoLO           0.771 -0.598 -0.991 -0.620 -0.440  0.328  0.586  0.347
+b.topoW            0.774 -0.601 -0.574 -0.991 -0.442  0.329  0.340  0.555
+b.year2001         0.744 -0.578 -0.553 -0.599 -0.965  0.719  0.743  0.762
+b.topoHT:year2001 -0.407  0.632  0.302  0.328  0.528 -0.945 -0.406 -0.417
+b.topoLO:year2001 -0.572  0.444  0.735  0.461  0.741 -0.553 -0.972 -0.585
+b.topoW:year2001  -0.531  0.412  0.394  0.680  0.688 -0.513 -0.529 -0.969
+                  b.(In) b.tpHT b.tpLO b.topW b.2001 b.HT:2 b.LO:2
+a.topoHT                                                          
+a.topoLO                                                          
+a.topoW                                                           
+a.year2001                                                        
+a.topoHT:year2001                                                 
+a.topoLO:year2001                                                 
+a.topoW:year2001                                                  
+b.(Intercept)                                                     
+b.topoHT          -0.631                                          
+b.topoLO          -0.777  0.490                                   
+b.topoW           -0.780  0.492  0.606                            
+b.year2001        -0.750  0.474  0.583  0.585                     
+b.topoHT:year2001  0.411 -0.650 -0.319 -0.320 -0.547              
+b.topoLO:year2001  0.577 -0.364 -0.742 -0.450 -0.768  0.420       
+b.topoW:year2001   0.535 -0.338 -0.415 -0.686 -0.713  0.390  0.548
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.66304432 -0.12672025  0.07029809  0.35912890  3.70405544 
+
+Number of Observations: 3443
+Number of Groups: 3 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="model-selection" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Model selection</h1>
+<section id="aic" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="aic"><span class="header-section-number">5.1</span> AIC:</h2>
+<p>We can use the Akaike Information Criterion (AIC).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nlme_model, nlme_model_topo, nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       df      AIC
+nlme_model              4 33852.62
+nlme_model_topo        12 33377.94
+nlme_model_interaction 20 33089.36</code></pre>
+</div>
+</div>
+</section>
+<section id="aicc" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="aicc"><span class="header-section-number">5.2</span> AICc:</h2>
+<p>When comparing different nonlinear models, it is essential to use an objective model selection criterion. One of the most commonly used criteria is the <strong>Akaike Information Criterion (AIC)</strong> and its corrected version <strong>AICc</strong>.</p>
+<p><strong>Why Use AICc Instead of AIC?</strong></p>
+<p>AIC is widely used for model comparison, but it has a known bias when applied to small sample sizes or when the number of parameters (<code>K</code>) is large relative to the sample size (<code>n</code>). <strong>AICc</strong> corrects for this bias by adding a small-sample penalty:</p>
+<p><span class="math display">\[
+AICc = AIC + \frac{2K(K+1)}{n-K-1}
+\]</span></p>
+<p>Where:</p>
+<p><strong>AIC</strong> is the standard Akaike Information Criterion: <span class="math inline">\(\(AIC = -2 \log L + 2K\)\)</span> <br> <strong>K</strong> is the number of estimated parameters <br> <strong>n</strong> is the sample size <br></p>
+<p>Thus, when <code>n</code> is large, <strong>AICc ≈ AIC</strong>, but for small datasets, <strong>AICc penalizes overfitting more effectively</strong>.</p>
+</section>
+<section id="delta-aicc-and-aicc-weights" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="delta-aicc-and-aicc-weights"><span class="header-section-number">5.3</span> Delta AICc and AICc Weights</h2>
+<p>To compare models, we use <strong>Delta AICc (ΔAICc)</strong> and <strong>AICc weights</strong>:</p>
+<ul>
+<li><strong>ΔAICc</strong>: The difference between each model’s AICc and the lowest AICc value.</li>
+<li>A model with <strong>ΔAICc = 0</strong> is the <strong>best</strong> model.</li>
+<li>Models with <strong>ΔAICc &lt; 2</strong> have substantial support.</li>
+<li><strong>ΔAICc &gt; 10</strong> means the model has little support.</li>
+<li><strong>AICc weight (wAICc)</strong>: Measures the <strong>relative likelihood</strong> of each model given the data.</li>
+<li>A <strong>higher weight</strong> means the model is more likely to be the best model.</li>
+<li>The weights sum to <strong>1</strong>, allowing for direct comparison of model likelihoods.</li>
+</ul>
+</section>
+<section id="using-aiccmodavg-in-r" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="using-aiccmodavg-in-r"><span class="header-section-number">5.4</span> Using <code>AICcmodavg</code> in R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run them separatedly</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33852.63</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33378.03</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33089.6</code></pre>
+</div>
+</div>
+<p>The <code>AICcmodavg</code> package provides functions for model selection: ### Compare Models Using <code>aictab()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of candidate models</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">simple =</span> nlme_model,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">topo =</span> nlme_model_topo,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction =</span> nlme_model_interaction</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Model selection table</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>model_selection <span class="ot">&lt;-</span> <span class="fu">aictab</span>(<span class="at">cand.set =</span> model_list, <span class="at">modnames =</span> <span class="fu">names</span>(model_list))</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>model_selection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model selection based on AICc:
+
+             K     AICc Delta_AICc AICcWt Cum.Wt        LL
+interaction 20 33089.60       0.00      1      1 -16524.68
+topo        12 33378.03     288.43      0      1 -16676.97
+simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
+</div>
+</div>
+<p>This will output a table with:</p>
+<ul>
+<li><strong>AICc</strong> values for each model</li>
+<li><strong>ΔAICc</strong> (relative difference)</li>
+<li><strong>AICc weights</strong> (relative model support)</li>
+</ul>
+</section>
+<section id="conclusion" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">5.5</span> Conclusion</h2>
+<ul>
+<li><strong>AICc is preferred over AIC</strong> when sample sizes are small.</li>
+<li><strong>ΔAICc helps identify the best model</strong> and evaluate model differences.</li>
+<li><strong>AICc weights allow comparison</strong> of model likelihoods.</li>
+<li>The <code>AICcmodavg</code> package makes it easy to apply AICc-based model selection in R.</li>
+</ul>
+<p>By using AICc, we can objectively choose the best model while avoiding overfitting. 🚀</p>
+</section>
+</section>
+<section id="visualization" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Visualization</h1>
+<p>The estimated parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> tell us how yield responds to nitrogen application. We can visualize the fitted models:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new data frame for predictions</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the function "expand.grid" is a great alternative to cross factor levels</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>new_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nitro =</span> <span class="fu">seq</span>(<span class="fu">min</span>(data_corn<span class="sc">$</span>nitro), <span class="fu">max</span>(data_corn<span class="sc">$</span>nitro), <span class="at">by=</span><span class="dv">1</span>),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">rep =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>rep),</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">topo =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>topo),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">year =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>year))</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions for each model</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>new_preds <span class="ot">&lt;-</span> new_df <span class="sc">%&gt;%</span> </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yield_nls =</span> <span class="fu">predict</span>(nls_model, <span class="at">newdata =</span> new_df),</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme =</span> <span class="fu">predict</span>(nlme_model, <span class="at">newdata =</span> new_df),</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_topo =</span> <span class="fu">predict</span>(nlme_model_topo, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>),</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_interaction =</span> <span class="fu">predict</span>(nlme_model_interaction, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>) )</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Global</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nonlinear Regression Fit (nls or nlme)"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Topography</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_topo, <span class="at">linetype =</span> <span class="st">"nlme topo"</span>)) <span class="sc">+</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_interaction, <span class="at">linetype =</span> <span class="st">"nlme interaction"</span>)) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography*Year"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year) <span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="other-alternatives" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Other alternatives</h1>
+<p>Some packages try to help with the fitting of models that are used for specific field. For example, the <code>soiltestcorr</code> package is designed to help with the regression model fitting for relationships between relative yield and soil test values. ## soiltestcorr</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example dataset</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>soilfert_data <span class="ot">&lt;-</span> soiltestcorr<span class="sc">::</span>data_test</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mitscherlich</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mitscherlich</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 13
+  asymptote     b curvature equation  y_intercept target  CSTV   AIC  AICc   BIC
+      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1      98.0  3.91    0.0885 98(1-e^(…        28.6     95  35.5 1022. 1022. 1033.
+# ℹ 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, pvalue &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mitscherlich</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear-plateau</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">linear_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 16
+  intercept slope equation    plateau  CSTV lowerCL upperCL CI_type target  STVt
+      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+1      53.7  1.55 53.7 + 1.5…    96.2  27.4      24    30.7 Wald, …   96.2  27.4
+# ℹ 6 more variables: AIC &lt;dbl&gt;, AICc &lt;dbl&gt;, BIC &lt;dbl&gt;, R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;,
+#   pvalue &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">linear_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic-plateau</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">quadratic_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 17
+  intercept slope quadratic equation       plateau  CSTV lowerCL upperCL CI_type
+      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  
+1      44.1  2.86   -0.0392 44.1 + 2.86x …    96.4  36.5    29.7    43.4 Wald C…
+# ℹ 8 more variables: target &lt;dbl&gt;, STVt &lt;dbl&gt;, AIC &lt;dbl&gt;, AICc &lt;dbl&gt;,
+#   BIC &lt;dbl&gt;, R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, pvalue &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">quadratic_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modified Arcsine-log Calibration Curve</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mod_alcc</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 18
+      n     r RMSE_alcc AIC_alcc AIC_sma BIC_sma  p_value confidence target
+  &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+1   137 0.716      10.5    1038.   -1.04    13.6 7.31e-23       0.95     95
+# ℹ 9 more variables: CSTV &lt;dbl&gt;, LL &lt;dbl&gt;, UL &lt;dbl&gt;, CSTV90 &lt;dbl&gt;,
+#   n.90x2 &lt;int&gt;, CSTV100 &lt;dbl&gt;, n.100 &lt;int&gt;, Curve &lt;list&gt;, SMA &lt;list&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mod_alcc</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-15-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="bootstrapping" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="bootstrapping"><span class="header-section-number">7.0.1</span> Bootstrapping</h3>
+<p>Bootstrapping is a technique introduced in late 1970’s by Bradley Efron (Efron, 1979). It is a general purpose inferential approach that is useful for robust estimations, especially when the distribution of a statistic of quantity of interest is complicated or unknown (Faraway, 2014). It provides an alternative to perform confidence statements while relaxing the famous assumption of normality (Efron and Tibshirani, 1993). The underlying concept of bootstrapping is that the inference about a population parameter (e.g.&nbsp;a coefficient) or quantity can be modeled by “resampling” the available data.</p>
+<p>The soiltestcorr package has the option to automatically run bootstrapping for the above mentioned non-linear regression models. More info <a href="https://adriancorrendo.github.io/soiltestcorr/articles/bootstrapping_tutorial.html">here</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>boots_models <span class="ot">&lt;-</span> soiltestcorr<span class="sc">::</span><span class="fu">boot_mod_alcc</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># See results</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>boots_models</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 14
+   boot_id     n     r RMSE_alcc AIC_alcc AIC_sma BIC_sma  p_value target  CSTV
+     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1       1   137 0.685      9.74    1018. -39.2    -24.6  2.46e-20     95  30.6
+ 2       2   137 0.750      9.19    1003. -22.7     -8.07 4.94e-26     95  30.0
+ 3       3   137 0.703     10.5     1040.  -3.99    10.6  9.54e-22     95  29.8
+ 4       4   137 0.700     10.5     1040.  -2.24    12.4  1.74e-21     95  30.8
+ 5       5   137 0.758     10.7     1044.   0.954   15.6  8.79e-27     95  30.3
+ 6       6   137 0.679     10.3     1033. -24.3     -9.68 7.52e-20     95  30.3
+ 7       7   137 0.759     10.1     1029.   6.86    21.5  6.32e-27     95  30.9
+ 8       8   137 0.701     10.9     1050.   4.94    19.5  1.44e-21     95  30.0
+ 9       9   137 0.690     10.0     1026.  -5.20     9.40 1.18e-20     95  30.2
+10      10   137 0.736      9.50    1012. -16.8     -2.23 1.21e-24     95  30.3
+# ℹ 4 more variables: CSTV90 &lt;dbl&gt;, n.90x2 &lt;int&gt;, CSTV100 &lt;dbl&gt;, n.100 &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion-1" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Conclusion</h1>
+<p>Non-linear regression allows for flexible modeling of relationships in agricultural data. The <code>nls()</code> function in R provides a simple way to estimate non-linear models, while <code>nlme()</code> extends this by incorporating random effects for better inference. Yet, these alternatives present challenges to achieve convergence of the models due to the lack of good starting values, or simply because the model doesn’t fit the data very well. There are some packages that help with specific non-linear regression models. Always keep in mind that understanding the meaning of the coeffients of the models you are trying to fit will tremendously help.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/adriancorrendo\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../coding/week_10/models_05.html" class="pagination-link" aria-label="16-Models V">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">16-Models V</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../outline/calendar.html" class="pagination-link" aria-label="Schedule">
+        <span class="nav-page-text">Schedule</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span> Developed by Adrian Correndo with <a href="https://quarto.org/">Quarto</a>. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. </span></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -125,7 +125,14 @@ summary(lm_fit_02)
 
 These approaches are particularly useful when yield data exhibit heteroscedasticity or skewness.
 
-- For this first approach, the model assumes a multiplicative relationship between predictors and yield, modeling the expected value as an exponential function. If you want to stabilize variance or normalize the residuals, use the first approach.
+- For this first approach, the model assumes a multiplicative relationship between predictors and yield, modeling the expected value as an exponential function. 
+
+Thus, the underlying model is:  
+$$E(Y) = \exp(X\beta)$$ , 
+where the expected value of yield, $E(Y)$, is modeled as an exponential function of the predictors $\exp(X\beta)$.
+
+If you believe the relationship between predictors and the expected value of yield is multiplicative, use this approach.
+
 ```{r}
 # Using log link without manually transforming yield
 glm_fit_02 <- glm(yield ~ nf + rep, data = data_corn, 
@@ -135,7 +142,14 @@ summary(glm_fit_02)
 
 Alternatively, you may want to manually log-transform the response:
 
-- For this second approach, the log-transformed yield is modeled as a linear function of the predictors, stabilizing variance or normalizing residuals. If you believe the relationship between predictors and the expected value of yield is multiplicative, use the second approach.
+- For this second approach, the log-transformed yield is modeled as a linear function of the predictors, stabilizing variance or normalizing residuals. 
+
+In the second case, the model is:  
+$$\log(Y) = X\beta + \epsilon $$, 
+
+which is a linear model $X\beta + \epsilon$ on the log-transformed outcome, $\log(Y)$.
+
+If you want to stabilize variance or normalize the residuals, use this second approach.
 
 ```{r}
 # Manually log-transforming yield
@@ -143,11 +157,6 @@ glm_fit_03 <- glm(log(yield) ~ nf + rep, data = lasrosas.corn,
                   family = gaussian(link = "identity"))
 summary(glm_fit_03)
 ```
-
-** Key Difference: **
-- In the first case, the model is:  $\log(Y) = X\beta + \epsilon $, which is a linear model on the log-transformed outcome.
-
-- In the second case, the model is:  $E(Y) = \exp(X\beta)$ , where the expected value of yield is modeled as an exponential function of the predictors.
 
 
 ### Mixed-Effects Models
