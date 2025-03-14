@@ -517,6 +517,7 @@ window.Quarto = {
 <li>Try the minpack.lm package for starting values. <br></li>
 <li>Conduct model selection using AIC and AICc. <br></li>
 <li>Apply these concepts to the <code>agridat::lasrosas.corn</code> dataset. <br></li>
+<li>See an example of specific package to help with non-linear regression</li>
 </ul>
 <section id="why-non-linear-regression" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="why-non-linear-regression"><span class="header-section-number">1.1</span> Why Non-Linear Regression?</h2>
@@ -1150,16 +1151,16 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 <pre><code># A tibble: 10 × 14
    boot_id     n     r RMSE_alcc AIC_alcc AIC_sma BIC_sma  p_value target  CSTV
      &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1       1   137 0.685      9.74    1018. -39.2    -24.6  2.46e-20     95  30.6
- 2       2   137 0.750      9.19    1003. -22.7     -8.07 4.94e-26     95  30.0
- 3       3   137 0.703     10.5     1040.  -3.99    10.6  9.54e-22     95  29.8
- 4       4   137 0.700     10.5     1040.  -2.24    12.4  1.74e-21     95  30.8
- 5       5   137 0.758     10.7     1044.   0.954   15.6  8.79e-27     95  30.3
- 6       6   137 0.679     10.3     1033. -24.3     -9.68 7.52e-20     95  30.3
- 7       7   137 0.759     10.1     1029.   6.86    21.5  6.32e-27     95  30.9
- 8       8   137 0.701     10.9     1050.   4.94    19.5  1.44e-21     95  30.0
- 9       9   137 0.690     10.0     1026.  -5.20     9.40 1.18e-20     95  30.2
-10      10   137 0.736      9.50    1012. -16.8     -2.23 1.21e-24     95  30.3
+ 1       1   137 0.735     11.3     1058.  12.5    27.1   1.60e-24     95  28.1
+ 2       2   137 0.732     11.2     1057.  16.5    31.1   3.07e-24     95  29.9
+ 3       3   137 0.633      9.87    1022. -50.2   -35.6   1.12e-16     95  28.3
+ 4       4   137 0.734     10.1     1029.  -1.78   12.8   1.79e-24     95  29.2
+ 5       5   137 0.680     10.9     1050.  12.9    27.5   6.30e-20     95  28.8
+ 6       6   137 0.721     10.7     1044.  30.9    45.5   2.85e-23     95  29.2
+ 7       7   137 0.724      9.81    1020. -15.4    -0.811 1.48e-23     95  30.4
+ 8       8   137 0.798      9.62    1015.   1.62   16.2   1.91e-31     95  29.6
+ 9       9   137 0.677     10.2     1032.   0.270  14.9   1.09e-19     95  28.6
+10      10   137 0.697     10.4     1036.  17.2    31.8   3.10e-21     95  29.8
 # ℹ 4 more variables: CSTV90 &lt;dbl&gt;, n.90x2 &lt;int&gt;, CSTV100 &lt;dbl&gt;, n.100 &lt;int&gt;</code></pre>
 </div>
 </div>

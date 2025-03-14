@@ -792,6 +792,149 @@
     ]
   },
   {
+    "objectID": "coding/week_10/models_06.html",
+    "href": "coding/week_10/models_06.html",
+    "title": "Non-Linear Regression with R",
+    "section": "",
+    "text": "Non-linear regression is a statistical technique used to model relationships that cannot be well-represented by a straight line. Unlike linear regression, which assumes a constant rate of change, non-linear models accommodate curves and complex relationships in data.\nThis tutorial will:\n\nIntroduce the concept of non-linear regression. \nShow how to fit non-linear models in R using nls() and nlme(). \nTry the minpack.lm package for starting values. \nConduct model selection using AIC and AICc. \nApply these concepts to the agridat::lasrosas.corn dataset. \nSee an example of specific package to help with non-linear regression\n\n\n\nMany real-world relationships are inherently non-linear. Examples include:\n\nGrowth models (e.g., exponential or power functions).\nYield response to fertilizers.\nEnzyme kinetics in biological systems.\n\nRequired packages for today\n\n# Load necessary libraries\nlibrary(pacman)\np_load(dplyr, tidyr) # data wrangling\np_load(ggplot2) #plots\np_load(agridat) # dataset\np_load(nls, nlme) # non-linear models\np_load(minpack.lm) # convergence help for nl models\np_load(AICcmodavg) # corrected AIC performance\np_load(soiltestcorr) # nl models for soil fertility",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#why-non-linear-regression",
+    "href": "coding/week_10/models_06.html#why-non-linear-regression",
+    "title": "Non-Linear Regression with R",
+    "section": "",
+    "text": "Many real-world relationships are inherently non-linear. Examples include:\n\nGrowth models (e.g., exponential or power functions).\nYield response to fertilizers.\nEnzyme kinetics in biological systems.\n\nRequired packages for today\n\n# Load necessary libraries\nlibrary(pacman)\np_load(dplyr, tidyr) # data wrangling\np_load(ggplot2) #plots\np_load(agridat) # dataset\np_load(nls, nlme) # non-linear models\np_load(minpack.lm) # convergence help for nl models\np_load(AICcmodavg) # corrected AIC performance\np_load(soiltestcorr) # nl models for soil fertility",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#visualizing-the-data",
+    "href": "coding/week_10/models_06.html#visualizing-the-data",
+    "title": "Non-Linear Regression with R",
+    "section": "2.1 Visualizing the Data",
+    "text": "2.1 Visualizing the Data\nTo determine if a non-linear model is needed, we first visualize the data:\n\n# Global scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point() +\n  geom_smooth()+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")\n\n\n\n\n\n\n\n# Grouped scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point(aes(color = topo, shape = year)) +\n  geom_smooth(aes(color = topo, linetype = year), se=F)+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#only-topo",
+    "href": "coding/week_10/models_06.html#only-topo",
+    "title": "Non-Linear Regression with R",
+    "section": "4.1 only topo",
+    "text": "4.1 only topo\n\nnlme_model_topo &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                   a_HT = 0, a_LO = 0, a_W = 0, \n                                   b_HT = 0, b_LO = 0, b_W = 0))\nsummary(nlme_model_topo)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33377.94 33451.67 -16676.97\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.358860e-01 a.(In)\nb.(Intercept) 5.329321e-09 0.475 \nResidual      3.071279e+01       \n\nFixed effects:  a + b ~ topo \n                  Value Std.Error   DF   t-value p-value\na.(Intercept)  65.83564  9.195307 3433  7.159700  0.0000\na.topoHT      -25.49439 12.649071 3433 -2.015515  0.0439\na.topoLO        1.40690 12.133727 3433  0.115949  0.9077\na.topoW       -12.09268 11.787969 3433 -1.025849  0.3050\nb.(Intercept)   0.04413  0.032635 3433  1.352101  0.1764\nb.topoHT        0.00672  0.060009 3433  0.112046  0.9108\nb.topoLO        0.01297  0.042594 3433  0.304426  0.7608\nb.topoW         0.01019  0.045655 3433  0.223244  0.8234\n Correlation: \n              a.(In) a.tpHT a.tpLO a.topW b.(In) b.tpHT b.tpLO\na.topoHT      -0.726                                          \na.topoLO      -0.757  0.550                                   \na.topoW       -0.779  0.567  0.591                            \nb.(Intercept) -0.993  0.722  0.753  0.775                     \nb.topoHT       0.540 -0.966 -0.409 -0.421 -0.544              \nb.topoLO       0.761 -0.553 -0.994 -0.594 -0.766  0.417       \nb.topoW        0.710 -0.516 -0.538 -0.989 -0.715  0.389  0.548\n\nStandardized Within-Group Residuals:\n       Min         Q1        Med         Q3        Max \n-1.5734100 -0.3300691  0.0845198  0.6716186  3.5438008 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\ncoef(nlme_model_topo)\n\n   a.(Intercept)  a.topoHT a.topoLO   a.topoW b.(Intercept)    b.topoHT\nR1      65.65141 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR2      65.72720 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR3      66.12830 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\n     b.topoLO    b.topoW\nR1 0.01296678 0.01019221\nR2 0.01296678 0.01019221\nR3 0.01296678 0.01019221\n\n# Some components of broom mixed doesn't work yet for non-linear models\n# broom.mixed::tidy(nlme_model_topo)",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#only-year",
+    "href": "coding/week_10/models_06.html#only-year",
+    "title": "Non-Linear Regression with R",
+    "section": "4.2 only year",
+    "text": "4.2 only year\n\nnlme_model_year &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 50, b_Intercept = 0.05, \n                                   a_2001 = 0, b_2001 = 0))",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#topo-year",
+    "href": "coding/week_10/models_06.html#topo-year",
+    "title": "Non-Linear Regression with R",
+    "section": "4.3 topo + year",
+    "text": "4.3 topo + year\n\nnlme_model_topoyear &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo + year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 50, b_Intercept = 0.05, \n                                       a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                       b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0))",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#minpack.lm",
+    "href": "coding/week_10/models_06.html#minpack.lm",
+    "title": "Non-Linear Regression with R",
+    "section": "4.4 minpack.lm",
+    "text": "4.4 minpack.lm\n\n# Fit using nlsLM() instead of nls()\nnls_fit &lt;- nlsLM(yield ~ a * nitro^b, \n                 data = data_corn, \n                 start = list(a = 10, b = 0.8)) \n\n# Extract better initial estimates\ncoef(nls_fit)\n\nnlme_model_topoyear &lt;- nlme(yield ~ a * nitro^b, \n                             data = data_corn, \n                             fixed = a + b ~ topo + year, \n                             random = a + b ~ 1 | rep, \n                             start = c(a_Intercept = coef(nls_fit)[1], \n                                       b_Intercept = coef(nls_fit)[2], \n                                       a_HT = 0.5, a_LO = -0.5, a_W = 0.8, a_2001 = 0.3, \n                                       b_HT = 0.1, b_LO = -0.1, b_W = 0.2, b_2001 = 0.05))",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#topoyear",
+    "href": "coding/week_10/models_06.html#topoyear",
+    "title": "Non-Linear Regression with R",
+    "section": "4.5 topo*year",
+    "text": "4.5 topo*year\n\nnlme_model_interaction &lt;- nlme(yield ~ a * nitro^b,\n                                data = data_corn,\n                                fixed = a + b ~ topo * year, \n                                random = a + b ~ 1 | rep,\n                                start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                          a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                          a_HT_2001 = 0, a_LO_2001 = 0, a_W_2001 = 0,\n                                          b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0, \n                                          b_HT_2001 = 0, b_LO_2001 = 0, b_W_2001 = 0))\nsummary(nlme_model_interaction)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33089.36 33212.24 -16524.68\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.218854e-01 a.(In)\nb.(Intercept) 5.341360e-09 0.423 \nResidual      2.938401e+01       \n\nFixed effects:  a + b ~ topo * year \n                      Value Std.Error   DF   t-value p-value\na.(Intercept)      55.24845 11.382004 3425  4.854018  0.0000\na.topoHT          -18.91198 14.663476 3425 -1.289734  0.1972\na.topoLO            5.95162 15.329161 3425  0.388255  0.6979\na.topoW            -4.92420 14.134876 3425 -0.348373  0.7276\na.year2001         34.48361 19.939592 3425  1.729404  0.0838\na.topoHT:year2001 -25.47476 26.755473 3425 -0.952133  0.3411\na.topoLO:year2001 -13.67997 25.911191 3425 -0.527956  0.5976\na.topoW:year2001  -24.38799 25.267053 3425 -0.965209  0.3345\nb.(Intercept)       0.04102  0.048357 3425  0.848201  0.3964\nb.topoHT            0.05674  0.076614 3425  0.740538  0.4590\nb.topoLO           -0.00215  0.062256 3425 -0.034577  0.9724\nb.topoW             0.02704  0.061999 3425  0.436191  0.6627\nb.year2001         -0.03186  0.064449 3425 -0.494372  0.6211\nb.topoHT:year2001  -0.06188  0.117790 3425 -0.525302  0.5994\nb.topoLO:year2001   0.04040  0.083879 3425  0.481585  0.6301\nb.topoW:year2001   -0.00726  0.090420 3425 -0.080283  0.9360\n Correlation: \n                  a.(In) a.tpHT a.tpLO a.topW a.2001 a.HT:2 a.LO:2 a.W:20\na.topoHT          -0.776                                                 \na.topoLO          -0.742  0.576                                          \na.topoW           -0.805  0.625  0.598                                   \na.year2001        -0.571  0.443  0.424  0.459                            \na.topoHT:year2001  0.425 -0.548 -0.316 -0.342 -0.745                     \na.topoLO:year2001  0.439 -0.341 -0.592 -0.354 -0.770  0.573              \na.topoW:year2001   0.450 -0.349 -0.334 -0.559 -0.789  0.588  0.607       \nb.(Intercept)     -0.992  0.770  0.737  0.799  0.566 -0.422 -0.436 -0.447\nb.topoHT           0.626 -0.971 -0.465 -0.504 -0.357  0.532  0.275  0.282\nb.topoLO           0.771 -0.598 -0.991 -0.620 -0.440  0.328  0.586  0.347\nb.topoW            0.774 -0.601 -0.574 -0.991 -0.442  0.329  0.340  0.555\nb.year2001         0.744 -0.578 -0.553 -0.599 -0.965  0.719  0.743  0.762\nb.topoHT:year2001 -0.407  0.632  0.302  0.328  0.528 -0.945 -0.406 -0.417\nb.topoLO:year2001 -0.572  0.444  0.735  0.461  0.741 -0.553 -0.972 -0.585\nb.topoW:year2001  -0.531  0.412  0.394  0.680  0.688 -0.513 -0.529 -0.969\n                  b.(In) b.tpHT b.tpLO b.topW b.2001 b.HT:2 b.LO:2\na.topoHT                                                          \na.topoLO                                                          \na.topoW                                                           \na.year2001                                                        \na.topoHT:year2001                                                 \na.topoLO:year2001                                                 \na.topoW:year2001                                                  \nb.(Intercept)                                                     \nb.topoHT          -0.631                                          \nb.topoLO          -0.777  0.490                                   \nb.topoW           -0.780  0.492  0.606                            \nb.year2001        -0.750  0.474  0.583  0.585                     \nb.topoHT:year2001  0.411 -0.650 -0.319 -0.320 -0.547              \nb.topoLO:year2001  0.577 -0.364 -0.742 -0.450 -0.768  0.420       \nb.topoW:year2001   0.535 -0.338 -0.415 -0.686 -0.713  0.390  0.548\n\nStandardized Within-Group Residuals:\n        Min          Q1         Med          Q3         Max \n-1.66304432 -0.12672025  0.07029809  0.35912890  3.70405544 \n\nNumber of Observations: 3443\nNumber of Groups: 3",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#aic",
+    "href": "coding/week_10/models_06.html#aic",
+    "title": "Non-Linear Regression with R",
+    "section": "5.1 AIC:",
+    "text": "5.1 AIC:\nWe can use the Akaike Information Criterion (AIC).\n\n# Get \nAIC(nlme_model, nlme_model_topo, nlme_model_interaction)\n\n                       df      AIC\nnlme_model              4 33852.62\nnlme_model_topo        12 33377.94\nnlme_model_interaction 20 33089.36",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#aicc",
+    "href": "coding/week_10/models_06.html#aicc",
+    "title": "Non-Linear Regression with R",
+    "section": "5.2 AICc:",
+    "text": "5.2 AICc:\nWhen comparing different nonlinear models, it is essential to use an objective model selection criterion. One of the most commonly used criteria is the Akaike Information Criterion (AIC) and its corrected version AICc.\nWhy Use AICc Instead of AIC?\nAIC is widely used for model comparison, but it has a known bias when applied to small sample sizes or when the number of parameters (K) is large relative to the sample size (n). AICc corrects for this bias by adding a small-sample penalty:\n\\[\nAICc = AIC + \\frac{2K(K+1)}{n-K-1}\n\\]\nWhere:\nAIC is the standard Akaike Information Criterion: \\(\\(AIC = -2 \\log L + 2K\\)\\)  K is the number of estimated parameters  n is the sample size \nThus, when n is large, AICc ≈ AIC, but for small datasets, AICc penalizes overfitting more effectively.",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#delta-aicc-and-aicc-weights",
+    "href": "coding/week_10/models_06.html#delta-aicc-and-aicc-weights",
+    "title": "Non-Linear Regression with R",
+    "section": "5.3 Delta AICc and AICc Weights",
+    "text": "5.3 Delta AICc and AICc Weights\nTo compare models, we use Delta AICc (ΔAICc) and AICc weights:\n\nΔAICc: The difference between each model’s AICc and the lowest AICc value.\nA model with ΔAICc = 0 is the best model.\nModels with ΔAICc &lt; 2 have substantial support.\nΔAICc &gt; 10 means the model has little support.\nAICc weight (wAICc): Measures the relative likelihood of each model given the data.\nA higher weight means the model is more likely to be the best model.\nThe weights sum to 1, allowing for direct comparison of model likelihoods.",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#using-aiccmodavg-in-r",
+    "href": "coding/week_10/models_06.html#using-aiccmodavg-in-r",
+    "title": "Non-Linear Regression with R",
+    "section": "5.4 Using AICcmodavg in R",
+    "text": "5.4 Using AICcmodavg in R\n\n# Run them separatedly\nAICcmodavg::AICc(nlme_model)\n\n[1] 33852.63\n\nAICcmodavg::AICc(nlme_model_topo)\n\n[1] 33378.03\n\nAICcmodavg::AICc(nlme_model_interaction)\n\n[1] 33089.6\n\n\nThe AICcmodavg package provides functions for model selection: ### Compare Models Using aictab()\n\n# Create a list of candidate models\nmodel_list &lt;- list(\n  simple = nlme_model,\n  topo = nlme_model_topo,\n  interaction = nlme_model_interaction\n)\n\n# Model selection table\nmodel_selection &lt;- aictab(cand.set = model_list, modnames = names(model_list))\n\nmodel_selection\n\n\nModel selection based on AICc:\n\n             K     AICc Delta_AICc AICcWt Cum.Wt        LL\ninteraction 20 33089.60       0.00      1      1 -16524.68\ntopo        12 33378.03     288.43      0      1 -16676.97\nsimple       4 33852.63     763.03      0      1 -16922.31\n\n\nThis will output a table with:\n\nAICc values for each model\nΔAICc (relative difference)\nAICc weights (relative model support)",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_06.html#conclusion",
+    "href": "coding/week_10/models_06.html#conclusion",
+    "title": "Non-Linear Regression with R",
+    "section": "5.5 Conclusion",
+    "text": "5.5 Conclusion\n\nAICc is preferred over AIC when sample sizes are small.\nΔAICc helps identify the best model and evaluate model differences.\nAICc weights allow comparison of model likelihoods.\nThe AICcmodavg package makes it easy to apply AICc-based model selection in R.\n\nBy using AICc, we can objectively choose the best model while avoiding overfitting. 🚀",
+    "crumbs": [
+      "Lessons",
+      "17-Models VI"
+    ]
+  },
+  {
     "objectID": "outline/outline.html",
     "href": "outline/outline.html",
     "title": "PLNT6800|01 - Course Outline",
@@ -1150,6 +1293,94 @@
     "crumbs": [
       "Calendar",
       "Schedule"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html",
+    "href": "coding/week_10/models_05.html",
+    "title": "Models IV: Mixed Models II",
+    "section": "",
+    "text": "Repeated measures models are a type of statistical model used when the same experimental unit is measured multiple times under different conditions or over time. These models account for the fact that repeated observations from the same unit (e.g., plant, plot, soil location) are not independent but correlated.\nIn agriculture, repeated measures designs are common in various scenarios, including:\n•   Time-based measurements: Tracking crop growth, soil nutrients, or yield over multiple time points. Or also treatments applied to the same unit over time such as fertilization trials where the same plots receive different treatments over multiple years.\n•   Spatially repeated measurements: Soil properties at different depths, plant characteristics at multiple canopy levels, or yield components across field zones.\n\n\nLinear mixed models (LMMs) are typically used for analyzing repeated measures because they allow us to include: 1. Fixed effects – Factors of interest, such as treatments, depths, or environmental conditions. 2. Random effects – Sources of variability, such as plot-to-plot differences or repeated observations on the same soil core.",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#mixed-models-for-repeated-measures",
+    "href": "coding/week_10/models_05.html#mixed-models-for-repeated-measures",
+    "title": "Models IV: Mixed Models II",
+    "section": "",
+    "text": "Linear mixed models (LMMs) are typically used for analyzing repeated measures because they allow us to include: 1. Fixed effects – Factors of interest, such as treatments, depths, or environmental conditions. 2. Random effects – Sources of variability, such as plot-to-plot differences or repeated observations on the same soil core.",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#required-packages-for-today",
+    "href": "coding/week_10/models_05.html#required-packages-for-today",
+    "title": "Models IV: Mixed Models II",
+    "section": "2.1 Required packages for today",
+    "text": "2.1 Required packages for today\n\nlibrary(pacman)\np_load(\"readxl\") # To open/save excel files\np_load('dplyr', \"tidyr\",\"purrr\", \"forcats\", \"stringr\") # Data wrangling\np_load(\"nlme\", \"lme4\") # Mixed models libraries\np_load(\"broom\", \"broom.mixed\") # Managing models results\np_load(\"performance\") # Check assumptions and performance\np_load(\"emmeans\",\"multcomp\",\"multcompView\",\n         \"car\", \"multilevelmod\") # Aov and mult comp\np_load(\"ggplot2\") # Figures\np_load(\"agricolae\") # Miscellaneous functions\np_load(\"agridat\") # For data",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#data",
+    "href": "coding/week_10/models_05.html#data",
+    "title": "Models IV: Mixed Models II",
+    "section": "2.2 Data",
+    "text": "2.2 Data\n\n# Read data\n# File online? Try this...\nurl_rm &lt;- \"https://raw.githubusercontent.com/adriancorrendo/tidymixedmodelsweb/refs/heads/master/data/02_repeated_measures_data.csv\"\n\n# Read file\nrm_data_00 &lt;- \n  read.csv(url_rm) \n\nrm_data_01 &lt;- \n  rm_data_00 %&gt;% \n  # We need to create PLOT column to identify subject (Exp. Unit for Rep. Measures)\n  ## Option 1, use \"unite\"\n  unite(data = ., col = PLOT, BLOCK,TREAT, sep = \"_\", remove=FALSE) %&gt;%\n  # OR\n  ## Option 2, use cur_group_id\n  # Identify Subplot\n  ungroup() %&gt;% \n  group_by(BLOCK, TREAT) %&gt;% # Don't need to add SITE here\n  # Create unique plot ID # Needed for Repeated Measures\n  mutate(plot = cur_group_id(), .after = PLOT) %&gt;% \n  ungroup() %&gt;% \n  ## Transform to factor if needed\n  mutate(depth = as.integer(DEPTH), # Needed for CorAR1\n         DEPTH = as.factor(DEPTH),\n         plot = factor(plot),\n         BLOCK = factor(BLOCK),\n         SITE = factor(SITE), \n                       #levels = c(\"site_1\", \"site_2\", \"site_3\", \"site_4\"), \n                       #labels = c(\"Balducchi\", \"San Alfredo\", \"La Blanca\", \"La Hansa\")\n         TREAT = factor(TREAT)\n         )",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#exploratory-analysis",
+    "href": "coding/week_10/models_05.html#exploratory-analysis",
+    "title": "Models IV: Mixed Models II",
+    "section": "2.3 Exploratory analysis",
+    "text": "2.3 Exploratory analysis\nNow, let’s use several functions to explore the data.\n\n2.3.1 glimpse()\nFirst, the glimpse() function from dplyr\n\n# Glimpse from dplyr\ndplyr::glimpse(rm_data_01)\n\nRows: 180\nColumns: 8\n$ SITE  &lt;fct&gt; site_1, site_1, site_1, site_1, site_1, site_1, site_1, site_1, …\n$ PLOT  &lt;chr&gt; \"I_Control\", \"I_Control\", \"I_Control\", \"I_Control\", \"I_Control\",…\n$ plot  &lt;fct&gt; 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 2, 2, 2, 2, 2, 5, 5…\n$ TREAT &lt;fct&gt; Control, Control, Control, Control, Control, Control, Control, C…\n$ BLOCK &lt;fct&gt; I, I, I, I, I, II, II, II, II, II, III, III, III, III, III, I, I…\n$ DEPTH &lt;fct&gt; 10, 30, 50, 70, 90, 10, 30, 50, 70, 90, 10, 30, 50, 70, 90, 10, …\n$ STK   &lt;int&gt; 105, 83, 103, 110, 127, 119, 98, 106, 107, 109, 132, 100, 96, 10…\n$ depth &lt;int&gt; 10, 30, 50, 70, 90, 10, 30, 50, 70, 90, 10, 30, 50, 70, 90, 10, …\n\n\n\n\n2.3.2 skim()\nThen, the skim() function from skmir\n\n# Skim from skimr\nskimr::skim(rm_data_01)\n\n\nData summary\n\n\nName\nrm_data_01\n\n\nNumber of rows\n180\n\n\nNumber of columns\n8\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n1\n\n\nfactor\n5\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\n\nPLOT\n0\n1\n5\n12\n0\n9\n0\n\n\n\nVariable type: factor\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nordered\nn_unique\ntop_counts\n\n\n\n\nSITE\n0\n1\nFALSE\n4\nsit: 45, sit: 45, sit: 45, sit: 45\n\n\nplot\n0\n1\nFALSE\n9\n1: 20, 2: 20, 3: 20, 4: 20\n\n\nTREAT\n0\n1\nFALSE\n3\nCon: 60, NPS: 60, Pri: 60\n\n\nBLOCK\n0\n1\nFALSE\n3\nI: 60, II: 60, III: 60\n\n\nDEPTH\n0\n1\nFALSE\n5\n10: 36, 30: 36, 50: 36, 70: 36\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nSTK\n0\n1\n181.84\n63.09\n74\n138.75\n174\n221.25\n406\n▅▇▅▂▁\n\n\ndepth\n0\n1\n50.00\n28.36\n10\n30.00\n50\n70.00\n90\n▇▇▇▇▇\n\n\n\n\n\n\n\n2.3.3 ggplot()\nAnd let’s use ggplot2 for a better look\n\n# Boxplot\nrm_data_01 %&gt;% \n  dplyr::select(-depth) %&gt;% \n  # Plot\nggplot() + \n  # Boxplots\n  geom_boxplot(aes(x = reorder(DEPTH, desc(DEPTH)), y = STK, fill = TREAT))+\n  # Axis labels\n  labs(x = \"Soil depth (cm)\", y = \"STK (g/m2)\")+\n  # Plot by site\n  facet_wrap(~SITE)+\n  # Flip axes\n  coord_flip()+\n  # Set scale type\n  scale_x_discrete()+\n  # Change theme\n  tidybayes::theme_tidybayes()\n\n\n\n\n\n\n\n\n\n\n2.3.4 Additional data manipulation?\n\nrm_data_02 &lt;-rm_data_01 %&gt;% \n  # Create a grouping variable (WHY?) # Needed for HetVar\n  mutate(GROUP = case_when(TREAT == \"Pristine\" ~ \"Pristine\",\n                           TRUE ~ \"Agriculture\"))",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#candidate-models",
+    "href": "coding/week_10/models_05.html#candidate-models",
+    "title": "Models IV: Mixed Models II",
+    "section": "2.4 Candidate Models",
+    "text": "2.4 Candidate Models\nI’m sorry for this, but the most important step is ALWAYS to write down the model.\n\n2.4.1 Formulae\n\n2.4.1.1 m0. Block Fixed\nIn a traditional approach blocks are defined as fixed, affecting the mean of the expected value. Yet there is no consensus about treating blocks as fixed or as random. For more information, read Dixon (2016).\nLet’s define the model. For simplification (and avoid writing interaction terms), here we are going to consider that \\(\\tau_i\\) is the “treatment”.\n\\[ y_{ij} = \\mu + \\tau_i + \\beta_j + \\epsilon_{ij} \\]\n\\[ \\epsilon_{ij} \\sim N(0, \\sigma^2_{e} )\\] where \\(\\mu\\) represents the overall mean (if intercept is used), \\(\\tau_i\\) is the effect of treatment-j over \\(\\mu\\), \\(\\beta_j\\) is the effect of block-j over \\(\\mu\\), and \\(\\epsilon_{ij}\\) is the random effect of each experimental unit.\n\n# SIMPLEST MODEL\nfit_block_fixed &lt;- function(x){\n  lm(# Response variable\n     STK ~ \n       # Fixed\n       TREAT + DEPTH + TREAT:DEPTH + BLOCK,\n     # Data\n     data = x)\n  }\n\n\n\n2.4.1.2 m1. Block Random\nAn alternative approach is considering a MIXED MODEL, where blocks are considered “random”. Basically, we add a term to the model that it is expected to show a “null” overall effect over the mean of the variable of interest but introduces “noise”. By convention, a random effect is expected to have an expected value equal to zero but a positive variance as follows: \\[ y_{ij} = \\mu + \\tau_i + \\beta_j + \\epsilon_{ij} \\] \\[ \\beta_j \\sim N(0, \\sigma^2_{b} )\\] \\[ \\epsilon_{ij} \\sim N(0, \\sigma^2_{e} )\\] Similar than before, \\(\\mu\\) represents the overall mean (if intercept is used), \\(\\tau_i\\) is the effect of treatment-j over \\(\\mu\\), \\(\\beta_j\\) is the “random” effect of block-j over \\(\\mu\\), and \\(\\epsilon_{ij}\\) is the random effect of each experimental unit.\nSo what’s the difference? Simply specifying this component: \\[ \\beta_j \\sim N(0, \\sigma^2_b) \\], which serves to model the variance.\nHow do we write that?\n\n# RANDOM BLOCK\nfit_block_random &lt;- function(x){\n  nlme::lme(\n    # Fixed\n    STK ~ TREAT + DEPTH + TREAT:DEPTH,\n    # Random\n    random = ~1|BLOCK,\n    # Data\n    data = x)\n  }\n\n\n\n\n2.4.2 Models w/ correlated ERRORS\nUntil here all sounds easy. However, we are (potentially) missing a key component. All measures involving DEPTH have been taken from the same “subjects” (experimental units/plots). So we do have “repeated measures” over space. Thus, it is highly likely that using depth implies the need to adjust the error correlation and covariance structure. Let’s explore some options…\n\n2.4.2.1 m2. m1 + CompSymm\nCompound symmetry is the simplest covariance structure, where we include a within-subject correlated errors. It is basically the same we do with including BLOCKS as random. We are telling the model that the observations within a given “depth” “share” something, they have something in common (the error).\n\n# RANDOM BLOCK w/compound symmetry error correlation structure\nfit_corsymm &lt;- function(x){\n  lme(# Response Variable\n      STK ~\n        # Fixed\n        TREAT + DEPTH + TREAT:DEPTH,\n        # Random\n        random = ~1|BLOCK,\n        # Identify subject where repeated measure happens\n        # Plots nested within blocks.\n        correlation = corCompSymm(form = ~ DEPTH |BLOCK/PLOT), \n     # Data   \n     data=x) }\n\n\n\n2.4.2.2 m3. m1 + CorAR1\nThe autoregressive of first order structure (CorAR1) considers correlations dependent of the “distance”. Thus, correlation of error is expected to be the highest between adjacent depths (e.g. 0-20 and 20-40 cm), and a systematically decrease with the distance. For example, the correlation between depth 1 and depth 2 would be \\(\\rho^{depth_2-depth_1}\\), and then less and less, ending with the correlation between depth 5 and depth 1 equal to \\(\\rho^{depth_5-depth_1}\\).\n\n\n\n\n\n\nCaution\n\n\n\nAn important detail here is that CorAR1 structure is only applicable for evenly spaced intervals!\n\n\n\n# RANDOM BLOCK w/ auto-regressive of 1st order as error correlation structure\nfit_ar1 &lt;- function(x){lme(STK ~ TREAT + DEPTH + TREAT:DEPTH,\n                       random = ~1|BLOCK,\n                       correlation=corAR1(form=~depth|BLOCK/PLOT),\n                       data=x)}\n\n\n\n2.4.2.3 m4. m2 + HetVar\nDid you know that we can “relax” the assumption about homogeneity of variance? Oftentimes we have data that shows different variability depending on the level of a given factor or variable.\nIn the STK dataset, we observed that the “Pristine” treatment (or agriculture condition) present a higher variability compared to Control and NPS treatments, probably linked to higher values of STK. Variance is modeled by adding a “weight”. This “weight” could be a function of a continuous variable (e.g. fertilizer rate?) or, like in our case, based on a “categorical” variable.\n\n# RANDOM BLOCK w/compound symmetry error correlation structure + Heterogeneous Variance\nfit_corsymm_hetvar &lt;- function(x){\n  lme(# Response variable\n      STK ~ \n        # Fixed\n        TREAT + DEPTH + TREAT:DEPTH,\n        # Random  \n        random = ~1|BLOCK,\n        # Correlation\n        correlation = corCompSymm(form = ~ DEPTH |BLOCK/PLOT),\n        # Variance\n        weights = varComb(varIdent(form= ~1|GROUP)),\n      # Data\n      data=x) }\n\n\n\n\n2.4.3 Fit\nRun the candidate models\n\nSTK_models &lt;- \n  rm_data_02 %&gt;% \n  # Let's group data to run multiple locations|datasets at once\n  group_by(SITE) %&gt;% \n  # Store the data per location using nested arrangement\n  nest() %&gt;% \n  # BLOCK as FIXED \n  mutate(model_0 = map(data, fit_block_fixed)) %&gt;% \n  # BLOCK as RANDOM\n  mutate(model_1 = map(data, fit_block_random)) %&gt;% \n  # COMPOUND SYMMETRY\n  mutate(model_2 = map(data, fit_corsymm)) %&gt;% \n  # AUTO-REGRESSIVE ORDER 1\n  mutate(model_3 = map(data, fit_ar1)) %&gt;% \n  # COMPOUND SYMMETRY + HETEROSKEDASTIC\n  mutate(model_4 = map(data,  fit_corsymm_hetvar) ) %&gt;%\n    \n  # Data wrangling\n  pivot_longer(cols = c(model_0:model_4), # show alternative 'contains' model\n               names_to = \"model_id\",\n               values_to = \"model\") %&gt;% \n  # Map over model column\n  mutate(results = map(model, broom.mixed::augment )) %&gt;% \n  # Performance\n  mutate(performance = map(model, broom.mixed::glance )) %&gt;% \n  # Extract AIC\n  mutate(AIC = map(performance, ~.x$AIC)) %&gt;% \n  # Extract coefficients\n  mutate(coef = map(model, ~coef(.x))) %&gt;% \n  # Visual-check plots\n  mutate(checks = map(model, ~performance::check_model(.))) %&gt;% \n  ungroup()\n\n\n\n2.4.4 Check assumptions\nChecking assumptions is always important. To learn more about data exploration, tools to detect outliers, heterogeneity of variance, collinearity, dependence of observations, problems with interactions, among others, I highly recommend reading (Zuur, Ieno, and Elphick 2010).\n\n# Extracting by site\nsite_1_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_1\")\nsite_2_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_3\")\nsite_3_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_4\")\nsite_4_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_2\")\n\n\nSite 1Site 2Site 3Site 4\n\n\n\n(site_1_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_2_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_3_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_4_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.4.5 Model Selection\nCompare models performance\n\n# Visual model selection\nbest_STK_models &lt;- \n  STK_models %&gt;% \n  group_by(SITE) %&gt;% \n  # Use case_when to identify the best model\n  mutate(best_model = \n           case_when(AIC == min(as.numeric(AIC)) ~ \"Yes\",\n                     TRUE ~ \"No\")) %&gt;% \n  ungroup()\n\n# Plot\nbest_STK_models %&gt;% \n  ggplot()+\n  geom_point(aes(x = model_id, y = as.numeric(AIC), \n                 color = best_model, shape = best_model), \n             size = 3)+\n  facet_wrap(~SITE)\n\n\n\n\n\n\n\n# Final models\nselected_models &lt;- best_STK_models %&gt;% dplyr::filter(best_model == \"Yes\")\n\n\n\n2.4.6 ANOVA\nEstimate the effects of factors under study (and their interaction)\n\nmodels_effects &lt;- \n  selected_models %&gt;%\n  # Type 3 Sum of Squares (Partial SS, when interactions are present)\n  mutate(ANOVA = map(model, ~Anova(., type = 3)) )\n\n# Extract ANOVAS\nmodels_effects$ANOVA[[1]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 326.261  1  &lt; 2.2e-16 ***\nTREAT        39.994  2  2.067e-09 ***\nDEPTH        12.637  4   0.013191 *  \nTREAT:DEPTH  21.827  8   0.005247 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nmodels_effects$ANOVA[[2]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 794.721  1  &lt; 2.2e-16 ***\nTREAT        21.394  2  2.261e-05 ***\nDEPTH        67.224  4  8.743e-14 ***\nTREAT:DEPTH  52.957  8  1.099e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nmodels_effects$ANOVA[[3]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n             Chisq Df Pr(&gt;Chisq)    \n(Intercept) 84.604  1  &lt; 2.2e-16 ***\nTREAT       50.791  2  9.353e-12 ***\nDEPTH       42.200  4  1.516e-08 ***\nTREAT:DEPTH 21.773  8   0.005355 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nmodels_effects$ANOVA[[4]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 876.934  1  &lt; 2.2e-16 ***\nTREAT       262.921  2  &lt; 2.2e-16 ***\nDEPTH        22.364  4  0.0001696 ***\nTREAT:DEPTH 107.841  8  &lt; 2.2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#means-comparison",
+    "href": "coding/week_10/models_05.html#means-comparison",
+    "title": "Models IV: Mixed Models II",
+    "section": "2.5 Means comparison",
+    "text": "2.5 Means comparison\n\n# MULTCOMPARISON\n# emmeans and cld multcomp\n# We need to specify ourselves the most important interaction to perform the comparisons\nmult_comp &lt;- \n  models_effects %&gt;% \n  # Comparisons estimates (emmeans)\n  mutate(mc_estimates = map(model, ~emmeans(., ~ TREAT*DEPTH))) %&gt;% \n  # Assign letters and p-value adjustment (multcomp)\n  mutate(mc_letters = \n           map(mc_estimates, \n               ~as.data.frame( \n                 # By specifies a strata or level to assign the letters\n                 cld(., by = \"DEPTH\", decreasing = TRUE, details=FALSE,\n                     reversed=TRUE, alpha=0.05,  adjust = \"tukey\", Letters=LETTERS))))",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
+    ]
+  },
+  {
+    "objectID": "coding/week_10/models_05.html#plot",
+    "href": "coding/week_10/models_05.html#plot",
+    "title": "Models IV: Mixed Models II",
+    "section": "2.6 Plot",
+    "text": "2.6 Plot\nNow, we are going to reproduce Figure 2\n\n# Create data frame for plot\nplot_df &lt;- mult_comp %&gt;% \n  dplyr::select(SITE, mc_letters) %&gt;% \n  unnest(mc_letters)\n\n# Define your own colors\nmy_colors &lt;- c(\"#ffaa00\", \"#7E5AA0\", \"#5c9c8c\")\n\n# Create the plot\nSTK_plot &lt;-\n  plot_df %&gt;% \n  # We need to re-express DEPTH from factor to character, and then to numeric\n  mutate(DEPTH = as.numeric(as.character(DEPTH)))  %&gt;% \n  # Re-order levels of the factors\n  mutate(TREAT = fct_relevel(TREAT,\"Control\", \"NPS\", \"Pristine\")) %&gt;% \n  mutate(SITE = fct_relevel(SITE,\"site_1\", \"site_2\", \"site_3\", \"site_4\")) %&gt;% \n  # Create plot\n  ggplot()+\n  # 01. LAYOUT\n  ## Subplots\n  facet_wrap(~SITE, nrow = 2)+\n  ## Axis titles\n  labs(x = \"Soil depth (cm)\", y = bquote(~NH[4]*'OAc-K (g' ~m^-2*')'))+\n  # 02. GEOMETRIES\n  ## i. Points\n  geom_point(aes(x = DEPTH, y = emmean,\n                 fill= TREAT,\n                 shape = TREAT),\n             size = 3, col = \"black\")+\n  ## Adjust shape aesthetics\n  scale_shape_manual(name=\"Fertilizer Scenario\", values=c(24,23,21),\n                     guide=\"legend\")+\n  scale_colour_manual(name=\"Fertilizer Scenario\",\n                    values = my_colors,\n                    guide='legend')+\n  scale_fill_manual(name=\"Fertilizer Scenario\",\n                    values = my_colors,\n                    guide='legend')+\n  ## ii. Add error bar\n  geom_errorbar(width = 0.25, aes(x = DEPTH, color = TREAT, \n                                 ymin = emmean-2*SE, ymax = emmean+2*SE))+\n  ## iii. Add line\n  geom_line(size = 0.5,aes(x = DEPTH, y = emmean, color = TREAT))+\n  # 03. ADJUST XY AXIS\n  ## Reverse the scale\n  scale_x_reverse(breaks=seq(0, 100, 20), limits = c(100,0))+\n  coord_flip()+\n  # 04. THEME\n  theme_bw()+\n  theme(strip.text = element_text(size = rel(1.25)),\n        strip.background = element_blank(),\n        # Grid\n        panel.grid = element_blank(),\n        # Axis\n        axis.title = element_text(size = rel(1.5)),\n        axis.text = element_text(size = rel(1.25), color = \"black\"),\n        # Legend\n        legend.position = \"top\", legend.title = element_blank(),\n        legend.text = element_text(size = rel(1.25))        )\n\nSTK_plot\n\n\n\n\n\n\n\n\n\n2.6.1 Figure with caption\n\n\nSTK_plot\n\n\n\n\n\n\n\n\nFigure 2. Soil profiles of STK (\\(g~m^{-2}\\)) under three different conditions: pristine soils (green circles), under grain cropping from 2000 to 2009 with no fertilizers added (Control, orange triangles), and under grain cropping from 2000 to 2009 with N, P, plus S fertilization (NPS, purple diamonds). Overlapping error bars indicate absence of significant differences between scenarios by soil depths combinations (Tukey’s HSD, p &lt; 0.05).",
+    "crumbs": [
+      "Lessons",
+      "16-Models V"
     ]
   },
   {
@@ -2019,258 +2250,6 @@
     "crumbs": [
       "Lessons",
       "10-Iteration"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html",
-    "href": "coding/week_10/models_05.html",
-    "title": "Models IV: Mixed Models II",
-    "section": "",
-    "text": "Repeated measures models are a type of statistical model used when the same experimental unit is measured multiple times under different conditions or over time. These models account for the fact that repeated observations from the same unit (e.g., plant, plot, soil location) are not independent but correlated.\nIn agriculture, repeated measures designs are common in various scenarios, including:\n•   Time-based measurements: Tracking crop growth, soil nutrients, or yield over multiple time points. Or also treatments applied to the same unit over time such as fertilization trials where the same plots receive different treatments over multiple years.\n•   Spatially repeated measurements: Soil properties at different depths, plant characteristics at multiple canopy levels, or yield components across field zones.\n\n\nLinear mixed models (LMMs) are typically used for analyzing repeated measures because they allow us to include: 1. Fixed effects – Factors of interest, such as treatments, depths, or environmental conditions. 2. Random effects – Sources of variability, such as plot-to-plot differences or repeated observations on the same soil core.",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#mixed-models-for-repeated-measures",
-    "href": "coding/week_10/models_05.html#mixed-models-for-repeated-measures",
-    "title": "Models IV: Mixed Models II",
-    "section": "",
-    "text": "Linear mixed models (LMMs) are typically used for analyzing repeated measures because they allow us to include: 1. Fixed effects – Factors of interest, such as treatments, depths, or environmental conditions. 2. Random effects – Sources of variability, such as plot-to-plot differences or repeated observations on the same soil core.",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#required-packages-for-today",
-    "href": "coding/week_10/models_05.html#required-packages-for-today",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.1 Required packages for today",
-    "text": "2.1 Required packages for today\n\nlibrary(pacman)\np_load(\"readxl\") # To open/save excel files\np_load('dplyr', \"tidyr\",\"purrr\", \"forcats\", \"stringr\") # Data wrangling\np_load(\"nlme\", \"lme4\") # Mixed models libraries\np_load(\"broom\", \"broom.mixed\") # Managing models results\np_load(\"performance\") # Check assumptions and performance\np_load(\"emmeans\",\"multcomp\",\"multcompView\",\n         \"car\", \"multilevelmod\") # Aov and mult comp\np_load(\"ggplot2\") # Figures\np_load(\"agricolae\") # Miscellaneous functions\np_load(\"agridat\") # For data",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#data",
-    "href": "coding/week_10/models_05.html#data",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.2 Data",
-    "text": "2.2 Data\n\n# Read data\n# File online? Try this...\nurl_rm &lt;- \"https://raw.githubusercontent.com/adriancorrendo/tidymixedmodelsweb/refs/heads/master/data/02_repeated_measures_data.csv\"\n\n# Read file\nrm_data_00 &lt;- \n  read.csv(url_rm) \n\nrm_data_01 &lt;- \n  rm_data_00 %&gt;% \n  # We need to create PLOT column to identify subject (Exp. Unit for Rep. Measures)\n  ## Option 1, use \"unite\"\n  unite(data = ., col = PLOT, BLOCK,TREAT, sep = \"_\", remove=FALSE) %&gt;%\n  # OR\n  ## Option 2, use cur_group_id\n  # Identify Subplot\n  ungroup() %&gt;% \n  group_by(BLOCK, TREAT) %&gt;% # Don't need to add SITE here\n  # Create unique plot ID # Needed for Repeated Measures\n  mutate(plot = cur_group_id(), .after = PLOT) %&gt;% \n  ungroup() %&gt;% \n  ## Transform to factor if needed\n  mutate(DEPTH = as.factor(DEPTH),\n         depth = as.integer(DEPTH), # Needed for CorAR1\n         BLOCK = factor(BLOCK),\n         SITE = factor(SITE),\n         TREAT = factor(TREAT)\n         )",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#exploratory-analysis",
-    "href": "coding/week_10/models_05.html#exploratory-analysis",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.3 Exploratory analysis",
-    "text": "2.3 Exploratory analysis\nNow, let’s use several functions to explore the data.\n\n2.3.1 glimpse()\nFirst, the glimpse() function from dplyr\n\n# Glimpse from dplyr\ndplyr::glimpse(rm_data_01)\n\nRows: 180\nColumns: 8\n$ SITE  &lt;fct&gt; site_1, site_1, site_1, site_1, site_1, site_1, site_1, site_1, …\n$ PLOT  &lt;chr&gt; \"I_Control\", \"I_Control\", \"I_Control\", \"I_Control\", \"I_Control\",…\n$ plot  &lt;int&gt; 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 2, 2, 2, 2, 2, 5, 5…\n$ TREAT &lt;fct&gt; Control, Control, Control, Control, Control, Control, Control, C…\n$ BLOCK &lt;fct&gt; I, I, I, I, I, II, II, II, II, II, III, III, III, III, III, I, I…\n$ DEPTH &lt;fct&gt; 10, 30, 50, 70, 90, 10, 30, 50, 70, 90, 10, 30, 50, 70, 90, 10, …\n$ STK   &lt;int&gt; 105, 83, 103, 110, 127, 119, 98, 106, 107, 109, 132, 100, 96, 10…\n$ depth &lt;int&gt; 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2…\n\n\n\n\n2.3.2 skim()\nThen, the skim() function from skmir\n\n# Skim from skimr\nskimr::skim(rm_data_01)\n\n\nData summary\n\n\nName\nrm_data_01\n\n\nNumber of rows\n180\n\n\nNumber of columns\n8\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n1\n\n\nfactor\n4\n\n\nnumeric\n3\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\n\nPLOT\n0\n1\n5\n12\n0\n9\n0\n\n\n\nVariable type: factor\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nordered\nn_unique\ntop_counts\n\n\n\n\nSITE\n0\n1\nFALSE\n4\nsit: 45, sit: 45, sit: 45, sit: 45\n\n\nTREAT\n0\n1\nFALSE\n3\nCon: 60, NPS: 60, Pri: 60\n\n\nBLOCK\n0\n1\nFALSE\n3\nI: 60, II: 60, III: 60\n\n\nDEPTH\n0\n1\nFALSE\n5\n10: 36, 30: 36, 50: 36, 70: 36\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nplot\n0\n1\n5.00\n2.59\n1\n3.00\n5\n7.00\n9\n▇▇▃▇▇\n\n\nSTK\n0\n1\n181.84\n63.09\n74\n138.75\n174\n221.25\n406\n▅▇▅▂▁\n\n\ndepth\n0\n1\n3.00\n1.42\n1\n2.00\n3\n4.00\n5\n▇▇▇▇▇\n\n\n\n\n\n\n\n2.3.3 ggplot()\nAnd let’s use ggplot2 for a better look\n\n# Boxplot\nrm_data_01 %&gt;% \n  dplyr::select(-depth) %&gt;% \n  # Plot\nggplot() + \n  # Boxplots\n  geom_boxplot(aes(x = reorder(DEPTH, desc(DEPTH)), y = STK, fill = TREAT))+\n  # Axis labels\n  labs(x = \"Soil depth (cm)\", y = \"STK (g/m2)\")+\n  # Plot by site\n  facet_wrap(~SITE)+\n  # Flip axes\n  coord_flip()+\n  # Set scale type\n  scale_x_discrete()+\n  # Change theme\n  tidybayes::theme_tidybayes()\n\n\n\n\n\n\n\n\n\n\n2.3.4 Additional data manipulation?\n\nrm_data_02 &lt;-rm_data_01 %&gt;% \n  # Create a grouping variable (WHY?) # Needed for HetVar\n  mutate(GROUP = case_when(TREAT == \"Pristine\" ~ \"Pristine\",\n                           TRUE ~ \"Agriculture\"))",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#iii.-candidate-models",
-    "href": "coding/week_10/models_05.html#iii.-candidate-models",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.4 iii. Candidate Models",
-    "text": "2.4 iii. Candidate Models\nI’m sorry for this, but the most important step is ALWAYS to write down the model.\n\n2.4.1 a. Formulae\n\n2.4.1.1 m0. Block Fixed\nIn a traditional approach blocks are defined as fixed, affecting the mean of the expected value. Yet there is no consensus about treating blocks as fixed or as random. For more information, read Dixon (2016).\nLet’s define the model. For simplification (and avoid writing interaction terms), here we are going to consider that \\(\\tau_i\\) is the “treatment”.\n\\[ y_{ij} = \\mu + \\tau_i + \\beta_j + \\epsilon_{ij} \\]\n\\[ \\epsilon_{ij} \\sim N(0, \\sigma^2_{e} )\\] where \\(\\mu\\) represents the overall mean (if intercept is used), \\(\\tau_i\\) is the effect of treatment-j over \\(\\mu\\), \\(\\beta_j\\) is the effect of block-j over \\(\\mu\\), and \\(\\epsilon_{ij}\\) is the random effect of each experimental unit.\n\n# SIMPLEST MODEL\nfit_block_fixed &lt;- function(x){\n  lm(# Response variable\n     STK ~ \n       # Fixed\n       TREAT + DEPTH + TREAT:DEPTH + BLOCK,\n     # Data\n     data = x)\n  }\n\n\n\n2.4.1.2 m1. Block Random\nAn alternative approach is considering a MIXED MODEL, where blocks are considered “random”. Basically, we add a term to the model that it is expected to show a “null” overall effect over the mean of the variable of interest but introduces “noise”. By convention, a random effect is expected to have an expected value equal to zero but a positive variance as follows: \\[ y_{ij} = \\mu + \\tau_i + \\beta_j + \\epsilon_{ij} \\] \\[ \\beta_j \\sim N(0, \\sigma^2_{b} )\\] \\[ \\epsilon_{ij} \\sim N(0, \\sigma^2_{e} )\\] Similar than before, \\(\\mu\\) represents the overall mean (if intercept is used), \\(\\tau_i\\) is the effect of treatment-j over \\(\\mu\\), \\(\\beta_j\\) is the “random” effect of block-j over \\(\\mu\\), and \\(\\epsilon_{ij}\\) is the random effect of each experimental unit.\nSo what’s the difference? Simply specifying this component: \\[ \\beta_j \\sim N(0, \\sigma^2_b) \\], which serves to model the variance.\nHow do we write that?\n\n# RANDOM BLOCK\nfit_block_random &lt;- function(x){\n  nlme::lme(\n    # Fixed\n    STK ~ TREAT + DEPTH + TREAT:DEPTH,\n    # Random\n    random = ~1|BLOCK,\n    # Data\n    data = x)\n  }\n\n\n\n\n2.4.2 Models w/ correlated ERRORS\nUntil here all sounds easy. However, we are (potentially) missing a key component. All measures involving DEPTH have been taken from the same “subjects” (experimental units/plots). So we do have “repeated measures” over space. Thus, it is highly likely that using depth implies the need to adjust the error correlation and covariance structure. Let’s explore some options…\n\n2.4.2.1 m2. m1 + CompSymm\nCompound symmetry is the simplest covariance structure, where we include a within-subject correlated errors. It is basically the same we do with including BLOCKS as random. We are telling the model that the observations within a given “depth” “share” something, they have something in common (the error).\n\n# RANDOM BLOCK w/compound symmetry error correlation structure\nfit_corsymm &lt;- function(x){\n  lme(# Response Variable\n      STK ~\n        # Fixed\n        TREAT + DEPTH + TREAT:DEPTH,\n        # Random\n        random = ~1|BLOCK,\n        # Identify subject where repeated measure happens\n        # Plots nested within blocks.\n        correlation = corCompSymm(form = ~ DEPTH |BLOCK/PLOT), \n     # Data   \n     data=x) }\n\n\n\n2.4.2.2 m3. m1 + CorAR1\nThe autoregressive of first order structure (CorAR1) considers correlations dependent of the “distance”. Thus, correlation of error is expected to be the highest between adjacent depths (e.g. 0-20 and 20-40 cm), and a systematically decrease with the distance. For example, the correlation between depth 1 and depth 2 would be \\(\\rho^{depth_2-depth_1}\\), and then less and less, ending with the correlation between depth 5 and depth 1 equal to \\(\\rho^{depth_5-depth_1}\\).\n\n\n\n\n\n\nCaution\n\n\n\nAn important detail here is that CorAR1 structure is only applicable for evenly spaced intervals!\n\n\n\n# RANDOM BLOCK w/ auto-regressive of 1st order as error correlation structure\nfit_ar1 &lt;- function(x){lme(STK ~ TREAT + DEPTH + TREAT:DEPTH,\n                       random = ~1|BLOCK,\n                       correlation=corAR1(form=~depth|BLOCK/PLOT),\n                       data=x)}\n\n\n\n2.4.2.3 m4. m2 + HetVar\nDid you know that we can “relax” the assumption about homogeneity of variance? Oftentimes we have data that shows different variability depending on the level of a given factor or variable.\nIn the STK dataset, we observed that the “Pristine” treatment (or agriculture condition) present a higher variability compared to Control and NPS treatments, probably linked to higher values of STK. Variance is modeled by adding a “weight”. This “weight” could be a function of a continuous variable (e.g. fertilizer rate?) or, like in our case, based on a “categorical” variable.\n\n# RANDOM BLOCK w/compound symmetry error correlation structure + Heterogeneous Variance\nfit_corsymm_hetvar &lt;- function(x){\n  lme(# Response variable\n      STK ~ \n        # Fixed\n        TREAT + DEPTH + TREAT:DEPTH,\n        # Random  \n        random = ~1|BLOCK,\n        # Correlation\n        correlation = corCompSymm(form = ~ depth |BLOCK/PLOT),\n        # Variance\n        weights = varComb(varIdent(form= ~1|GROUP)),\n      # Data\n      data=x) }\n\n\n\n\n2.4.3 b. Fit\nRun the candidate models\n\nSTK_models &lt;- \n  rm_data_02 %&gt;% \n  # Let's group data to run multiple locations|datasets at once\n  group_by(SITE) %&gt;% \n  # Store the data per location using nested arrangement\n  nest() %&gt;% \n  # BLOCK as FIXED \n  mutate(model_0 = map(data, fit_block_fixed)) %&gt;% \n  # BLOCK as RANDOM\n  mutate(model_1 = map(data, fit_block_random)) %&gt;% \n  # COMPOUND SYMMETRY\n  mutate(model_2 = map(data, fit_corsymm)) %&gt;% \n  # AUTO-REGRESSIVE ORDER 1\n  mutate(model_3 = map(data, fit_ar1)) %&gt;% \n  # COMPOUND SYMMETRY + HETEROSKEDASTIC\n  mutate(model_4 = map(data,  fit_corsymm_hetvar) ) %&gt;%\n    \n  # Data wrangling\n  pivot_longer(cols = c(model_0:model_4), # show alternative 'contains' model\n               names_to = \"model_id\",\n               values_to = \"model\") %&gt;% \n  # Map over model column\n  mutate(results = map(model, broom.mixed::augment )) %&gt;% \n  # Performance\n  mutate(performance = map(model, broom.mixed::glance )) %&gt;% \n  # Extract AIC\n  mutate(AIC = map(performance, ~.x$AIC)) %&gt;% \n  # Extract coefficients\n  mutate(coef = map(model, ~coef(.x))) %&gt;% \n  # Visual-check plots\n  mutate(checks = map(model, ~performance::check_model(.))) %&gt;% \n  ungroup()\n\n\n\n2.4.4 c. Check\nChecking assumptions is always important. To learn more about data exploration, tools to detect outliers, heterogeneity of variance, collinearity, dependence of observations, problems with interactions, among others, I highly recommend reading (Zuur, Ieno, and Elphick 2010).\n\n# Extracting by site\nsite_1_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_1\")\nsite_2_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_3\")\nsite_3_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_4\")\nsite_4_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_2\")\n\n\nSite 1Site 2Site 3Site 4\n\n\n\n(site_1_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_2_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_3_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_4_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.4.5 d. Selection\nCompare models performance\n\n# Visual model selection\nbest_STK_models &lt;- \n  STK_models %&gt;% \n  group_by(SITE) %&gt;% \n  # Use case_when to identify the best model\n  mutate(best_model = \n           case_when(AIC == min(as.numeric(AIC)) ~ \"Yes\",\n                     TRUE ~ \"No\")) %&gt;% \n  ungroup()\n\n# Plot\nbest_STK_models %&gt;% \n  ggplot()+\n  geom_point(aes(x = model_id, y = as.numeric(AIC), \n                 color = best_model, shape = best_model), \n             size = 3)+\n  facet_wrap(~SITE)\n\n\n\n\n\n\n\n# Final models\nselected_models &lt;- best_STK_models %&gt;% dplyr::filter(best_model == \"Yes\")\n\n\n\n2.4.6 e. ANOVA\nEstimate the effects of factors under study (and their interaction)\n\nmodels_effects &lt;- \n  selected_models %&gt;%\n  # Type 3 Sum of Squares (Partial SS, when interactions are present)\n  mutate(ANOVA = map(model, ~Anova(., type = 3)) )\n\n# Extract ANOVAS\nmodels_effects$ANOVA[[1]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 326.261  1  &lt; 2.2e-16 ***\nTREAT        39.994  2  2.067e-09 ***\nDEPTH        12.637  4   0.013191 *  \nTREAT:DEPTH  21.827  8   0.005247 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nmodels_effects$ANOVA[[2]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 794.721  1  &lt; 2.2e-16 ***\nTREAT        21.394  2  2.261e-05 ***\nDEPTH        67.224  4  8.743e-14 ***\nTREAT:DEPTH  52.957  8  1.099e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#iv.-means-comparison",
-    "href": "coding/week_10/models_05.html#iv.-means-comparison",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.5 iv. Means comparison",
-    "text": "2.5 iv. Means comparison\n\n# MULTCOMPARISON\n# emmeans and cld multcomp\n# We need to specify ourselves the most important interaction to perform the comparisons\nmult_comp &lt;- \n  models_effects %&gt;% \n  # Comparisons estimates (emmeans)\n  mutate(mc_estimates = map(model, ~emmeans(., ~ TREAT*DEPTH))) %&gt;% \n  # Assign letters and p-value adjustment (multcomp)\n  mutate(mc_letters = \n           map(mc_estimates, \n               ~as.data.frame( \n                 # By specifies a strata or level to assign the letters\n                 cld(., by = \"DEPTH\", decreasing = TRUE, details=FALSE,\n                     reversed=TRUE, alpha=0.05,  adjust = \"tukey\", Letters=LETTERS))))"
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#v.-plot",
-    "href": "coding/week_10/models_05.html#v.-plot",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.6 v. Plot",
-    "text": "2.6 v. Plot\nNow, we are going to reproduce Figure 2\n\n# Create data frame for plot\nplot_df &lt;- mult_comp %&gt;% \n  dplyr::select(SITE, mc_letters) %&gt;% \n  unnest(mc_letters)\n\n# Define your own colors\nmy_colors &lt;- c(\"#ffaa00\", \"#7E5AA0\", \"#5c9c8c\")\n\n# Create the plot\nSTK_plot &lt;-\n  plot_df %&gt;% \n  # We need to re-express DEPTH from factor to character, and then to numeric\n  mutate(DEPTH = as.numeric(as.character(DEPTH)))  %&gt;% \n  # Re-order levels of the factors\n  mutate(TREAT = fct_relevel(TREAT,\"Control\", \"NPS\", \"Pristine\")) %&gt;% \n  mutate(SITE = fct_relevel(SITE,\"site_1\", \"site_2\", \"site_3\", \"site_4\")) %&gt;% \n  # Create plot\n  ggplot()+\n  # 01. LAYOUT\n  ## Subplots\n  facet_wrap(~SITE, nrow = 2)+\n  ## Axis titles\n  labs(x = \"Soil depth (cm)\", y = bquote(~NH[4]*'OAc-K (g' ~m^-2*')'))+\n  # 02. GEOMETRIES\n  ## i. Points\n  geom_point(aes(x = DEPTH, y = emmean,\n                 fill= TREAT,\n                 shape = TREAT),\n             size = 3, col = \"black\")+\n  ## Adjust shape aesthetics\n  scale_shape_manual(name=\"Fertilizer Scenario\", values=c(24,23,21),\n                     guide=\"legend\")+\n  scale_colour_manual(name=\"Fertilizer Scenario\",\n                    values = my_colors,\n                    guide='legend')+\n  scale_fill_manual(name=\"Fertilizer Scenario\",\n                    values = my_colors,\n                    guide='legend')+\n  ## ii. Add error bar\n  geom_errorbar(width = 0.25, aes(x = DEPTH, color = TREAT, \n                                 ymin = emmean-2*SE, ymax = emmean+2*SE))+\n  ## iii. Add line\n  geom_line(size = 0.5,aes(x = DEPTH, y = emmean, color = TREAT))+\n  # 03. ADJUST XY AXIS\n  ## Reverse the scale\n  scale_x_reverse(breaks=seq(0, 100, 20), limits = c(100,0))+\n  coord_flip()+\n  # 04. THEME\n  theme_bw()+\n  theme(strip.text = element_text(size = rel(1.25)),\n        strip.background = element_blank(),\n        # Grid\n        panel.grid = element_blank(),\n        # Axis\n        axis.title = element_text(size = rel(1.5)),\n        axis.text = element_text(size = rel(1.25), color = \"black\"),\n        # Legend\n        legend.position = \"top\", legend.title = element_blank(),\n        legend.text = element_text(size = rel(1.25))        )\n\n\n2.6.1 i. Figure with caption\n\n\nSTK_plot\n\n\n\n\n\n\n\n\nFigure 2. Soil profiles of STK (\\(g~m^{-2}\\)) under three different conditions: pristine soils (green circles), under grain cropping from 2000 to 2009 with no fertilizers added (Control, orange triangles), and under grain cropping from 2000 to 2009 with N, P, plus S fertilization (NPS, purple diamonds). Overlapping error bars indicate absence of significant differences between scenarios by soil depths combinations (Tukey’s HSD, p &lt; 0.05)."
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#candidate-models",
-    "href": "coding/week_10/models_05.html#candidate-models",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.4 Candidate Models",
-    "text": "2.4 Candidate Models\nI’m sorry for this, but the most important step is ALWAYS to write down the model.\n\n2.4.1 Formulae\n\n2.4.1.1 m0. Block Fixed\nIn a traditional approach blocks are defined as fixed, affecting the mean of the expected value. Yet there is no consensus about treating blocks as fixed or as random. For more information, read Dixon (2016).\nLet’s define the model. For simplification (and avoid writing interaction terms), here we are going to consider that \\(\\tau_i\\) is the “treatment”.\n\\[ y_{ij} = \\mu + \\tau_i + \\beta_j + \\epsilon_{ij} \\]\n\\[ \\epsilon_{ij} \\sim N(0, \\sigma^2_{e} )\\] where \\(\\mu\\) represents the overall mean (if intercept is used), \\(\\tau_i\\) is the effect of treatment-j over \\(\\mu\\), \\(\\beta_j\\) is the effect of block-j over \\(\\mu\\), and \\(\\epsilon_{ij}\\) is the random effect of each experimental unit.\n\n# SIMPLEST MODEL\nfit_block_fixed &lt;- function(x){\n  lm(# Response variable\n     STK ~ \n       # Fixed\n       TREAT + DEPTH + TREAT:DEPTH + BLOCK,\n     # Data\n     data = x)\n  }\n\n\n\n2.4.1.2 m1. Block Random\nAn alternative approach is considering a MIXED MODEL, where blocks are considered “random”. Basically, we add a term to the model that it is expected to show a “null” overall effect over the mean of the variable of interest but introduces “noise”. By convention, a random effect is expected to have an expected value equal to zero but a positive variance as follows: \\[ y_{ij} = \\mu + \\tau_i + \\beta_j + \\epsilon_{ij} \\] \\[ \\beta_j \\sim N(0, \\sigma^2_{b} )\\] \\[ \\epsilon_{ij} \\sim N(0, \\sigma^2_{e} )\\] Similar than before, \\(\\mu\\) represents the overall mean (if intercept is used), \\(\\tau_i\\) is the effect of treatment-j over \\(\\mu\\), \\(\\beta_j\\) is the “random” effect of block-j over \\(\\mu\\), and \\(\\epsilon_{ij}\\) is the random effect of each experimental unit.\nSo what’s the difference? Simply specifying this component: \\[ \\beta_j \\sim N(0, \\sigma^2_b) \\], which serves to model the variance.\nHow do we write that?\n\n# RANDOM BLOCK\nfit_block_random &lt;- function(x){\n  nlme::lme(\n    # Fixed\n    STK ~ TREAT + DEPTH + TREAT:DEPTH,\n    # Random\n    random = ~1|BLOCK,\n    # Data\n    data = x)\n  }\n\n\n\n\n2.4.2 Models w/ correlated ERRORS\nUntil here all sounds easy. However, we are (potentially) missing a key component. All measures involving DEPTH have been taken from the same “subjects” (experimental units/plots). So we do have “repeated measures” over space. Thus, it is highly likely that using depth implies the need to adjust the error correlation and covariance structure. Let’s explore some options…\n\n2.4.2.1 m2. m1 + CompSymm\nCompound symmetry is the simplest covariance structure, where we include a within-subject correlated errors. It is basically the same we do with including BLOCKS as random. We are telling the model that the observations within a given “depth” “share” something, they have something in common (the error).\n\n# RANDOM BLOCK w/compound symmetry error correlation structure\nfit_corsymm &lt;- function(x){\n  lme(# Response Variable\n      STK ~\n        # Fixed\n        TREAT + DEPTH + TREAT:DEPTH,\n        # Random\n        random = ~1|BLOCK,\n        # Identify subject where repeated measure happens\n        # Plots nested within blocks.\n        correlation = corCompSymm(form = ~ DEPTH |BLOCK/PLOT), \n     # Data   \n     data=x) }\n\n\n\n2.4.2.2 m3. m1 + CorAR1\nThe autoregressive of first order structure (CorAR1) considers correlations dependent of the “distance”. Thus, correlation of error is expected to be the highest between adjacent depths (e.g. 0-20 and 20-40 cm), and a systematically decrease with the distance. For example, the correlation between depth 1 and depth 2 would be \\(\\rho^{depth_2-depth_1}\\), and then less and less, ending with the correlation between depth 5 and depth 1 equal to \\(\\rho^{depth_5-depth_1}\\).\n\n\n\n\n\n\nCaution\n\n\n\nAn important detail here is that CorAR1 structure is only applicable for evenly spaced intervals!\n\n\n\n# RANDOM BLOCK w/ auto-regressive of 1st order as error correlation structure\nfit_ar1 &lt;- function(x){lme(STK ~ TREAT + DEPTH + TREAT:DEPTH,\n                       random = ~1|BLOCK,\n                       correlation=corAR1(form=~depth|BLOCK/PLOT),\n                       data=x)}\n\n\n\n2.4.2.3 m4. m2 + HetVar\nDid you know that we can “relax” the assumption about homogeneity of variance? Oftentimes we have data that shows different variability depending on the level of a given factor or variable.\nIn the STK dataset, we observed that the “Pristine” treatment (or agriculture condition) present a higher variability compared to Control and NPS treatments, probably linked to higher values of STK. Variance is modeled by adding a “weight”. This “weight” could be a function of a continuous variable (e.g. fertilizer rate?) or, like in our case, based on a “categorical” variable.\n\n# RANDOM BLOCK w/compound symmetry error correlation structure + Heterogeneous Variance\nfit_corsymm_hetvar &lt;- function(x){\n  lme(# Response variable\n      STK ~ \n        # Fixed\n        TREAT + DEPTH + TREAT:DEPTH,\n        # Random  \n        random = ~1|BLOCK,\n        # Correlation\n        correlation = corCompSymm(form = ~ depth |BLOCK/PLOT),\n        # Variance\n        weights = varComb(varIdent(form= ~1|GROUP)),\n      # Data\n      data=x) }\n\n\n\n\n2.4.3 Fit\nRun the candidate models\n\nSTK_models &lt;- \n  rm_data_02 %&gt;% \n  # Let's group data to run multiple locations|datasets at once\n  group_by(SITE) %&gt;% \n  # Store the data per location using nested arrangement\n  nest() %&gt;% \n  # BLOCK as FIXED \n  mutate(model_0 = map(data, fit_block_fixed)) %&gt;% \n  # BLOCK as RANDOM\n  mutate(model_1 = map(data, fit_block_random)) %&gt;% \n  # COMPOUND SYMMETRY\n  mutate(model_2 = map(data, fit_corsymm)) %&gt;% \n  # AUTO-REGRESSIVE ORDER 1\n  mutate(model_3 = map(data, fit_ar1)) %&gt;% \n  # COMPOUND SYMMETRY + HETEROSKEDASTIC\n  mutate(model_4 = map(data,  fit_corsymm_hetvar) ) %&gt;%\n    \n  # Data wrangling\n  pivot_longer(cols = c(model_0:model_4), # show alternative 'contains' model\n               names_to = \"model_id\",\n               values_to = \"model\") %&gt;% \n  # Map over model column\n  mutate(results = map(model, broom.mixed::augment )) %&gt;% \n  # Performance\n  mutate(performance = map(model, broom.mixed::glance )) %&gt;% \n  # Extract AIC\n  mutate(AIC = map(performance, ~.x$AIC)) %&gt;% \n  # Extract coefficients\n  mutate(coef = map(model, ~coef(.x))) %&gt;% \n  # Visual-check plots\n  mutate(checks = map(model, ~performance::check_model(.))) %&gt;% \n  ungroup()\n\n\n\n2.4.4 Check assumptions\nChecking assumptions is always important. To learn more about data exploration, tools to detect outliers, heterogeneity of variance, collinearity, dependence of observations, problems with interactions, among others, I highly recommend reading (Zuur, Ieno, and Elphick 2010).\n\n# Extracting by site\nsite_1_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_1\")\nsite_2_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_3\")\nsite_3_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_4\")\nsite_4_models &lt;- STK_models %&gt;% dplyr::filter(SITE == \"site_2\")\n\n\nSite 1Site 2Site 3Site 4\n\n\n\n(site_1_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_2_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_3_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n(site_4_models %&gt;% dplyr::filter(model_id == \"model_0\"))$checks[[1]]\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.4.5 Model Selection\nCompare models performance\n\n# Visual model selection\nbest_STK_models &lt;- \n  STK_models %&gt;% \n  group_by(SITE) %&gt;% \n  # Use case_when to identify the best model\n  mutate(best_model = \n           case_when(AIC == min(as.numeric(AIC)) ~ \"Yes\",\n                     TRUE ~ \"No\")) %&gt;% \n  ungroup()\n\n# Plot\nbest_STK_models %&gt;% \n  ggplot()+\n  geom_point(aes(x = model_id, y = as.numeric(AIC), \n                 color = best_model, shape = best_model), \n             size = 3)+\n  facet_wrap(~SITE)\n\n\n\n\n\n\n\n# Final models\nselected_models &lt;- best_STK_models %&gt;% dplyr::filter(best_model == \"Yes\")\n\n\n\n2.4.6 ANOVA\nEstimate the effects of factors under study (and their interaction)\n\nmodels_effects &lt;- \n  selected_models %&gt;%\n  # Type 3 Sum of Squares (Partial SS, when interactions are present)\n  mutate(ANOVA = map(model, ~Anova(., type = 3)) )\n\n# Extract ANOVAS\nmodels_effects$ANOVA[[1]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 326.261  1  &lt; 2.2e-16 ***\nTREAT        39.994  2  2.067e-09 ***\nDEPTH        12.637  4   0.013191 *  \nTREAT:DEPTH  21.827  8   0.005247 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nmodels_effects$ANOVA[[2]]\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: STK\n              Chisq Df Pr(&gt;Chisq)    \n(Intercept) 794.721  1  &lt; 2.2e-16 ***\nTREAT        21.394  2  2.261e-05 ***\nDEPTH        67.224  4  8.743e-14 ***\nTREAT:DEPTH  52.957  8  1.099e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#means-comparison",
-    "href": "coding/week_10/models_05.html#means-comparison",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.5 Means comparison",
-    "text": "2.5 Means comparison\n\n# MULTCOMPARISON\n# emmeans and cld multcomp\n# We need to specify ourselves the most important interaction to perform the comparisons\nmult_comp &lt;- \n  models_effects %&gt;% \n  # Comparisons estimates (emmeans)\n  mutate(mc_estimates = map(model, ~emmeans(., ~ TREAT*DEPTH))) %&gt;% \n  # Assign letters and p-value adjustment (multcomp)\n  mutate(mc_letters = \n           map(mc_estimates, \n               ~as.data.frame( \n                 # By specifies a strata or level to assign the letters\n                 cld(., by = \"DEPTH\", decreasing = TRUE, details=FALSE,\n                     reversed=TRUE, alpha=0.05,  adjust = \"tukey\", Letters=LETTERS))))",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_05.html#plot",
-    "href": "coding/week_10/models_05.html#plot",
-    "title": "Models IV: Mixed Models II",
-    "section": "2.6 Plot",
-    "text": "2.6 Plot\nNow, we are going to reproduce Figure 2\n\n# Create data frame for plot\nplot_df &lt;- mult_comp %&gt;% \n  dplyr::select(SITE, mc_letters) %&gt;% \n  unnest(mc_letters)\n\n# Define your own colors\nmy_colors &lt;- c(\"#ffaa00\", \"#7E5AA0\", \"#5c9c8c\")\n\n# Create the plot\nSTK_plot &lt;-\n  plot_df %&gt;% \n  # We need to re-express DEPTH from factor to character, and then to numeric\n  mutate(DEPTH = as.numeric(as.character(DEPTH)))  %&gt;% \n  # Re-order levels of the factors\n  mutate(TREAT = fct_relevel(TREAT,\"Control\", \"NPS\", \"Pristine\")) %&gt;% \n  mutate(SITE = fct_relevel(SITE,\"site_1\", \"site_2\", \"site_3\", \"site_4\")) %&gt;% \n  # Create plot\n  ggplot()+\n  # 01. LAYOUT\n  ## Subplots\n  facet_wrap(~SITE, nrow = 2)+\n  ## Axis titles\n  labs(x = \"Soil depth (cm)\", y = bquote(~NH[4]*'OAc-K (g' ~m^-2*')'))+\n  # 02. GEOMETRIES\n  ## i. Points\n  geom_point(aes(x = DEPTH, y = emmean,\n                 fill= TREAT,\n                 shape = TREAT),\n             size = 3, col = \"black\")+\n  ## Adjust shape aesthetics\n  scale_shape_manual(name=\"Fertilizer Scenario\", values=c(24,23,21),\n                     guide=\"legend\")+\n  scale_colour_manual(name=\"Fertilizer Scenario\",\n                    values = my_colors,\n                    guide='legend')+\n  scale_fill_manual(name=\"Fertilizer Scenario\",\n                    values = my_colors,\n                    guide='legend')+\n  ## ii. Add error bar\n  geom_errorbar(width = 0.25, aes(x = DEPTH, color = TREAT, \n                                 ymin = emmean-2*SE, ymax = emmean+2*SE))+\n  ## iii. Add line\n  geom_line(size = 0.5,aes(x = DEPTH, y = emmean, color = TREAT))+\n  # 03. ADJUST XY AXIS\n  ## Reverse the scale\n  scale_x_reverse(breaks=seq(0, 100, 20), limits = c(100,0))+\n  coord_flip()+\n  # 04. THEME\n  theme_bw()+\n  theme(strip.text = element_text(size = rel(1.25)),\n        strip.background = element_blank(),\n        # Grid\n        panel.grid = element_blank(),\n        # Axis\n        axis.title = element_text(size = rel(1.5)),\n        axis.text = element_text(size = rel(1.25), color = \"black\"),\n        # Legend\n        legend.position = \"top\", legend.title = element_blank(),\n        legend.text = element_text(size = rel(1.25))        )\n\n\n2.6.1 Figure with caption\n\n\nSTK_plot\n\n\n\n\n\n\n\n\nFigure 2. Soil profiles of STK (\\(g~m^{-2}\\)) under three different conditions: pristine soils (green circles), under grain cropping from 2000 to 2009 with no fertilizers added (Control, orange triangles), and under grain cropping from 2000 to 2009 with N, P, plus S fertilization (NPS, purple diamonds). Overlapping error bars indicate absence of significant differences between scenarios by soil depths combinations (Tukey’s HSD, p &lt; 0.05).",
-    "crumbs": [
-      "Lessons",
-      "16-Models V"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html",
-    "href": "coding/week_10/models_06.html",
-    "title": "Non-Linear Regression with R",
-    "section": "",
-    "text": "Non-linear regression is a statistical technique used to model relationships that cannot be well-represented by a straight line. Unlike linear regression, which assumes a constant rate of change, non-linear models accommodate curves and complex relationships in data.\nThis tutorial will:\n\nIntroduce the concept of non-linear regression. \nShow how to fit non-linear models in R using nls() and nlme(). \nTry the minpack.lm package for starting values. \nConduct model selection using AIC and AICc. \nApply these concepts to the agridat::lasrosas.corn dataset. \n\n\n\nMany real-world relationships are inherently non-linear. Examples include:\n\nGrowth models (e.g., exponential or power functions).\nYield response to fertilizers.\nEnzyme kinetics in biological systems.\n\nRequired packages for today\n\n# Load necessary libraries\nlibrary(pacman)\np_load(dplyr, tidyr) # data wrangling\np_load(ggplot2) #plots\np_load(agridat) # dataset\np_load(nls, nlme) # non-linear models\np_load(minpack.lm) # convergence help for nl models\np_load(AICcmodavg) # corrected AIC performance\np_load(soiltestcorr) # nl models for soil fertility",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#why-non-linear-regression",
-    "href": "coding/week_10/models_06.html#why-non-linear-regression",
-    "title": "Non-Linear Regression with R",
-    "section": "",
-    "text": "Many real-world relationships are inherently non-linear. Examples include:\n\nGrowth models (e.g., exponential or power functions).\nYield response to fertilizers.\nEnzyme kinetics in biological systems.\n\nRequired packages for today\n\n# Load necessary libraries\nlibrary(pacman)\np_load(dplyr, tidyr) # data wrangling\np_load(ggplot2) #plots\np_load(agridat) # dataset\np_load(nls, nlme) # non-linear models\np_load(minpack.lm) # convergence help for nl models\np_load(AICcmodavg) # corrected AIC performance\np_load(soiltestcorr) # nl models for soil fertility",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#visualizing-the-data",
-    "href": "coding/week_10/models_06.html#visualizing-the-data",
-    "title": "Non-Linear Regression with R",
-    "section": "2.1 Visualizing the Data",
-    "text": "2.1 Visualizing the Data\nTo determine if a non-linear model is needed, we first visualize the data:\n\n# Global scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point() +\n  geom_smooth()+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")\n\n\n\n\n\n\n\n# Grouped scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point(aes(color = topo, shape = year)) +\n  geom_smooth(aes(color = topo, linetype = year), se=F)+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#only-topo",
-    "href": "coding/week_10/models_06.html#only-topo",
-    "title": "Non-Linear Regression with R",
-    "section": "4.1 only topo",
-    "text": "4.1 only topo\n\nnlme_model_topo &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                   a_HT = 0, a_LO = 0, a_W = 0, \n                                   b_HT = 0, b_LO = 0, b_W = 0))\nsummary(nlme_model_topo)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33377.94 33451.67 -16676.97\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.358860e-01 a.(In)\nb.(Intercept) 5.329321e-09 0.475 \nResidual      3.071279e+01       \n\nFixed effects:  a + b ~ topo \n                  Value Std.Error   DF   t-value p-value\na.(Intercept)  65.83564  9.195307 3433  7.159700  0.0000\na.topoHT      -25.49439 12.649071 3433 -2.015515  0.0439\na.topoLO        1.40690 12.133727 3433  0.115949  0.9077\na.topoW       -12.09268 11.787969 3433 -1.025849  0.3050\nb.(Intercept)   0.04413  0.032635 3433  1.352101  0.1764\nb.topoHT        0.00672  0.060009 3433  0.112046  0.9108\nb.topoLO        0.01297  0.042594 3433  0.304426  0.7608\nb.topoW         0.01019  0.045655 3433  0.223244  0.8234\n Correlation: \n              a.(In) a.tpHT a.tpLO a.topW b.(In) b.tpHT b.tpLO\na.topoHT      -0.726                                          \na.topoLO      -0.757  0.550                                   \na.topoW       -0.779  0.567  0.591                            \nb.(Intercept) -0.993  0.722  0.753  0.775                     \nb.topoHT       0.540 -0.966 -0.409 -0.421 -0.544              \nb.topoLO       0.761 -0.553 -0.994 -0.594 -0.766  0.417       \nb.topoW        0.710 -0.516 -0.538 -0.989 -0.715  0.389  0.548\n\nStandardized Within-Group Residuals:\n       Min         Q1        Med         Q3        Max \n-1.5734100 -0.3300691  0.0845198  0.6716186  3.5438008 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\ncoef(nlme_model_topo)\n\n   a.(Intercept)  a.topoHT a.topoLO   a.topoW b.(Intercept)    b.topoHT\nR1      65.65141 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR2      65.72720 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR3      66.12830 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\n     b.topoLO    b.topoW\nR1 0.01296678 0.01019221\nR2 0.01296678 0.01019221\nR3 0.01296678 0.01019221\n\n# Some components of broom mixed doesn't work yet for non-linear models\n# broom.mixed::tidy(nlme_model_topo)",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#only-year",
-    "href": "coding/week_10/models_06.html#only-year",
-    "title": "Non-Linear Regression with R",
-    "section": "4.2 only year",
-    "text": "4.2 only year\n\nnlme_model_year &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 50, b_Intercept = 0.05, \n                                   a_2001 = 0, b_2001 = 0))",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#topo-year",
-    "href": "coding/week_10/models_06.html#topo-year",
-    "title": "Non-Linear Regression with R",
-    "section": "4.3 topo + year",
-    "text": "4.3 topo + year\n\nnlme_model_topoyear &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo + year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 50, b_Intercept = 0.05, \n                                       a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                       b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0))",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#minpack.lm",
-    "href": "coding/week_10/models_06.html#minpack.lm",
-    "title": "Non-Linear Regression with R",
-    "section": "4.4 minpack.lm",
-    "text": "4.4 minpack.lm\n\n# Fit using nlsLM() instead of nls()\nnls_fit &lt;- nlsLM(yield ~ a * nitro^b, \n                 data = data_corn, \n                 start = list(a = 10, b = 0.8)) \n\n# Extract better initial estimates\ncoef(nls_fit)\n\nnlme_model_topoyear &lt;- nlme(yield ~ a * nitro^b, \n                             data = data_corn, \n                             fixed = a + b ~ topo + year, \n                             random = a + b ~ 1 | rep, \n                             start = c(a_Intercept = coef(nls_fit)[1], \n                                       b_Intercept = coef(nls_fit)[2], \n                                       a_HT = 0.5, a_LO = -0.5, a_W = 0.8, a_2001 = 0.3, \n                                       b_HT = 0.1, b_LO = -0.1, b_W = 0.2, b_2001 = 0.05))",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#topoyear",
-    "href": "coding/week_10/models_06.html#topoyear",
-    "title": "Non-Linear Regression with R",
-    "section": "4.5 topo*year",
-    "text": "4.5 topo*year\n\nnlme_model_interaction &lt;- nlme(yield ~ a * nitro^b,\n                                data = data_corn,\n                                fixed = a + b ~ topo * year, \n                                random = a + b ~ 1 | rep,\n                                start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                          a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                          a_HT_2001 = 0, a_LO_2001 = 0, a_W_2001 = 0,\n                                          b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0, \n                                          b_HT_2001 = 0, b_LO_2001 = 0, b_W_2001 = 0))\nsummary(nlme_model_interaction)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33089.36 33212.24 -16524.68\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.218854e-01 a.(In)\nb.(Intercept) 5.341360e-09 0.423 \nResidual      2.938401e+01       \n\nFixed effects:  a + b ~ topo * year \n                      Value Std.Error   DF   t-value p-value\na.(Intercept)      55.24845 11.382004 3425  4.854018  0.0000\na.topoHT          -18.91198 14.663476 3425 -1.289734  0.1972\na.topoLO            5.95162 15.329161 3425  0.388255  0.6979\na.topoW            -4.92420 14.134876 3425 -0.348373  0.7276\na.year2001         34.48361 19.939592 3425  1.729404  0.0838\na.topoHT:year2001 -25.47476 26.755473 3425 -0.952133  0.3411\na.topoLO:year2001 -13.67997 25.911191 3425 -0.527956  0.5976\na.topoW:year2001  -24.38799 25.267053 3425 -0.965209  0.3345\nb.(Intercept)       0.04102  0.048357 3425  0.848201  0.3964\nb.topoHT            0.05674  0.076614 3425  0.740538  0.4590\nb.topoLO           -0.00215  0.062256 3425 -0.034577  0.9724\nb.topoW             0.02704  0.061999 3425  0.436191  0.6627\nb.year2001         -0.03186  0.064449 3425 -0.494372  0.6211\nb.topoHT:year2001  -0.06188  0.117790 3425 -0.525302  0.5994\nb.topoLO:year2001   0.04040  0.083879 3425  0.481585  0.6301\nb.topoW:year2001   -0.00726  0.090420 3425 -0.080283  0.9360\n Correlation: \n                  a.(In) a.tpHT a.tpLO a.topW a.2001 a.HT:2 a.LO:2 a.W:20\na.topoHT          -0.776                                                 \na.topoLO          -0.742  0.576                                          \na.topoW           -0.805  0.625  0.598                                   \na.year2001        -0.571  0.443  0.424  0.459                            \na.topoHT:year2001  0.425 -0.548 -0.316 -0.342 -0.745                     \na.topoLO:year2001  0.439 -0.341 -0.592 -0.354 -0.770  0.573              \na.topoW:year2001   0.450 -0.349 -0.334 -0.559 -0.789  0.588  0.607       \nb.(Intercept)     -0.992  0.770  0.737  0.799  0.566 -0.422 -0.436 -0.447\nb.topoHT           0.626 -0.971 -0.465 -0.504 -0.357  0.532  0.275  0.282\nb.topoLO           0.771 -0.598 -0.991 -0.620 -0.440  0.328  0.586  0.347\nb.topoW            0.774 -0.601 -0.574 -0.991 -0.442  0.329  0.340  0.555\nb.year2001         0.744 -0.578 -0.553 -0.599 -0.965  0.719  0.743  0.762\nb.topoHT:year2001 -0.407  0.632  0.302  0.328  0.528 -0.945 -0.406 -0.417\nb.topoLO:year2001 -0.572  0.444  0.735  0.461  0.741 -0.553 -0.972 -0.585\nb.topoW:year2001  -0.531  0.412  0.394  0.680  0.688 -0.513 -0.529 -0.969\n                  b.(In) b.tpHT b.tpLO b.topW b.2001 b.HT:2 b.LO:2\na.topoHT                                                          \na.topoLO                                                          \na.topoW                                                           \na.year2001                                                        \na.topoHT:year2001                                                 \na.topoLO:year2001                                                 \na.topoW:year2001                                                  \nb.(Intercept)                                                     \nb.topoHT          -0.631                                          \nb.topoLO          -0.777  0.490                                   \nb.topoW           -0.780  0.492  0.606                            \nb.year2001        -0.750  0.474  0.583  0.585                     \nb.topoHT:year2001  0.411 -0.650 -0.319 -0.320 -0.547              \nb.topoLO:year2001  0.577 -0.364 -0.742 -0.450 -0.768  0.420       \nb.topoW:year2001   0.535 -0.338 -0.415 -0.686 -0.713  0.390  0.548\n\nStandardized Within-Group Residuals:\n        Min          Q1         Med          Q3         Max \n-1.66304432 -0.12672025  0.07029809  0.35912890  3.70405544 \n\nNumber of Observations: 3443\nNumber of Groups: 3",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#aic",
-    "href": "coding/week_10/models_06.html#aic",
-    "title": "Non-Linear Regression with R",
-    "section": "5.1 AIC:",
-    "text": "5.1 AIC:\nWe can use the Akaike Information Criterion (AIC).\n\n# Get \nAIC(nlme_model, nlme_model_topo, nlme_model_interaction)\n\n                       df      AIC\nnlme_model              4 33852.62\nnlme_model_topo        12 33377.94\nnlme_model_interaction 20 33089.36",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#aicc",
-    "href": "coding/week_10/models_06.html#aicc",
-    "title": "Non-Linear Regression with R",
-    "section": "5.2 AICc:",
-    "text": "5.2 AICc:\nWhen comparing different nonlinear models, it is essential to use an objective model selection criterion. One of the most commonly used criteria is the Akaike Information Criterion (AIC) and its corrected version AICc.\nWhy Use AICc Instead of AIC?\nAIC is widely used for model comparison, but it has a known bias when applied to small sample sizes or when the number of parameters (K) is large relative to the sample size (n). AICc corrects for this bias by adding a small-sample penalty:\n\\[\nAICc = AIC + \\frac{2K(K+1)}{n-K-1}\n\\]\nWhere:\nAIC is the standard Akaike Information Criterion: \\(\\(AIC = -2 \\log L + 2K\\)\\)  K is the number of estimated parameters  n is the sample size \nThus, when n is large, AICc ≈ AIC, but for small datasets, AICc penalizes overfitting more effectively.",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#delta-aicc-and-aicc-weights",
-    "href": "coding/week_10/models_06.html#delta-aicc-and-aicc-weights",
-    "title": "Non-Linear Regression with R",
-    "section": "5.3 Delta AICc and AICc Weights",
-    "text": "5.3 Delta AICc and AICc Weights\nTo compare models, we use Delta AICc (ΔAICc) and AICc weights:\n\nΔAICc: The difference between each model’s AICc and the lowest AICc value.\nA model with ΔAICc = 0 is the best model.\nModels with ΔAICc &lt; 2 have substantial support.\nΔAICc &gt; 10 means the model has little support.\nAICc weight (wAICc): Measures the relative likelihood of each model given the data.\nA higher weight means the model is more likely to be the best model.\nThe weights sum to 1, allowing for direct comparison of model likelihoods.",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#using-aiccmodavg-in-r",
-    "href": "coding/week_10/models_06.html#using-aiccmodavg-in-r",
-    "title": "Non-Linear Regression with R",
-    "section": "5.4 Using AICcmodavg in R",
-    "text": "5.4 Using AICcmodavg in R\n\n# Run them separatedly\nAICcmodavg::AICc(nlme_model)\n\n[1] 33852.63\n\nAICcmodavg::AICc(nlme_model_topo)\n\n[1] 33378.03\n\nAICcmodavg::AICc(nlme_model_interaction)\n\n[1] 33089.6\n\n\nThe AICcmodavg package provides functions for model selection: ### Compare Models Using aictab()\n\n# Create a list of candidate models\nmodel_list &lt;- list(\n  simple = nlme_model,\n  topo = nlme_model_topo,\n  interaction = nlme_model_interaction\n)\n\n# Model selection table\nmodel_selection &lt;- aictab(cand.set = model_list, modnames = names(model_list))\n\nmodel_selection\n\n\nModel selection based on AICc:\n\n             K     AICc Delta_AICc AICcWt Cum.Wt        LL\ninteraction 20 33089.60       0.00      1      1 -16524.68\ntopo        12 33378.03     288.43      0      1 -16676.97\nsimple       4 33852.63     763.03      0      1 -16922.31\n\n\nThis will output a table with:\n\nAICc values for each model\nΔAICc (relative difference)\nAICc weights (relative model support)",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
-    ]
-  },
-  {
-    "objectID": "coding/week_10/models_06.html#conclusion",
-    "href": "coding/week_10/models_06.html#conclusion",
-    "title": "Non-Linear Regression with R",
-    "section": "5.5 Conclusion",
-    "text": "5.5 Conclusion\n\nAICc is preferred over AIC when sample sizes are small.\nΔAICc helps identify the best model and evaluate model differences.\nAICc weights allow comparison of model likelihoods.\nThe AICcmodavg package makes it easy to apply AICc-based model selection in R.\n\nBy using AICc, we can objectively choose the best model while avoiding overfitting. 🚀",
-    "crumbs": [
-      "Lessons",
-      "17-Models VI"
     ]
   }
 ]

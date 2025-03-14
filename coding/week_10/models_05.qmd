@@ -104,10 +104,13 @@ rm_data_01 <-
   mutate(plot = cur_group_id(), .after = PLOT) %>% 
   ungroup() %>% 
   ## Transform to factor if needed
-  mutate(DEPTH = as.factor(DEPTH),
-         depth = as.integer(DEPTH), # Needed for CorAR1
+  mutate(depth = as.integer(DEPTH), # Needed for CorAR1
+         DEPTH = as.factor(DEPTH),
+         plot = factor(plot),
          BLOCK = factor(BLOCK),
-         SITE = factor(SITE),
+         SITE = factor(SITE), 
+                       #levels = c("site_1", "site_2", "site_3", "site_4"), 
+                       #labels = c("Balducchi", "San Alfredo", "La Blanca", "La Hansa")
          TREAT = factor(TREAT)
          )
 
@@ -279,7 +282,7 @@ fit_corsymm_hetvar <- function(x){
         # Random  
         random = ~1|BLOCK,
         # Correlation
-        correlation = corCompSymm(form = ~ depth |BLOCK/PLOT),
+        correlation = corCompSymm(form = ~ DEPTH |BLOCK/PLOT),
         # Variance
         weights = varComb(varIdent(form= ~1|GROUP)),
       # Data
@@ -425,6 +428,8 @@ models_effects <-
 # Extract ANOVAS
 models_effects$ANOVA[[1]]
 models_effects$ANOVA[[2]]
+models_effects$ANOVA[[3]]
+models_effects$ANOVA[[4]]
 
 ```
 
@@ -453,7 +458,7 @@ mult_comp <-
 
 Now, we are going to reproduce [**Figure 2**](https://www.nature.com/articles/s41598-021-90297-1#Fig2)
 
-```{r rm_plot}
+```{r rm_plot, fig.width=8, fig.height=9}
 
 # Create data frame for plot
 plot_df <- mult_comp %>% 
@@ -515,6 +520,7 @@ STK_plot <-
         legend.position = "top", legend.title = element_blank(),
         legend.text = element_text(size = rel(1.25))        )
 
+STK_plot
 
 ```
 
