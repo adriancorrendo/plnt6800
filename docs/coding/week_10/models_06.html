@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../outline/calendar.html" rel="next">
+<link href="../../coding/week_11/models_07.html" rel="next">
 <link href="../../coding/week_10/models_05.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -381,6 +381,12 @@ window.Quarto = {
  <span class="menu-text">17-Models VI</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_11/models_07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-Models VII</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -560,22 +566,19 @@ window.Quarto = {
 5 1999 -33.05118 -63.84858 75.55 131.5    W 171.46  R1 N5
 6 1999 -33.05120 -63.84851 70.24 131.5    W 170.56  R1 N5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_corn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data_corn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   year           lat              long            yield       
- 1999:1738   Min.   :-33.05   Min.   :-63.85   Min.   : 12.66  
- 2001:1705   1st Qu.:-33.05   1st Qu.:-63.85   1st Qu.: 54.54  
-             Median :-33.05   Median :-63.85   Median : 66.63  
-             Mean   :-33.05   Mean   :-63.85   Mean   : 69.83  
-             3rd Qu.:-33.05   3rd Qu.:-63.84   3rd Qu.: 84.69  
-             Max.   :-33.05   Max.   :-63.84   Max.   :117.90  
-     nitro        topo            bv         rep        nf     
- Min.   :  0.00   E : 730   Min.   : 91.74   R1:1147   N0:573  
- 1st Qu.: 29.00   HT: 785   1st Qu.:168.48   R2:1147   N1:577  
- Median : 66.00   LO: 885   Median :173.08   R3:1149   N2:571  
- Mean   : 64.57   W :1043   Mean   :174.42             N3:575  
- 3rd Qu.:106.00             3rd Qu.:179.39             N4:572  
- Max.   :131.50             Max.   :213.82             N5:575  </code></pre>
+<pre><code>Rows: 3,443
+Columns: 9
+$ year  &lt;fct&gt; 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999, 1999…
+$ lat   &lt;dbl&gt; -33.05113, -33.05115, -33.05116, -33.05117, -33.05118, -33.05120…
+$ long  &lt;dbl&gt; -63.84886, -63.84879, -63.84872, -63.84865, -63.84858, -63.84851…
+$ yield &lt;dbl&gt; 72.14, 73.79, 77.25, 76.35, 75.55, 70.24, 76.17, 69.17, 69.77, 6…
+$ nitro &lt;dbl&gt; 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 131.5, 1…
+$ topo  &lt;fct&gt; W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W…
+$ bv    &lt;dbl&gt; 162.60, 170.49, 168.39, 176.68, 171.46, 170.56, 172.94, 171.86, …
+$ rep   &lt;fct&gt; R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, R1, …
+$ nf    &lt;fct&gt; N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, N5, …</code></pre>
 </div>
 </div>
 <section id="visualizing-the-data" class="level2" data-number="2.1">
@@ -585,7 +588,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Global scatter plot</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield)) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y<span class="sc">~</span><span class="fu">poly</span>(x, <span class="dv">2</span>))<span class="sc">+</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Corn Yield vs Nitrogen"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -622,7 +625,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model with nls</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nls_model <span class="ot">&lt;-</span> <span class="fu">nls</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, <span class="at">data =</span> data_corn,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">50</span>, <span class="at">b =</span> <span class="fl">0.05</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">50</span>, <span class="at">b =</span> <span class="fl">0.1</span>))</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nls_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -632,7 +635,7 @@ Formula: yield ~ a * nitro^b
 
 Parameters:
   Estimate Std. Error t value Pr(&gt;|t|)    
-a 55.71691    4.33102  12.865  &lt; 2e-16 ***
+a 55.71683    4.33101  12.865  &lt; 2e-16 ***
 b  0.05641    0.01811   3.116  0.00185 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -640,7 +643,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 32.99 on 3441 degrees of freedom
 
 Number of iterations to convergence: 3 
-Achieved convergence tolerance: 1.209e-07</code></pre>
+Achieved convergence tolerance: 4.657e-07</code></pre>
 </div>
 </div>
 </section>
@@ -649,15 +652,44 @@ Achieved convergence tolerance: 1.209e-07</code></pre>
 <p>The idea here is to be able to account for variability among replicates (<code>rep</code>), so we extend our model to:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model with nlme</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nlme_model <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nlme_model_a <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> data_corn,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">random =</span> a <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="fu">coef</span>(nls_model)[[<span class="dv">1</span>]], <span class="at">b =</span> <span class="fu">coef</span>(nls_model)[[<span class="dv">2</span>]]) )</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>nlme_model_b <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> data_corn,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">random =</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="fu">coef</span>(nls_model)[[<span class="dv">1</span>]], <span class="at">b =</span> <span class="fu">coef</span>(nls_model)[[<span class="dv">2</span>]]) )</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>nlme_model_ab <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> data_corn,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">0</span>) )</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nls_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Formula: yield ~ a * nitro^b
+
+Parameters:
+  Estimate Std. Error t value Pr(&gt;|t|)    
+a 55.71683    4.33101  12.865  &lt; 2e-16 ***
+b  0.05641    0.01811   3.116  0.00185 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 32.99 on 3441 degrees of freedom
+
+Number of iterations to convergence: 3 
+Achieved convergence tolerance: 4.657e-07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nonlinear mixed-effects model fit by maximum likelihood
   Model: yield ~ a * nitro^b 
@@ -668,43 +700,104 @@ Achieved convergence tolerance: 1.209e-07</code></pre>
 Random effects:
  Formula: a ~ 1 | rep
                   a Residual
-StdDev: 0.001414344 32.98493
+StdDev: 0.001412211 32.98493
 
 Fixed effects:  a + b ~ 1 
-     Value Std.Error   DF  t-value p-value
-a 55.71691  4.331020 3439 12.86461  0.0000
-b  0.05641  0.018106 3439  3.11551  0.0019
+     Value Std.Error   DF   t-value p-value
+a 55.71683  4.331014 3439 12.864614  0.0000
+b  0.05641  0.018106 3439  3.115529  0.0019
  Correlation: 
   a     
 b -0.994
 
 Standardized Within-Group Residuals:
          Min           Q1          Med           Q3          Max 
--1.567168803 -0.383887822  0.003849285  0.919014405  3.299688776 
+-1.567168846 -0.383887413  0.003849493  0.919014157  3.299688776 
 
 Number of Observations: 3443
 Number of Groups: 3 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nls_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 33850.62</code></pre>
+<pre><code>Nonlinear mixed-effects model fit by maximum likelihood
+  Model: yield ~ a * nitro^b 
+  Data: data_corn 
+       AIC      BIC    logLik
+  33852.62 33877.19 -16922.31
+
+Random effects:
+ Formula: b ~ 1 | rep
+                   b Residual
+StdDev: 5.694816e-06 32.98493
+
+Fixed effects:  a + b ~ 1 
+     Value Std.Error   DF   t-value p-value
+a 55.71683  4.331014 3439 12.864614  0.0000
+b  0.05641  0.018106 3439  3.115529  0.0019
+ Correlation: 
+  a     
+b -0.994
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-1.567168845 -0.383887413  0.003849493  0.919014157  3.299688776 
+
+Number of Observations: 3443
+Number of Groups: 3 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nlme_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_ab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 33852.62</code></pre>
+<pre><code>Nonlinear mixed-effects model fit by maximum likelihood
+  Model: yield ~ a * nitro^b 
+  Data: data_corn 
+       AIC      BIC    logLik
+  33856.62 33893.48 -16922.31
+
+Random effects:
+ Formula: list(a ~ 1, b ~ 1)
+ Level: rep
+ Structure: General positive-definite, Log-Cholesky parametrization
+         StdDev       Corr 
+a        3.837215e-02 a    
+b        2.462836e-09 0.041
+Residual 3.298492e+01      
+
+Fixed effects:  a + b ~ 1 
+     Value Std.Error   DF   t-value p-value
+a 55.71616  4.331023 3439 12.864433  0.0000
+b  0.05641  0.018106 3439  3.115681  0.0019
+ Correlation: 
+  a     
+b -0.994
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-1.567152286 -0.383893192  0.003794805  0.919030084  3.299689858 
+
+Number of Observations: 3443
+Number of Groups: 3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nls_model, nlme_model_a, nlme_model_b, nlme_model_ab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              df      AIC
+nls_model      3 33850.62
+nlme_model_a   4 33852.62
+nlme_model_b   4 33852.62
+nlme_model_ab  6 33856.62</code></pre>
 </div>
 </div>
 <section id="only-topo" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="only-topo"><span class="header-section-number">4.1</span> only topo</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>nlme_model_topo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>))</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nlme_model_topo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> (a<span class="sc">+</span>b) <span class="sc">~</span> topo,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> (a <span class="sc">+</span> b) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                                   )      )</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nonlinear mixed-effects model fit by maximum likelihood
   Model: yield ~ a * nitro^b 
@@ -721,7 +814,7 @@ a.(Intercept) 4.358860e-01 a.(In)
 b.(Intercept) 5.329321e-09 0.475 
 Residual      3.071279e+01       
 
-Fixed effects:  a + b ~ topo 
+Fixed effects:  (a + b) ~ topo 
                   Value Std.Error   DF   t-value p-value
 a.(Intercept)  65.83564  9.195307 3433  7.159700  0.0000
 a.topoHT      -25.49439 12.649071 3433 -2.015515  0.0439
@@ -748,7 +841,7 @@ Standardized Within-Group Residuals:
 Number of Observations: 3443
 Number of Groups: 3 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   a.(Intercept)  a.topoHT a.topoLO   a.topoW b.(Intercept)    b.topoHT
 R1      65.65141 -25.49439 1.406899 -12.09268    0.04412586 0.006723821
@@ -759,67 +852,143 @@ R1 0.01296678 0.01019221
 R2 0.01296678 0.01019221
 R3 0.01296678 0.01019221</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some components of broom mixed doesn't work yet for non-linear models</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># broom.mixed::tidy(nlme_model_topo)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some components of broom mixed doesn't work yet for non-linear models</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 7
+  effect term           estimate std.error    df statistic  p.value
+  &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 fixed  a.(Intercept)  65.8        9.20    3433     7.16  9.84e-13
+2 fixed  a.topoHT      -25.5       12.6     3433    -2.02  4.39e- 2
+3 fixed  a.topoLO        1.41      12.1     3433     0.116 9.08e- 1
+4 fixed  a.topoW       -12.1       11.8     3433    -1.03  3.05e- 1
+5 fixed  b.(Intercept)   0.0441     0.0326  3433     1.35  1.76e- 1
+6 fixed  b.topoHT        0.00672    0.0600  3433     0.112 9.11e- 1
+7 fixed  b.topoLO        0.0130     0.0426  3433     0.304 7.61e- 1
+8 fixed  b.topoW         0.0102     0.0457  3433     0.223 8.23e- 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(nls_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term  estimate std.error statistic  p.value
+  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 a      55.7       4.33       12.9  5.01e-37
+2 b       0.0564    0.0181      3.12 1.85e- 3</code></pre>
+</div>
 </div>
 </section>
 <section id="only-year" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="only-year"><span class="header-section-number">4.2</span> only year</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nlme_model_year <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> year,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">50</span>, <span class="at">b_Intercept =</span> <span class="fl">0.05</span>, </span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">a_2001 =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nlme_model_year <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> year,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">a_2001 =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nonlinear mixed-effects model fit by maximum likelihood
+  Model: yield ~ a * nitro^b 
+  Data: data_corn 
+       AIC      BIC    logLik
+  33791.26 33840.41 -16887.63
+
+Random effects:
+ Formula: list(a ~ 1, b ~ 1)
+ Level: rep
+ Structure: General positive-definite, Log-Cholesky parametrization
+              StdDev       Corr  
+a.(Intercept) 3.886561e-02 a.(In)
+b.(Intercept) 1.927724e-09 0.054 
+Residual      3.265434e+01       
+
+Fixed effects:  a + b ~ year 
+                 Value Std.Error   DF   t-value p-value
+a.(Intercept) 50.55627  5.361897 3437  9.428802  0.0000
+a.year2001    15.29395  9.280588 3437  1.647950  0.0995
+b.(Intercept)  0.06190  0.024771 3437  2.498676  0.0125
+b.year2001    -0.02825  0.036459 3437 -0.774741  0.4385
+ Correlation: 
+              a.(In) a.2001 b.(In)
+a.year2001    -0.578              
+b.(Intercept) -0.992  0.573       
+b.year2001     0.674 -0.985 -0.679
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.7378975 -0.2882427  0.1438697  0.7748094  3.3330942 
+
+Number of Observations: 3443
+Number of Groups: 3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nlme_model_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   a.(Intercept) a.year2001 b.(Intercept)  b.year2001
+R1      50.55581   15.29395    0.06189593 -0.02824663
+R2      50.55517   15.29395    0.06189593 -0.02824663
+R3      50.55783   15.29395    0.06189593 -0.02824663</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some components of broom mixed doesn't work yet for non-linear models</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(nlme_model_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 7
+  effect term          estimate std.error    df statistic  p.value
+  &lt;chr&gt;  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 fixed  a.(Intercept)  50.6       5.36    3437     9.43  7.39e-21
+2 fixed  a.year2001     15.3       9.28    3437     1.65  9.95e- 2
+3 fixed  b.(Intercept)   0.0619    0.0248  3437     2.50  1.25e- 2
+4 fixed  b.year2001     -0.0282    0.0365  3437    -0.775 4.39e- 1</code></pre>
+</div>
 </div>
 </section>
 <section id="topo-year" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="topo-year"><span class="header-section-number">4.3</span> topo + year</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>nlme_model_topoyear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">+</span> year,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">50</span>, <span class="at">b_Intercept =</span> <span class="fl">0.05</span>, </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, <span class="at">a_2001 =</span> <span class="dv">0</span>, </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nlme_model_topoyear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data_corn,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">+</span> year,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, <span class="at">a_2001 =</span> <span class="dv">0</span>, </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="minpack.lm" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="minpack.lm"><span class="header-section-number">4.4</span> minpack.lm</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using nlsLM() instead of nls()</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nls_fit <span class="ot">&lt;-</span> <span class="fu">nlsLM</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> data_corn, </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.8</span>)) </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract better initial estimates</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nls_fit)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>nlme_model_topoyear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, </span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> data_corn, </span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">+</span> year, </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep, </span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="fu">coef</span>(nls_fit)[<span class="dv">1</span>], </span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_Intercept =</span> <span class="fu">coef</span>(nls_fit)[<span class="dv">2</span>], </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">a_HT =</span> <span class="fl">0.5</span>, <span class="at">a_LO =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">a_W =</span> <span class="fl">0.8</span>, <span class="at">a_2001 =</span> <span class="fl">0.3</span>, </span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_HT =</span> <span class="fl">0.1</span>, <span class="at">b_LO =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">b_W =</span> <span class="fl">0.2</span>, <span class="at">b_2001 =</span> <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit using nlsLM() instead of nls()</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>nls_fit <span class="ot">&lt;-</span> <span class="fu">nlsLM</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> data_corn, </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.8</span>)) </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract better initial estimates</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(nls_fit)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>nlme_model_topoyear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b, </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> data_corn, </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">+</span> year, </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep, </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="fu">coef</span>(nls_fit)[<span class="dv">1</span>], </span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_Intercept =</span> <span class="fu">coef</span>(nls_fit)[<span class="dv">2</span>], </span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">a_HT =</span> <span class="fl">0.5</span>, <span class="at">a_LO =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">a_W =</span> <span class="fl">0.8</span>, <span class="at">a_2001 =</span> <span class="fl">0.3</span>, </span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">b_HT =</span> <span class="fl">0.1</span>, <span class="at">b_LO =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">b_W =</span> <span class="fl">0.2</span>, <span class="at">b_2001 =</span> <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="topoyear" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="topoyear"><span class="header-section-number">4.5</span> topo*year</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nlme_model_interaction <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_corn,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">*</span> year, </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, <span class="at">a_2001 =</span> <span class="dv">0</span>, </span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">a_HT_2001 =</span> <span class="dv">0</span>, <span class="at">a_LO_2001 =</span> <span class="dv">0</span>, <span class="at">a_W_2001 =</span> <span class="dv">0</span>,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>, </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">b_HT_2001 =</span> <span class="dv">0</span>, <span class="at">b_LO_2001 =</span> <span class="dv">0</span>, <span class="at">b_W_2001 =</span> <span class="dv">0</span>))</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nlme_model_interaction <span class="ot">&lt;-</span> <span class="fu">nlme</span>(yield <span class="sc">~</span> a <span class="sc">*</span> nitro<span class="sc">^</span>b,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_corn,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">fixed =</span> a <span class="sc">+</span> b <span class="sc">~</span> topo <span class="sc">*</span> year, </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">random =</span> a <span class="sc">+</span> b <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> rep,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">start =</span> <span class="fu">c</span>(<span class="at">a_Intercept =</span> <span class="dv">1</span>, <span class="at">b_Intercept =</span> <span class="fl">0.5</span>, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">a_HT =</span> <span class="dv">0</span>, <span class="at">a_LO =</span> <span class="dv">0</span>, <span class="at">a_W =</span> <span class="dv">0</span>, <span class="at">a_2001 =</span> <span class="dv">0</span>, </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">a_HT_2001 =</span> <span class="dv">0</span>, <span class="at">a_LO_2001 =</span> <span class="dv">0</span>, <span class="at">a_W_2001 =</span> <span class="dv">0</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">b_HT =</span> <span class="dv">0</span>, <span class="at">b_LO =</span> <span class="dv">0</span>, <span class="at">b_W =</span> <span class="dv">0</span>, <span class="at">b_2001 =</span> <span class="dv">0</span>, </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">b_HT_2001 =</span> <span class="dv">0</span>, <span class="at">b_LO_2001 =</span> <span class="dv">0</span>, <span class="at">b_W_2001 =</span> <span class="dv">0</span>))</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nonlinear mixed-effects model fit by maximum likelihood
   Model: yield ~ a * nitro^b 
@@ -895,6 +1064,23 @@ Standardized Within-Group Residuals:
 Number of Observations: 3443
 Number of Groups: 3 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_int <span class="ot">&lt;-</span> broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(nlme_model_interaction)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>df_int <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">as.numeric</span>(estimate),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">std.error</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">std.error</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(term, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"coef"</span>, <span class="st">"topo_year"</span>), <span class="at">sep =</span> <span class="st">"."</span>, <span class="at">remove =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> term, <span class="at">y =</span> estimate))<span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> term))<span class="sc">+</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> estimate <span class="sc">-</span> <span class="st">`</span><span class="at">std.error</span><span class="st">`</span>, <span class="at">ymax =</span> estimate <span class="sc">+</span> <span class="st">`</span><span class="at">std.error</span><span class="st">`</span>))<span class="sc">+</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -904,12 +1090,13 @@ Number of Groups: 3 </code></pre>
 <h2 data-number="5.1" class="anchored" data-anchor-id="aic"><span class="header-section-number">5.1</span> AIC:</h2>
 <p>We can use the Akaike Information Criterion (AIC).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nlme_model, nlme_model_topo, nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get </span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(nlme_model_ab, nlme_model_topo, nlme_model_year, nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       df      AIC
-nlme_model              4 33852.62
+nlme_model_ab           6 33856.62
 nlme_model_topo        12 33377.94
+nlme_model_year         8 33791.26
 nlme_model_interaction 20 33089.36</code></pre>
 </div>
 </div>
@@ -942,33 +1129,38 @@ AICc = AIC + \frac{2K(K+1)}{n-K-1}
 <section id="using-aiccmodavg-in-r" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="using-aiccmodavg-in-r"><span class="header-section-number">5.4</span> Using <code>AICcmodavg</code> in R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run them separatedly</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run them separatedly</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_ab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 33852.63</code></pre>
+<pre><code>[1] 33856.64</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_topo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 33378.03</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33791.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>AICcmodavg<span class="sc">::</span><span class="fu">AICc</span>(nlme_model_interaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 33089.6</code></pre>
 </div>
 </div>
 <p>The <code>AICcmodavg</code> package provides functions for model selection: ### Compare Models Using <code>aictab()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of candidate models</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">simple =</span> nlme_model,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">topo =</span> nlme_model_topo,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction =</span> nlme_model_interaction</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Model selection table</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>model_selection <span class="ot">&lt;-</span> <span class="fu">aictab</span>(<span class="at">cand.set =</span> model_list, <span class="at">modnames =</span> <span class="fu">names</span>(model_list))</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>model_selection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of candidate models</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>model_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">simple =</span> nlme_model_ab,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">topo =</span> nlme_model_topo,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> nlme_model_year,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction =</span> nlme_model_interaction</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Model selection table</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>model_selection <span class="ot">&lt;-</span> AICcmodavg<span class="sc">::</span><span class="fu">aictab</span>(<span class="at">cand.set =</span> model_list, <span class="at">modnames =</span> <span class="fu">names</span>(model_list))</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>model_selection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Model selection based on AICc:
@@ -976,7 +1168,8 @@ Model selection based on AICc:
              K     AICc Delta_AICc AICcWt Cum.Wt        LL
 interaction 20 33089.60       0.00      1      1 -16524.68
 topo        12 33378.03     288.43      0      1 -16676.97
-simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
+year         8 33791.30     701.70      0      1 -16887.63
+simple       6 33856.64     767.04      0      1 -16922.31</code></pre>
 </div>
 </div>
 <p>This will output a table with:</p>
@@ -1001,27 +1194,28 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 <h1 data-number="6"><span class="header-section-number">6</span> Visualization</h1>
 <p>The estimated parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> tell us how yield responds to nitrogen application. We can visualize the fitted models:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new data frame for predictions</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the function "expand.grid" is a great alternative to cross factor levels</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>new_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nitro =</span> <span class="fu">seq</span>(<span class="fu">min</span>(data_corn<span class="sc">$</span>nitro), <span class="fu">max</span>(data_corn<span class="sc">$</span>nitro), <span class="at">by=</span><span class="dv">1</span>),</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">rep =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>rep),</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">topo =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>topo),</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">year =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>year))</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions for each model</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>new_preds <span class="ot">&lt;-</span> new_df <span class="sc">%&gt;%</span> </span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yield_nls =</span> <span class="fu">predict</span>(nls_model, <span class="at">newdata =</span> new_df),</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme =</span> <span class="fu">predict</span>(nlme_model, <span class="at">newdata =</span> new_df),</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_topo =</span> <span class="fu">predict</span>(nlme_model_topo, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>),</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_interaction =</span> <span class="fu">predict</span>(nlme_model_interaction, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>) )</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Global</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nonlinear Regression Fit (nls or nlme)"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new data frame for predictions</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the function "expand.grid" is a great alternative to cross factor levels</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>new_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nitro =</span> <span class="fu">seq</span>(<span class="fu">min</span>(data_corn<span class="sc">$</span>nitro), <span class="fu">max</span>(data_corn<span class="sc">$</span>nitro), <span class="at">by=</span><span class="dv">1</span>),</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">rep =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>rep),</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">topo =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>topo),</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">year =</span> <span class="fu">unique</span>(data_corn<span class="sc">$</span>year))</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions for each model</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>new_preds <span class="ot">&lt;-</span> new_df <span class="sc">%&gt;%</span> </span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yield_nls =</span> <span class="fu">predict</span>(nls_model, <span class="at">newdata =</span> new_df),</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme =</span> <span class="fu">predict</span>(nlme_model_ab, <span class="at">newdata =</span> new_df),</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_topo =</span> <span class="fu">predict</span>(nlme_model_topo, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>),</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_year =</span> <span class="fu">predict</span>(nlme_model_year, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>),</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">yield_nlme_interaction =</span> <span class="fu">predict</span>(nlme_model_interaction, <span class="at">newdata =</span> new_df, <span class="at">level =</span> <span class="dv">0</span>) )</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Global</span></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme, <span class="at">linetype =</span> <span class="st">"nlme"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nonlinear Regression Fit (nls or nlme)"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1029,13 +1223,13 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Topography</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_topo, <span class="at">linetype =</span> <span class="st">"nlme topo"</span>)) <span class="sc">+</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Topography</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_topo, <span class="at">linetype =</span> <span class="st">"nlme topo"</span>)) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1043,18 +1237,32 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_interaction, <span class="at">linetype =</span> <span class="st">"nlme interaction"</span>)) <span class="sc">+</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography*Year"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year) <span class="sc">+</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Year</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> year, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_year, <span class="at">linetype =</span> <span class="st">"nlme topo"</span>)) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="models_06_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_corn, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield, <span class="at">color =</span> topo, <span class="at">shape =</span> <span class="fu">as.factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nls, <span class="at">linetype =</span> <span class="st">"nls"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> new_preds, <span class="fu">aes</span>(<span class="at">x =</span> nitro, <span class="at">y =</span> yield_nlme_interaction, <span class="at">linetype =</span> <span class="st">"nlme interaction"</span>)) <span class="sc">+</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model by Topography*Year"</span>, <span class="at">x =</span> <span class="st">"Nitrogen (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Yield (tons/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#facet_wrap(~year) +</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="models_06_files/figure-html/unnamed-chunk-14-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1064,11 +1272,11 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 <h1 data-number="7"><span class="header-section-number">7</span> Other alternatives</h1>
 <p>Some packages try to help with the fitting of models that are used for specific field. For example, the <code>soiltestcorr</code> package is designed to help with the regression model fitting for relationships between relative yield and soil test values. ## soiltestcorr</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example dataset</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>soilfert_data <span class="ot">&lt;-</span> soiltestcorr<span class="sc">::</span>data_test</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mitscherlich</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mitscherlich</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example dataset</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>soilfert_data <span class="ot">&lt;-</span> soiltestcorr<span class="sc">::</span>data_test</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mitscherlich</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mitscherlich</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 13
   asymptote     b curvature equation  y_intercept target  CSTV   AIC  AICc   BIC
@@ -1076,7 +1284,7 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 1      98.0  3.91    0.0885 98(1-e^(…        28.6     95  35.5 1022. 1022. 1033.
 # ℹ 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, pvalue &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mitscherlich</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mitscherlich</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1084,8 +1292,8 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear-plateau</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">linear_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear-plateau</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">linear_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 16
   intercept slope equation    plateau  CSTV lowerCL upperCL CI_type target  STVt
@@ -1094,7 +1302,7 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 # ℹ 6 more variables: AIC &lt;dbl&gt;, AICc &lt;dbl&gt;, BIC &lt;dbl&gt;, R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;,
 #   pvalue &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">linear_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">linear_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1102,8 +1310,8 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic-plateau</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">quadratic_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic-plateau</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">quadratic_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 17
   intercept slope quadratic equation       plateau  CSTV lowerCL upperCL CI_type
@@ -1112,7 +1320,7 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 # ℹ 8 more variables: target &lt;dbl&gt;, STVt &lt;dbl&gt;, AIC &lt;dbl&gt;, AICc &lt;dbl&gt;,
 #   BIC &lt;dbl&gt;, R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, pvalue &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">quadratic_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">quadratic_plateau</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1120,8 +1328,8 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modified Arcsine-log Calibration Curve</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mod_alcc</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modified Arcsine-log Calibration Curve</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mod_alcc</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>, <span class="at">plot =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 18
       n     r RMSE_alcc AIC_alcc AIC_sma BIC_sma  p_value confidence target
@@ -1130,7 +1338,7 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 # ℹ 9 more variables: CSTV &lt;dbl&gt;, LL &lt;dbl&gt;, UL &lt;dbl&gt;, CSTV90 &lt;dbl&gt;,
 #   n.90x2 &lt;int&gt;, CSTV100 &lt;dbl&gt;, n.100 &lt;int&gt;, Curve &lt;list&gt;, SMA &lt;list&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mod_alcc</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>soiltestcorr<span class="sc">::</span><span class="fu">mod_alcc</span>(<span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1144,23 +1352,23 @@ simple       4 33852.63     763.03      0      1 -16922.31</code></pre>
 <p>Bootstrapping is a technique introduced in late 1970’s by Bradley Efron (Efron, 1979). It is a general purpose inferential approach that is useful for robust estimations, especially when the distribution of a statistic of quantity of interest is complicated or unknown (Faraway, 2014). It provides an alternative to perform confidence statements while relaxing the famous assumption of normality (Efron and Tibshirani, 1993). The underlying concept of bootstrapping is that the inference about a population parameter (e.g.&nbsp;a coefficient) or quantity can be modeled by “resampling” the available data.</p>
 <p>The soiltestcorr package has the option to automatically run bootstrapping for the above mentioned non-linear regression models. More info <a href="https://adriancorrendo.github.io/soiltestcorr/articles/bootstrapping_tutorial.html">here</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>boots_models <span class="ot">&lt;-</span> soiltestcorr<span class="sc">::</span><span class="fu">boot_mod_alcc</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># See results</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>boots_models</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>boots_models <span class="ot">&lt;-</span> soiltestcorr<span class="sc">::</span><span class="fu">boot_mod_alcc</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">data =</span> soilfert_data, <span class="at">stv =</span> STV, <span class="at">ry =</span> RY, <span class="at">target =</span> <span class="dv">95</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># See results</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>boots_models</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 14
    boot_id     n     r RMSE_alcc AIC_alcc AIC_sma BIC_sma  p_value target  CSTV
      &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1       1   137 0.735     11.3     1058.  12.5    27.1   1.60e-24     95  28.1
- 2       2   137 0.732     11.2     1057.  16.5    31.1   3.07e-24     95  29.9
- 3       3   137 0.633      9.87    1022. -50.2   -35.6   1.12e-16     95  28.3
- 4       4   137 0.734     10.1     1029.  -1.78   12.8   1.79e-24     95  29.2
- 5       5   137 0.680     10.9     1050.  12.9    27.5   6.30e-20     95  28.8
- 6       6   137 0.721     10.7     1044.  30.9    45.5   2.85e-23     95  29.2
- 7       7   137 0.724      9.81    1020. -15.4    -0.811 1.48e-23     95  30.4
- 8       8   137 0.798      9.62    1015.   1.62   16.2   1.91e-31     95  29.6
- 9       9   137 0.677     10.2     1032.   0.270  14.9   1.09e-19     95  28.6
-10      10   137 0.697     10.4     1036.  17.2    31.8   3.10e-21     95  29.8
+ 1       1   137 0.755     10.6     1042.   22.2    36.8  1.53e-26     95  28.1
+ 2       2   137 0.750      9.11    1000.  -26.0   -11.4  5.87e-26     95  28.9
+ 3       3   137 0.711      9.92    1023.  -29.3   -14.7  2.19e-22     95  30.2
+ 4       4   137 0.651     11.1     1054.  -17.6    -2.98 7.32e-18     95  31.9
+ 5       5   137 0.647     10.1     1029.  -38.9   -24.3  1.42e-17     95  30.5
+ 6       6   137 0.640     10.6     1042.  -11.4     3.20 4.02e-17     95  30.3
+ 7       7   137 0.739     10.2     1030.    6.71   21.3  7.16e-25     95  29.7
+ 8       8   137 0.699     11.4     1061.   17.1    31.7  2.33e-21     95  29.6
+ 9       9   137 0.677     11.1     1055.   14.0    28.6  1.07e-19     95  28.1
+10      10   137 0.731      9.78    1020.  -10.9     3.71 3.40e-24     95  29.7
 # ℹ 4 more variables: CSTV90 &lt;dbl&gt;, n.90x2 &lt;int&gt;, CSTV100 &lt;dbl&gt;, n.100 &lt;int&gt;</code></pre>
 </div>
 </div>
@@ -1742,8 +1950,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../outline/calendar.html" class="pagination-link" aria-label="Schedule">
-        <span class="nav-page-text">Schedule</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../coding/week_11/models_07.html" class="pagination-link" aria-label="18-Models VII">
+        <span class="nav-page-text">18-Models VII</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

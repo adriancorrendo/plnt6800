@@ -818,7 +818,7 @@
     "href": "coding/week_10/models_06.html#visualizing-the-data",
     "title": "Non-Linear Regression with R",
     "section": "2.1 Visualizing the Data",
-    "text": "2.1 Visualizing the Data\nTo determine if a non-linear model is needed, we first visualize the data:\n\n# Global scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point() +\n  geom_smooth()+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")\n\n\n\n\n\n\n\n# Grouped scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point(aes(color = topo, shape = year)) +\n  geom_smooth(aes(color = topo, linetype = year), se=F)+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")",
+    "text": "2.1 Visualizing the Data\nTo determine if a non-linear model is needed, we first visualize the data:\n\n# Global scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", formula = y~poly(x, 2))+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")\n\n\n\n\n\n\n\n# Grouped scatter plot\nggplot(data_corn, aes(x = nitro, y = yield)) +\n  geom_point(aes(color = topo, shape = year)) +\n  geom_smooth(aes(color = topo, linetype = year), se=F)+\n  labs(title = \"Corn Yield vs Nitrogen\", x = \"Nitrogen (kg/ha)\", y = \"Yield (tons/ha)\")",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -829,7 +829,7 @@
     "href": "coding/week_10/models_06.html#only-topo",
     "title": "Non-Linear Regression with R",
     "section": "4.1 only topo",
-    "text": "4.1 only topo\n\nnlme_model_topo &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                   a_HT = 0, a_LO = 0, a_W = 0, \n                                   b_HT = 0, b_LO = 0, b_W = 0))\nsummary(nlme_model_topo)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33377.94 33451.67 -16676.97\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.358860e-01 a.(In)\nb.(Intercept) 5.329321e-09 0.475 \nResidual      3.071279e+01       \n\nFixed effects:  a + b ~ topo \n                  Value Std.Error   DF   t-value p-value\na.(Intercept)  65.83564  9.195307 3433  7.159700  0.0000\na.topoHT      -25.49439 12.649071 3433 -2.015515  0.0439\na.topoLO        1.40690 12.133727 3433  0.115949  0.9077\na.topoW       -12.09268 11.787969 3433 -1.025849  0.3050\nb.(Intercept)   0.04413  0.032635 3433  1.352101  0.1764\nb.topoHT        0.00672  0.060009 3433  0.112046  0.9108\nb.topoLO        0.01297  0.042594 3433  0.304426  0.7608\nb.topoW         0.01019  0.045655 3433  0.223244  0.8234\n Correlation: \n              a.(In) a.tpHT a.tpLO a.topW b.(In) b.tpHT b.tpLO\na.topoHT      -0.726                                          \na.topoLO      -0.757  0.550                                   \na.topoW       -0.779  0.567  0.591                            \nb.(Intercept) -0.993  0.722  0.753  0.775                     \nb.topoHT       0.540 -0.966 -0.409 -0.421 -0.544              \nb.topoLO       0.761 -0.553 -0.994 -0.594 -0.766  0.417       \nb.topoW        0.710 -0.516 -0.538 -0.989 -0.715  0.389  0.548\n\nStandardized Within-Group Residuals:\n       Min         Q1        Med         Q3        Max \n-1.5734100 -0.3300691  0.0845198  0.6716186  3.5438008 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\ncoef(nlme_model_topo)\n\n   a.(Intercept)  a.topoHT a.topoLO   a.topoW b.(Intercept)    b.topoHT\nR1      65.65141 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR2      65.72720 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR3      66.12830 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\n     b.topoLO    b.topoW\nR1 0.01296678 0.01019221\nR2 0.01296678 0.01019221\nR3 0.01296678 0.01019221\n\n# Some components of broom mixed doesn't work yet for non-linear models\n# broom.mixed::tidy(nlme_model_topo)",
+    "text": "4.1 only topo\n\nnlme_model_topo &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = (a+b) ~ topo,\n                         random = (a + b) ~ 1 | rep,\n                         start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                   a_HT = 0, a_LO = 0, a_W = 0,\n                                   b_HT = 0, b_LO = 0, b_W = 0\n                                   )      )\nsummary(nlme_model_topo)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33377.94 33451.67 -16676.97\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.358860e-01 a.(In)\nb.(Intercept) 5.329321e-09 0.475 \nResidual      3.071279e+01       \n\nFixed effects:  (a + b) ~ topo \n                  Value Std.Error   DF   t-value p-value\na.(Intercept)  65.83564  9.195307 3433  7.159700  0.0000\na.topoHT      -25.49439 12.649071 3433 -2.015515  0.0439\na.topoLO        1.40690 12.133727 3433  0.115949  0.9077\na.topoW       -12.09268 11.787969 3433 -1.025849  0.3050\nb.(Intercept)   0.04413  0.032635 3433  1.352101  0.1764\nb.topoHT        0.00672  0.060009 3433  0.112046  0.9108\nb.topoLO        0.01297  0.042594 3433  0.304426  0.7608\nb.topoW         0.01019  0.045655 3433  0.223244  0.8234\n Correlation: \n              a.(In) a.tpHT a.tpLO a.topW b.(In) b.tpHT b.tpLO\na.topoHT      -0.726                                          \na.topoLO      -0.757  0.550                                   \na.topoW       -0.779  0.567  0.591                            \nb.(Intercept) -0.993  0.722  0.753  0.775                     \nb.topoHT       0.540 -0.966 -0.409 -0.421 -0.544              \nb.topoLO       0.761 -0.553 -0.994 -0.594 -0.766  0.417       \nb.topoW        0.710 -0.516 -0.538 -0.989 -0.715  0.389  0.548\n\nStandardized Within-Group Residuals:\n       Min         Q1        Med         Q3        Max \n-1.5734100 -0.3300691  0.0845198  0.6716186  3.5438008 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\ncoef(nlme_model_topo)\n\n   a.(Intercept)  a.topoHT a.topoLO   a.topoW b.(Intercept)    b.topoHT\nR1      65.65141 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR2      65.72720 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\nR3      66.12830 -25.49439 1.406899 -12.09268    0.04412586 0.006723821\n     b.topoLO    b.topoW\nR1 0.01296678 0.01019221\nR2 0.01296678 0.01019221\nR3 0.01296678 0.01019221\n\n# Some components of broom mixed doesn't work yet for non-linear models\nbroom.mixed::tidy(nlme_model_topo)\n\n# A tibble: 8 × 7\n  effect term           estimate std.error    df statistic  p.value\n  &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 fixed  a.(Intercept)  65.8        9.20    3433     7.16  9.84e-13\n2 fixed  a.topoHT      -25.5       12.6     3433    -2.02  4.39e- 2\n3 fixed  a.topoLO        1.41      12.1     3433     0.116 9.08e- 1\n4 fixed  a.topoW       -12.1       11.8     3433    -1.03  3.05e- 1\n5 fixed  b.(Intercept)   0.0441     0.0326  3433     1.35  1.76e- 1\n6 fixed  b.topoHT        0.00672    0.0600  3433     0.112 9.11e- 1\n7 fixed  b.topoLO        0.0130     0.0426  3433     0.304 7.61e- 1\n8 fixed  b.topoW         0.0102     0.0457  3433     0.223 8.23e- 1\n\nbroom.mixed::tidy(nls_model)\n\n# A tibble: 2 × 5\n  term  estimate std.error statistic  p.value\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 a      55.7       4.33       12.9  5.01e-37\n2 b       0.0564    0.0181      3.12 1.85e- 3",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -840,7 +840,7 @@
     "href": "coding/week_10/models_06.html#only-year",
     "title": "Non-Linear Regression with R",
     "section": "4.2 only year",
-    "text": "4.2 only year\n\nnlme_model_year &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 50, b_Intercept = 0.05, \n                                   a_2001 = 0, b_2001 = 0))",
+    "text": "4.2 only year\n\nnlme_model_year &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                   a_2001 = 0, b_2001 = 0))\n\nsummary(nlme_model_year)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33791.26 33840.41 -16887.63\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 3.886561e-02 a.(In)\nb.(Intercept) 1.927724e-09 0.054 \nResidual      3.265434e+01       \n\nFixed effects:  a + b ~ year \n                 Value Std.Error   DF   t-value p-value\na.(Intercept) 50.55627  5.361897 3437  9.428802  0.0000\na.year2001    15.29395  9.280588 3437  1.647950  0.0995\nb.(Intercept)  0.06190  0.024771 3437  2.498676  0.0125\nb.year2001    -0.02825  0.036459 3437 -0.774741  0.4385\n Correlation: \n              a.(In) a.2001 b.(In)\na.year2001    -0.578              \nb.(Intercept) -0.992  0.573       \nb.year2001     0.674 -0.985 -0.679\n\nStandardized Within-Group Residuals:\n       Min         Q1        Med         Q3        Max \n-1.7378975 -0.2882427  0.1438697  0.7748094  3.3330942 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\ncoef(nlme_model_year)\n\n   a.(Intercept) a.year2001 b.(Intercept)  b.year2001\nR1      50.55581   15.29395    0.06189593 -0.02824663\nR2      50.55517   15.29395    0.06189593 -0.02824663\nR3      50.55783   15.29395    0.06189593 -0.02824663\n\n# Some components of broom mixed doesn't work yet for non-linear models\nbroom.mixed::tidy(nlme_model_year)\n\n# A tibble: 4 × 7\n  effect term          estimate std.error    df statistic  p.value\n  &lt;chr&gt;  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 fixed  a.(Intercept)  50.6       5.36    3437     9.43  7.39e-21\n2 fixed  a.year2001     15.3       9.28    3437     1.65  9.95e- 2\n3 fixed  b.(Intercept)   0.0619    0.0248  3437     2.50  1.25e- 2\n4 fixed  b.year2001     -0.0282    0.0365  3437    -0.775 4.39e- 1",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -851,7 +851,7 @@
     "href": "coding/week_10/models_06.html#topo-year",
     "title": "Non-Linear Regression with R",
     "section": "4.3 topo + year",
-    "text": "4.3 topo + year\n\nnlme_model_topoyear &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo + year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 50, b_Intercept = 0.05, \n                                       a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                       b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0))",
+    "text": "4.3 topo + year\n\nnlme_model_topoyear &lt;- nlme(yield ~ a * nitro^b,\n                         data = data_corn,\n                         fixed = a + b ~ topo + year,\n                         random = a + b ~ 1 | rep,\n                         start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                       a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                       b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0))",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -873,7 +873,7 @@
     "href": "coding/week_10/models_06.html#topoyear",
     "title": "Non-Linear Regression with R",
     "section": "4.5 topo*year",
-    "text": "4.5 topo*year\n\nnlme_model_interaction &lt;- nlme(yield ~ a * nitro^b,\n                                data = data_corn,\n                                fixed = a + b ~ topo * year, \n                                random = a + b ~ 1 | rep,\n                                start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                          a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                          a_HT_2001 = 0, a_LO_2001 = 0, a_W_2001 = 0,\n                                          b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0, \n                                          b_HT_2001 = 0, b_LO_2001 = 0, b_W_2001 = 0))\nsummary(nlme_model_interaction)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33089.36 33212.24 -16524.68\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.218854e-01 a.(In)\nb.(Intercept) 5.341360e-09 0.423 \nResidual      2.938401e+01       \n\nFixed effects:  a + b ~ topo * year \n                      Value Std.Error   DF   t-value p-value\na.(Intercept)      55.24845 11.382004 3425  4.854018  0.0000\na.topoHT          -18.91198 14.663476 3425 -1.289734  0.1972\na.topoLO            5.95162 15.329161 3425  0.388255  0.6979\na.topoW            -4.92420 14.134876 3425 -0.348373  0.7276\na.year2001         34.48361 19.939592 3425  1.729404  0.0838\na.topoHT:year2001 -25.47476 26.755473 3425 -0.952133  0.3411\na.topoLO:year2001 -13.67997 25.911191 3425 -0.527956  0.5976\na.topoW:year2001  -24.38799 25.267053 3425 -0.965209  0.3345\nb.(Intercept)       0.04102  0.048357 3425  0.848201  0.3964\nb.topoHT            0.05674  0.076614 3425  0.740538  0.4590\nb.topoLO           -0.00215  0.062256 3425 -0.034577  0.9724\nb.topoW             0.02704  0.061999 3425  0.436191  0.6627\nb.year2001         -0.03186  0.064449 3425 -0.494372  0.6211\nb.topoHT:year2001  -0.06188  0.117790 3425 -0.525302  0.5994\nb.topoLO:year2001   0.04040  0.083879 3425  0.481585  0.6301\nb.topoW:year2001   -0.00726  0.090420 3425 -0.080283  0.9360\n Correlation: \n                  a.(In) a.tpHT a.tpLO a.topW a.2001 a.HT:2 a.LO:2 a.W:20\na.topoHT          -0.776                                                 \na.topoLO          -0.742  0.576                                          \na.topoW           -0.805  0.625  0.598                                   \na.year2001        -0.571  0.443  0.424  0.459                            \na.topoHT:year2001  0.425 -0.548 -0.316 -0.342 -0.745                     \na.topoLO:year2001  0.439 -0.341 -0.592 -0.354 -0.770  0.573              \na.topoW:year2001   0.450 -0.349 -0.334 -0.559 -0.789  0.588  0.607       \nb.(Intercept)     -0.992  0.770  0.737  0.799  0.566 -0.422 -0.436 -0.447\nb.topoHT           0.626 -0.971 -0.465 -0.504 -0.357  0.532  0.275  0.282\nb.topoLO           0.771 -0.598 -0.991 -0.620 -0.440  0.328  0.586  0.347\nb.topoW            0.774 -0.601 -0.574 -0.991 -0.442  0.329  0.340  0.555\nb.year2001         0.744 -0.578 -0.553 -0.599 -0.965  0.719  0.743  0.762\nb.topoHT:year2001 -0.407  0.632  0.302  0.328  0.528 -0.945 -0.406 -0.417\nb.topoLO:year2001 -0.572  0.444  0.735  0.461  0.741 -0.553 -0.972 -0.585\nb.topoW:year2001  -0.531  0.412  0.394  0.680  0.688 -0.513 -0.529 -0.969\n                  b.(In) b.tpHT b.tpLO b.topW b.2001 b.HT:2 b.LO:2\na.topoHT                                                          \na.topoLO                                                          \na.topoW                                                           \na.year2001                                                        \na.topoHT:year2001                                                 \na.topoLO:year2001                                                 \na.topoW:year2001                                                  \nb.(Intercept)                                                     \nb.topoHT          -0.631                                          \nb.topoLO          -0.777  0.490                                   \nb.topoW           -0.780  0.492  0.606                            \nb.year2001        -0.750  0.474  0.583  0.585                     \nb.topoHT:year2001  0.411 -0.650 -0.319 -0.320 -0.547              \nb.topoLO:year2001  0.577 -0.364 -0.742 -0.450 -0.768  0.420       \nb.topoW:year2001   0.535 -0.338 -0.415 -0.686 -0.713  0.390  0.548\n\nStandardized Within-Group Residuals:\n        Min          Q1         Med          Q3         Max \n-1.66304432 -0.12672025  0.07029809  0.35912890  3.70405544 \n\nNumber of Observations: 3443\nNumber of Groups: 3",
+    "text": "4.5 topo*year\n\nnlme_model_interaction &lt;- nlme(yield ~ a * nitro^b,\n                                data = data_corn,\n                                fixed = a + b ~ topo * year, \n                                random = a + b ~ 1 | rep,\n                                start = c(a_Intercept = 1, b_Intercept = 0.5, \n                                          a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, \n                                          a_HT_2001 = 0, a_LO_2001 = 0, a_W_2001 = 0,\n                                          b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0, \n                                          b_HT_2001 = 0, b_LO_2001 = 0, b_W_2001 = 0))\nsummary(nlme_model_interaction)\n\nNonlinear mixed-effects model fit by maximum likelihood\n  Model: yield ~ a * nitro^b \n  Data: data_corn \n       AIC      BIC    logLik\n  33089.36 33212.24 -16524.68\n\nRandom effects:\n Formula: list(a ~ 1, b ~ 1)\n Level: rep\n Structure: General positive-definite, Log-Cholesky parametrization\n              StdDev       Corr  \na.(Intercept) 4.218854e-01 a.(In)\nb.(Intercept) 5.341360e-09 0.423 \nResidual      2.938401e+01       \n\nFixed effects:  a + b ~ topo * year \n                      Value Std.Error   DF   t-value p-value\na.(Intercept)      55.24845 11.382004 3425  4.854018  0.0000\na.topoHT          -18.91198 14.663476 3425 -1.289734  0.1972\na.topoLO            5.95162 15.329161 3425  0.388255  0.6979\na.topoW            -4.92420 14.134876 3425 -0.348373  0.7276\na.year2001         34.48361 19.939592 3425  1.729404  0.0838\na.topoHT:year2001 -25.47476 26.755473 3425 -0.952133  0.3411\na.topoLO:year2001 -13.67997 25.911191 3425 -0.527956  0.5976\na.topoW:year2001  -24.38799 25.267053 3425 -0.965209  0.3345\nb.(Intercept)       0.04102  0.048357 3425  0.848201  0.3964\nb.topoHT            0.05674  0.076614 3425  0.740538  0.4590\nb.topoLO           -0.00215  0.062256 3425 -0.034577  0.9724\nb.topoW             0.02704  0.061999 3425  0.436191  0.6627\nb.year2001         -0.03186  0.064449 3425 -0.494372  0.6211\nb.topoHT:year2001  -0.06188  0.117790 3425 -0.525302  0.5994\nb.topoLO:year2001   0.04040  0.083879 3425  0.481585  0.6301\nb.topoW:year2001   -0.00726  0.090420 3425 -0.080283  0.9360\n Correlation: \n                  a.(In) a.tpHT a.tpLO a.topW a.2001 a.HT:2 a.LO:2 a.W:20\na.topoHT          -0.776                                                 \na.topoLO          -0.742  0.576                                          \na.topoW           -0.805  0.625  0.598                                   \na.year2001        -0.571  0.443  0.424  0.459                            \na.topoHT:year2001  0.425 -0.548 -0.316 -0.342 -0.745                     \na.topoLO:year2001  0.439 -0.341 -0.592 -0.354 -0.770  0.573              \na.topoW:year2001   0.450 -0.349 -0.334 -0.559 -0.789  0.588  0.607       \nb.(Intercept)     -0.992  0.770  0.737  0.799  0.566 -0.422 -0.436 -0.447\nb.topoHT           0.626 -0.971 -0.465 -0.504 -0.357  0.532  0.275  0.282\nb.topoLO           0.771 -0.598 -0.991 -0.620 -0.440  0.328  0.586  0.347\nb.topoW            0.774 -0.601 -0.574 -0.991 -0.442  0.329  0.340  0.555\nb.year2001         0.744 -0.578 -0.553 -0.599 -0.965  0.719  0.743  0.762\nb.topoHT:year2001 -0.407  0.632  0.302  0.328  0.528 -0.945 -0.406 -0.417\nb.topoLO:year2001 -0.572  0.444  0.735  0.461  0.741 -0.553 -0.972 -0.585\nb.topoW:year2001  -0.531  0.412  0.394  0.680  0.688 -0.513 -0.529 -0.969\n                  b.(In) b.tpHT b.tpLO b.topW b.2001 b.HT:2 b.LO:2\na.topoHT                                                          \na.topoLO                                                          \na.topoW                                                           \na.year2001                                                        \na.topoHT:year2001                                                 \na.topoLO:year2001                                                 \na.topoW:year2001                                                  \nb.(Intercept)                                                     \nb.topoHT          -0.631                                          \nb.topoLO          -0.777  0.490                                   \nb.topoW           -0.780  0.492  0.606                            \nb.year2001        -0.750  0.474  0.583  0.585                     \nb.topoHT:year2001  0.411 -0.650 -0.319 -0.320 -0.547              \nb.topoLO:year2001  0.577 -0.364 -0.742 -0.450 -0.768  0.420       \nb.topoW:year2001   0.535 -0.338 -0.415 -0.686 -0.713  0.390  0.548\n\nStandardized Within-Group Residuals:\n        Min          Q1         Med          Q3         Max \n-1.66304432 -0.12672025  0.07029809  0.35912890  3.70405544 \n\nNumber of Observations: 3443\nNumber of Groups: 3 \n\ndf_int &lt;- broom.mixed::tidy(nlme_model_interaction)\n\ndf_int %&gt;% \n  mutate(estimate = as.numeric(estimate),\n         `std.error` = as.numeric(`std.error`)) %&gt;% \n  separate(term, into = c(\"coef\", \"topo_year\"), sep = \".\", remove = F) %&gt;% \n  ggplot(aes(x = term, y = estimate))+\n  geom_point(aes(color = term))+\n  geom_errorbar(aes(ymin = estimate - `std.error`, ymax = estimate + `std.error`))+\n  theme_classic()",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -884,7 +884,7 @@
     "href": "coding/week_10/models_06.html#aic",
     "title": "Non-Linear Regression with R",
     "section": "5.1 AIC:",
-    "text": "5.1 AIC:\nWe can use the Akaike Information Criterion (AIC).\n\n# Get \nAIC(nlme_model, nlme_model_topo, nlme_model_interaction)\n\n                       df      AIC\nnlme_model              4 33852.62\nnlme_model_topo        12 33377.94\nnlme_model_interaction 20 33089.36",
+    "text": "5.1 AIC:\nWe can use the Akaike Information Criterion (AIC).\n\n# Get \nAIC(nlme_model_ab, nlme_model_topo, nlme_model_year, nlme_model_interaction)\n\n                       df      AIC\nnlme_model_ab           6 33856.62\nnlme_model_topo        12 33377.94\nnlme_model_year         8 33791.26\nnlme_model_interaction 20 33089.36",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -917,7 +917,7 @@
     "href": "coding/week_10/models_06.html#using-aiccmodavg-in-r",
     "title": "Non-Linear Regression with R",
     "section": "5.4 Using AICcmodavg in R",
-    "text": "5.4 Using AICcmodavg in R\n\n# Run them separatedly\nAICcmodavg::AICc(nlme_model)\n\n[1] 33852.63\n\nAICcmodavg::AICc(nlme_model_topo)\n\n[1] 33378.03\n\nAICcmodavg::AICc(nlme_model_interaction)\n\n[1] 33089.6\n\n\nThe AICcmodavg package provides functions for model selection: ### Compare Models Using aictab()\n\n# Create a list of candidate models\nmodel_list &lt;- list(\n  simple = nlme_model,\n  topo = nlme_model_topo,\n  interaction = nlme_model_interaction\n)\n\n# Model selection table\nmodel_selection &lt;- aictab(cand.set = model_list, modnames = names(model_list))\n\nmodel_selection\n\n\nModel selection based on AICc:\n\n             K     AICc Delta_AICc AICcWt Cum.Wt        LL\ninteraction 20 33089.60       0.00      1      1 -16524.68\ntopo        12 33378.03     288.43      0      1 -16676.97\nsimple       4 33852.63     763.03      0      1 -16922.31\n\n\nThis will output a table with:\n\nAICc values for each model\nΔAICc (relative difference)\nAICc weights (relative model support)",
+    "text": "5.4 Using AICcmodavg in R\n\n# Run them separatedly\nAICcmodavg::AICc(nlme_model_ab)\n\n[1] 33856.64\n\nAICcmodavg::AICc(nlme_model_topo)\n\n[1] 33378.03\n\nAICcmodavg::AICc(nlme_model_year)\n\n[1] 33791.3\n\nAICcmodavg::AICc(nlme_model_interaction)\n\n[1] 33089.6\n\n\nThe AICcmodavg package provides functions for model selection: ### Compare Models Using aictab()\n\n# Create a list of candidate models\nmodel_list &lt;- list(\n  simple = nlme_model_ab,\n  topo = nlme_model_topo,\n  year = nlme_model_year,\n  interaction = nlme_model_interaction\n)\n\n# Model selection table\nmodel_selection &lt;- AICcmodavg::aictab(cand.set = model_list, modnames = names(model_list))\n\nmodel_selection\n\n\nModel selection based on AICc:\n\n             K     AICc Delta_AICc AICcWt Cum.Wt        LL\ninteraction 20 33089.60       0.00      1      1 -16524.68\ntopo        12 33378.03     288.43      0      1 -16676.97\nyear         8 33791.30     701.70      0      1 -16887.63\nsimple       6 33856.64     767.04      0      1 -16922.31\n\n\nThis will output a table with:\n\nAICc values for each model\nΔAICc (relative difference)\nAICc weights (relative model support)",
     "crumbs": [
       "Lessons",
       "17-Models VI"
@@ -935,144 +935,25 @@
     ]
   },
   {
-    "objectID": "outline/outline.html",
-    "href": "outline/outline.html",
-    "title": "PLNT6800|01 - Course Outline",
+    "objectID": "outline/calendar.html",
+    "href": "outline/calendar.html",
+    "title": "PLNT6800|01 - Calendar",
     "section": "",
-    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202",
     "crumbs": [
-      "Course Outline",
-      "Outline"
+      "Calendar",
+      "Schedule"
     ]
   },
   {
-    "objectID": "outline/outline.html#course-information",
-    "href": "outline/outline.html#course-information",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "",
-    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "objectID": "outline/calendar.html#calendar",
+    "href": "outline/calendar.html#calendar",
+    "title": "PLNT6800|01 - Calendar",
+    "section": "Calendar",
+    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n5\nFeb 5\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 7\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n6\nFeb 12\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n\nFeb 14\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 21\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
     "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-description",
-    "href": "outline/outline.html#course-description",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "2. Course Description",
-    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-learning-outcomes",
-    "href": "outline/outline.html#course-learning-outcomes",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "3. Course Learning Outcomes",
-    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#calendar",
-    "href": "outline/outline.html#calendar",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "4. Calendar",
-    "text": "4. Calendar\nSee http://adriancorrendo.github.io/plnt6800/calendar.html\n\nLast Day to Drop Course\nTBD",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#assessment-breakdown",
-    "href": "outline/outline.html#assessment-breakdown",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "5. Assessment Breakdown",
-    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-grading-policies",
-    "href": "outline/outline.html#course-grading-policies",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "6. Course Grading Policies",
-    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#course-statements",
-    "href": "outline/outline.html#course-statements",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "7. Course Statements",
-    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#accessibility",
-    "href": "outline/outline.html#accessibility",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "8. Accessibility",
-    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "outline/outline.html#land-acknowledgement",
-    "href": "outline/outline.html#land-acknowledgement",
-    "title": "PLNT6800|01 - Course Outline",
-    "section": "9. Land Acknowledgement",
-    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
-    "crumbs": [
-      "Course Outline",
-      "Outline"
-    ]
-  },
-  {
-    "objectID": "software/software.html",
-    "href": "software/software.html",
-    "title": "Required Software & Accounts",
-    "section": "",
-    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
-    "crumbs": [
-      "Software",
-      "Instructions"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
-    "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "PLNT6800|01 - Special Topics in Plant Science",
-    "section": "",
-    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
-    "crumbs": [
-      "Home"
+      "Calendar",
+      "Schedule"
     ]
   },
   {
@@ -1274,25 +1155,309 @@
     ]
   },
   {
-    "objectID": "outline/calendar.html",
-    "href": "outline/calendar.html",
-    "title": "PLNT6800|01 - Calendar",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
     "section": "",
-    "text": "Days: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
     "crumbs": [
-      "Calendar",
-      "Schedule"
+      "Home"
     ]
   },
   {
-    "objectID": "outline/calendar.html#calendar",
-    "href": "outline/calendar.html#calendar",
-    "title": "PLNT6800|01 - Calendar",
-    "section": "Calendar",
-    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 8\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 10\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 15\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 17\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 22\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 24\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 29\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 31\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n5\nFeb 5\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 7\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n6\nFeb 12\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n\nFeb 14\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 26\nModels I: Key concepts\n🌐\n🎥\n\n\n\nFeb 28\nModels II: Explanatory vs. Predictive\n🌐\n🎥\n\n\n8\nMar 5\nModels III: Linear Models\n🌐\n🎥\n\n\n\nMar 7\nModels IV: Fixed, Random, Mixed Effects\n🌐\n🎥\n\n\n9\nMar 12\nModels V: Regression I\n🌐\n🎥\n\n\n\nMar 14\nModels VI: Regression II\n🌐\n🎥\n\n\n10\nMar 19\nModels VII: Review LMs\n🌐\n🎥\n\n\n\nMar 21\nModels VIII: Principal Components\n🌐\n🎥\n\n\n11\nMar 26\nQuarto / Rmarkdown tricks\n🌐\n🎥\n\n\n\nMar 28\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 2\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 4\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 11\nFinal Exam Due (11.59 pm)\n🌐",
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "PLNT6800|01 - Special Topics in Plant Science",
+    "section": "",
+    "text": "Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\n\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.\n\n\n\n\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).",
     "crumbs": [
-      "Calendar",
-      "Schedule"
+      "Home"
+    ]
+  },
+  {
+    "objectID": "software/software.html",
+    "href": "software/software.html",
+    "title": "Required Software & Accounts",
+    "section": "",
+    "text": "R & RStudio IDEGitGitHubGitHub DesktopPosit Cloud\n\n\nBefore starting with the course, it is important that you install R and R Studio in your computer. Please, follow these simple steps:\nDownload the latest version of R from CRAN, here Download the latest version of RStudio from posit, here Run and install in the downloaded files in the same order. There are plenty of useful tutorials on the internet such as:\n\nhttps://rstudio-education.github.io/hopr/starting.html\nhttps://www.youtube.com/watch?v=Tb3R4GLJ45U\n\n\n\nWhat is Git?\nGit is a powerful version control system that helps you track changes in your code, collaborate with others, and manage your projects effectively.\nHow to Install Git:\nFollow these steps to install Git on your computer:\n\nVisit the official Git website (https://git-scm.com/);to download the installer for your operating system.\nFor detailed guidance, read the official tutorial to install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).\nYou may use these step-by-step videos for installation:\n\n• Installing Git on Windows (https://www.youtube.com/watch?v=iYkLrXobBbA)\n• Installing Git on Mac (https://www.youtube.com/watch?v=B4qsvQ5IqWk)\nOnce installed, verify by typing git –version in your terminal to ensure Git is ready to use!\n\n\nWhat is GitHub?\nGitHub is a web-based interface (nowadays own by Microsoft) that facilitates the use of Git, an open source version control software. This lets multiple people make separate changes to projects and have control over them. GitHub is to Git the equivalent of what RStudio is to R.\nFor this course, it is required that you create your GitHub account. Preferably, using your University email (##@uoguelph.ca). Please, follow the steps detailed on this official link from GitHub:\nhttps://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github\nYou may also find multiple useful YouTube tutorials like this one:\nhttps://www.youtube.com/watch?v=h5cKAd94QNo\n\n\nWhat is GitHub Desktop?\nGitHub Desktop is a user-friendly application that helps you interact with Git and GitHub through a simple graphical interface, making it easier to manage your repositories.\nHow to Install GitHub Desktop:\nFollow these steps to install GitHub Desktop on your computer:\n\nVisit the GitHub Desktop website (https://desktop.github.com); and download the application for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, sign in to your GitHub account or create one if you don’t have it.\n\nFor additional help, check out these videos:\n• Installing GitHub Desktop on Windows (https://www.youtube.com/watch?v=3JdDAJ2YPeU)\n• Installing GitHub Desktop on Mac (https://www.youtube.com/watch?v=C0n6O4d0ccw)\nOnce installed, you can easily clone repositories, commit changes, and sync your work with GitHub!\n\n\nWhat is Posit Cloud?\nPosit Cloud is an online platform that allows you to run RStudio “online”. It helps to write and execute R code directly in your browser, making it easy to learn and work on data science projects without installing software locally.\nHow to Create a Free Posit Cloud Account:\nFollow these steps to set up your free account:\n\nVisit Posit Cloud website at https://posit.cloud.\nClick on Sign Up and choose to create an account using your UoG email. THIS IS IMPORTANT, USE YOUR UOG EMAIL!\nComplete the registration form and verify your email if required.\nOnce registered, log in to your Posit Cloud account and start exploring R projects directly in your browser.\nMore instructions about our course workspace will be provided during the semester.\n\nFor a hint of what PositCloud does, you may watch with this video:\nhttps://www.youtube.com/watch?v=-fzwm4ZhVQQ With Posit Cloud, you’ll have a convenient environment to learn and work on your R programming assignments!",
+    "crumbs": [
+      "Software",
+      "Instructions"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html",
+    "href": "outline/outline.html",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-information",
+    "href": "outline/outline.html#course-information",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "",
+    "text": "Course Code: PLNT6800\nCourse Title: Reproducible Ag Data Science with R\nTerm: Winter\nCredits: 0.50\n\n\n\n\nDays: Wednesdays and Fridays\nTime: 1:00 pm - 2:20 pm\nLocation: CRSC 202\n\n\n\n\n\nDr. Adrian Correndo\nEmail: acorrend@uoguelph.ca",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-description",
+    "href": "outline/outline.html#course-description",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "2. Course Description",
+    "text": "2. Course Description\nReproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.\n\nPrerequisite(s)\nA basic understanding of R or any programming language is recommended but not required. Basic statistical theory is also recommended.\n\n\nTextbooks and Resources\nRecommended:\n\nR for Data Science by Hadley Wickham & Garrett Grolemund.\nOnline resources and package documentation will be provided throughout the course.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-learning-outcomes",
+    "href": "outline/outline.html#course-learning-outcomes",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "3. Course Learning Outcomes",
+    "text": "3. Course Learning Outcomes\nBy the end of this course, students will be able to:\n\nUnderstand and apply the principles of reproducible research in data science.\nUse version control tools like GitHub for managing code and collaborative projects.\nDevelop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.\nApply statistical models to agricultural data and interpret the results.\nProduce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#calendar",
+    "href": "outline/outline.html#calendar",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "4. Calendar",
+    "text": "4. Calendar\nSee http://adriancorrendo.github.io/plnt6800/calendar.html\n\nLast Day to Drop Course\nTBD",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#assessment-breakdown",
+    "href": "outline/outline.html#assessment-breakdown",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "5. Assessment Breakdown",
+    "text": "5. Assessment Breakdown\n\n\n\n\n\n\n\n\nComponent\nWeight (%)\nDetails\n\n\n\n\nWeekly Exercises\n30%\nHands-on exercises to practice skills covered in each week’s topic.\n\n\nSemester Project\n50%\nComplete data analysis project, report, and presentation.\n\n\nFinal Exam\n20%\nCumulative assessment covering all topics from the course.\n\n\n\n\nFinal Exam\n\nDate: Apr 11, 11.59 pm.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-grading-policies",
+    "href": "outline/outline.html#course-grading-policies",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "6. Course Grading Policies",
+    "text": "6. Course Grading Policies\n\na. Late Submissions\nAssignments submitted late will be penalized 5% per day, up to six days. Extensions granted only for valid reasons.\n\n\nb. Use of Devices\nElectronic recording of classes is forbidden without prior permission from the instructor.\n\n\nc. Academic honesty\nPlease adhere to the following guidelines when working on assignments for this course:\n\nIndividual and Team Assignments: You are welcome to discuss individual homework and lab assignments with other students; however, direct sharing or copying of code or written work is not permitted. For team assignments, collaboration is allowed freely within your team. Sharing or copying code or written content between teams is prohibited. Any unauthorized sharing or copying will be treated as a violation for all parties involved.\nExams: Collaboration or discussion with others during exams is strictly prohibited. Unauthorized collaboration or use of unapproved materials will be considered a violation for all students involved.\nReusing Code: Unless specified otherwise, you may refer to online resources (e.g., StackOverflow) for coding examples in assignments. If you use code from an external source directly or take inspiration from it, you must clearly cite the source. The use of AI to complete tasks is not prohibited but it must be disclosed. Failure to cite reused code will be considered plagiarism.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#course-statements",
+    "href": "outline/outline.html#course-statements",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "7. Course Statements",
+    "text": "7. Course Statements\n\nA. Communication with instructor\nDuring the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:\n\nAnnouncements: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.\nEmail: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.\nVideo Call: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on Zoom or Teams. Video meetings depend on the availability and are booked on a first come first served basis.\n\n\n\nB. Course Technology Requirements\nThis course will use a variety of technologies and resources. To successfully participate in and complete this course, students will need access to the following\n\n1. Communication tools:\nCourseLink. This platform will be used as the main Course-Home Page. If you need any assistance with the software tools or the CourseLink website, contact CourseLink Support. Email: courselink@uoguelph.ca Tel: 519-824-4120 ext. 56939 Toll-Free (CAN/USA): 1-866- 275-1478. Support Hours (Eastern Time): Monday thru Friday: 8:30 am–8:30 pm; Saturday: 10:00 am–4:00 pm; Sunday: 12:00 pm–6:00 pm\nZoom. This course will use Zoom for lectures when in-person class is not possible. Check your system requirements to ensure you will be able to participate (https://opened.uoguelph.ca/student-resources/system-and-software-requirements/). A Zoom link for the class will be provided before the first day of class. Please, check Home-Page and announcements on CourseLink, and emails from the instructor (acorrend@uoguelph.ca).\n\n\n2. Software & Tools:\n\nR (latest stable version, available at CRAN).\nRStudio/Posit IDE (desktop or cloud-based version for writing and running R code).\nCourse-Specific Libraries and Packages: Students will be required to install R packages. Detailed instructions will be provided in class.\nVersion Control and Collaboration Tools: Git (for version control) and a free GitHub account for collaborative project work and sharing code.\n\n\n\n3. Computing Requirements:\nA laptop or desktop computer capable of running R and RStudio (Windows, MacOS, or Linux). Minimum specifications include:\n\nProcessor: At least a dual-core processor.\nRAM: 8 GB or more (16 GB recommended for handling larger datasets).\nStorage: 10 GB of free space for software installation, course files, and datasets.\n\n\n\n4. Internet Access:\nReliable high-speed internet for accessing online sessions, resources, downloading software, and using cloud-based platforms (e.g., Posit Cloud, GitHub).\n\n\n\n\nC. Data Usage Policy for the Semester Project\nStudents are encouraged to use data from their own research projects for the semester project. However, it is essential to ensure the integrity and privacy of the data, as well as compliance with the policies of their research lab or institution. To safeguard data privacy and integrity: \n\nData Sharing Restrictions: Students are NOT allowed to upload raw research data directly to the instructor, peers, GitHub repositories, Posit Cloud, or any other external platform.\nDe-Identification and Transformation: Before using or sharing the data for the semester project, students must de-identify and transform the data as necessary. This process should ensure that sensitive information or identifying details are removed or anonymized. All data preparation must be performed locally on the student’s machine before incorporating it into the project. \nDocumentation Requirement: Students must include a clear description of the steps taken to de-identify and transform the data in their project report or presentation. This demonstrates adherence to ethical data handling practices.\n\nBy following these guidelines, students can apply their learning to real-world datasets while respecting ethical and institutional standards. The instructor is not responsible for students’ violations to the integrity and privacy of their research data. Non-compliance with this policy may result in disqualification of the project or additional academic consequences.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#accessibility",
+    "href": "outline/outline.html#accessibility",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "8. Accessibility",
+    "text": "8. Accessibility\nStudents requiring accommodations must register with Student Accessibility Services. Contact the instructor early in the semester to arrange accommodations.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "outline/outline.html#land-acknowledgement",
+    "href": "outline/outline.html#land-acknowledgement",
+    "title": "PLNT6800|01 - Course Outline",
+    "section": "9. Land Acknowledgement",
+    "text": "9. Land Acknowledgement\nThe University of Guelph resides on the ancestral lands of the Attawandaron people and the treaty lands and territory of the Mississaugas of the Credit. We recognize the significance of the Dish with One Spoon Covenant to this land and offer respect to our Anishinaabe, Haudenosaunee, and Métis neighbours. Today, this gathering place is home to many First Nations, Inuit, and Métis peoples, and acknowledging them reminds us of our important connection to this land where we work and learn.",
+    "crumbs": [
+      "Course Outline",
+      "Outline"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html",
+    "href": "coding/week_11/models_07.html",
+    "title": "Classification models in R",
+    "section": "",
+    "text": "This document demonstrates how to apply Logistic Regression James et al. (2013) and tree-based models Breiman (2001) using the tidyverse approach in R. We use the Dry Bean Dataset from the UCI Machine Learning Repository.\nPackages required for today",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#logistic-regression",
+    "href": "coding/week_11/models_07.html#logistic-regression",
+    "title": "Classification models in R",
+    "section": "2.1 Logistic regression",
+    "text": "2.1 Logistic regression\nWe will start with a simple example using the Iris dataset, where we will create a binary classification problem.\n\n2.1.1 logistic_reg() from tidymodels\nWe will filter the dataset to only include two species (setosa and versicolor) and train a logistic regression model.\n\n# Load iris dataset\niris_binary &lt;- iris %&gt;%\n  filter(Species != \"versicolor\") %&gt;%  # Keep only two classes\n  mutate(Species = as.factor(Species))\n\n# Split the data\nset.seed(42)\niris_split &lt;- initial_split(iris_binary, prop = 0.8, strata = Species)\niris_train &lt;- training(iris_split)\niris_test &lt;- testing(iris_split)\n\n# Train logistic regression using tidymodels\niris_log_model &lt;- logistic_reg() %&gt;%\n  set_engine(\"glm\") %&gt;%\n  set_mode(\"classification\")\n\niris_log_wf &lt;- workflow() %&gt;%\n  add_model(iris_log_model) %&gt;%\n  add_formula(Species ~ .)\n\niris_log_fit &lt;- iris_log_wf %&gt;% fit(data = iris_train)\n\n# Evaluate model\niris_predictions &lt;- predict(iris_log_fit, iris_test, type = \"class\") %&gt;%\n  bind_cols(iris_test)\n\niris_metrics &lt;- iris_predictions %&gt;%\n  metrics(truth = Species, estimate = .pred_class)\n\niris_metrics\n\n# A tibble: 2 × 3\n  .metric  .estimator .estimate\n  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n1 accuracy multiclass     0.5  \n2 kap      multiclass     0.333\n\n\n\n\n2.1.2 glm() from base R\nAlternatively, we can use the more classic approach with glm().\n\n# Train logistic regression using glm\niris_glm &lt;- glm(Species ~ ., data = iris_train, family = binomial)\n\n# Predict on test data\niris_glm_probs &lt;- predict(iris_glm, iris_test, type = \"response\")\n\n# Ensure the response variable is a factor with two levels\niris_test &lt;- iris_test %&gt;% \n  mutate(Species = factor(Species, levels = c(\"setosa\", \"virginica\")))\n\n# Plot ROC Curve\nroc_curve_glm &lt;- roc(response = iris_test$Species, predictor = iris_glm_probs, levels = rev(levels(iris_test$Species)))\nplot(roc_curve_glm, col = \"blue\", main = \"ROC Curve for GLM Logistic Regression\")\n\n\n\n\n\n\n\nauc(roc_curve_glm)\n\nArea under the curve: 1",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#confusion-matrix",
+    "href": "coding/week_11/models_07.html#confusion-matrix",
+    "title": "Classification models in R",
+    "section": "3.1 Confusion Matrix",
+    "text": "3.1 Confusion Matrix\nIn machine learning and statistics, a confusion matrix is used to evaluate the performance of a classification model. It compares predicted labels against actual ground truth labels.\nBelow is a conceptual confusion matrix explaining True Positive (TP), False Positive (FP), True Negative (TN), and False Negative (FN):\n\n\n\n\n\n\n\n\nActual / Predicted\nPositive Prediction\nNegative Prediction\n\n\n\n\nActual Positive\nTrue Positive (TP): Correctly predicted positive\nFalse Negative (FN): Incorrectly predicted as negative\n\n\nActual Negative\nFalse Positive (FP): Incorrectly predicted as positive\nTrue Negative (TN): Correctly predicted negative",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#explanation-of-terms",
+    "href": "coding/week_11/models_07.html#explanation-of-terms",
+    "title": "Classification models in R",
+    "section": "3.2 Explanation of Terms:",
+    "text": "3.2 Explanation of Terms:\n\nTrue Positive (TP): Model correctly predicts a positive instance.\nFalse Positive (FP): Model incorrectly predicts a negative instance as positive (Type I error).\nTrue Negative (TN): Model correctly predicts a negative instance.\nFalse Negative (FN): Model incorrectly predicts a positive instance as negative (Type II error).\n\nThis matrix helps in evaluating performance metrics such as accuracy, precision, recall, and F1-score.",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#classification-metrics",
+    "href": "coding/week_11/models_07.html#classification-metrics",
+    "title": "Classification models in R",
+    "section": "3.3 Classification Metrics",
+    "text": "3.3 Classification Metrics\n\n3.3.1 Accuracy\nAccuracy is one of the most popular metrics that measures the proportion of correctly classified cases:\n\\[\\text{Accuracy} = \\frac{TP + TN}{TP + TN + FP + FN}\\] - A value of 0.50 suggests the model is predicting correctly only half the time, which is just slightly better than random guessing. - Higher accuracy (closer to 1.00) is desirable, but accuracy alone doesn’t always reflect the model’s performance, especially in imbalanced datasets.\n\n\n3.3.2 Kappa Statistic\nKappa (Cohen’s Kappa) measures how well the model performs relative to random chance:\n\\[\\kappa = \\frac{p_o - p_e}{1 - p_e}\\]\nWhere: \\(p_o\\) is the observed accuracy, \\(p_e\\) is the expected accuracy due to chance.\nInterpretation of Kappa Values: • Kappa = 1.00 → Perfect agreement. • Kappa &gt; 0.80 → Strong agreement. • Kappa between 0.40 and 0.60 → Moderate agreement. • Kappa &lt; 0.40 → Poor agreement. • Kappa = 0 → The model is no better than random chance.\nIn our Iris example, a Kappa of 0.333 suggests that while the model performs better than random, it still struggles to distinguish between the classes.",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#roc-curve-auc-area-under-the-curve",
+    "href": "coding/week_11/models_07.html#roc-curve-auc-area-under-the-curve",
+    "title": "Classification models in R",
+    "section": "3.4 ROC Curve & AUC (Area Under the Curve)",
+    "text": "3.4 ROC Curve & AUC (Area Under the Curve)\nThe Receiver Operating Characteristic (ROC) curve shows the trade-off between True Positive Rate (Sensitivity) and False Positive Rate (1 - Specificity).\nInterpretation of AUC Values: - AUC = 1.00 → Perfect classification. - AUC &gt; 0.90 → Excellent discrimination. - AUC between 0.80 - 0.90 → Good classification. - AUC between 0.70 - 0.80 → Fair classification. - AUC = 0.50 → Random guessing.\nIn our Iris example, an AUC of 1.00 means that the model separates the two species perfectly. However, this should be interpreted alongside accuracy and kappa to ensure it’s not due to overfitting.\nIf accuracy is low (e.g., 50%) but AUC is high (1.00), this could indicate a problem in threshold selection or that the dataset is too simple for the model.\nThis example shows both the modern tidymodels approach and the classic glm() approach for binary classification.",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#dry-beans-dataset",
+    "href": "coding/week_11/models_07.html#dry-beans-dataset",
+    "title": "Classification models in R",
+    "section": "4.1 Dry beans dataset",
+    "text": "4.1 Dry beans dataset\n\n#url &lt;- \"https://archive.ics.uci.edu/ml/machine-learning-databases/00602/DryBeanDataset.zip\"\n#download.file(url, \"DryBeanDataset.zip\")\n#unzip(\"DryBeanDataset.zip\", exdir = \"./DryBeanDataset\")\n\ndf &lt;- readxl::read_xlsx(path=\"data/Dry_Bean_Dataset.xlsx\")\n\nLets take a look at the structure and summary of the dataset.\n\nglimpse(df)\n\nRows: 13,611\nColumns: 17\n$ Area            &lt;dbl&gt; 28395, 28734, 29380, 30008, 30140, 30279, 30477, 30519…\n$ Perimeter       &lt;dbl&gt; 610.291, 638.018, 624.110, 645.884, 620.134, 634.927, …\n$ MajorAxisLength &lt;dbl&gt; 208.1781, 200.5248, 212.8261, 210.5580, 201.8479, 212.…\n$ MinorAxisLength &lt;dbl&gt; 173.8887, 182.7344, 175.9311, 182.5165, 190.2793, 181.…\n$ AspectRation    &lt;dbl&gt; 1.197191, 1.097356, 1.209713, 1.153638, 1.060798, 1.17…\n$ Eccentricity    &lt;dbl&gt; 0.5498122, 0.4117853, 0.5627273, 0.4986160, 0.3336797,…\n$ ConvexArea      &lt;dbl&gt; 28715, 29172, 29690, 30724, 30417, 30600, 30970, 30847…\n$ EquivDiameter   &lt;dbl&gt; 190.1411, 191.2728, 193.4109, 195.4671, 195.8965, 196.…\n$ Extent          &lt;dbl&gt; 0.7639225, 0.7839681, 0.7781132, 0.7826813, 0.7730980,…\n$ Solidity        &lt;dbl&gt; 0.9888560, 0.9849856, 0.9895588, 0.9766957, 0.9908933,…\n$ roundness       &lt;dbl&gt; 0.9580271, 0.8870336, 0.9478495, 0.9039364, 0.9848771,…\n$ Compactness     &lt;dbl&gt; 0.9133578, 0.9538608, 0.9087742, 0.9283288, 0.9705155,…\n$ ShapeFactor1    &lt;dbl&gt; 0.007331506, 0.006978659, 0.007243912, 0.007016729, 0.…\n$ ShapeFactor2    &lt;dbl&gt; 0.003147289, 0.003563624, 0.003047733, 0.003214562, 0.…\n$ ShapeFactor3    &lt;dbl&gt; 0.8342224, 0.9098505, 0.8258706, 0.8617944, 0.9419004,…\n$ ShapeFactor4    &lt;dbl&gt; 0.9987239, 0.9984303, 0.9990661, 0.9941988, 0.9991661,…\n$ Class           &lt;chr&gt; \"SEKER\", \"SEKER\", \"SEKER\", \"SEKER\", \"SEKER\", \"SEKER\", …\n\nskimr::skim(df)\n\n\nData summary\n\n\nName\ndf\n\n\nNumber of rows\n13611\n\n\nNumber of columns\n17\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n1\n\n\nnumeric\n16\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\n\nClass\n0\n1\n4\n8\n0\n7\n0\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nArea\n0\n1\n53048.28\n29324.10\n20420.00\n36328.00\n44652.00\n61332.00\n254616.00\n▇▂▁▁▁\n\n\nPerimeter\n0\n1\n855.28\n214.29\n524.74\n703.52\n794.94\n977.21\n1985.37\n▇▆▁▁▁\n\n\nMajorAxisLength\n0\n1\n320.14\n85.69\n183.60\n253.30\n296.88\n376.50\n738.86\n▇▆▂▁▁\n\n\nMinorAxisLength\n0\n1\n202.27\n44.97\n122.51\n175.85\n192.43\n217.03\n460.20\n▇▇▁▁▁\n\n\nAspectRation\n0\n1\n1.58\n0.25\n1.02\n1.43\n1.55\n1.71\n2.43\n▂▇▅▂▁\n\n\nEccentricity\n0\n1\n0.75\n0.09\n0.22\n0.72\n0.76\n0.81\n0.91\n▁▁▂▇▇\n\n\nConvexArea\n0\n1\n53768.20\n29774.92\n20684.00\n36714.50\n45178.00\n62294.00\n263261.00\n▇▂▁▁▁\n\n\nEquivDiameter\n0\n1\n253.06\n59.18\n161.24\n215.07\n238.44\n279.45\n569.37\n▇▆▁▁▁\n\n\nExtent\n0\n1\n0.75\n0.05\n0.56\n0.72\n0.76\n0.79\n0.87\n▁▁▅▇▂\n\n\nSolidity\n0\n1\n0.99\n0.00\n0.92\n0.99\n0.99\n0.99\n0.99\n▁▁▁▁▇\n\n\nroundness\n0\n1\n0.87\n0.06\n0.49\n0.83\n0.88\n0.92\n0.99\n▁▁▂▇▇\n\n\nCompactness\n0\n1\n0.80\n0.06\n0.64\n0.76\n0.80\n0.83\n0.99\n▂▅▇▂▁\n\n\nShapeFactor1\n0\n1\n0.01\n0.00\n0.00\n0.01\n0.01\n0.01\n0.01\n▁▃▇▃▁\n\n\nShapeFactor2\n0\n1\n0.00\n0.00\n0.00\n0.00\n0.00\n0.00\n0.00\n▇▇▇▃▁\n\n\nShapeFactor3\n0\n1\n0.64\n0.10\n0.41\n0.58\n0.64\n0.70\n0.97\n▂▇▇▃▁\n\n\nShapeFactor4\n0\n1\n1.00\n0.00\n0.95\n0.99\n1.00\n1.00\n1.00\n▁▁▁▁▇",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#data-preprocessing",
+    "href": "coding/week_11/models_07.html#data-preprocessing",
+    "title": "Classification models in R",
+    "section": "4.2 Data Preprocessing",
+    "text": "4.2 Data Preprocessing\nWe handle class imbalance using SMOTE and ensure the target variable is a factor.\n\ndf &lt;- df %&gt;% \n  mutate(Class = as.factor(Class)) %&gt;%\n  recipe(Class ~ .) %&gt;%\n  step_smote(Class) %&gt;%\n  prep() %&gt;%\n  juice()\n\n\n4.2.1 Training and Testing Split\n\nset.seed(42)\ndata_split &lt;- initial_split(df, prop = 0.8, strata = Class)\ntrain_data &lt;- training(data_split)\ntest_data &lt;- testing(data_split)",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#logistic-regression-model",
+    "href": "coding/week_11/models_07.html#logistic-regression-model",
+    "title": "Classification models in R",
+    "section": "4.3 Logistic Regression Model",
+    "text": "4.3 Logistic Regression Model\n\n# First, fit a standard logistic regression model\nlog_model_simple &lt;- logistic_reg() %&gt;%  # Logistic regression (binary only)\n  set_engine(\"glm\") %&gt;%\n  set_mode(\"classification\")\n\nlog_wf_simple &lt;- workflow() %&gt;%\n  add_model(log_model_simple) %&gt;%\n  add_formula(Class ~ .)\n\nlog_fit_simple &lt;- log_wf_simple %&gt;% fit(data = train_data)\n\n\n\n\n\n\n\nWarning\n\n\n\nWarning: Be cautious because logistic regression is only suitable for binary classification. Since we have 7 classes, a multinomial regression is more appropriate.",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#multinomial-logistic-regression-model",
+    "href": "coding/week_11/models_07.html#multinomial-logistic-regression-model",
+    "title": "Classification models in R",
+    "section": "4.4 Multinomial Logistic Regression Model",
+    "text": "4.4 Multinomial Logistic Regression Model\n\nlog_model_multinom &lt;- multinom_reg() %&gt;%  # Multinomial logistic regression\n  set_engine(\"nnet\") %&gt;%\n  set_mode(\"classification\")\n\nlog_wf_multinom &lt;- workflow() %&gt;%\n  add_model(log_model_multinom) %&gt;%\n  add_formula(Class ~ .)\n\nlog_fit_multinom &lt;- log_wf_multinom %&gt;% fit(data = train_data)",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#classification-tree-model",
+    "href": "coding/week_11/models_07.html#classification-tree-model",
+    "title": "Classification models in R",
+    "section": "4.5 Classification Tree Model",
+    "text": "4.5 Classification Tree Model\nA classification tree is a single decision tree that splits the data based on feature values to classify observations. It follows these steps:\n\nSplits data at each node based on a feature that minimizes impurity (e.g., Gini index, entropy).\nForms a tree structure where each leaf represents a predicted class.\nProne to overfitting, as it may capture noise in the training data.\n\n\n\n\n\n\n\nTip\n\n\n\nTip: use CART when you need interpretability, and quick decisions and you don’t care about overfitting.\n\n\n\ntree_model &lt;- decision_tree() %&gt;%\n  set_engine(\"rpart\") %&gt;%\n  set_mode(\"classification\")\n\ntree_wf &lt;- workflow() %&gt;%\n  add_model(tree_model) %&gt;%\n  add_formula(Class ~ .)\n\ntree_fit &lt;- tree_wf %&gt;% fit(data = train_data)",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#random-forest-model",
+    "href": "coding/week_11/models_07.html#random-forest-model",
+    "title": "Classification models in R",
+    "section": "4.6 Random Forest Model",
+    "text": "4.6 Random Forest Model\nA random forest is an ensemble method that builds multiple decision trees and combines their outputs. It works as follows:\n\nRandomly samples data (with replacement) to create different training sets (bootstrap sampling).\nConstructs multiple decision trees using subsets of features at each split.\nAggregates the predictions from all trees (majority vote for classification, average for regression).\nReduces overfitting by averaging across trees, improving generalization.\n\n\n\n\n\n\n\nTip\n\n\n\nTip: use random forest when you need higher accuracy and robustness to overfitting.\n\n\n\n# Train a Random Forest model\nrf_model &lt;- rand_forest(mode = \"classification\") %&gt;%\n  set_engine(\"ranger\")\n\nrf_wf &lt;- workflow() %&gt;%\n  add_model(rf_model) %&gt;%\n  add_formula(Class ~ .)\n\nrf_fit &lt;- rf_wf %&gt;% fit(data = train_data)",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#model-evaluation-1",
+    "href": "coding/week_11/models_07.html#model-evaluation-1",
+    "title": "Classification models in R",
+    "section": "4.7 Model Evaluation",
+    "text": "4.7 Model Evaluation\nWe evaluate the models using accuracy, ROC curves, and other metrics.\n\n4.7.1 Understanding ROC Curves\nThe Receiver Operating Characteristic (ROC) curve is a graphical representation of a classification model’s performance. It shows the trade-off between sensitivity (True Positive Rate) and 1 - specificity (False Positive Rate) across different threshold values. A higher area under the ROC curve (AUC) indicates better model performance.\nIn this case, since we have multiple classes, we use a One-vs-All (OvA) approach, where we compute an ROC curve for each class, treating it as a binary classification problem.\nWe evaluate the models using accuracy, ROC curves, and other metrics.\nWe evaluate the models using accuracy and other metrics.\n\n# Logistic regression\nlog_results &lt;- predict(log_fit_simple, test_data, type = \"class\") %&gt;%\n  bind_cols(test_data) %&gt;%\n  metrics(truth = Class, estimate = .pred_class)\n\n# Multinomial logistic\nmultlog_results &lt;- predict(log_fit_multinom, test_data, type = \"class\") %&gt;%\n  bind_cols(test_data) %&gt;%\n  metrics(truth = Class, estimate = .pred_class)\n\ntree_results &lt;- predict(tree_fit, test_data, type = \"class\") %&gt;%\n  bind_cols(test_data) %&gt;%\n  metrics(truth = Class, estimate = .pred_class)\n# Random forest\nrf_results &lt;- predict(rf_fit, test_data, type = \"class\") %&gt;%\n  bind_cols(test_data) %&gt;%\n  metrics(truth = Class, estimate = .pred_class)\n\n\n\n4.7.2 Logistic Regression Results\n\nlog_results\n\n# A tibble: 2 × 3\n  .metric  .estimator .estimate\n  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n1 accuracy multiclass     0.278\n2 kap      multiclass     0.158\n\n# Generate ROC Curve for multinomial regression using One-vs-All approach\n\n# Convert prediction probabilities to wide format\ndata_roc &lt;- predict(log_fit_simple, test_data, type = \"prob\") %&gt;%\n  bind_cols(test_data)\n\n# Compute ROC curves for each class\n# roc_data &lt;- data_roc %&gt;%\n#   roc_curve(truth = Class, \n#             !!!syms(names(select(data_roc, starts_with(\".pred_\")))))\n\n# Plot ROC curves\n# autoplot(roc_data)\n\n\n\n4.7.3 Logistic Regression Results\n\nmultlog_results\n\n# A tibble: 2 × 3\n  .metric  .estimator .estimate\n  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n1 accuracy multiclass     0.948\n2 kap      multiclass     0.940\n\n# Generate ROC Curve for multinomial regression using One-vs-All approach\n\n# Convert prediction probabilities to wide format\ndata_roc &lt;- predict(log_fit_multinom, test_data, type = \"prob\") %&gt;%\n  bind_cols(test_data)\n\n# Compute ROC curves for each class\nroc_data &lt;- data_roc %&gt;%\n  roc_curve(truth = Class, \n            !!!syms(names(select(data_roc, starts_with(\".pred_\")))))\n\n# Plot ROC curves\nautoplot(roc_data)\n\n\n\n\n\n\n\n\n\n\n4.7.4 Decision Tree Results\n\ntree_results\n\n# A tibble: 2 × 3\n  .metric  .estimator .estimate\n  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n1 accuracy multiclass     0.896\n2 kap      multiclass     0.878\n\n\n\n\n4.7.5 Random Forest Results\n\nrf_results\n\n# A tibble: 2 × 3\n  .metric  .estimator .estimate\n  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n1 accuracy multiclass     0.956\n2 kap      multiclass     0.949\n\n# Compute ROC Curve for Random Forest\nrf_roc &lt;- predict(rf_fit, test_data, type = \"prob\") %&gt;%\n  bind_cols(test_data) %&gt;%\n  roc_curve(truth = Class, !!!syms(names(select(., starts_with(\".pred_\")))))\n\nautoplot(rf_roc)",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#visualizing-decision-tree",
+    "href": "coding/week_11/models_07.html#visualizing-decision-tree",
+    "title": "Classification models in R",
+    "section": "4.8 7. Visualizing Decision Tree",
+    "text": "4.8 7. Visualizing Decision Tree\n\n# Extract the trained model from the workflow\ntree_model_extracted &lt;- extract_fit_parsnip(tree_fit)\n\n# Plot the decision tree\nrpart.plot(tree_model_extracted$fit)",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
+    ]
+  },
+  {
+    "objectID": "coding/week_11/models_07.html#conclusion",
+    "href": "coding/week_11/models_07.html#conclusion",
+    "title": "Classification models in R",
+    "section": "4.9 Conclusion",
+    "text": "4.9 Conclusion\nThis tutorial demonstrates how to apply logistic regression and decision tree classification using the tidyverse approach in R. We also handled class imbalance with SMOTE and evaluated models based on accuracy.",
+    "crumbs": [
+      "Lessons",
+      "18-Models VII"
     ]
   },
   {

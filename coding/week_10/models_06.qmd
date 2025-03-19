@@ -76,7 +76,7 @@ data_corn <- agridat::lasrosas.corn %>%
 
 # Inspect data
 head(data_corn)
-summary(data_corn)
+glimpse(data_corn)
 ```
 
 
@@ -88,7 +88,7 @@ To determine if a non-linear model is needed, we first visualize the data:
 # Global scatter plot
 ggplot(data_corn, aes(x = nitro, y = yield)) +
   geom_point() +
-  geom_smooth()+
+  geom_smooth(method = "lm", formula = y~poly(x, 2))+
   labs(title = "Corn Yield vs Nitrogen", x = "Nitrogen (kg/ha)", y = "Yield (tons/ha)")
 
 # Grouped scatter plot
@@ -113,7 +113,7 @@ where:
 ```{r}
 # Fit the model with nls
 nls_model <- nls(yield ~ a * nitro^b, data = data_corn,
-                 start = list(a = 50, b = 0.05))
+                 start = list(a = 50, b = 0.1))
 
 # Summary of the model
 summary(nls_model)
@@ -125,40 +125,61 @@ The idea here is to be able to account for variability among replicates (`rep`),
 
 ```{r}
 # Fit the model with nlme
-nlme_model <- nlme(yield ~ a * nitro^b,
+nlme_model_a <- nlme(yield ~ a * nitro^b,
                    data = data_corn,
                    fixed = a + b ~ 1,
                    random = a ~ 1 | rep,
                    start = c(a = coef(nls_model)[[1]], b = coef(nls_model)[[2]]) )
+
+nlme_model_b <- nlme(yield ~ a * nitro^b,
+                   data = data_corn,
+                   fixed = a + b ~ 1,
+                   random = b ~ 1 | rep,
+                   start = c(a = coef(nls_model)[[1]], b = coef(nls_model)[[2]]) )
+
+nlme_model_ab <- nlme(yield ~ a * nitro^b,
+                   data = data_corn,
+                   fixed = a + b ~ 1,
+                   random = a + b ~ 1 | rep,
+                   start = c(a = 1, b = 0) )
     
 
 # Summary of the model
-summary(nlme_model)
-AIC(nls_model)
-AIC(nlme_model)
+summary(nls_model)
+summary(nlme_model_a)
+summary(nlme_model_b)
+summary(nlme_model_ab)
+AIC(nls_model, nlme_model_a, nlme_model_b, nlme_model_ab)
 ```
 ## only topo
 ```{r}
 nlme_model_topo <- nlme(yield ~ a * nitro^b,
                          data = data_corn,
-                         fixed = a + b ~ topo,
-                         random = a + b ~ 1 | rep,
+                         fixed = (a+b) ~ topo,
+                         random = (a + b) ~ 1 | rep,
                          start = c(a_Intercept = 1, b_Intercept = 0.5, 
-                                   a_HT = 0, a_LO = 0, a_W = 0, 
-                                   b_HT = 0, b_LO = 0, b_W = 0))
+                                   a_HT = 0, a_LO = 0, a_W = 0,
+                                   b_HT = 0, b_LO = 0, b_W = 0
+                                   )      )
 summary(nlme_model_topo)
 coef(nlme_model_topo)
 # Some components of broom mixed doesn't work yet for non-linear models
-# broom.mixed::tidy(nlme_model_topo)
+broom.mixed::tidy(nlme_model_topo)
+broom.mixed::tidy(nls_model)
 ```
 ## only year
-```{r eval=FALSE}
+```{r eval=TRUE}
 nlme_model_year <- nlme(yield ~ a * nitro^b,
                          data = data_corn,
                          fixed = a + b ~ year,
                          random = a + b ~ 1 | rep,
-                         start = c(a_Intercept = 50, b_Intercept = 0.05, 
+                         start = c(a_Intercept = 1, b_Intercept = 0.5, 
                                    a_2001 = 0, b_2001 = 0))
+
+summary(nlme_model_year)
+coef(nlme_model_year)
+# Some components of broom mixed doesn't work yet for non-linear models
+broom.mixed::tidy(nlme_model_year)
 
 ```
 
@@ -168,7 +189,7 @@ nlme_model_topoyear <- nlme(yield ~ a * nitro^b,
                          data = data_corn,
                          fixed = a + b ~ topo + year,
                          random = a + b ~ 1 | rep,
-                         start = c(a_Intercept = 50, b_Intercept = 0.05, 
+                         start = c(a_Intercept = 1, b_Intercept = 0.5, 
                                        a_HT = 0, a_LO = 0, a_W = 0, a_2001 = 0, 
                                        b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0))
 
@@ -193,9 +214,6 @@ nlme_model_topoyear <- nlme(yield ~ a * nitro^b,
                                        b_HT = 0.1, b_LO = -0.1, b_W = 0.2, b_2001 = 0.05))
 ```
 
-
-
-
 ## topo*year
 ```{r}
 nlme_model_interaction <- nlme(yield ~ a * nitro^b,
@@ -208,13 +226,25 @@ nlme_model_interaction <- nlme(yield ~ a * nitro^b,
                                           b_HT = 0, b_LO = 0, b_W = 0, b_2001 = 0, 
                                           b_HT_2001 = 0, b_LO_2001 = 0, b_W_2001 = 0))
 summary(nlme_model_interaction)
+
+df_int <- broom.mixed::tidy(nlme_model_interaction)
+
+df_int %>% 
+  mutate(estimate = as.numeric(estimate),
+         `std.error` = as.numeric(`std.error`)) %>% 
+  separate(term, into = c("coef", "topo_year"), sep = ".", remove = F) %>% 
+  ggplot(aes(x = term, y = estimate))+
+  geom_point(aes(color = term))+
+  geom_errorbar(aes(ymin = estimate - `std.error`, ymax = estimate + `std.error`))+
+  theme_classic()
+
 ```
 # Model selection
 ## AIC:
 We can use the Akaike Information Criterion (AIC).
 ```{r}
 # Get 
-AIC(nlme_model, nlme_model_topo, nlme_model_interaction)
+AIC(nlme_model_ab, nlme_model_topo, nlme_model_year, nlme_model_interaction)
 ```
 
 ## AICc:
@@ -252,9 +282,11 @@ To compare models, we use **Delta AICc (ΔAICc)** and **AICc weights**:
 ## Using `AICcmodavg` in R
 ```{r}
 # Run them separatedly
-AICcmodavg::AICc(nlme_model)
+AICcmodavg::AICc(nlme_model_ab)
 AICcmodavg::AICc(nlme_model_topo)
+AICcmodavg::AICc(nlme_model_year)
 AICcmodavg::AICc(nlme_model_interaction)
+
 ```
 
 The `AICcmodavg` package provides functions for model selection:
@@ -263,13 +295,14 @@ The `AICcmodavg` package provides functions for model selection:
 ```{r}
 # Create a list of candidate models
 model_list <- list(
-  simple = nlme_model,
+  simple = nlme_model_ab,
   topo = nlme_model_topo,
+  year = nlme_model_year,
   interaction = nlme_model_interaction
 )
 
 # Model selection table
-model_selection <- aictab(cand.set = model_list, modnames = names(model_list))
+model_selection <- AICcmodavg::aictab(cand.set = model_list, modnames = names(model_list))
 
 model_selection
 
@@ -305,15 +338,16 @@ new_df <- expand.grid(nitro = seq(min(data_corn$nitro), max(data_corn$nitro), by
 # Predictions for each model
 new_preds <- new_df %>% 
   mutate(yield_nls = predict(nls_model, newdata = new_df),
-         yield_nlme = predict(nlme_model, newdata = new_df),
+         yield_nlme = predict(nlme_model_ab, newdata = new_df),
          yield_nlme_topo = predict(nlme_model_topo, newdata = new_df, level = 0),
+         yield_nlme_year = predict(nlme_model_year, newdata = new_df, level = 0),
          yield_nlme_interaction = predict(nlme_model_interaction, newdata = new_df, level = 0) )
 
 # Global
 ggplot(data_corn, aes(x = nitro, y = yield, color = topo, shape = as.factor(year))) +
   geom_point() +
   geom_line(data = new_preds, aes(x = nitro, y = yield_nls, linetype = "nls"), color = "black", linewidth = 2) +
-  geom_line(data = new_preds, aes(x = nitro, y = yield_nls, linetype = "nls"), color = "black", linewidth = 2) +
+  geom_line(data = new_preds, aes(x = nitro, y = yield_nlme, linetype = "nlme"), color = "red", linewidth = 2, linetype = "dotted") +
   labs(title = "Nonlinear Regression Fit (nls or nlme)", x = "Nitrogen (kg/ha)", y = "Yield (tons/ha)") +
   theme_minimal()
 
@@ -325,13 +359,21 @@ ggplot(data_corn, aes(x = nitro, y = yield, color = topo, shape = as.factor(year
   labs(title = "Model by Topography", x = "Nitrogen (kg/ha)", y = "Yield (tons/ha)") +
   theme_minimal()
 
+# Year
+ggplot(data_corn, aes(x = nitro, y = yield, color = year, shape = as.factor(year))) +
+  geom_point() +
+  geom_line(data = new_preds, aes(x = nitro, y = yield_nls, linetype = "nls"), color = "black", linewidth = 2) +
+  geom_line(data = new_preds, aes(x = nitro, y = yield_nlme_year, linetype = "nlme topo")) +
+  labs(title = "Model by Topography", x = "Nitrogen (kg/ha)", y = "Yield (tons/ha)") +
+  theme_minimal()
+
 # Interaction
 ggplot(data_corn, aes(x = nitro, y = yield, color = topo, shape = as.factor(year))) +
   geom_point() +
   geom_line(data = new_preds, aes(x = nitro, y = yield_nls, linetype = "nls"), color = "black", linewidth = 2) +
   geom_line(data = new_preds, aes(x = nitro, y = yield_nlme_interaction, linetype = "nlme interaction")) +
   labs(title = "Model by Topography*Year", x = "Nitrogen (kg/ha)", y = "Yield (tons/ha)") +
-  facet_wrap(~year) +
+  #facet_wrap(~year) +
   theme_minimal()
 
 ```
