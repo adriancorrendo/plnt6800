@@ -159,7 +159,7 @@ weather.daymet <- function(input, dpp = 0){
                       "SWE",   # Snow water (kg/m2)
                       "Tmax",  # Max. temp. (degC)
                       "Tmin",  # Min. temp. (degC)
-                      "VPD")))) %>%   # Vap Pres Def (Pa)
+                      "VP")))) %>%   # Vap Pres (Pa)
     # STEP 4. Processing data given start and ending dates:
     dplyr::mutate(Weather = purrr::pmap(list(sta = Start - dpp, 
                                              end = End, 
@@ -173,7 +173,7 @@ weather.daymet <- function(input, dpp = 0){
     # STEP 6. Converting units and adding extra variables:
     dplyr::mutate(Rad = Rad*0.000001*DL, # Radiation (W/m2 to MJ/m2)
                   Tmean = (Tmax+Tmin)/2, # Mean temperature (degC),
-                  VPD = VPD / 1000, # VPD (Pa to kPa),
+                  VP = VP / 1000, # VP (Pa to kPa),
                   # Creating variables for ET0 estimation:
                   lat_rad = latitude*0.0174533,
                   dr = 1 + 0.033*cos((2*pi/365)*DOY),
@@ -316,7 +316,7 @@ summary.daymet <- function(input, intervals) {
                                         c("ID", "Crop", "Site",
                                           "Date","DL", "PP", 
                                           "Rad", "Tmax", "Tmin",
-                                          "Tmean", "VPD", "ET0_HS")) %>%
+                                          "Tmean", "VP", "ET0_HS")) %>%
                      dplyr::group_by(ID, Crop, Site) %>% 
                      tidyr::nest(Weather = -c(ID, Crop, Site)) %>%
                      dplyr::ungroup(), 
@@ -339,8 +339,9 @@ summary.daymet <- function(input, intervals) {
                             # Extreme Temp. event:
                             ETEi = case_when(Tmax >= 30 ~1, TRUE ~ 0), 
                             # Tmax factor,  crop heat units (CHU):
-                            Ymax = case_when(Tmax < 10 ~ 0, 
-                                    TRUE ~ 3.33*(Tmax-10) - 0.084*(Tmax-10)),
+                            Ymax = case_when(Tmax < 10 ~ 0,
+                                             Tmax >= 30 ~ 0,
+                                    TRUE ~ 3.33*(Tmax-10) - 0.084*(Tmax-10)^2),
                             # Tmin factor, Crop heat units (CHU):
                             Ymin = case_when(Tmin < 4.44 ~ 0, 
                                     TRUE ~ 1.8*(Tmin-4.44)), 
@@ -360,7 +361,10 @@ summary.daymet <- function(input, intervals) {
                             # Tmin threshold Growing Degrees:
                             Gmin = case_when(Tmin >= 10 ~ Tmin, TRUE ~ 10),
                             # Tmax threshold Growing Degrees:
-                            Gmax = case_when(Tmax <= 30 ~ Tmax, TRUE ~ 30),
+                            Gmax = case_when(Tmax <= 30 ~ Tmax,
+                                             Tmax > 30 ~ 30,
+                                             Tmin <= 10 ~ 10,
+                                             TRUE ~ 30),
                             # Daily Growing Degree Units:
                             GDU = ((Gmin + Gmax)/2) - 10) ) ) %>% 
     
@@ -374,8 +378,8 @@ summary.daymet <- function(input, intervals) {
       Tmean = Weather %>% purrr::map(~mean(.$Tmean)),
       # Accumulated Rad (MJ/m2):
       Rad = Weather %>% purrr::map(~sum(.$Rad)),
-      # Accumulated VPD (kPa):
-      VPD = Weather %>% purrr::map(~sum(.$VPD)),
+      # Accumulated VP (kPa):
+      VP = Weather %>% purrr::map(~sum(.$VP)),
       # Accumulated ET0 (mm):
       ET0_HS = Weather %>% purrr::map(~sum(.$ET0_HS)),
       # Number of ETE (#):
@@ -392,7 +396,7 @@ summary.daymet <- function(input, intervals) {
     # Additional indices and final units:
     dplyr::select(-Weather) %>% 
     # DS: `cols` is now required when using unnest()
-    tidyr::unnest(cols = c(Dur, PP, Tmean, Rad, VPD, ET0_HS, ETE, EPE, CHU, SDI, GDD)) %>% 
+    tidyr::unnest(cols = c(Dur, PP, Tmean, Rad, VP, ET0_HS, ETE, EPE, CHU, SDI, GDD)) %>% 
     dplyr::mutate(
       # Photo-thermal quotient (Q):
       Q_chu = Rad/CHU,

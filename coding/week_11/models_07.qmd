@@ -63,7 +63,8 @@ iris_train <- training(iris_split)
 iris_test <- testing(iris_split)
 
 # Train logistic regression using tidymodels
-iris_log_model <- logistic_reg() %>%
+iris_log_model <- 
+  logistic_reg() %>%
   set_engine("glm") %>%
   set_mode("classification")
 
@@ -176,6 +177,7 @@ This example shows both the **modern tidymodels approach** and the **classic glm
 #unzip("DryBeanDataset.zip", exdir = "./DryBeanDataset")
 
 df <- readxl::read_xlsx(path="data/Dry_Bean_Dataset.xlsx")
+
 ```
 
 Lets take a look at the structure and summary of the dataset.
@@ -196,6 +198,7 @@ df <- df %>%
   step_smote(Class) %>%
   prep() %>%
   juice()
+
 ```
 
 ### Training and Testing Split

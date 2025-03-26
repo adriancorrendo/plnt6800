@@ -383,6 +383,12 @@ window.Quarto = {
  <span class="menu-text">18-Models VII</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../coding/week_12/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-Quarto tips</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -652,7 +658,7 @@ window.Quarto = {
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"SWE"</span>,   <span class="co"># Snow water (kg/m2)</span></span>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Tmax"</span>,  <span class="co"># Max. temp. (degC)</span></span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Tmin"</span>,  <span class="co"># Min. temp. (degC)</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"VPD"</span>)))) <span class="sc">%&gt;%</span>   <span class="co"># Vap Pres Def (Pa)</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"VP"</span>)))) <span class="sc">%&gt;%</span>   <span class="co"># Vap Pres (Pa)</span></span>
 <span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># STEP 4. Processing data given start and ending dates:</span></span>
 <span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Weather =</span> purrr<span class="sc">::</span><span class="fu">pmap</span>(<span class="fu">list</span>(<span class="at">sta =</span> Start <span class="sc">-</span> dpp, </span>
 <span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">end =</span> End, </span>
@@ -666,7 +672,7 @@ window.Quarto = {
 <span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># STEP 6. Converting units and adding extra variables:</span></span>
 <span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Rad =</span> Rad<span class="sc">*</span><span class="fl">0.000001</span><span class="sc">*</span>DL, <span class="co"># Radiation (W/m2 to MJ/m2)</span></span>
 <span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Tmean =</span> (Tmax<span class="sc">+</span>Tmin)<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Mean temperature (degC),</span></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                  <span class="at">VPD =</span> VPD <span class="sc">/</span> <span class="dv">1000</span>, <span class="co"># VPD (Pa to kPa),</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                  <span class="at">VP =</span> VP <span class="sc">/</span> <span class="dv">1000</span>, <span class="co"># VP (Pa to kPa),</span></span>
 <span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># Creating variables for ET0 estimation:</span></span>
 <span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                  <span class="at">lat_rad =</span> latitude<span class="sc">*</span><span class="fl">0.0174533</span>,</span>
 <span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dr =</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.033</span><span class="sc">*</span><span class="fu">cos</span>((<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">365</span>)<span class="sc">*</span>DOY),</span>
@@ -1057,7 +1063,7 @@ window.Quarto = {
 <td style="text-align: left;">▁▃▅▇▃</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">VPD</td>
+<td style="text-align: left;">VP</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1.26</td>
@@ -1510,7 +1516,7 @@ window.Quarto = {
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">c</span>(<span class="st">"ID"</span>, <span class="st">"Crop"</span>, <span class="st">"Site"</span>,</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"Date"</span>,<span class="st">"DL"</span>, <span class="st">"PP"</span>, </span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"Rad"</span>, <span class="st">"Tmax"</span>, <span class="st">"Tmin"</span>,</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"Tmean"</span>, <span class="st">"VPD"</span>, <span class="st">"ET0_HS"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"Tmean"</span>, <span class="st">"VP"</span>, <span class="st">"ET0_HS"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                     dplyr<span class="sc">::</span><span class="fu">group_by</span>(ID, Crop, Site) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                     tidyr<span class="sc">::</span><span class="fu">nest</span>(<span class="at">Weather =</span> <span class="sc">-</span><span class="fu">c</span>(ID, Crop, Site)) <span class="sc">%&gt;%</span></span>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                     dplyr<span class="sc">::</span><span class="fu">ungroup</span>(), </span>
@@ -1533,67 +1539,71 @@ window.Quarto = {
 <span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Extreme Temp. event:</span></span>
 <span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ETEi =</span> <span class="fu">case_when</span>(Tmax <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">~</span><span class="dv">1</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>), </span>
 <span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmax factor,  crop heat units (CHU):</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ymax =</span> <span class="fu">case_when</span>(Tmax <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fl">3.33</span><span class="sc">*</span>(Tmax<span class="dv">-10</span>) <span class="sc">-</span> <span class="fl">0.084</span><span class="sc">*</span>(Tmax<span class="dv">-10</span>)),</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmin factor, Crop heat units (CHU):</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ymin =</span> <span class="fu">case_when</span>(Tmin <span class="sc">&lt;</span> <span class="fl">4.44</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fl">1.8</span><span class="sc">*</span>(Tmin<span class="fl">-4.44</span>)), </span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Daily CHU:</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Yavg =</span> (Ymax <span class="sc">+</span> Ymin)<span class="sc">/</span><span class="dv">2</span>,</span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># For WHEAT (diff. base temp and winter negatives)</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># # Tmin threshold Growing Degrees:</span></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Gmin = case_when(Tmin &gt;= 0 ~ Tmin, TRUE ~ 0),</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># # Tmax threshold Growing Degrees:</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Gmax = case_when(Tmax &gt; 30 ~ 30,</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#                  Tmin &lt; 0 ~ 0, </span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#                  between(Tmax, 0, 30) ~ Tmax),</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># # Daily Growing Degree Units:</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># GDU = ((Gmin + Gmax)/2) - 0,</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># GDD_c = cumsum(GDU) </span></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># For CORN, SOYBEAN (Base temp = 10)</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmin threshold Growing Degrees:</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Gmin =</span> <span class="fu">case_when</span>(Tmin <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">~</span> Tmin, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">10</span>),</span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmax threshold Growing Degrees:</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Gmax =</span> <span class="fu">case_when</span>(Tmax <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> Tmax, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">30</span>),</span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Daily Growing Degree Units:</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>                            <span class="at">GDU =</span> ((Gmin <span class="sc">+</span> Gmax)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">10</span>) ) ) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># STEP 4. Summary for each variable over the period of interest:</span></span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Duration of interval (days):</span></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>      <span class="at">Dur =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">nrow</span>(.)),</span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated PP (mm):</span></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">PP =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>PP)),</span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Mean Temp (C):</span></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">Tmean =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">mean</span>(.<span class="sc">$</span>Tmean)),</span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated Rad (MJ/m2):</span></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">Rad =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>Rad)),</span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated VPD (kPa):</span></span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">VPD =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>VPD)),</span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated ET0 (mm):</span></span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">ET0_HS =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>ET0_HS)),</span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Number of ETE (#):</span></span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>      <span class="at">ETE =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>ETEi)),</span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Number of EPE (#):</span></span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>      <span class="at">EPE =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>EPEi)),</span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated Crop Heat Units (CHU):</span></span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>      <span class="at">CHU =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>Yavg)),</span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Shannon Diversity Index for PP:</span></span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>      <span class="at">SDI =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span> vegan<span class="sc">::</span><span class="fu">diversity</span>(.<span class="sc">$</span>PP, <span class="at">index =</span> <span class="st">"shannon"</span>)<span class="sc">/</span><span class="fu">log</span>(<span class="fu">length</span>(.<span class="sc">$</span>PP))),</span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated Growing Degree Days (GDD):</span></span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>      <span class="at">GDD =</span>  Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>GDU))) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Additional indices and final units:</span></span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Weather) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># DS: `cols` is now required when using unnest()</span></span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(Dur, PP, Tmean, Rad, VPD, ET0_HS, ETE, EPE, CHU, SDI, GDD)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Photo-thermal quotient (Q):</span></span>
-<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">Q_chu =</span> Rad<span class="sc">/</span>CHU,</span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">Q_gdd =</span> Rad<span class="sc">/</span>GDD,</span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Abundant and Well Distributed Water:</span></span>
-<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">AWDR =</span> PP<span class="sc">*</span>SDI) </span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ymax =</span> <span class="fu">case_when</span>(Tmax <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                                             Tmax <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fl">3.33</span><span class="sc">*</span>(Tmax<span class="dv">-10</span>) <span class="sc">-</span> <span class="fl">0.084</span><span class="sc">*</span>(Tmax<span class="dv">-10</span>)<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmin factor, Crop heat units (CHU):</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ymin =</span> <span class="fu">case_when</span>(Tmin <span class="sc">&lt;</span> <span class="fl">4.44</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fl">1.8</span><span class="sc">*</span>(Tmin<span class="fl">-4.44</span>)), </span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Daily CHU:</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Yavg =</span> (Ymax <span class="sc">+</span> Ymin)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># For WHEAT (diff. base temp and winter negatives)</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># # Tmin threshold Growing Degrees:</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Gmin = case_when(Tmin &gt;= 0 ~ Tmin, TRUE ~ 0),</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># # Tmax threshold Growing Degrees:</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Gmax = case_when(Tmax &gt; 30 ~ 30,</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#                  Tmin &lt; 0 ~ 0, </span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#                  between(Tmax, 0, 30) ~ Tmax),</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># # Daily Growing Degree Units:</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># GDU = ((Gmin + Gmax)/2) - 0,</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># GDD_c = cumsum(GDU) </span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># For CORN, SOYBEAN (Base temp = 10)</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmin threshold Growing Degrees:</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Gmin =</span> <span class="fu">case_when</span>(Tmin <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">~</span> Tmin, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">10</span>),</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Tmax threshold Growing Degrees:</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Gmax =</span> <span class="fu">case_when</span>(Tmax <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> Tmax,</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>                                             Tmax <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="dv">30</span>,</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>                                             Tmin <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>                                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">30</span>),</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Daily Growing Degree Units:</span></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>                            <span class="at">GDU =</span> ((Gmin <span class="sc">+</span> Gmax)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">10</span>) ) ) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># STEP 4. Summary for each variable over the period of interest:</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Duration of interval (days):</span></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">Dur =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">nrow</span>(.)),</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated PP (mm):</span></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">PP =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>PP)),</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Mean Temp (C):</span></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">Tmean =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">mean</span>(.<span class="sc">$</span>Tmean)),</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated Rad (MJ/m2):</span></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">Rad =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>Rad)),</span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated VP (kPa):</span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>      <span class="at">VP =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>VP)),</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated ET0 (mm):</span></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>      <span class="at">ET0_HS =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>ET0_HS)),</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Number of ETE (#):</span></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>      <span class="at">ETE =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>ETEi)),</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Number of EPE (#):</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>      <span class="at">EPE =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>EPEi)),</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated Crop Heat Units (CHU):</span></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>      <span class="at">CHU =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>Yavg)),</span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Shannon Diversity Index for PP:</span></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>      <span class="at">SDI =</span> Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span> vegan<span class="sc">::</span><span class="fu">diversity</span>(.<span class="sc">$</span>PP, <span class="at">index =</span> <span class="st">"shannon"</span>)<span class="sc">/</span><span class="fu">log</span>(<span class="fu">length</span>(.<span class="sc">$</span>PP))),</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Accumulated Growing Degree Days (GDD):</span></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">GDD =</span>  Weather <span class="sc">%&gt;%</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span><span class="fu">sum</span>(.<span class="sc">$</span>GDU))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Additional indices and final units:</span></span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Weather) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>    <span class="co"># DS: `cols` is now required when using unnest()</span></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(Dur, PP, Tmean, Rad, VP, ET0_HS, ETE, EPE, CHU, SDI, GDD)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Photo-thermal quotient (Q):</span></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">Q_chu =</span> Rad<span class="sc">/</span>CHU,</span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">Q_gdd =</span> Rad<span class="sc">/</span>GDD,</span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Abundant and Well Distributed Water:</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">AWDR =</span> PP<span class="sc">*</span>SDI) </span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="run-summaries" class="level2" data-number="3.3">
@@ -1770,17 +1780,17 @@ window.Quarto = {
 <p><strong>Variable type: numeric</strong></p>
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 9%">
-<col style="width: 13%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 10%">
+<col style="width: 14%">
 <col style="width: 8%">
-<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1851,7 +1861,7 @@ window.Quarto = {
 <td style="text-align: left;">▇▁▁▁▃</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">VPD</td>
+<td style="text-align: left;">VP</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">358.94</td>
@@ -1906,13 +1916,13 @@ window.Quarto = {
 <td style="text-align: left;">CHU</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">6368.17</td>
-<td style="text-align: right;">3463.65</td>
-<td style="text-align: right;">4274.61</td>
-<td style="text-align: right;">4369.18</td>
-<td style="text-align: right;">4463.75</td>
-<td style="text-align: right;">7414.95</td>
-<td style="text-align: right;">10366.15</td>
+<td style="text-align: right;">4323.15</td>
+<td style="text-align: right;">2564.95</td>
+<td style="text-align: right;">2740.35</td>
+<td style="text-align: right;">2843.47</td>
+<td style="text-align: right;">2946.59</td>
+<td style="text-align: right;">5114.55</td>
+<td style="text-align: right;">7282.51</td>
 <td style="text-align: left;">▇▁▁▁▃</td>
 </tr>
 <tr class="even">
@@ -1945,13 +1955,13 @@ window.Quarto = {
 <td style="text-align: left;">Q_chu</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.66</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.54</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">0.70</td>
-<td style="text-align: right;">0.72</td>
-<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">1.06</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">1.10</td>
 <td style="text-align: left;">▃▁▁▁▇</td>
 </tr>
 <tr class="odd">
@@ -2001,7 +2011,7 @@ window.Quarto = {
 <th style="text-align: right;" data-quarto-table-cell-role="th">PP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Tmean</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Rad</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">VPD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">VP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ET0_HS</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ETE</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">EPE</th>
@@ -2029,10 +2039,10 @@ window.Quarto = {
 <td style="text-align: right;">660.5558</td>
 <td style="text-align: right;">16</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">4274.608</td>
+<td style="text-align: right;">2740.348</td>
 <td style="text-align: right;">0.7134269</td>
 <td style="text-align: right;">1208.965</td>
-<td style="text-align: right;">0.7020574</td>
+<td style="text-align: right;">1.0951238</td>
 <td style="text-align: right;">2.482305</td>
 <td style="text-align: right;">257.9252</td>
 </tr>
@@ -2051,10 +2061,10 @@ window.Quarto = {
 <td style="text-align: right;">1521.3225</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">10366.150</td>
+<td style="text-align: right;">7282.508</td>
 <td style="text-align: right;">0.7595347</td>
 <td style="text-align: right;">2533.715</td>
-<td style="text-align: right;">0.7412990</td>
+<td style="text-align: right;">1.0551883</td>
 <td style="text-align: right;">3.032866</td>
 <td style="text-align: right;">854.6209</td>
 </tr>
@@ -2073,10 +2083,10 @@ window.Quarto = {
 <td style="text-align: right;">594.0311</td>
 <td style="text-align: right;">15</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">4463.745</td>
+<td style="text-align: right;">2946.587</td>
 <td style="text-align: right;">0.7590440</td>
 <td style="text-align: right;">1290.725</td>
-<td style="text-align: right;">0.5364196</td>
+<td style="text-align: right;">0.8126148</td>
 <td style="text-align: right;">1.855113</td>
 <td style="text-align: right;">428.0856</td>
 </tr>
@@ -2262,12 +2272,12 @@ window.Quarto = {
 <col style="width: 14%">
 <col style="width: 10%">
 <col style="width: 14%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
+<col style="width: 7%">
 <col style="width: 7%">
 <col style="width: 8%">
-<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
 <col style="width: 8%">
 <col style="width: 6%">
 </colgroup>
@@ -2340,7 +2350,7 @@ window.Quarto = {
 <td style="text-align: left;">▇▂▁▁▂</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">VPD</td>
+<td style="text-align: left;">VP</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">76.45</td>
@@ -2395,13 +2405,13 @@ window.Quarto = {
 <td style="text-align: left;">CHU</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1329.55</td>
-<td style="text-align: right;">1267.41</td>
-<td style="text-align: right;">170.96</td>
-<td style="text-align: right;">502.82</td>
-<td style="text-align: right;">1165.18</td>
-<td style="text-align: right;">1356.75</td>
-<td style="text-align: right;">4269.04</td>
+<td style="text-align: right;">908.91</td>
+<td style="text-align: right;">846.64</td>
+<td style="text-align: right;">145.26</td>
+<td style="text-align: right;">415.56</td>
+<td style="text-align: right;">782.24</td>
+<td style="text-align: right;">865.76</td>
+<td style="text-align: right;">2963.26</td>
 <td style="text-align: left;">▇▇▁▁▂</td>
 </tr>
 <tr class="even">
@@ -2434,14 +2444,14 @@ window.Quarto = {
 <td style="text-align: left;">Q_chu</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1.20</td>
-<td style="text-align: right;">0.98</td>
-<td style="text-align: right;">0.47</td>
-<td style="text-align: right;">0.54</td>
-<td style="text-align: right;">0.64</td>
-<td style="text-align: right;">1.79</td>
-<td style="text-align: right;">3.05</td>
-<td style="text-align: left;">▇▁▁▂▂</td>
+<td style="text-align: right;">1.57</td>
+<td style="text-align: right;">1.11</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">2.28</td>
+<td style="text-align: right;">3.59</td>
+<td style="text-align: left;">▇▁▁▁▂</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Q_gdd</td>
@@ -2490,7 +2500,7 @@ window.Quarto = {
 <th style="text-align: right;" data-quarto-table-cell-role="th">PP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Tmean</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Rad</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">VPD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">VP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ET0_HS</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ETE</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">EPE</th>
@@ -2518,10 +2528,10 @@ window.Quarto = {
 <td style="text-align: right;">63.48611</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">200.0765</td>
+<td style="text-align: right;">154.3458</td>
 <td style="text-align: right;">0.6357661</td>
 <td style="text-align: right;">6.780</td>
-<td style="text-align: right;">2.5253259</td>
+<td style="text-align: right;">3.2735469</td>
 <td style="text-align: right;">74.521875</td>
 <td style="text-align: right;">60.73474</td>
 </tr>
@@ -2540,10 +2550,10 @@ window.Quarto = {
 <td style="text-align: right;">128.07920</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">370.5894</td>
+<td style="text-align: right;">292.5157</td>
 <td style="text-align: right;">0.6866269</td>
 <td style="text-align: right;">84.400</td>
-<td style="text-align: right;">2.1609828</td>
+<td style="text-align: right;">2.7377578</td>
 <td style="text-align: right;">9.488593</td>
 <td style="text-align: right;">77.61630</td>
 </tr>
@@ -2562,10 +2572,10 @@ window.Quarto = {
 <td style="text-align: right;">202.20827</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1288.3794</td>
+<td style="text-align: right;">823.2502</td>
 <td style="text-align: right;">0.6508401</td>
 <td style="text-align: right;">371.250</td>
-<td style="text-align: right;">0.6647409</td>
+<td style="text-align: right;">1.0403138</td>
 <td style="text-align: right;">2.306905</td>
 <td style="text-align: right;">64.39412</td>
 </tr>
@@ -2584,10 +2594,10 @@ window.Quarto = {
 <td style="text-align: right;">194.90035</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1483.4871</td>
+<td style="text-align: right;">893.7629</td>
 <td style="text-align: right;">0.5993348</td>
 <td style="text-align: right;">437.950</td>
-<td style="text-align: right;">0.5070893</td>
+<td style="text-align: right;">0.8416778</td>
 <td style="text-align: right;">1.717685</td>
 <td style="text-align: right;">53.55656</td>
 </tr>
@@ -2606,10 +2616,10 @@ window.Quarto = {
 <td style="text-align: right;">138.43587</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1165.1813</td>
+<td style="text-align: right;">754.0653</td>
 <td style="text-align: right;">0.4283610</td>
 <td style="text-align: right;">324.600</td>
-<td style="text-align: right;">0.5187786</td>
+<td style="text-align: right;">0.8016164</td>
 <td style="text-align: right;">1.862203</td>
 <td style="text-align: right;">26.05720</td>
 </tr>
@@ -2628,10 +2638,10 @@ window.Quarto = {
 <td style="text-align: right;">75.06876</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">170.9552</td>
+<td style="text-align: right;">145.2592</td>
 <td style="text-align: right;">0.5923778</td>
 <td style="text-align: right;">41.800</td>
-<td style="text-align: right;">3.0542811</td>
+<td style="text-align: right;">3.5945772</td>
 <td style="text-align: right;">12.491513</td>
 <td style="text-align: right;">62.22337</td>
 </tr>
@@ -2650,10 +2660,10 @@ window.Quarto = {
 <td style="text-align: right;">576.34481</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">4269.0377</td>
+<td style="text-align: right;">2793.4159</td>
 <td style="text-align: right;">0.6940917</td>
 <td style="text-align: right;">1285.435</td>
-<td style="text-align: right;">0.6004932</td>
+<td style="text-align: right;">0.9177037</td>
 <td style="text-align: right;">1.994288</td>
 <td style="text-align: right;">156.36498</td>
 </tr>
@@ -2672,10 +2682,10 @@ window.Quarto = {
 <td style="text-align: right;">174.13068</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">1296.1836</td>
+<td style="text-align: right;">1025.8802</td>
 <td style="text-align: right;">0.6752569</td>
 <td style="text-align: right;">112.950</td>
-<td style="text-align: right;">0.7655815</td>
+<td style="text-align: right;">0.9673003</td>
 <td style="text-align: right;">8.785606</td>
 <td style="text-align: right;">172.63617</td>
 </tr>
@@ -2694,10 +2704,10 @@ window.Quarto = {
 <td style="text-align: right;">236.08072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">593.9790</td>
+<td style="text-align: right;">510.1460</td>
 <td style="text-align: right;">0.6804557</td>
 <td style="text-align: right;">-112.175</td>
-<td style="text-align: right;">3.0191285</td>
+<td style="text-align: right;">3.5152659</td>
 <td style="text-align: right;">-15.986619</td>
 <td style="text-align: right;">195.93041</td>
 </tr>
@@ -2716,10 +2726,10 @@ window.Quarto = {
 <td style="text-align: right;">536.30800</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">4217.6632</td>
+<td style="text-align: right;">2963.2599</td>
 <td style="text-align: right;">0.7236240</td>
 <td style="text-align: right;">1249.530</td>
-<td style="text-align: right;">0.5552717</td>
+<td style="text-align: right;">0.7903286</td>
 <td style="text-align: right;">1.874264</td>
 <td style="text-align: right;">263.99249</td>
 </tr>
@@ -2738,10 +2748,10 @@ window.Quarto = {
 <td style="text-align: right;">106.48366</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">411.6609</td>
+<td style="text-align: right;">320.9666</td>
 <td style="text-align: right;">0.5915947</td>
 <td style="text-align: right;">112.350</td>
-<td style="text-align: right;">1.4248358</td>
+<td style="text-align: right;">1.8274459</td>
 <td style="text-align: right;">5.220732</td>
 <td style="text-align: right;">27.17786</td>
 </tr>
@@ -2760,10 +2770,10 @@ window.Quarto = {
 <td style="text-align: right;">177.92863</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1134.8709</td>
+<td style="text-align: right;">782.2378</td>
 <td style="text-align: right;">0.7315317</td>
 <td style="text-align: right;">319.395</td>
-<td style="text-align: right;">0.6043740</td>
+<td style="text-align: right;">0.8768259</td>
 <td style="text-align: right;">2.147455</td>
 <td style="text-align: right;">87.18395</td>
 </tr>
@@ -2782,10 +2792,10 @@ window.Quarto = {
 <td style="text-align: right;">184.06589</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1417.3120</td>
+<td style="text-align: right;">817.1332</td>
 <td style="text-align: right;">0.6402241</td>
 <td style="text-align: right;">426.640</td>
-<td style="text-align: right;">0.4991809</td>
+<td style="text-align: right;">0.8658260</td>
 <td style="text-align: right;">1.658295</td>
 <td style="text-align: right;">54.61112</td>
 </tr>
@@ -2804,10 +2814,10 @@ window.Quarto = {
 <td style="text-align: right;">150.74414</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1290.7796</td>
+<td style="text-align: right;">837.7504</td>
 <td style="text-align: right;">0.6259308</td>
 <td style="text-align: right;">382.745</td>
-<td style="text-align: right;">0.4742457</td>
+<td style="text-align: right;">0.7307030</td>
 <td style="text-align: right;">1.599359</td>
 <td style="text-align: right;">105.24400</td>
 </tr>
@@ -2826,10 +2836,10 @@ window.Quarto = {
 <td style="text-align: right;">83.48533</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">633.1501</td>
+<td style="text-align: right;">519.7147</td>
 <td style="text-align: right;">0.7037089</td>
 <td style="text-align: right;">165.755</td>
-<td style="text-align: right;">0.6360815</td>
+<td style="text-align: right;">0.7749157</td>
 <td style="text-align: right;">2.429701</td>
 <td style="text-align: right;">134.66174</td>
 </tr>
@@ -3029,7 +3039,7 @@ window.Quarto = {
 <col style="width: 8%">
 <col style="width: 7%">
 <col style="width: 7%">
-<col style="width: 8%">
+<col style="width: 7%">
 <col style="width: 8%">
 <col style="width: 8%">
 <col style="width: 6%">
@@ -3103,7 +3113,7 @@ window.Quarto = {
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">VPD</td>
+<td style="text-align: left;">VP</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">94.38</td>
@@ -3158,14 +3168,14 @@ window.Quarto = {
 <td style="text-align: left;">CHU</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1638.66</td>
-<td style="text-align: right;">2112.65</td>
-<td style="text-align: right;">170.96</td>
-<td style="text-align: right;">610.25</td>
-<td style="text-align: right;">1248.18</td>
-<td style="text-align: right;">1717.42</td>
-<td style="text-align: right;">8062.31</td>
-<td style="text-align: left;">▇▂▁▁▁</td>
+<td style="text-align: right;">1119.50</td>
+<td style="text-align: right;">1476.59</td>
+<td style="text-align: right;">145.26</td>
+<td style="text-align: right;">389.46</td>
+<td style="text-align: right;">852.85</td>
+<td style="text-align: right;">1123.81</td>
+<td style="text-align: right;">5634.82</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SDI</td>
@@ -3197,14 +3207,14 @@ window.Quarto = {
 <td style="text-align: left;">Q_chu</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1.03</td>
-<td style="text-align: right;">0.88</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.51</td>
-<td style="text-align: right;">0.55</td>
-<td style="text-align: right;">1.07</td>
-<td style="text-align: right;">3.05</td>
-<td style="text-align: left;">▇▂▁▁▁</td>
+<td style="text-align: right;">1.39</td>
+<td style="text-align: right;">1.02</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">1.54</td>
+<td style="text-align: right;">3.59</td>
+<td style="text-align: left;">▇▂▁▁▂</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Q_gdd</td>
@@ -3254,7 +3264,7 @@ window.Quarto = {
 <th style="text-align: right;" data-quarto-table-cell-role="th">PP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Tmean</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Rad</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">VPD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">VP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ET0_HS</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ETE</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">EPE</th>
@@ -3283,10 +3293,10 @@ window.Quarto = {
 <td style="text-align: right;">63.48611</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">200.0765</td>
+<td style="text-align: right;">154.3458</td>
 <td style="text-align: right;">0.6357661</td>
 <td style="text-align: right;">6.780</td>
-<td style="text-align: right;">2.5253259</td>
+<td style="text-align: right;">3.2735469</td>
 <td style="text-align: right;">74.521875</td>
 <td style="text-align: right;">60.73474</td>
 </tr>
@@ -3306,10 +3316,10 @@ window.Quarto = {
 <td style="text-align: right;">358.83259</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1868.5814</td>
+<td style="text-align: right;">1218.2390</td>
 <td style="text-align: right;">0.7117824</td>
 <td style="text-align: right;">518.900</td>
-<td style="text-align: right;">0.9456586</td>
+<td style="text-align: right;">1.4504872</td>
 <td style="text-align: right;">3.405358</td>
 <td style="text-align: right;">150.88364</td>
 </tr>
@@ -3329,10 +3339,10 @@ window.Quarto = {
 <td style="text-align: right;">89.48994</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">676.4427</td>
+<td style="text-align: right;">412.2869</td>
 <td style="text-align: right;">0.5459508</td>
 <td style="text-align: right;">200.385</td>
-<td style="text-align: right;">0.4923909</td>
+<td style="text-align: right;">0.8078700</td>
 <td style="text-align: right;">1.662171</td>
 <td style="text-align: right;">33.56506</td>
 </tr>
@@ -3352,10 +3362,10 @@ window.Quarto = {
 <td style="text-align: right;">203.26534</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1667.0347</td>
+<td style="text-align: right;">1063.5927</td>
 <td style="text-align: right;">0.5490199</td>
 <td style="text-align: right;">471.480</td>
-<td style="text-align: right;">0.5167456</td>
+<td style="text-align: right;">0.8099273</td>
 <td style="text-align: right;">1.827082</td>
 <td style="text-align: right;">48.35218</td>
 </tr>
@@ -3375,10 +3385,10 @@ window.Quarto = {
 <td style="text-align: right;">75.06876</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">170.9552</td>
+<td style="text-align: right;">145.2592</td>
 <td style="text-align: right;">0.5923778</td>
 <td style="text-align: right;">41.800</td>
-<td style="text-align: right;">3.0542811</td>
+<td style="text-align: right;">3.5945772</td>
 <td style="text-align: right;">12.491513</td>
 <td style="text-align: right;">62.22337</td>
 </tr>
@@ -3398,10 +3408,10 @@ window.Quarto = {
 <td style="text-align: right;">1261.94680</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">8062.3054</td>
+<td style="text-align: right;">5634.8226</td>
 <td style="text-align: right;">0.7467051</td>
 <td style="text-align: right;">1848.980</td>
-<td style="text-align: right;">0.8119356</td>
+<td style="text-align: right;">1.1617177</td>
 <td style="text-align: right;">3.540370</td>
 <td style="text-align: right;">668.48028</td>
 </tr>
@@ -3421,10 +3431,10 @@ window.Quarto = {
 <td style="text-align: right;">87.99388</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">808.2634</td>
+<td style="text-align: right;">492.0876</td>
 <td style="text-align: right;">0.5904150</td>
 <td style="text-align: right;">255.540</td>
-<td style="text-align: right;">0.4118919</td>
+<td style="text-align: right;">0.6765403</td>
 <td style="text-align: right;">1.302798</td>
 <td style="text-align: right;">42.43313</td>
 </tr>
@@ -3444,10 +3454,10 @@ window.Quarto = {
 <td style="text-align: right;">161.56523</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1422.1259</td>
+<td style="text-align: right;">1104.2616</td>
 <td style="text-align: right;">0.6849177</td>
 <td style="text-align: right;">407.350</td>
-<td style="text-align: right;">0.5345383</td>
+<td style="text-align: right;">0.6884064</td>
 <td style="text-align: right;">1.866161</td>
 <td style="text-align: right;">108.27178</td>
 </tr>
@@ -3467,10 +3477,10 @@ window.Quarto = {
 <td style="text-align: right;">106.48366</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">411.6609</td>
+<td style="text-align: right;">320.9666</td>
 <td style="text-align: right;">0.5915947</td>
 <td style="text-align: right;">112.350</td>
-<td style="text-align: right;">1.4248358</td>
+<td style="text-align: right;">1.8274459</td>
 <td style="text-align: right;">5.220732</td>
 <td style="text-align: right;">27.17786</td>
 </tr>
@@ -3490,10 +3500,10 @@ window.Quarto = {
 <td style="text-align: right;">278.97376</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1880.1266</td>
+<td style="text-align: right;">1182.4459</td>
 <td style="text-align: right;">0.7532597</td>
 <td style="text-align: right;">538.705</td>
-<td style="text-align: right;">0.5679515</td>
+<td style="text-align: right;">0.9030610</td>
 <td style="text-align: right;">1.982199</td>
 <td style="text-align: right;">136.48312</td>
 </tr>
@@ -3513,10 +3523,10 @@ window.Quarto = {
 <td style="text-align: right;">141.75997</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1137.2219</td>
+<td style="text-align: right;">743.4511</td>
 <td style="text-align: right;">0.5215225</td>
 <td style="text-align: right;">346.630</td>
-<td style="text-align: right;">0.4985132</td>
+<td style="text-align: right;">0.7625520</td>
 <td style="text-align: right;">1.635519</td>
 <td style="text-align: right;">44.67362</td>
 </tr>
@@ -3536,10 +3546,10 @@ window.Quarto = {
 <td style="text-align: right;">163.36417</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">1359.1429</td>
+<td style="text-align: right;">962.2477</td>
 <td style="text-align: right;">0.7257673</td>
 <td style="text-align: right;">377.755</td>
-<td style="text-align: right;">0.5301286</td>
+<td style="text-align: right;">0.7487890</td>
 <td style="text-align: right;">1.907375</td>
 <td style="text-align: right;">215.64723</td>
 </tr>
@@ -3921,7 +3931,7 @@ window.Quarto = {
 <td style="text-align: left;">▁▂▇▇▅</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">VPD</td>
+<td style="text-align: left;">VP</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0.93</td>
@@ -4077,7 +4087,7 @@ window.Quarto = {
 <th style="text-align: right;" data-quarto-table-cell-role="th">PP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Tmean</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Rad</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">VPD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">VP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ET0_HS</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ETE</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">EPE</th>
@@ -4105,10 +4115,10 @@ window.Quarto = {
 <td style="text-align: right;">834.4626</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">4364.787</td>
+<td style="text-align: right;">3363.850</td>
 <td style="text-align: right;">0.7951588</td>
 <td style="text-align: right;">480.635</td>
-<td style="text-align: right;">1.1185144</td>
+<td style="text-align: right;">1.451336</td>
 <td style="text-align: right;">10.157556</td>
 <td style="text-align: right;">823.6175</td>
 </tr>
@@ -4127,10 +4137,10 @@ window.Quarto = {
 <td style="text-align: right;">874.0620</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">4667.094</td>
+<td style="text-align: right;">3266.985</td>
 <td style="text-align: right;">0.7815342</td>
 <td style="text-align: right;">644.145</td>
-<td style="text-align: right;">1.0621094</td>
+<td style="text-align: right;">1.517290</td>
 <td style="text-align: right;">7.695417</td>
 <td style="text-align: right;">710.6491</td>
 </tr>
@@ -4149,10 +4159,10 @@ window.Quarto = {
 <td style="text-align: right;">869.5653</td>
 <td style="text-align: right;">16</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">4773.116</td>
+<td style="text-align: right;">3140.274</td>
 <td style="text-align: right;">0.7811108</td>
 <td style="text-align: right;">630.985</td>
-<td style="text-align: right;">1.0201579</td>
+<td style="text-align: right;">1.550607</td>
 <td style="text-align: right;">7.717032</td>
 <td style="text-align: right;">621.2487</td>
 </tr>
@@ -4171,10 +4181,10 @@ window.Quarto = {
 <td style="text-align: right;">841.3591</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">4327.508</td>
+<td style="text-align: right;">3158.797</td>
 <td style="text-align: right;">0.7825177</td>
 <td style="text-align: right;">388.790</td>
-<td style="text-align: right;">1.1500003</td>
+<td style="text-align: right;">1.575484</td>
 <td style="text-align: right;">12.800318</td>
 <td style="text-align: right;">742.4528</td>
 </tr>
@@ -4193,10 +4203,10 @@ window.Quarto = {
 <td style="text-align: right;">827.3507</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">4256.332</td>
+<td style="text-align: right;">3248.058</td>
 <td style="text-align: right;">0.8086498</td>
 <td style="text-align: right;">401.735</td>
-<td style="text-align: right;">1.1472563</td>
+<td style="text-align: right;">1.503392</td>
 <td style="text-align: right;">12.155037</td>
 <td style="text-align: right;">770.2228</td>
 </tr>
@@ -4215,10 +4225,10 @@ window.Quarto = {
 <td style="text-align: right;">921.0563</td>
 <td style="text-align: right;">24</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">5131.436</td>
+<td style="text-align: right;">3242.154</td>
 <td style="text-align: right;">0.7836771</td>
 <td style="text-align: right;">681.280</td>
-<td style="text-align: right;">0.9973287</td>
+<td style="text-align: right;">1.578497</td>
 <td style="text-align: right;">7.511932</td>
 <td style="text-align: right;">659.9266</td>
 </tr>
@@ -4261,7 +4271,7 @@ window.Quarto = {
 <th style="text-align: right;" data-quarto-table-cell-role="th">PP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Tmean</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Rad</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">VPD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">VP</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ET0_HS</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">ETE</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">EPE</th>
@@ -4290,10 +4300,10 @@ window.Quarto = {
 <td style="text-align: right;">12.22926</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.94134</td>
+<td style="text-align: right;">0.9515712</td>
 <td style="text-align: right;">0.7172157</td>
 <td style="text-align: right;">-190.010</td>
-<td style="text-align: right;">203.4690205</td>
+<td style="text-align: right;">201.2813416</td>
 <td style="text-align: right;">-1.008018</td>
 <td style="text-align: right;">31.71528</td>
 </tr>
@@ -4313,10 +4323,10 @@ window.Quarto = {
 <td style="text-align: right;">19.01688</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">6.89583</td>
+<td style="text-align: right;">6.6954018</td>
 <td style="text-align: right;">0.7480953</td>
 <td style="text-align: right;">-141.315</td>
-<td style="text-align: right;">39.0302527</td>
+<td style="text-align: right;">40.1986311</td>
 <td style="text-align: right;">-1.904582</td>
 <td style="text-align: right;">42.70128</td>
 </tr>
@@ -4336,10 +4346,10 @@ window.Quarto = {
 <td style="text-align: right;">47.73356</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">86.70312</td>
+<td style="text-align: right;">70.8484896</td>
 <td style="text-align: right;">0.6801023</td>
 <td style="text-align: right;">-33.830</td>
-<td style="text-align: right;">5.0868832</td>
+<td style="text-align: right;">6.2252371</td>
 <td style="text-align: right;">-13.037205</td>
 <td style="text-align: right;">30.58420</td>
 </tr>
@@ -4359,10 +4369,10 @@ window.Quarto = {
 <td style="text-align: right;">65.36530</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">117.08760</td>
+<td style="text-align: right;">100.1956452</td>
 <td style="text-align: right;">0.5036470</td>
 <td style="text-align: right;">-1.030</td>
-<td style="text-align: right;">4.7218089</td>
+<td style="text-align: right;">5.5178573</td>
 <td style="text-align: right;">-536.762404</td>
 <td style="text-align: right;">32.67158</td>
 </tr>
@@ -4382,10 +4392,10 @@ window.Quarto = {
 <td style="text-align: right;">114.94758</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">505.68054</td>
+<td style="text-align: right;">398.9491488</td>
 <td style="text-align: right;">0.6533741</td>
 <td style="text-align: right;">140.385</td>
-<td style="text-align: right;">1.1555954</td>
+<td style="text-align: right;">1.4647534</td>
 <td style="text-align: right;">4.162568</td>
 <td style="text-align: right;">96.32695</td>
 </tr>
@@ -4405,10 +4415,10 @@ window.Quarto = {
 <td style="text-align: right;">133.48935</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">787.44879</td>
+<td style="text-align: right;">576.7064388</td>
 <td style="text-align: right;">0.7668216</td>
 <td style="text-align: right;">217.885</td>
-<td style="text-align: right;">0.7112789</td>
+<td style="text-align: right;">0.9711973</td>
 <td style="text-align: right;">2.570603</td>
 <td style="text-align: right;">153.27230</td>
 </tr>
