@@ -11,9 +11,9 @@ format:
     number-sections: true
     table-class: "table table-striped table-hover"
     self-contained: true
-  pdf:
-    number-sections: true
 editor: source
+markdown: 
+  wrap: sentence
 smooth-scroll: true
 bibliography: ../../references.bib
 link-citations: TRUE
@@ -23,18 +23,11 @@ link-citations: TRUE
 
 In this class, we will explore how to create geographic maps using `ggplot2`, `sf`, `maps`, `leaflet`, and `geojson`. We'll cover techniques for plotting data points on US and Canada maps, customizing map aesthetics, and working with spatial data.
 
-![](https://ggplot2.tidyverse.org/logo.png){.absolute top=0 right=0 height="25%"}
+![](https://ggplot2.tidyverse.org/logo.png){.absolute top="0" right="0" height="25%"}
 
 # Learning Objectives
 
-By the end of this session, you will:
-1. Load and visualize geographic data using `sf` and `maps`.
-2. Create US and Canada maps using `ggplot2`.
-3. Overlay data points on maps using geographic coordinates.
-4. Customize map aesthetics for professional presentations.
-5. Work with shapefiles and GeoJSON for more detailed geographic visualizations.
-6. Implement a function for plotting.
-7. Create an interactive map using `leaflet`.
+By the end of this session, you will: 1. Load and visualize geographic data using `sf` and `maps`. 2. Create US and Canada maps using `ggplot2`. 3. Overlay data points on maps using geographic coordinates. 4. Customize map aesthetics for professional presentations. 5. Work with shapefiles and GeoJSON for more detailed geographic visualizations. 6. Implement a function for plotting. 7. Create an interactive map using `leaflet`.
 
 **Required Packages** <br/>
 
@@ -140,6 +133,7 @@ canada_plot +
 For more detailed geographic visualizations, we can use shapefiles with the `sf` package.
 
 ## Loading and Plotting Shapefiles
+
 ```{r}
 # Load shapefile (replace 'path_to_shapefile' with your actual path)
 # usa_shapefile <- st_read("path_to_shapefile/usa_shapefile.shp")
@@ -158,6 +152,7 @@ ggplot(nc) +
 ```
 
 ## Read shp of Canada and US
+
 ```{r}
 ## Load shp files
 usa_shp <- st_read("shp_map/us/usa.shp") %>%
@@ -166,7 +161,9 @@ usa_shp <- st_read("shp_map/us/usa.shp") %>%
 
 can_shp <- st_read("shp_map/can/canada.shp")
 ```
+
 ## Create objects for maps
+
 ```{r}
 # Create list of selected provinces
 selected_provinces <- c("Ontario", "Manitoba", "Quebec")
@@ -178,7 +175,9 @@ ontario_cities <- data.frame(
   lat = c(43.6511, 45.4215, 43.2557, 42.9834, 44.2312)
 )
 ```
+
 ## Define function to customize plot
+
 ```{r}
 geo_plot <- function(x, y, z, title = NULL){
   ggplot()+
@@ -221,7 +220,9 @@ geo_plot <- function(x, y, z, title = NULL){
   
   
 ```
+
 ## Plot
+
 ```{r}
 # Plot from function
 geo_plot(x = can_shp, y = usa_shp, z = ontario_cities, 
@@ -232,7 +233,8 @@ geo_plot(x = can_shp, y = usa_shp, z = ontario_cities,
 
 We can use GeoJSON files for geographic data. Here’s how to load and visualize a GeoJSON file for Ontario, Canada.
 
-## Loading  GeoJSON Data
+## Loading GeoJSON Data
+
 ```{r}
 # Load Canada GeoJSON (replace with actual file path if available)
 # Read geojson for Canada
@@ -246,7 +248,9 @@ can_geojson <- read_sf("geojson_maps/canada_provinces.geojson")  %>%
 # Read geojson for US
 usa_geojson <- read_sf("geojson_maps/us-states.json")
 ```
+
 ## Plot GEOJSON
+
 ```{r}
 # Plot from function
 geo_plot(x = can_geojson, y = usa_geojson, z = ontario_cities, 
@@ -254,15 +258,17 @@ geo_plot(x = can_geojson, y = usa_geojson, z = ontario_cities,
 ```
 
 ## Explanation:
-- **`geojson_read()`**: Reads the GeoJSON file.
-- **`st_as_sf()`**: Converts the data into an `sf` object for plotting.
-- **`geom_sf()`**: Plots the GeoJSON data.
+
+-   **`geojson_read()`**: Reads the GeoJSON file.
+-   **`st_as_sf()`**: Converts the data into an `sf` object for plotting.
+-   **`geom_sf()`**: Plots the GeoJSON data.
 
 # Creating Interactive Maps with `leaflet`
 
 `leaflet` allows us to create interactive maps. Let's create a map of Ontario, Canada.
 
 ## Ontario Map with `leaflet`
+
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # Create interactive map
 ontario_cities %>%
@@ -277,29 +283,25 @@ setView(lng = -80, lat = 44, zoom = 6)
 ```
 
 ## Explanation:
-- **`addTiles()`**: Adds the base map layer.
-- **`addMarkers()`**: Plots city locations with popups displaying city names.
-- **`setView()`**: Centers the map on Toronto with a specified zoom level.
+
+-   **`addTiles()`**: Adds the base map layer.
+-   **`addMarkers()`**: Plots city locations with popups displaying city names.
+-   **`setView()`**: Centers the map on Toronto with a specified zoom level.
 
 # Conclusion
 
-In this lesson, you learned how to:
-- Create geographic maps of the US and Canada using `ggplot2` and `maps`.
-- Plot data points on maps with latitude and longitude coordinates.
-- Use shapefiles and GeoJSON for more detailed geographic visualizations with `sf`.
-- Customize map aesthetics for clearer and more professional presentations.
-- Create interactive maps using `leaflet`.
+In this lesson, you learned how to: - Create geographic maps of the US and Canada using `ggplot2` and `maps`. - Plot data points on maps with latitude and longitude coordinates. - Use shapefiles and GeoJSON for more detailed geographic visualizations with `sf`. - Customize map aesthetics for clearer and more professional presentations. - Create interactive maps using `leaflet`.
 
 These techniques are valuable for visualizing spatial data and can be adapted for a wide range of research applications.
 
 # Additional Resources
 
-1. **[ggplot2 Documentation](https://ggplot2.tidyverse.org/)** – Official documentation for creating maps and more.
-2. **[sf Package Documentation](https://r-spatial.github.io/sf/)** – Guide to handling spatial data in R.
-3. **[R Maps Package](https://cran.r-project.org/web/packages/maps/index.html)** – Reference for basic map data.
-4. **[Leaflet for R](https://rstudio.github.io/leaflet/)** – Documentation for interactive mapping in R.
-5. **[GeoJSON Data and Tools](https://geojson.io/)** – Create and explore GeoJSON data.
-6. **[R Spatial Data Science](https://rspatial.org/)** – Tutorials and resources for spatial data analysis.
-7. **[R Graph Gallery - Maps](https://r-graph-gallery.com/map.html)** – Examples of different map types using R.
+1.  [**ggplot2 Documentation**](https://ggplot2.tidyverse.org/) – Official documentation for creating maps and more.
+2.  [**sf Package Documentation**](https://r-spatial.github.io/sf/) – Guide to handling spatial data in R.
+3.  [**R Maps Package**](https://cran.r-project.org/web/packages/maps/index.html) – Reference for basic map data.
+4.  [**Leaflet for R**](https://rstudio.github.io/leaflet/) – Documentation for interactive mapping in R.
+5.  [**GeoJSON Data and Tools**](https://geojson.io/) – Create and explore GeoJSON data.
+6.  [**R Spatial Data Science**](https://rspatial.org/) – Tutorials and resources for spatial data analysis.
+7.  [**R Graph Gallery - Maps**](https://r-graph-gallery.com/map.html) – Examples of different map types using R.
 
 Experiment with different datasets and explore additional map customizations to further enhance your visualizations! 🚀

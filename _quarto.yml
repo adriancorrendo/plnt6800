@@ -90,7 +90,12 @@ website:
           - href: coding/week_11/models_07.qmd
             text: "18-Models VII"
           - href: coding/week_12/quarto.qmd
-            text: "19-Quarto tips"  
+            text: "19-Quarto tips"
+          - href: coding/week_13/bayes_01.qmd
+            text: "20-Bayesian intro"
+          - href: coding/week_13/bayes_02.qmd
+            text: "21-Bayesian in R"
+ 
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
@@ -99,7 +104,7 @@ website:
         contents:
           - href: outline/outline.qmd
             text: "Outline"
-         
+       
 format:
   html:
     theme:

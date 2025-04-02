@@ -1,0 +1,146 @@
+---
+title: "Intro to Bayesian Statistics"
+author: "Dr. Adrian Correndo"
+date: "2025-04-02" 
+categories: [statistics, frequentism, bayes theorem] 
+editor: source
+abstract-title: 'Intro' 
+abstract: 'This article provides some basics about Bayesian statistics and a comparison with the conventional frequentist perspective about probabilities and stats.'
+format: 
+  html:
+    toc: true
+    toc-location: left 
+    toc-depth: 4 
+    number-sections: true 
+    table-class: "table table-striped table-hover" 
+    editor: source 
+execute: 
+  echo: true 
+  warning: false 
+  message: false 
+smooth-scroll: true 
+---
+
+::: callout-important
+Neither Frequentist nor Bayesian approaches are universally superior — each has strengths depending on the context. 😉
+:::
+
+Today, we'll explore and contrast both paradigms.
+
+## Frequentism vs Bayesianism Video
+
+::: {align="center"}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tsuJM_bHSgA" frameborder="0" allowfullscreen></iframe>
+:::
+
+What are your thoughts?
+
+- Let's open the floor for discussion!
+
+---
+
+## Main Differences
+
+The key divergence lies in their treatment of TRUTH.
+
+Frequentism assumes the existence of a fixed, true value. Parameters are fixed, and randomness comes from data variation. It's called "frequentism" because it relies on the frequency of events under repeated sampling.
+
+> 🎲 **Example:** To estimate the probability of rolling a 6, Frequentists say: “If we roll a die infinitely many times, the proportion of 6s will approach 1/6.”
+
+Inference is based on idealized, repeated experiments — even ones we've never performed.
+
+Bayesianism does *not* assume a fixed truth. It centers on:
+
+**PROBABILITIES:** All knowledge is probabilistic — not true/false, but likely/unlikely.
+
+**BELIEFS:** Prior knowledge is incorporated into analysis via prior distributions. Even when we know nothing (👉 uninformative priors!), Bayesianism lets us model uncertainty.
+
+> 🎲 **Bayesian Dice:** “We are *a priori* 16.7% certain we’ll get a 6.”
+
+Bayesian inference updates beliefs based on observed data:
+
+$$
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}
+$$
+
+And to compare competing models or beliefs, we use the **Bayes Factor**:
+
+$$
+\text{Bayes Factor} = \frac{\text{Posterior}}{\text{Prior}} = \frac{0.334}{0.167} = 2
+$$
+
+This means the updated belief is twice as likely, given the data.
+
+### Summary:
+- **Frequentism**: Models are fixed; randomness is in the data.
+- **Bayesianism**: Data is fixed; uncertainty lies in the model.
+
+::: callout-tip
+For many simple models, both approaches yield similar conclusions.
+
+💡 Hint: Consider uninformative priors!
+:::
+
+::: callout-note
+Bayesian logic mirrors human reasoning:
+
+1. We collect data.
+2. We have prior beliefs.
+3. We combine both to update our beliefs.
+:::
+
+## Bayes Theorem
+
+$$
+P(A_{\text{true}} \mid B) = \frac{P(B \mid A_{\text{true}}) \cdot P(A_{\text{true}})}{P(B)}
+$$
+
+$$
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}
+$$
+
+### Video: Bayes' Rule
+
+::: {align="center"}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HZGCoVF3YvM" frameborder="0" allowfullscreen></iframe>
+:::
+
+## The Priors
+
+Priors formalize our beliefs as probability distributions — based on:
+
+1. The nature of the variable (discrete/continuous)
+2. Our prior knowledge or lack thereof
+
+## Credible vs. Confidence Intervals
+
+A crucial difference lies in interpreting uncertainty:
+
+- **Confidence Interval (Frequentist)**: “If we repeat the experiment infinitely, 95% of the calculated intervals will contain the true value of $\theta$.”
+
+    > ⚠️ $\theta$ is fixed — it's either in the interval or not.
+
+- **Credible Interval (Bayesian)**: “There is a 95% probability that $\theta$ lies within the interval.”
+
+    > 🔑 *Conditional on the prior being correct.*
+
+## Useful Resources
+
+### 🧠 Introductory Theory
+- [Bayesian Models: A Statistical Primer for Ecologists – Hobbs & Hooten](https://www.amazon.com/dp/0691159289)
+- [Bringing Bayesian Models to Life – Hooten & Hefley](https://www.amazon.com/dp/0367198487)
+- [Statistical Rethinking – McElreath (PDF)](https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf)
+
+### 🎓 Bayesian Workflow & Philosophy
+- [Bayesian workflow – Gelman et al.](https://arxiv.org/abs/2011.01808)
+- [Scientific Reasoning: The Bayesian Approach – Howson & Urbach](https://www.amazon.com/dp/081269578X)
+
+### 📘 Advanced Theory
+- [Bayesian Data Analysis (3rd Edition)](https://www.amazon.com/dp/1439840954)
+
+### 🌱 Agronomy Applications
+- [Makowski et al., 2020 (EJA)](https://doi.org/10.1016/j.eja.2020.126076)
+
+### 🗣️ Miscellaneous
+- [Statistical Modeling Blog – Gelman et al.](https://statmodeling.stat.columbia.edu/)
+- [Learning Bayesian Statistics Podcast](https://open.spotify.com/show/7HYN0pLjob4d8RiwKTvLUa)
