@@ -454,8 +454,8 @@
     "objectID": "coding/week_13/bayes_01.html#main-differences",
     "href": "coding/week_13/bayes_01.html#main-differences",
     "title": "Intro to Bayesian Statistics",
-    "section": "2 Main Differences",
-    "text": "2 Main Differences\nThe key divergence lies in their treatment of TRUTH.\nFrequentism assumes the existence of a fixed, true value. Parameters are fixed, and randomness comes from data variation. It’s called “frequentism” because it relies on the frequency of events under repeated sampling.\n\n🎲 Example: To estimate the probability of rolling a 6, Frequentists say: “If we roll a die infinitely many times, the proportion of 6s will approach 1/6.”\n\nInference is based on idealized, repeated experiments — even ones we’ve never performed.\nBayesianism does not assume a fixed truth. It centers on:\nPROBABILITIES: All knowledge is probabilistic — not true/false, but likely/unlikely.\nBELIEFS: Prior knowledge is incorporated into analysis via prior distributions. Even when we know nothing (👉 uninformative priors!), Bayesianism lets us model uncertainty.\n\n🎲 Bayesian Dice: “We are a priori 16.7% certain we’ll get a 6.”\n\nBayesian inference updates beliefs based on observed data:\n\\[\n\\text{Posterior} = \\frac{\\text{Likelihood} \\times \\text{Prior}}{\\text{Evidence}}\n\\]\nAnd to compare competing models or beliefs, we use the Bayes Factor:\n\\[\n\\text{Bayes Factor} = \\frac{\\text{Posterior}}{\\text{Prior}} = \\frac{0.334}{0.167} = 2\n\\]\nThis means the updated belief is twice as likely, given the data.\n\n2.1 Summary:\n\nFrequentism: Models are fixed; randomness is in the data.\nBayesianism: Data is fixed; uncertainty lies in the model.\n\n\n\n\n\n\n\nTip\n\n\n\nFor many simple models, both approaches yield similar conclusions.\n💡 Hint: Consider uninformative priors!\n\n\n\n\n\n\n\n\nNote\n\n\n\nBayesian logic mirrors human reasoning:\n\nWe collect data.\nWe have prior beliefs.\nWe combine both to update our beliefs.",
+    "section": "1.1 Main Differences",
+    "text": "1.1 Main Differences\nThe key divergence lies in their treatment of TRUTH.\nFrequentism assumes the existence of a fixed, true value. Parameters are fixed, and randomness comes from data variation. It’s called “frequentism” because it relies on the frequency of events under repeated sampling.\n\n🎲 Example: To estimate the probability of rolling a 6, Frequentists say: “If we roll a die infinitely many times, the proportion of 6s will approach 1/6.”\n\nInference is based on idealized, repeated experiments — even ones we’ve never performed.\nIn contrast, Bayesianism does not assume a fixed truth. It centers on:\nPROBABILITIES: All knowledge is probabilistic — not true/false, but likely/unlikely.\nBELIEFS: Prior knowledge is incorporated into analysis via prior distributions. Even when we know nothing (👉 uninformative priors!), Bayesianism lets us model uncertainty.\n\n🎲 Bayesian Dice: “We are a priori 16.7% certain we’ll get a 6.”\n\nBayesian inference updates beliefs based on observed data:\n\\[\n\\text{Posterior} = \\frac{\\text{Likelihood} \\times \\text{Prior}}{\\text{Evidence}}\n\\]\nAnd to compare competing models or beliefs, we use the Bayes Factor:\n\\[\n\\text{Bayes Factor} = \\frac{\\text{Posterior}}{\\text{Prior}} = \\frac{0.334}{0.167} = 2\n\\]\nThis means the updated belief is twice as likely, given the data.\n\n1.1.1 Summary:\n\nFrequentism: Models are fixed; randomness is in the data.\nBayesianism: After being observed, the data is considered fixed; uncertainty lies in the model (parameters and predictions).\n\n\n\n\n\n\n\nTip\n\n\n\nFor many simple models, both approaches yield similar conclusions.\n💡 Hint: Consider uninformative priors!\n\n\n\n\n\n\n\n\nNote\n\n\n\nBayesian logic mirrors human reasoning:\n\nWe collect data.\nWe have prior beliefs.\nWe combine both to update our beliefs.",
     "crumbs": [
       "Lessons",
       "20-Bayesian intro"
@@ -465,8 +465,8 @@
     "objectID": "coding/week_13/bayes_01.html#bayes-theorem",
     "href": "coding/week_13/bayes_01.html#bayes-theorem",
     "title": "Intro to Bayesian Statistics",
-    "section": "3 Bayes Theorem",
-    "text": "3 Bayes Theorem\n\\[\nP(A_{\\text{true}} \\mid B) = \\frac{P(B \\mid A_{\\text{true}}) \\cdot P(A_{\\text{true}})}{P(B)}\n\\]\n\\[\n\\text{Posterior} = \\frac{\\text{Likelihood} \\times \\text{Prior}}{\\text{Evidence}}\n\\]\n\n3.1 Video: Bayes’ Rule",
+    "section": "1.2 Bayes Theorem",
+    "text": "1.2 Bayes Theorem\n\\[\nP(A_{\\text{true}} \\mid B) = \\frac{P(B \\mid A_{\\text{true}}) \\cdot P(A_{\\text{true}})}{P(B)}\n\\]\n\\[\n\\text{Posterior} = \\frac{\\text{Likelihood} \\times \\text{Prior}}{\\text{Evidence}}\n\\]\n\n1.2.1 Video: Bayes’ Rule",
     "crumbs": [
       "Lessons",
       "20-Bayesian intro"
@@ -476,8 +476,8 @@
     "objectID": "coding/week_13/bayes_01.html#the-priors",
     "href": "coding/week_13/bayes_01.html#the-priors",
     "title": "Intro to Bayesian Statistics",
-    "section": "4 The Priors",
-    "text": "4 The Priors\nPriors formalize our beliefs as probability distributions — based on:\n\nThe nature of the variable (discrete/continuous)\nOur prior knowledge or lack thereof",
+    "section": "1.3 The Priors",
+    "text": "1.3 The Priors\nPriors formalize our beliefs as probability distributions — based on:\n\nThe nature of the variable (discrete/continuous)\nOur prior knowledge or lack thereof\n\n\n\n\n\n\n\nTip\n\n\n\n🧠 Bayesian Perspective on Uncertainty\nIn Bayesian analysis, uncertainty is placed on:\n\nParameters (they are random variables with prior/posterior distributions)\nPredictions (future outcomes are modeled probabilistically)\n\nOnce data is observed, it’s considered fixed.\nSo rather than saying “data is fixed, model is random,” it’s more precise to say:\n\n“Bayesian analysis treats unknown parameters and future data as random variables, while the observed data is fixed. The uncertainty lies in our beliefs about parameters and predictions, not in the data we’ve already seen.”",
     "crumbs": [
       "Lessons",
       "20-Bayesian intro"
@@ -487,8 +487,8 @@
     "objectID": "coding/week_13/bayes_01.html#credible-vs.-confidence-intervals",
     "href": "coding/week_13/bayes_01.html#credible-vs.-confidence-intervals",
     "title": "Intro to Bayesian Statistics",
-    "section": "5 Credible vs. Confidence Intervals",
-    "text": "5 Credible vs. Confidence Intervals\nA crucial difference lies in interpreting uncertainty:\n\nConfidence Interval (Frequentist): “If we repeat the experiment infinitely, 95% of the calculated intervals will contain the true value of \\(\\theta\\).”\n\n⚠️ \\(\\theta\\) is fixed — it’s either in the interval or not.\n\nCredible Interval (Bayesian): “There is a 95% probability that \\(\\theta\\) lies within the interval.”\n\n🔑 Conditional on the prior being correct.",
+    "section": "1.5 Credible vs. Confidence Intervals",
+    "text": "1.5 Credible vs. Confidence Intervals\nA crucial difference lies in interpreting uncertainty:\n\nConfidence Interval (Frequentist): “If we repeat the experiment infinitely, 95% of the calculated intervals will contain the true value of \\(\\theta\\).”\n\n⚠️ \\(\\theta\\) is fixed — it’s either in the interval or not.\n\nCredible Interval (Bayesian): “There is a 95% probability that \\(\\theta\\) lies within the interval.”\n\n🔑 Conditional on the prior being correct.",
     "crumbs": [
       "Lessons",
       "20-Bayesian intro"
@@ -498,8 +498,8 @@
     "objectID": "coding/week_13/bayes_01.html#useful-resources",
     "href": "coding/week_13/bayes_01.html#useful-resources",
     "title": "Intro to Bayesian Statistics",
-    "section": "6 Useful Resources",
-    "text": "6 Useful Resources\n\n6.1 🧠 Introductory Theory\n\nBayesian Models: A Statistical Primer for Ecologists – Hobbs & Hooten\nBringing Bayesian Models to Life – Hooten & Hefley\nStatistical Rethinking – McElreath (PDF)\n\n\n\n6.2 🎓 Bayesian Workflow & Philosophy\n\nBayesian workflow – Gelman et al.\nScientific Reasoning: The Bayesian Approach – Howson & Urbach\n\n\n\n6.3 📘 Advanced Theory\n\nBayesian Data Analysis (3rd Edition)\n\n\n\n6.4 🌱 Agronomy Applications\n\nMakowski et al., 2020 (EJA)\n\n\n\n6.5 🗣️ Miscellaneous\n\nStatistical Modeling Blog – Gelman et al.\nLearning Bayesian Statistics Podcast",
+    "section": "1.6 Useful Resources",
+    "text": "1.6 Useful Resources\n\n1.6.1 🧠 Introductory Theory\n\nBayesian Models: A Statistical Primer for Ecologists – Hobbs & Hooten\nBringing Bayesian Models to Life – Hooten & Hefley\nStatistical Rethinking – McElreath (PDF)\n\n\n\n1.6.2 🎓 Bayesian Workflow & Philosophy\n\nBayesian workflow – Gelman et al.\nScientific Reasoning: The Bayesian Approach – Howson & Urbach\n\n\n\n1.6.3 📘 Advanced Theory\n\nBayesian Data Analysis (3rd Edition)\n\n\n\n1.6.4 🌱 Agronomy Applications\n\nMakowski et al., 2020 (EJA)\n\n\n\n1.6.5 🗣️ Miscellaneous\n\nStatistical Modeling Blog – Gelman et al.\nLearning Bayesian Statistics Podcast",
     "crumbs": [
       "Lessons",
       "20-Bayesian intro"
@@ -2679,6 +2679,17 @@
     "crumbs": [
       "Lessons",
       "21-Bayesian in R"
+    ]
+  },
+  {
+    "objectID": "coding/week_13/bayes_01.html#visualization-of-bayesian-updating",
+    "href": "coding/week_13/bayes_01.html#visualization-of-bayesian-updating",
+    "title": "Intro to Bayesian Statistics",
+    "section": "1.4 📈 Visualization of Bayesian Updating",
+    "text": "1.4 📈 Visualization of Bayesian Updating\n\nx &lt;- seq(0, 1, length.out = 300)\nprior &lt;- exp(-((x - 0.3)^2) / 0.05)\nlikelihood &lt;- exp(-((x - 0.7)^2) / 0.02)\nposterior &lt;- exp(-((x - 0.6)^2) / 0.01)\n\n# Normalize\nprior &lt;- prior / sum(prior)\nlikelihood &lt;- likelihood / sum(likelihood)\nposterior &lt;- posterior / sum(posterior)\n\ndf &lt;- data.frame(x = x, Prior = prior, Likelihood = likelihood, Posterior = posterior)\n\ndf_long &lt;- df %&gt;% pivot_longer(cols = -x, names_to = \"Distribution\", values_to = \"Density\")\n\nggplot(df_long, aes(x = x, y = Density, color = Distribution)) +\n  geom_line(size = 1.2) +\n  labs(title = \"Bayesian Updating: Prior × Likelihood → Posterior\",\n       x = \"Parameter (\\u03B8)\", y = \"Density\") +\n  theme_classic() +\n  scale_color_manual(values = c(\"tomato\", \"steelblue\", \"darkgreen\"))\n\n\n\n\nFig 1. Bayesian updating: Prior × Likelihood → Posterior",
+    "crumbs": [
+      "Lessons",
+      "20-Bayesian intro"
     ]
   }
 ]

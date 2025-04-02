@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -106,11 +140,17 @@ window.Quarto = {
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Intro to Bayesian Statistics – PLNT6800 - Winter 2025">
 <meta property="og:description" content="This article provides some basics about Bayesian statistics and a comparison with the conventional frequentist perspective about probabilities and stats.">
+<meta property="og:image" content="https://adriancorrendo.github.io/coding/week_13/bayes_01_files/figure-html/bayesian-updating-ggplot-1.png">
 <meta property="og:site_name" content="PLNT6800 - Winter 2025">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
 <meta name="twitter:title" content="Intro to Bayesian Statistics – PLNT6800 - Winter 2025">
 <meta name="twitter:description" content="This article provides some basics about Bayesian statistics and a comparison with the conventional frequentist perspective about probabilities and stats.">
+<meta name="twitter:image" content="https://adriancorrendo.github.io/coding/week_13/bayes_01_files/figure-html/bayesian-updating-ggplot-1.png">
 <meta name="twitter:creator" content="@aacorrendo">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -407,24 +447,27 @@ window.Quarto = {
     <h2 id="toc-title">Content</h2>
    
   <ul>
-  <li><a href="#frequentism-vs-bayesianism-video" id="toc-frequentism-vs-bayesianism-video" class="nav-link active" data-scroll-target="#frequentism-vs-bayesianism-video"><span class="header-section-number">1</span> Frequentism vs Bayesianism Video</a></li>
-  <li><a href="#main-differences" id="toc-main-differences" class="nav-link" data-scroll-target="#main-differences"><span class="header-section-number">2</span> Main Differences</a>
+  <li><a href="#frequentism-vs-bayesianism" id="toc-frequentism-vs-bayesianism" class="nav-link active" data-scroll-target="#frequentism-vs-bayesianism"><span class="header-section-number">1</span> Frequentism vs Bayesianism</a>
   <ul>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.1</span> Summary:</a></li>
+  <li><a href="#main-differences" id="toc-main-differences" class="nav-link" data-scroll-target="#main-differences"><span class="header-section-number">1.1</span> Main Differences</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">1.1.1</span> Summary:</a></li>
   </ul></li>
-  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem"><span class="header-section-number">3</span> Bayes Theorem</a>
-  <ul>
-  <li><a href="#video-bayes-rule" id="toc-video-bayes-rule" class="nav-link" data-scroll-target="#video-bayes-rule"><span class="header-section-number">3.1</span> Video: Bayes’ Rule</a></li>
+  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem"><span class="header-section-number">1.2</span> Bayes Theorem</a>
+  <ul class="collapse">
+  <li><a href="#video-bayes-rule" id="toc-video-bayes-rule" class="nav-link" data-scroll-target="#video-bayes-rule"><span class="header-section-number">1.2.1</span> Video: Bayes’ Rule</a></li>
   </ul></li>
-  <li><a href="#the-priors" id="toc-the-priors" class="nav-link" data-scroll-target="#the-priors"><span class="header-section-number">4</span> The Priors</a></li>
-  <li><a href="#credible-vs.-confidence-intervals" id="toc-credible-vs.-confidence-intervals" class="nav-link" data-scroll-target="#credible-vs.-confidence-intervals"><span class="header-section-number">5</span> Credible vs.&nbsp;Confidence Intervals</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">6</span> Useful Resources</a>
-  <ul>
-  <li><a href="#introductory-theory" id="toc-introductory-theory" class="nav-link" data-scroll-target="#introductory-theory"><span class="header-section-number">6.1</span> 🧠 Introductory Theory</a></li>
-  <li><a href="#bayesian-workflow-philosophy" id="toc-bayesian-workflow-philosophy" class="nav-link" data-scroll-target="#bayesian-workflow-philosophy"><span class="header-section-number">6.2</span> 🎓 Bayesian Workflow &amp; Philosophy</a></li>
-  <li><a href="#advanced-theory" id="toc-advanced-theory" class="nav-link" data-scroll-target="#advanced-theory"><span class="header-section-number">6.3</span> 📘 Advanced Theory</a></li>
-  <li><a href="#agronomy-applications" id="toc-agronomy-applications" class="nav-link" data-scroll-target="#agronomy-applications"><span class="header-section-number">6.4</span> 🌱 Agronomy Applications</a></li>
-  <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous"><span class="header-section-number">6.5</span> 🗣️ Miscellaneous</a></li>
+  <li><a href="#the-priors" id="toc-the-priors" class="nav-link" data-scroll-target="#the-priors"><span class="header-section-number">1.3</span> The Priors</a></li>
+  <li><a href="#visualization-of-bayesian-updating" id="toc-visualization-of-bayesian-updating" class="nav-link" data-scroll-target="#visualization-of-bayesian-updating"><span class="header-section-number">1.4</span> 📈 Visualization of Bayesian Updating</a></li>
+  <li><a href="#credible-vs.-confidence-intervals" id="toc-credible-vs.-confidence-intervals" class="nav-link" data-scroll-target="#credible-vs.-confidence-intervals"><span class="header-section-number">1.5</span> Credible vs.&nbsp;Confidence Intervals</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">1.6</span> Useful Resources</a>
+  <ul class="collapse">
+  <li><a href="#introductory-theory" id="toc-introductory-theory" class="nav-link" data-scroll-target="#introductory-theory"><span class="header-section-number">1.6.1</span> 🧠 Introductory Theory</a></li>
+  <li><a href="#bayesian-workflow-philosophy" id="toc-bayesian-workflow-philosophy" class="nav-link" data-scroll-target="#bayesian-workflow-philosophy"><span class="header-section-number">1.6.2</span> 🎓 Bayesian Workflow &amp; Philosophy</a></li>
+  <li><a href="#advanced-theory" id="toc-advanced-theory" class="nav-link" data-scroll-target="#advanced-theory"><span class="header-section-number">1.6.3</span> 📘 Advanced Theory</a></li>
+  <li><a href="#agronomy-applications" id="toc-agronomy-applications" class="nav-link" data-scroll-target="#agronomy-applications"><span class="header-section-number">1.6.4</span> 🌱 Agronomy Applications</a></li>
+  <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous"><span class="header-section-number">1.6.5</span> 🗣️ Miscellaneous</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -492,8 +535,8 @@ Important
 </div>
 </div>
 <p>Today, we’ll explore and contrast both paradigms.</p>
-<section id="frequentism-vs-bayesianism-video" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="frequentism-vs-bayesianism-video"><span class="header-section-number">1</span> Frequentism vs Bayesianism Video</h2>
+<section id="frequentism-vs-bayesianism" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Frequentism vs Bayesianism</h1>
 <div data-align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tsuJM_bHSgA" frameborder="0" allowfullscreen="">
 </iframe>
@@ -503,16 +546,15 @@ Important
 <li>Let’s open the floor for discussion!</li>
 </ul>
 <hr>
-</section>
-<section id="main-differences" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="main-differences"><span class="header-section-number">2</span> Main Differences</h2>
+<section id="main-differences" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="main-differences"><span class="header-section-number">1.1</span> Main Differences</h2>
 <p>The key divergence lies in their treatment of TRUTH.</p>
 <p>Frequentism assumes the existence of a fixed, true value. Parameters are fixed, and randomness comes from data variation. It’s called “frequentism” because it relies on the frequency of events under repeated sampling.</p>
 <blockquote class="blockquote">
 <p>🎲 <strong>Example:</strong> To estimate the probability of rolling a 6, Frequentists say: “If we roll a die infinitely many times, the proportion of 6s will approach 1/6.”</p>
 </blockquote>
 <p>Inference is based on idealized, repeated experiments — even ones we’ve never performed.</p>
-<p>Bayesianism does <em>not</em> assume a fixed truth. It centers on:</p>
+<p>In contrast, Bayesianism does <em>not</em> assume a fixed truth. It centers on:</p>
 <p><strong>PROBABILITIES:</strong> All knowledge is probabilistic — not true/false, but likely/unlikely.</p>
 <p><strong>BELIEFS:</strong> Prior knowledge is incorporated into analysis via prior distributions. Even when we know nothing (👉 uninformative priors!), Bayesianism lets us model uncertainty.</p>
 <blockquote class="blockquote">
@@ -527,11 +569,11 @@ Important
 \text{Bayes Factor} = \frac{\text{Posterior}}{\text{Prior}} = \frac{0.334}{0.167} = 2
 \]</span></p>
 <p>This means the updated belief is twice as likely, given the data.</p>
-<section id="summary" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.1</span> Summary:</h3>
+<section id="summary" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.1.1</span> Summary:</h3>
 <ul>
 <li><strong>Frequentism</strong>: Models are fixed; randomness is in the data.</li>
-<li><strong>Bayesianism</strong>: Data is fixed; uncertainty lies in the model.</li>
+<li><strong>Bayesianism</strong>: After being observed, the data is considered fixed; uncertainty lies in the model (parameters and predictions).</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -567,32 +609,88 @@ Note
 </div>
 </section>
 </section>
-<section id="bayes-theorem" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="bayes-theorem"><span class="header-section-number">3</span> Bayes Theorem</h2>
+<section id="bayes-theorem" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="bayes-theorem"><span class="header-section-number">1.2</span> Bayes Theorem</h2>
 <p><span class="math display">\[
 P(A_{\text{true}} \mid B) = \frac{P(B \mid A_{\text{true}}) \cdot P(A_{\text{true}})}{P(B)}
 \]</span></p>
 <p><span class="math display">\[
 \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}
 \]</span></p>
-<section id="video-bayes-rule" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="video-bayes-rule"><span class="header-section-number">3.1</span> Video: Bayes’ Rule</h3>
+<section id="video-bayes-rule" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="video-bayes-rule"><span class="header-section-number">1.2.1</span> Video: Bayes’ Rule</h3>
 <div data-align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HZGCoVF3YvM" frameborder="0" allowfullscreen="">
 </iframe>
 </div>
 </section>
 </section>
-<section id="the-priors" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="the-priors"><span class="header-section-number">4</span> The Priors</h2>
+<section id="the-priors" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="the-priors"><span class="header-section-number">1.3</span> The Priors</h2>
 <p>Priors formalize our beliefs as probability distributions — based on:</p>
 <ol type="1">
 <li>The nature of the variable (discrete/continuous)</li>
 <li>Our prior knowledge or lack thereof</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🧠 <strong>Bayesian Perspective on Uncertainty</strong></p>
+<p>In Bayesian analysis, uncertainty is placed on:</p>
+<ul>
+<li><strong>Parameters</strong> (they are random variables with prior/posterior distributions)</li>
+<li><strong>Predictions</strong> (future outcomes are modeled probabilistically)</li>
+</ul>
+<p>Once data is observed, it’s considered fixed.</p>
+<p>So rather than saying “data is fixed, model is random,” it’s more precise to say:</p>
+<blockquote class="blockquote">
+<p>“Bayesian analysis treats unknown parameters and future data as random variables, while the observed data is fixed. The uncertainty lies in our beliefs about parameters and predictions, not in the data we’ve already seen.”</p>
+</blockquote>
+</div>
+</div>
 </section>
-<section id="credible-vs.-confidence-intervals" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="credible-vs.-confidence-intervals"><span class="header-section-number">5</span> Credible vs.&nbsp;Confidence Intervals</h2>
+<section id="visualization-of-bayesian-updating" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="visualization-of-bayesian-updating"><span class="header-section-number">1.4</span> 📈 Visualization of Bayesian Updating</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">300</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> <span class="fl">0.3</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fl">0.05</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> <span class="fl">0.7</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fl">0.02</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> <span class="fl">0.6</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fl">0.01</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> prior <span class="sc">/</span> <span class="fu">sum</span>(prior)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> likelihood <span class="sc">/</span> <span class="fu">sum</span>(likelihood)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> posterior <span class="sc">/</span> <span class="fu">sum</span>(posterior)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">Prior =</span> prior, <span class="at">Likelihood =</span> likelihood, <span class="at">Posterior =</span> posterior)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>x, <span class="at">names_to =</span> <span class="st">"Distribution"</span>, <span class="at">values_to =</span> <span class="st">"Density"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Density, <span class="at">color =</span> Distribution)) <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bayesian Updating: Prior × Likelihood → Posterior"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Parameter (\u03B8)"</span>, <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"tomato"</span>, <span class="st">"steelblue"</span>, <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bayes_01_files/figure-html/bayesian-updating-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Fig 1. Bayesian updating: Prior × Likelihood → Posterior</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="credible-vs.-confidence-intervals" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="credible-vs.-confidence-intervals"><span class="header-section-number">1.5</span> Credible vs.&nbsp;Confidence Intervals</h2>
 <p>A crucial difference lies in interpreting uncertainty:</p>
 <ul>
 <li><p><strong>Confidence Interval (Frequentist)</strong>: “If we repeat the experiment infinitely, 95% of the calculated intervals will contain the true value of <span class="math inline">\(\theta\)</span>.”</p>
@@ -605,43 +703,44 @@ P(A_{\text{true}} \mid B) = \frac{P(B \mid A_{\text{true}}) \cdot P(A_{\text{tru
 </blockquote></li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">6</span> Useful Resources</h2>
-<section id="introductory-theory" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="introductory-theory"><span class="header-section-number">6.1</span> 🧠 Introductory Theory</h3>
+<section id="useful-resources" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">1.6</span> Useful Resources</h2>
+<section id="introductory-theory" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="introductory-theory"><span class="header-section-number">1.6.1</span> 🧠 Introductory Theory</h3>
 <ul>
 <li><a href="https://www.amazon.com/dp/0691159289">Bayesian Models: A Statistical Primer for Ecologists – Hobbs &amp; Hooten</a></li>
 <li><a href="https://www.amazon.com/dp/0367198487">Bringing Bayesian Models to Life – Hooten &amp; Hefley</a></li>
 <li><a href="https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf">Statistical Rethinking – McElreath (PDF)</a></li>
 </ul>
 </section>
-<section id="bayesian-workflow-philosophy" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="bayesian-workflow-philosophy"><span class="header-section-number">6.2</span> 🎓 Bayesian Workflow &amp; Philosophy</h3>
+<section id="bayesian-workflow-philosophy" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="bayesian-workflow-philosophy"><span class="header-section-number">1.6.2</span> 🎓 Bayesian Workflow &amp; Philosophy</h3>
 <ul>
 <li><a href="https://arxiv.org/abs/2011.01808">Bayesian workflow – Gelman et al.</a></li>
 <li><a href="https://www.amazon.com/dp/081269578X">Scientific Reasoning: The Bayesian Approach – Howson &amp; Urbach</a></li>
 </ul>
 </section>
-<section id="advanced-theory" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="advanced-theory"><span class="header-section-number">6.3</span> 📘 Advanced Theory</h3>
+<section id="advanced-theory" class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3" class="anchored" data-anchor-id="advanced-theory"><span class="header-section-number">1.6.3</span> 📘 Advanced Theory</h3>
 <ul>
 <li><a href="https://www.amazon.com/dp/1439840954">Bayesian Data Analysis (3rd Edition)</a></li>
 </ul>
 </section>
-<section id="agronomy-applications" class="level3" data-number="6.4">
-<h3 data-number="6.4" class="anchored" data-anchor-id="agronomy-applications"><span class="header-section-number">6.4</span> 🌱 Agronomy Applications</h3>
+<section id="agronomy-applications" class="level3" data-number="1.6.4">
+<h3 data-number="1.6.4" class="anchored" data-anchor-id="agronomy-applications"><span class="header-section-number">1.6.4</span> 🌱 Agronomy Applications</h3>
 <ul>
 <li><a href="https://doi.org/10.1016/j.eja.2020.126076">Makowski et al., 2020 (EJA)</a></li>
 </ul>
 </section>
-<section id="miscellaneous" class="level3" data-number="6.5">
-<h3 data-number="6.5" class="anchored" data-anchor-id="miscellaneous"><span class="header-section-number">6.5</span> 🗣️ Miscellaneous</h3>
+<section id="miscellaneous" class="level3" data-number="1.6.5">
+<h3 data-number="1.6.5" class="anchored" data-anchor-id="miscellaneous"><span class="header-section-number">1.6.5</span> 🗣️ Miscellaneous</h3>
 <ul>
 <li><a href="https://statmodeling.stat.columbia.edu/">Statistical Modeling Blog – Gelman et al.</a></li>
 <li><a href="https://open.spotify.com/show/7HYN0pLjob4d8RiwKTvLUa">Learning Bayesian Statistics Podcast</a></li>
 </ul>
 
 
+</section>
 </section>
 </section>
 

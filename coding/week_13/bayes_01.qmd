@@ -21,13 +21,18 @@ execute:
 smooth-scroll: true 
 ---
 
+```{r echo=FALSE}
+library(tidyverse)
+```
+
+
 ::: callout-important
 Neither Frequentist nor Bayesian approaches are universally superior — each has strengths depending on the context. 😉
 :::
 
 Today, we'll explore and contrast both paradigms.
 
-## Frequentism vs Bayesianism Video
+# Frequentism vs Bayesianism
 
 ::: {align="center"}
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tsuJM_bHSgA" frameborder="0" allowfullscreen></iframe>
@@ -49,7 +54,7 @@ Frequentism assumes the existence of a fixed, true value. Parameters are fixed, 
 
 Inference is based on idealized, repeated experiments — even ones we've never performed.
 
-Bayesianism does *not* assume a fixed truth. It centers on:
+In contrast, Bayesianism does *not* assume a fixed truth. It centers on:
 
 **PROBABILITIES:** All knowledge is probabilistic — not true/false, but likely/unlikely.
 
@@ -73,7 +78,7 @@ This means the updated belief is twice as likely, given the data.
 
 ### Summary:
 - **Frequentism**: Models are fixed; randomness is in the data.
-- **Bayesianism**: Data is fixed; uncertainty lies in the model.
+- **Bayesianism**: After being observed, the data is considered fixed; uncertainty lies in the model (parameters and predictions).
 
 ::: callout-tip
 For many simple models, both approaches yield similar conclusions.
@@ -111,6 +116,47 @@ Priors formalize our beliefs as probability distributions — based on:
 
 1. The nature of the variable (discrete/continuous)
 2. Our prior knowledge or lack thereof
+
+::: callout-tip
+🧠 **Bayesian Perspective on Uncertainty**
+
+In Bayesian analysis, uncertainty is placed on:
+
+- **Parameters** (they are random variables with prior/posterior distributions)
+- **Predictions** (future outcomes are modeled probabilistically)
+
+Once data is observed, it's considered fixed.
+
+So rather than saying "data is fixed, model is random," it's more precise to say:
+
+> "Bayesian analysis treats unknown parameters and future data as random variables, while the observed data is fixed. The uncertainty lies in our beliefs about parameters and predictions, not in the data we’ve already seen."
+
+:::
+
+## 📈 Visualization of Bayesian Updating
+
+```{r bayesian-updating-ggplot, echo=TRUE, fig.cap="Fig 1. Bayesian updating: Prior × Likelihood → Posterior"}
+x <- seq(0, 1, length.out = 300)
+prior <- exp(-((x - 0.3)^2) / 0.05)
+likelihood <- exp(-((x - 0.7)^2) / 0.02)
+posterior <- exp(-((x - 0.6)^2) / 0.01)
+
+# Normalize
+prior <- prior / sum(prior)
+likelihood <- likelihood / sum(likelihood)
+posterior <- posterior / sum(posterior)
+
+df <- data.frame(x = x, Prior = prior, Likelihood = likelihood, Posterior = posterior)
+
+df_long <- df %>% pivot_longer(cols = -x, names_to = "Distribution", values_to = "Density")
+
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1.2) +
+  labs(title = "Bayesian Updating: Prior × Likelihood → Posterior",
+       x = "Parameter (\u03B8)", y = "Density") +
+  theme_classic() +
+  scale_color_manual(values = c("tomato", "steelblue", "darkgreen"))
+```
 
 ## Credible vs. Confidence Intervals
 
