@@ -20,9 +20,9 @@ highlight-style: pygments
 smooth-scroll: true
 ---
 
-## Welcome!
+## [![DPAG-OAC-UOG](images/uog.png)](https://www.plant.uoguelph.ca)Welcome!
 
-Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
+Reproducible Ag Data Science with R is the first edition Ag data science course designed by Dr. Adrian Correndo offered at Department of Plant Agriculture (University of Guelph) for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
 
 ### Course Learning Outcomes
 

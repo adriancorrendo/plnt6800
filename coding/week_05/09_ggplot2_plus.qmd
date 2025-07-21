@@ -12,8 +12,6 @@ format:
     table-class: "table table-striped table-hover"
     self-contained: true
 editor: source
-markdown: 
-  wrap: sentence
 smooth-scroll: true
 bibliography: ../../references.bib
 link-citations: TRUE
