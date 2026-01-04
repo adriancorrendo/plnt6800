@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_05/09_ggplot2_plus.html</loc>
-    <lastmod>2025-07-21T05:10:43.545Z</lastmod>
+    <loc>https://adriancorrendo.github.io/coding/week_01/essentials_01.html</loc>
+    <lastmod>2026-01-04T20:48:03.905Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adriancorrendo.github.io/coding/week_02/03_versioncontrol.html</loc>
+    <lastmod>2026-01-04T20:48:09.044Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adriancorrendo.github.io/coding/week_03/05_datawrangling_02.html</loc>
+    <lastmod>2026-01-04T20:48:18.477Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adriancorrendo.github.io/outline/outline.html</loc>
+    <lastmod>2026-01-04T20:48:38.652Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adriancorrendo.github.io/software/software.html</loc>
+    <lastmod>2025-12-07T21:39:00.752Z</lastmod>
   </url>
   <url>
     <loc>https://adriancorrendo.github.io/index.html</loc>
-    <lastmod>2025-07-21T05:12:26.766Z</lastmod>
+    <lastmod>2026-01-04T20:55:19.406Z</lastmod>
   </url>
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_01/essentials_01.html</loc>
-    <lastmod>2025-01-15T17:41:32.128Z</lastmod>
+    <loc>https://adriancorrendo.github.io/slides/day1.html</loc>
+    <lastmod>2026-01-04T20:39:29.235Z</lastmod>
   </url>
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_06/11_weather.html</loc>
-    <lastmod>2025-04-01T21:53:16.587Z</lastmod>
+    <loc>https://adriancorrendo.github.io/outline/calendar.html</loc>
+    <lastmod>2026-01-04T20:48:36.496Z</lastmod>
   </url>
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_08/models_01.html</loc>
-    <lastmod>2025-04-01T21:53:00.850Z</lastmod>
+    <loc>https://adriancorrendo.github.io/coding/week_03/04_datawrangling_01.html</loc>
+    <lastmod>2026-01-04T20:47:37.029Z</lastmod>
   </url>
   <url>
-    <loc>https://adriancorrendo.github.io/coding/week_09/models_03.html</loc>
-    <lastmod>2025-04-01T21:52:49.351Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/coding/week_13/bayes_02.html</loc>
-    <lastmod>2025-07-21T05:09:38.383Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/coding/week_09/models_04.html</loc>
-    <lastmod>2025-04-01T21:52:52.301Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/coding/week_08/models_02.html</loc>
-    <lastmod>2025-04-01T21:53:03.835Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adriancorrendo.github.io/coding/week_06/10_iteration.html</loc>
-    <lastmod>2025-04-01T21:53:13.103Z</lastmod>
+    <loc>https://adriancorrendo.github.io/coding/week_02/02_fundamentals_rpackages.html</loc>
+    <lastmod>2026-01-04T20:48:01.330Z</lastmod>
   </url>
 </urlset>

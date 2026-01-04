@@ -10,8 +10,7 @@
   <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Adrian A. Correndo">
-  <meta name="dcterms.date" content="2025-01-08">
-  <title>PLNT6800 - Winter 2025 – Reproducible Ag Data Science with R</title>
+  <title>PLNT6530 - Winter 2026 – Reproducible Data Science for Ag</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,8 +29,8 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-65cd33677194f0aedcc0af8dcd80dca8.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-cec9d0dd42a000c2388e8bbdda135c90.css">
+  <link rel="stylesheet" href="..//styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,9 +122,9 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="Reproducible Ag Data Science with R – PLNT6800 - Winter 2025">
-<meta property="og:site_name" content="PLNT6800 - Winter 2025">
-<meta name="twitter:title" content="Reproducible Ag Data Science with R – PLNT6800 - Winter 2025">
+<meta property="og:title" content="ReproducibleData Science for Ag – PLNT6530 - Winter 2026">
+<meta property="og:site_name" content="PLNT6530 - Winter 2026">
+<meta name="twitter:title" content="ReproducibleData Science for Ag – PLNT6530 - Winter 2026">
 <meta name="twitter:creator" content="@aacorrendo">
 <meta name="twitter:card" content="summary">
 </head>
@@ -133,8 +132,8 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Reproducible Ag Data Science with R</h1>
+<section id="title-slide" data-background-image="../images/cover4.png" class="quarto-title-block center">
+  <h1 class="title">Reproducible<br>Data Science for Ag</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -144,22 +143,25 @@ Adrian A. Correndo
 </div>
 </div>
 
-  <p class="date">2025-01-08</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Contents</h2>
 <ul>
-<li class="fragment"><a href="#/core-concepts" id="/toc-core-concepts">Core concepts</a></li>
-<li class="fragment"><a href="#/alternatives-to-r" id="/toc-alternatives-to-r">Alternatives to R</a></li>
+<li class="fragment"><a href="#/how-this-course-works" id="/toc-how-this-course-works">1. How this course works</a></li>
+<li class="fragment"><a href="#/core-concepts" id="/toc-core-concepts">2. Core concepts</a></li>
+<li class="fragment"><a href="#/what-is-r" id="/toc-what-is-r">3. What is R?</a></li>
+<li class="fragment"><a href="#/alternatives-to-r" id="/toc-alternatives-to-r">4. Alternatives to R</a></li>
+<li class="fragment"><a href="#/why-r-posit-cloud-and-version-control" id="/toc-why-r-posit-cloud-and-version-control">5. Why R, posit cloud and version control?</a></li>
 </ul>
 </nav>
 </section>
-<section id="welcome" class="slide level2">
-<h2>Welcome 👋</h2>
-<ul>
-<li class="fragment"><strong>Goal</strong>: Gain foundational knowledge and understand how data science can improve agricultural practices.</li>
-<li class="fragment">Let’s dive into it with an emphasis on reproducibility and data literacy.</li>
-</ul>
+<section id="introductions" class="slide level2">
+<h2>Introductions 💬</h2>
+<div class="fragment">
+<p><br></p>
+<h3 style="color:#bc4749" id="i.-who-are-you-and-why-enrolling-on-this-course">i. Who are you and why enrolling on this course?</h3>
+<p><br></p>
+</div>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -171,37 +173,101 @@ Adrian A. Correndo
 </div>
 <div class="callout-content">
 <ul>
-<li class="fragment"><strong>Remember</strong>: Questions and discussions are encouraged! 💬</li>
+<li class="fragment">Research project, career goals…</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="objectives-for-today" class="slide level2">
-<h2>Objectives for Today 📌</h2>
-<ul>
-<li class="fragment">Define core concepts:
-<ul>
-<li class="fragment">Data Science,</li>
-<li class="fragment">Data Literacy,</li>
-<li class="fragment">Reproducibility.</li>
-</ul></li>
-<li class="fragment">Understand the role of <strong>reproducible data science</strong> in agriculture.</li>
-<li class="fragment">Explore <strong>challenges</strong> and <strong>opportunities</strong>.</li>
-</ul>
 </section>
 <section>
-<section id="core-concepts" class="title-slide slide level1 center">
-<h1>Core concepts</h1>
+<section id="how-this-course-works" class="title-slide slide level1 center">
+<h1>1. How this course works</h1>
 
 </section>
-<section id="what-is-data-science-in-agriculture" class="slide level2">
-<h2>What is Data Science in Agriculture? 🌱</h2>
+<section id="learning-goals" class="slide level2">
+<h2>Learning Goals 📌</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Reproducibility</strong>: understand the principles and importance of reproducible data analysis.</p></li>
+<li class="fragment"><p><strong>Data manipulation</strong>: develop proficiency in R, including key data structures, packages, and functions to read, clean, transform, and organize datasets.</p></li>
+<li class="fragment"><p><strong>Data visualization</strong>: create informative and aesthetically pleasing visualizations of data.</p></li>
+<li class="fragment"><p><strong>Modelling and iteration</strong>: apply various algorithms and statistical models common to plant agriculture, and implement techniques to handle multiple datasets simultaneously.</p></li>
+<li class="fragment"><p><strong>Professional reporting</strong>: produce professional reports for sharing results.</p></li>
+<li class="fragment"><p><strong>Version control</strong>: manage the basics of Git and Github for collaborative projects.</p></li>
+</ol>
+</section>
+<section id="a-hands-on-learning-model" class="slide level2">
+<h2>A hands-on learning model</h2>
 <ul>
-<li class="fragment">Applying data engineering, analysis, statistics, and machine learning to solve agricultural problems.</li>
-<li class="fragment"><strong>Examples</strong>: Precision agriculture, yield forecasting, environmental monitoring.</li>
+<li class="fragment"><strong>Live coding sessions</strong> (you code along with me)</li>
+<li class="fragment">Focus on <strong>doing</strong>, not just reading about tools</li>
+<li class="fragment">Class time is for:
+<ul>
+<li class="fragment">building workflows</li>
+<li class="fragment">troubleshooting together</li>
+<li class="fragment">practicing reproducible habits</li>
+</ul></li>
 </ul>
+</section>
+<section id="what-youll-leave-with" class="slide level2">
+<h2>What you’ll leave with</h2>
+<ul>
+<li class="fragment">The ability to complete a reproducible analysis workflow</li>
+<li class="fragment">An understanding of main models used in agriculture data science</li>
+<li class="fragment">Confidence reading/writing <strong>Quarto</strong> (<code>.qmd</code>) documents</li>
+<li class="fragment">A lot of templates to re-use in the future</li>
+<li class="fragment">A portfolio-ready project</li>
+</ul>
+</section>
+<section id="course-assessment" class="slide level2">
+<h2>Course-Assessment</h2>
+<h3 id="three-main-components"><span style="color:#1f77b4;">Three main components</span></h3>
+<ul>
+<li class="fragment"><strong>Quizzes / short coding assignments — 30%</strong>
+<ul>
+<li class="fragment">5 total (<em>asynchronous</em>)</li>
+<li class="fragment">lowest 2 dropped</li>
+</ul></li>
+<li class="fragment"><strong>Semester project — 50%</strong>
+<ul>
+<li class="fragment"><em>groups of 2</em></li>
+<li class="fragment">Analysis of your <strong>own dataset</strong> (or provided if you don’t have one)</li>
+</ul></li>
+<li class="fragment"><strong>Final exam — 20%</strong>
+<ul>
+<li class="fragment">On-line, asynchronous, open-book</li>
+</ul></li>
+</ul>
+</section>
+<section id="semester-project-50" class="slide level2">
+<h2>Semester project (50%)</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Expectations</strong> <br> - Use <strong>reproducible</strong> practices throughout (files, code, and narrative) <br> - Clear questions, clean data, and transparent methods <br> - Professional communication (figures, tables, interpretation) <br></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<h3 id="milestones"><span style="color:#1f77b4;">Milestones</span></h3>
+<ol type="1">
+<li class="fragment"><strong>Proposal</strong> (10%)</li>
+<li class="fragment"><strong>Initial report</strong> (20%)</li>
+<li class="fragment"><strong>Presentation</strong> (20%)</li>
+<li class="fragment"><strong>Final report</strong> (50%)</li>
+</ol>
+</div>
+</section></section>
+<section>
+<section id="core-concepts" class="title-slide slide level1 center">
+<h1>2. Core concepts</h1>
+
 </section>
 <section id="key-definitions" class="slide level2">
 <h2>Key Definitions 📖</h2>
@@ -267,13 +333,6 @@ Adrian A. Correndo
 </ul></li>
 </ul>
 </section>
-<section id="good-news-is" class="slide level2">
-<h2>GOOD NEWS IS…</h2>
-<div class="fragment">
-<div class="column" style="width:100%;">
-<p><img data-src="../images/repbrush.png" class="absolute" style="top: 50px; left: 200px; height: 100%; "></p>
-</div></div>
-</section>
 <section id="why-reproducibility-in-agriculture" class="slide level2">
 <h2><strong>Why Reproducibility in Agriculture?</strong></h2>
 <ul>
@@ -315,33 +374,13 @@ Adrian A. Correndo
 <li class="fragment">Limited curriculum in applied data science</li>
 </ul>
 </div>
+</section></section>
+<section>
+<section id="what-is-r" class="title-slide slide level1 center">
+<h1>3. What is R?</h1>
+
 </section>
-<section id="discussion-prompt" class="slide level2">
-<h2>Discussion Prompt 💬</h2>
-<div class="fragment">
-<p><br></p>
-<h3 style="color:#bc4749" id="i.-where-do-you-think-improved-data-literacy-reproducibility-could-impact-agriculture-the-most">i. Where do you think improved data literacy &amp; reproducibility could impact agriculture the most?</h3>
-<p><br></p>
-</div>
-<div class="fragment">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li class="fragment">Consider areas like resource management, market predictions, and farm management.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="what-is-r" class="slide level2">
+<section id="what-is-r-1" class="slide level2">
 <h2>What is R? 🧮</h2>
 <div class="fragment">
 <ul>
@@ -350,25 +389,42 @@ Adrian A. Correndo
 <li class="fragment">Widely used in fields like <strong>data science</strong>, <strong>bioinformatics</strong>, <strong>agriculture</strong>, and <strong>social sciences</strong>.</li>
 </ul>
 </div>
-<div class="fragment">
-<h3 id="brief-history">Brief History 📜</h3>
+</section>
+<section id="brief-history-of-r" class="slide level2">
+<h2>Brief History of R 📜</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
 <ul>
 <li class="fragment"><strong>Origin</strong>: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.</li>
 <li class="fragment"><strong>Inspiration</strong>: R is an implementation of the S language, designed at Bell Laboratories for data analysis.</li>
 <li class="fragment"><strong>Open Source</strong>: Released as free, open-source software, leading to a large community of users and contributors.</li>
 <li class="fragment"><strong>Popularity</strong>: Today, R is one of the top programming languages for statistical analysis and data science.</li>
+<li class="fragment"><strong>CRAN</strong>: the Comprehensive R Archive Network, which hosts thousands of packages was developed in 1997 by Kurt Hornik &amp; Fritz Leisch.</li>
 </ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="https://thermanuals.wordpress.com/wp-content/uploads/2014/12/rr.jpg" class="quarto-figure quarto-figure-right" width="200"> <br> Ihaka, Gentleman</p>
+</div></div>
+</section>
+<section id="packages" class="slide level2">
+<h2>Packages</h2>
+<p>There are currently 23,052 of packages (on CRAN only).</p>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/cranpackages.png" class="quarto-figure quarto-figure-center" width="800"></p>
+</figure>
+</div>
 </div>
 </section></section>
 <section>
 <section id="alternatives-to-r" class="title-slide slide level1 center">
-<h1>Alternatives to R</h1>
+<h1>4. Alternatives to R</h1>
 
 </section>
 <section id="r-vs.-excel-for-data-wrangling" class="slide level2">
 <h2>R vs.&nbsp;Excel for Data Wrangling 📊</h2>
 <div class="columns">
-<div class="column" style="width:65%;">
+<div class="column" style="width:85%;">
 <ul>
 <li class="fragment"><strong>Excel</strong>: Known for ease of use, popular among business and finance professionals.
 <ul>
@@ -381,10 +437,10 @@ Adrian A. Correndo
 <li class="fragment"><strong>Cons</strong>: Requires programming knowledge, steeper learning curve than Excel.</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:35%;">
+</div><div class="column" style="width:15%;">
 <div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019–present%29.svg" class="quarto-figure quarto-figure-right" width="290"></p>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Microsoft_Office_Excel_%282019–2025%29.svg" class="quarto-figure quarto-figure-right" width="290"></p>
 </figure>
 </div>
 </div></div>
@@ -409,7 +465,7 @@ Adrian A. Correndo
 <section id="r-vs.-sas-for-statistical-analysis" class="slide level2">
 <h2>R vs.&nbsp;SAS for Statistical Analysis 📉</h2>
 <div class="columns">
-<div class="column" style="width:65%;">
+<div class="column" style="width:80%;">
 <ul>
 <li class="fragment"><strong>SAS</strong>: A powerful statistical software suite used widely in industries such as healthcare and finance.
 <ul>
@@ -422,7 +478,7 @@ Adrian A. Correndo
 <li class="fragment"><strong>Cons</strong>: Requires more coding and configuration for regulatory standards.</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:35%;">
+</div><div class="column" style="width:20%;">
 <div class="quarto-figure quarto-figure-right">
 <figure>
 <p><img data-src="../images/SASlogo.svg" class="quarto-figure quarto-figure-right" title="By SAS Institute - http://www.sas.com, Public Domain, https://commons.wikimedia.org/w/index.php?curid=5291445" width="290"></p>
@@ -457,7 +513,7 @@ Adrian A. Correndo
 <div class="column" style="width:34%;">
 <div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/1448px-R_logo.svg.png?20240131042527" class="quarto-figure quarto-figure-right" width="290"></p>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/1/1b/R_logo.svg" class="quarto-figure quarto-figure-right" width="290"></p>
 </figure>
 </div>
 </div><div class="column" style="width:33%;">
@@ -531,15 +587,16 @@ Adrian A. Correndo
 </div>
 <div class="callout-content">
 <ul>
-<li class="fragment"><strong>R</strong>: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.</li>
 <li class="fragment"><strong>Excel</strong>: User-friendly, ideal for simple tasks, but limited for complex data wrangling.</li>
 <li class="fragment"><strong>SAS</strong>: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.</li>
+<li class="fragment"><strong>R</strong>: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.</li>
 <li class="fragment"><strong>Python</strong>: Strong in ML and AI with highly permissive licensing, making it ideal for production.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+<p><br></p>
 <div class="fragment">
 <table class="caption-top">
 <colgroup>
@@ -579,6 +636,15 @@ Adrian A. Correndo
 </table>
 </div>
 <p><br></p>
+</section>
+<section id="comparison-summary-ii" class="slide level2">
+<h2>Comparison Summary II 📊</h2>
+<h4 id="choosing-the-right-tool-depends-on">Choosing the right tool depends on:</h4>
+<ul>
+<li class="fragment">your project’s requirements, <br></li>
+<li class="fragment">team structure &amp; skills, and <br></li>
+<li class="fragment">licensing needs for research vs.&nbsp;production.</li>
+</ul>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -589,25 +655,215 @@ Adrian A. Correndo
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Choosing the right tool depends on your project’s requirements, team skills, and licensing needs for research vs.&nbsp;production.</p>
+<ul>
+<li class="fragment"><strong>R</strong>: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.</li>
+<li class="fragment"><strong>Python</strong>: Strong in ML and AI with highly permissive licensing, making it ideal for production.</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="why-r-posit-cloud-and-version-control" class="title-slide slide level1 center">
+<h1>5. Why R, posit cloud and version control?</h1>
+
+</section>
+<section id="why-r" class="slide level2 smaller">
+<h2>Why R?</h2>
+<div class="columns">
+<div class="column" style="width:80%;">
+<ul>
+<li class="fragment"><strong>1. Open-Source</strong>
+<ul>
+<li class="fragment">Free to use and modify, with contributions from a large community.</li>
+</ul></li>
+<li class="fragment"><strong>2. Multi-Platform</strong>
+<ul>
+<li class="fragment">Runs on Windows, macOS, and Linux, making it versatile for collaboration.</li>
+</ul></li>
+<li class="fragment"><strong>3. Community Support</strong>
+<ul>
+<li class="fragment">Strong online help through forums, tutorials, and dedicated resources.</li>
+</ul></li>
+<li class="fragment"><strong>4. Continuous Development</strong>
+<ul>
+<li class="fragment">Regular updates keep R on the leading edge of data science.</li>
+</ul></li>
+<li class="fragment"><strong>5. Reproducible Workflows</strong>
+<ul>
+<li class="fragment">Tools like <strong>Rmarkdown</strong> and <strong>Quarto</strong> facilitates the job.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/1/1b/R_logo.svg" class="quarto-figure quarto-figure-right" width="290"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="why-rstudio" class="slide level2 smaller">
+<h2>Why RStudio?</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li class="fragment"><strong>1. An interface to R</strong>
+<ul>
+<li class="fragment">Provides a user-friendly environment to work with R.</li>
+</ul></li>
+<li class="fragment"><strong>2. Integrates various components of an analysis</strong>
+<ul>
+<li class="fragment">Combines data, code, and output in one place, simplifying the workflow.</li>
+</ul></li>
+<li class="fragment"><strong>3. Colored syntax</strong>
+<ul>
+<li class="fragment">Highlights code with colors, making it easier to read and spot errors, improving code clarity.</li>
+</ul></li>
+<li class="fragment"><strong>4. Syntax suggestions</strong>
+<ul>
+<li class="fragment">Offers autocomplete suggestions, which speeds up coding and reduces mistakes.</li>
+</ul></li>
+<li class="fragment"><strong>5. RStudio panels</strong>
+<ul>
+<li class="fragment">Panels for console, scripts, files, and plots, giving quick access to all elements.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg" class="quarto-figure quarto-figure-right" width="400"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="rstudio-panels" class="slide level2">
+<h2>Rstudio panels</h2>
+<div class="fragment">
+<p><img data-src="../images/rstudiopanel.png"></p>
+</div>
+</section>
+<section id="why-posit-cloud" class="slide level2">
+<h2>Why posit cloud?</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="fragment">
+<ul>
+<li class="fragment"><strong>1. Learn how to use a cloud service</strong>
+<ul>
+<li class="fragment">Gain experience with cloud-based tools, increasingly important in data science.</li>
+</ul></li>
+<li class="fragment"><strong>2. Access from anywhere</strong>
+<ul>
+<li class="fragment">Access R and RStudio directly from your web browser without any setup.</li>
+</ul></li>
+<li class="fragment"><strong>3. Collaboration</strong>
+<ul>
+<li class="fragment">Share projects easily with others, facilitating teamwork and joint analysis.</li>
+</ul></li>
+<li class="fragment"><strong>4. It’s free for you</strong>
+<ul>
+<li class="fragment">You’ll have free access to Posit Cloud through this course (this semester).</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="https://posit.co/wp-content/uploads/2022/10/thumbnail-63.jpg" class="quarto-figure quarto-figure-right" width="400"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="why-version-control" class="slide level2 smaller">
+<h2>Why version control? 🔄</h2>
+<div class="columns">
+<div class="column" style="width:80%;">
+<div class="fragment">
+<ul>
+<li class="fragment"><strong>1. Track Changes</strong>
+<ul>
+<li class="fragment">Maintain a complete history of edits, making it easy to identify when and why changes were made.</li>
+</ul></li>
+<li class="fragment"><strong>2. Collaborate Seamlessly</strong>
+<ul>
+<li class="fragment">Multiple users can work together without overwriting each other’s work, enhancing teamwork.</li>
+</ul></li>
+<li class="fragment"><strong>3. Ensure Data Integrity</strong>
+<ul>
+<li class="fragment">Protect primary data by using branches for experimentation, avoiding accidental overwrites.</li>
+</ul></li>
+<li class="fragment"><strong>4. Boost Reproducibility</strong>
+<ul>
+<li class="fragment">Access exact versions of code and data, enabling others to reproduce your work reliably.</li>
+</ul></li>
+<li class="fragment"><strong>5. Provide Built-in Documentation</strong>
+<ul>
+<li class="fragment">Changes can be documented, helping to understand workflow.</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg" class="quarto-figure quarto-figure-right" width="400"></p>
+</figure>
+</div>
+<p><br></p>
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="../images/GitHub-logo.png" class="quarto-figure quarto-figure-right" width="400"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="what-are-git-and-github" class="slide level2">
+<h2>What are Git and GitHub?</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li class="fragment"><strong>Git</strong>
+<ul>
+<li class="fragment">A version control system that tracks changes in files on your local computer, allowing you to manage versions and revert to previous work.</li>
+</ul></li>
+<li class="fragment"><strong>GitHub</strong>
+<ul>
+<li class="fragment">An online platform for hosting Git repositories, enabling easy collaboration, project sharing, and cloud storage.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg" class="quarto-figure quarto-figure-right" width="400"></p>
+</figure>
+</div>
+<p><br></p>
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="../images/GitHub-logo.png" class="quarto-figure quarto-figure-right" width="400"></p>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="thank-you" class="slide level2">
 <h2>THANK YOU!</h2>
-<p>acorrend@uoguelph.ca</p>
-<div style="text-align: right; font-size: 0.75em">
-<p>Adrian A. Correndo<br>
-Assistant Professor<br>
-Sustainable Cropping Systems<br>
-Department of Plant Agriculture<br>
-University of Guelph<br>
-</p>
+<h3 id="section">_</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="adrian-a.-correndo">Adrian A. Correndo</h4>
+<p>📬 acorrend@uoguelph.ca</p>
+<div style="text-align: left; font-size: 0.75em">
+<p>Assistant Professor<br>
+Pick Family Chair, Sustainable Cropping Systems<br>
+Rm 226, Crop Science Building</p>
 </div>
-<p>Rm 226, Crop Science Bldg | Department of Plant Agriculture</p>
-<p>Ontario Agricultural College | University of Guelph | 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="../images/uog.png" class="quarto-figure quarto-figure-left" width="900"></p>
+</figure>
+</div>
+</div></div>
 <p><br></p>
 <h3 id="contact-me">Contact me</h3>
 <table class="caption-top">
@@ -619,7 +875,7 @@ University of Guelph<br>
 </tr>
 <tr class="even">
 <td><a href="https://orcid.org/0000-0002-4172-289X"><img data-src="../images/orcid.png" class="quarto-figure quarto-figure-center" width="60"></a></td>
-<td><a href="https://scholar.google.com/citations?user=4h88EXkAAAAJ&amp;hl=en"><img data-src="../images/768px-Google_Scholar_logo.png" class="quarto-figure quarto-figure-center" width="60"></a></td>
+<td><a href="https://scholar.google.com/citations?user=8_ZxORIAAAAJ&amp;hl=en"><img data-src="../images/768px-Google_Scholar_logo.png" class="quarto-figure quarto-figure-center" width="60"></a></td>
 <td><a href="https://www.researchgate.net/profile/Adrian-Correndo-2"><img data-src="../images/ResearchGate_icon.png" class="quarto-figure quarto-figure-center" width="60"></a></td>
 </tr>
 </tbody>
@@ -629,9 +885,9 @@ University of Guelph<br>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
-<p><img src="../images/plnt6800_logo.png" class="slide-logo"></p>
+<p><img src="../images/2026_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p><a href="https://adriancorrendo.github.io" class="uri">https://adriancorrendo.github.io</a></p>
+
 </div>
 </div></div>
 
@@ -814,7 +1070,7 @@ University of Guelph<br>
         height: 700,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 4.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',

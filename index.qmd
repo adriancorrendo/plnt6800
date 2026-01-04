@@ -1,6 +1,6 @@
 ---
-title: PLNT6800|01 - Special Topics in Plant Science
-subtitle: "Reproducible Ag Data Science with R"
+title: PLNT6530|01 - Reproducible Data Sci for Ag
+subtitle: "Winter 2026"
 author: "Dr. Adrian Correndo"
 format: 
   html:
@@ -9,9 +9,6 @@ format:
     toc-location: left
     toc-depth: 4
     number-sections: false
-    theme:
-      light: journal
-      dark: darkly
     code-tools: true
     code-fold: true
     code-summary: 'Show code'
@@ -20,23 +17,27 @@ highlight-style: pygments
 smooth-scroll: true
 ---
 
-## [![DPAG-OAC-UOG](images/uog.png)](https://www.plant.uoguelph.ca)Welcome!
+## ![DPAG-OAC-UOG](images/uog.png){width="600"} <br/>
 
-Reproducible Ag Data Science with R is the first edition Ag data science course designed by Dr. Adrian Correndo offered at Department of Plant Agriculture (University of Guelph) for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
+### Welcome
+
+Reproducible Data Science for Ag is offered at Department of Plant Agriculture (University of Guelph) by Dr. Adrian Correndo. It is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
 
 ### Course Learning Outcomes
 
 By the end of this course, students will be able to:
 
-1.  Understand and apply the principles of reproducible research in data science.
+1.  **Reproducibility**: understand the principles and importance of reproducible data analysis.
 
-2.  Use version control tools like GitHub for managing code and collaborative projects.
+2.  **Data manipulation**: develop proficiency in R, including key data structures, packages, and functions to read, clean, transform, and organize datasets.
 
-3.  Develop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.
+3.  **Data visualization**: create informative and aesthetically pleasing visualizations of data.
 
-4.  Apply statistical models to agricultural data and interpret the results.
+4.  **Modelling and iteration**: apply various algorithms and statistical models common to plant agriculture, and implement techniques to handle multiple datasets simultaneously.
 
-5.  Produce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.
+5.  **Professional reporting**: produce professional reports for sharing results.
+
+6.  **Version control**: manage the basics of Git and Github for collaborative projects.
 
 ### Course Technology Requirements
 

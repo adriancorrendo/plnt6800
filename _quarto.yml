@@ -4,8 +4,8 @@ project:
 
 website:
   page-navigation: true
-  title: "PLNT6800 - Winter 2025"
-  description: "Reproducible Ag Data Science with R"
+  title: "PLNT6530 - Winter 2026"
+  description: "Reproducible Data Science for Agriculture"
   site-url: "https://adriancorrendo.github.io/"
   repo-actions: [edit, issue]
   
@@ -23,14 +23,14 @@ website:
       - icon: globe
         href: https://adriancorrendo.github.io/
       - icon: github
-        href: https://github.com/adriancorrendo/plnt6800/
+        href: https://github.com/adriancorrendo/plnt6530/
       - icon: twitter
         href: https://twitter.com/aacorrendo
       - icon: linkedin
         href: https://www.linkedin.com/in/adriancorrendo/
       
   sidebar:
-    logo: "images/plnt6800_logo.png"
+    logo: "images/2026_logo.png"
     pinned: true
     align: center
     tools:
@@ -63,39 +63,6 @@ website:
             text: "04-Data Wrangling I"
           - href: coding/week_03/05_datawrangling_02.qmd
             text: "05-Data Wrangling II"
-          - href: coding/week_04/06_datawrangling_03.qmd
-            text: "06-Data Wrangling III"
-          - href: coding/week_04/07_ggplot2_intro.qmd
-            text: "07-Data viz I"
-          - href: coding/week_05/08_ggplot2_adv.qmd
-            text: "08-Data viz II"
-          - href: coding/week_05/09_ggplot2_plus.qmd
-            text: "09-Data viz III"
-          - href: coding/week_06/10_iteration.qmd
-            text: "10-Iteration"
-          - href: coding/week_06/11_weather.qmd
-            text: "11-Weather data"
-          - href: coding/week_08/models_01.qmd
-            text: "12-Models I"
-          - href: coding/week_08/models_02.qmd
-            text: "13-Models II"
-          - href: coding/week_09/models_03.qmd
-            text: "14-Models III"
-          - href: coding/week_09/models_04.qmd
-            text: "15-Models IV"
-          - href: coding/week_10/models_05.qmd
-            text: "16-Models V"
-          - href: coding/week_10/models_06.qmd
-            text: "17-Models VI"
-          - href: coding/week_11/models_07.qmd
-            text: "18-Models VII"
-          - href: coding/week_12/quarto.qmd
-            text: "19-Quarto tips"
-          - href: coding/week_13/bayes_01.qmd
-            text: "20-Bayesian intro"
-          - href: coding/week_13/bayes_02.qmd
-            text: "21-Bayesian in R"
- 
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd
@@ -108,7 +75,7 @@ website:
 format:
   html:
     theme:
-      light: journal
+      light: flatly
       dark: darkly
     highlight-style: pygments
     css: styles.css
