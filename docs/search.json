@@ -944,17 +944,6 @@
     ]
   },
   {
-    "objectID": "coding/week_03/04_datawrangling_01.html#the-pipe-operators",
-    "href": "coding/week_03/04_datawrangling_01.html#the-pipe-operators",
-    "title": "Transforming Ag data with dplyr",
-    "section": "3.5 The pipe operator/s: %>% & |>",
-    "text": "3.5 The pipe operator/s: %&gt;% & |&gt;\n\nThe pipe operator %&gt;% (from the magrittr package, included in dplyr) and the native R pipe |&gt; allow you to chain multiple operations together in a readable way. They pass the output of one function as the input to the next function.\n\n\n3.5.1 Example of pipe operator %&gt;%\n# Using the pipe operator to chain operations\nresult &lt;- df %&gt;%\n  mutate(total = var1 + var2) %&gt;%\n  filter(total &gt; 5)\n\n\n3.5.2 Example of native R pipe |&gt;\n# Using the native R pipe to chain operations\nresult &lt;- df |&gt;\n  mutate(total = var1 + var2) |&gt;\n  filter(total &gt; 5)\n\n\n3.5.3 Does |&gt; work “better” than %&gt;%?\nOften yes, but it depends what you need.\n\n3.5.3.1 Where |&gt; tends to be better\n\nNo package needed (it’s base R syntax), so it works everywhere without loading magrittr.\nUsually less overhead than %&gt;% because %&gt;% is a function-based pipe, while |&gt; is language syntax.\nIn practice, the difference is rarely noticeable compared to the cost of dplyr verbs, but it can matter in tight loops.\nPlays nicely with modern R style and is increasingly common in new code.\n\n\n\n3.5.3.2 Where %&gt;% is more flexible\n\nPlaceholder power: %&gt;% uses . to place the LHS wherever you want. Base |&gt; uses _ but it’s more restricted (notably, it’s tied to named arguments).\n%&gt;% can do extras like creating functions from a pipeline (and other magrittr variants like %T&gt;%, %&lt;&gt;%, etc.). Base |&gt; doesn’t include those.\n%&gt;% lets you pipe into a bare function name (x %&gt;% sqrt).\nBase |&gt; generally requires a call: x |&gt; sqrt()",
-    "crumbs": [
-      "Lessons",
-      "04-Data Wrangling I"
-    ]
-  },
-  {
     "objectID": "coding/week_03/04_datawrangling_01.html#inspect-data",
     "href": "coding/week_03/04_datawrangling_01.html#inspect-data",
     "title": "Transforming Ag data with dplyr",
@@ -1153,55 +1142,77 @@
     ]
   },
   {
-    "objectID": "coding/week_02/02_fundamentals_rpackages.html#a.-ggplot2-for-data-visualization",
-    "href": "coding/week_02/02_fundamentals_rpackages.html#a.-ggplot2-for-data-visualization",
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#a.-agridat",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#a.-agridat",
     "title": "Fundamentals of R Packages",
-    "section": "a. ggplot2 for data visualization:",
-    "text": "a. ggplot2 for data visualization:\n\nlibrary(ggplot2)\nggplot(mtcars, aes(x = mpg, y = hp)) + geom_point()",
+    "section": "a. agridat",
+    "text": "a. agridat\nThe agridat package contains datasets related to agriculture, such as crop yields, experimental designs, and climate data. Let’s use an example from this package:\n\n# Load the package\nlibrary(agridat)\n# Load an example dataset\ndata(rothamsted.oats, package = 'agridat')\nhead(rothamsted.oats)\n\n  block trt  grain straw row col\n1     x  oa 61.375  83.0  12   1\n2     x 2me 68.750 130.0  12   2\n3     x 2sl 64.250 100.0  12   3\n4     x  ob 65.500  96.0  12   4\n5     w 2sl 79.625 130.5  12   5\n6     w  oa 79.250 122.0  12   6\n\n# view(rothamsted.oats)",
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
     ]
   },
   {
-    "objectID": "coding/week_02/02_fundamentals_rpackages.html#b.-dplyr-for-data-manipulation",
-    "href": "coding/week_02/02_fundamentals_rpackages.html#b.-dplyr-for-data-manipulation",
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#b.-ggplot2-for-data-visualization",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#b.-ggplot2-for-data-visualization",
     "title": "Fundamentals of R Packages",
-    "section": "b. dplyr for data manipulation:",
-    "text": "b. dplyr for data manipulation:\n\nlibrary(dplyr)\nmtcars %&gt;% filter(mpg &gt; 20) %&gt;% summarize(mean_hp = mean(hp))\n\n  mean_hp\n1    88.5",
+    "section": "b. ggplot2 for data visualization:",
+    "text": "b. ggplot2 for data visualization:\n\nlibrary(ggplot2)\nggplot(rothamsted.oats, aes(x = trt, y = grain)) +\n  geom_point(aes(color = trt))\n\n\n\n\n\n\n\nggplot(rothamsted.oats, aes(x = trt, y = grain)) +\n  geom_boxplot(aes(color = trt))\n\n\n\n\n\n\n\nggplot(data = rothamsted.oats, \n       aes(x = trt, y = grain, fill = trt)) +\n  geom_bar(stat = \"identity\")+\n  facet_wrap(~block)",
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
     ]
   },
   {
-    "objectID": "coding/week_02/02_fundamentals_rpackages.html#c.-agridat",
-    "href": "coding/week_02/02_fundamentals_rpackages.html#c.-agridat",
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#c.-dplyr-for-data-manipulation",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#c.-dplyr-for-data-manipulation",
     "title": "Fundamentals of R Packages",
-    "section": "c. agridat",
-    "text": "c. agridat\nThe agridat package contains datasets related to agriculture, such as crop yields, experimental designs, and climate data. Let’s use an example from this package:\n\n# Load the package\nlibrary(agridat)\n# Load an example dataset\ndata(rothamsted.oats, package = 'agridat')\nhead(rothamsted.oats)\n\n  block trt  grain straw row col\n1     x  oa 61.375  83.0  12   1\n2     x 2me 68.750 130.0  12   2\n3     x 2sl 64.250 100.0  12   3\n4     x  ob 65.500  96.0  12   4\n5     w 2sl 79.625 130.5  12   5\n6     w  oa 79.250 122.0  12   6\n\n# Visualize crop yields\nlibrary(ggplot2)\nggplot(rothamsted.oats, aes(x = trt, y = grain, fill = as.factor(block))) +\n  geom_bar(stat = \"identity\", position = \"dodge\") +\n  labs(\n    title = \"Grain Yields in Rothamsted Oats Experiment\",\n    x = \"Treatment\",\n    y = \"Grain Yield (grams/plot)\",\n    fill = \"Block\"\n  ) +\n  theme_minimal()",
+    "section": "c. dplyr for data manipulation:",
+    "text": "c. dplyr for data manipulation:\n\nlibrary(dplyr)\n\n# Basic dplyr operations\nfilter(.data = rothamsted.oats, straw &gt; 150)\n\n   block trt  grain straw row col\n1      w 1se 80.750 160.5  12   8\n2      w 2me 88.500 159.0  11   5\n3      w 1me 89.125 165.0  11   7\n4      x 2se 83.000 161.0  10   4\n5      w 1sl 93.125 191.0  10   6\n6      w  od 84.875 166.5  10   7\n7      w 2se 86.625 185.0  10   8\n8      z 2se 64.500 161.5   9   6\n9      z 2sl 88.750 180.5   9   7\n10     z 2ml 91.250 165.5   9   8\n11     z  oc 88.750 155.0   8   7\n12     z 1sl 88.875 158.0   8   8\n13     z 2me 84.125 170.0   7   5\n14     z 1me 86.000 190.5   7   7\n15     z 1se 80.500 158.5   7   8\n16     k 2me 83.875 181.0   6   4\n17     j 2se 82.875 196.5   6   6\n18     j 2me 78.250 200.0   6   7\n19     j 1ml 87.125 154.5   5   8\n20     j 1se 76.875 165.5   4   7\n21     l 2sl 87.125 153.0   3   4\n22     m 1sl 80.750 154.5   3   8\n23     m 2se 85.375 181.5   2   6\n24     m 2ml 93.375 164.0   2   7\n25     m  oc 89.625 157.0   2   8\n26     l 2se 82.125 175.5   1   3\n27     m 2me 83.875 192.5   1   6\n28     m 2sl 89.000 188.0   1   7\n29     m 1ml 93.250 162.0   1   8\n\n# Get mean grain yield\nsummarize(.data = rothamsted.oats, mean_hp = mean(grain))\n\n   mean_hp\n1 81.17448\n\n\n\n\n\n\n\n\nNote\n\n\n\nWhat if we’d like to run several commands in a row? There are three main options: 1. overwrite an object at each step, 2. create intermediate objects and pass them along, or… 3. use pipe operators to chain commands",
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
     ]
   },
   {
-    "objectID": "coding/week_02/02_fundamentals_rpackages.html#d.-agricolae",
-    "href": "coding/week_02/02_fundamentals_rpackages.html#d.-agricolae",
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#d.-pipe-operator",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#d.-pipe-operator",
     "title": "Fundamentals of R Packages",
-    "section": "d. agricolae",
-    "text": "d. agricolae\nThe agricolae package in R is a comprehensive toolset designed for statistical analysis and visualization of agricultural experiments. It is particularly useful for researchers and practitioners working in crop science, agronomy, and other fields of agricultural research.\nIt provides methods for designing experiments, analyzing experimental data, and visualizing results, particularly for data collected in agricultural and biological research.\n\n\n\n\n\n\nNote\n\n\n\nIt supports:\n\nExperimental Designs: Generate designs for field experiments like randomized complete block design (RCBD), Latin square, factorial experiments, and others.\nStatistical Analysis: Analyze variance (ANOVA), perform post-hoc tests (e.g., LSD, Tukey HSD), and assess experimental data.\nVisualization: Create plots for results, including mean comparisons, dendrograms, and histograms.\nAgronomic Tools: Calculate indices like stability for crop yields or pest/disease control measures.\n\n\n\n\ni. Data analysis\n\n# Load agricolae package\nlibrary(agricolae)\n\n# Simulate agricultural data\ndata &lt;- data.frame(\n  treatment = rep(c(\"A\", \"B\", \"C\"), each = 5),\n  yield = c(50, 55, 52, 51, 54,   # Yields for Treatment A\n            60, 62, 59, 61, 63,   # Yields for Treatment B\n            48, 46, 50, 49, 47)   # Yields for Treatment C\n)\n\n# Display the dataset\nprint(data)\n\n   treatment yield\n1          A    50\n2          A    55\n3          A    52\n4          A    51\n5          A    54\n6          B    60\n7          B    62\n8          B    59\n9          B    61\n10         B    63\n11         C    48\n12         C    46\n13         C    50\n14         C    49\n15         C    47\n\n# Perform ANOVA\nanova_result &lt;- aov(yield ~ treatment, data = data)\nsummary(anova_result)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ntreatment    2  437.2   218.6   70.52 2.32e-07 ***\nResiduals   12   37.2     3.1                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Perform LSD test for pairwise comparison\nlsd_result &lt;- LSD.test(anova_result, \"treatment\", console = TRUE)\n\n\nStudy: anova_result ~ \"treatment\"\n\nLSD t Test for yield \n\nMean Square Error:  3.1 \n\ntreatment,  means and individual ( 95 %) CI\n\n  yield      std r        se     LCL     UCL Min Max Q25 Q50 Q75\nA  52.4 2.073644 5 0.7874008 50.6844 54.1156  50  55  51  52  54\nB  61.0 1.581139 5 0.7874008 59.2844 62.7156  59  63  60  61  62\nC  48.0 1.581139 5 0.7874008 46.2844 49.7156  46  50  47  48  49\n\nAlpha: 0.05 ; DF Error: 12\nCritical Value of t: 2.178813 \n\nleast Significant Difference: 2.426223 \n\nTreatments with the same letter are not significantly different.\n\n  yield groups\nB  61.0      a\nA  52.4      b\nC  48.0      c\n\n# Could also run Tukey HSD, & Duncan's Test\n\n# Plot LSD results\nplot(lsd_result, main = \"LSD Test Results for Treatment Yields\")\n\n\n\n\n\n\n\n\n\n\nii. Design of experiments\nYou can generate layouts for randomized complete block designs (RCBD), Latin squares, Graeco-Latin squares, factorial experiments, and split-plot designs\n\ndesign &lt;- design.rcbd(trt = c(\"A\", \"B\", \"C\"), r = 3)\nprint(design)\n\n$parameters\n$parameters$design\n[1] \"rcbd\"\n\n$parameters$trt\n[1] \"A\" \"B\" \"C\"\n\n$parameters$r\n[1] 3\n\n$parameters$serie\n[1] 2\n\n$parameters$seed\n[1] 1513342570\n\n$parameters$kinds\n[1] \"Super-Duper\"\n\n$parameters[[7]]\n[1] TRUE\n\n\n$sketch\n     [,1] [,2] [,3]\n[1,] \"C\"  \"A\"  \"B\" \n[2,] \"C\"  \"B\"  \"A\" \n[3,] \"A\"  \"C\"  \"B\" \n\n$book\n  plots block c(\"A\", \"B\", \"C\")\n1   101     1                C\n2   102     1                A\n3   103     1                B\n4   201     2                C\n5   202     2                B\n6   203     2                A\n7   301     3                A\n8   302     3                C\n9   303     3                B",
+    "section": "d. Pipe operator ‘%>%’:",
+    "text": "d. Pipe operator ‘%&gt;%’:\nThe ‘dplyr’ package heavily utilizes the pipe operator %&gt;% from the ‘magrittr’ package to streamline data manipulation workflows. This operator allows you to pass the output of one function directly into the next function, making your code more readable and easier to follow.\n\n# Group by treatment and summarize\n# Using the pipe operator for chaining commands\nrothamsted.oats %&gt;%\n  group_by(trt) %&gt;%\n  summarize(mean_grain = mean(grain))\n\n# A tibble: 12 × 2\n   trt   mean_grain\n   &lt;fct&gt;      &lt;dbl&gt;\n 1 1me         82.8\n 2 1ml         86.5\n 3 1se         81.1\n 4 1sl         80.8\n 5 2me         81.5\n 6 2ml         82.3\n 7 2se         81.2\n 8 2sl         81.2\n 9 oa          77.6\n10 ob          79.2\n11 oc          78.4\n12 od          81.4\n\n# The best practice is to specify the data using the .data argument\nrothamsted.oats %&gt;%\n  group_by(trt) %&gt;%\n  summarize(.data = ., mean_grain = mean(grain))\n\n# A tibble: 12 × 2\n   trt   mean_grain\n   &lt;fct&gt;      &lt;dbl&gt;\n 1 1me         82.8\n 2 1ml         86.5\n 3 1se         81.1\n 4 1sl         80.8\n 5 2me         81.5\n 6 2ml         82.3\n 7 2se         81.2\n 8 2sl         81.2\n 9 oa          77.6\n10 ob          79.2\n11 oc          78.4\n12 od          81.4",
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
     ]
   },
   {
-    "objectID": "coding/week_02/02_fundamentals_rpackages.html#e.-soiltestcorr",
-    "href": "coding/week_02/02_fundamentals_rpackages.html#e.-soiltestcorr",
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#e.-native-pipe-operator",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#e.-native-pipe-operator",
     "title": "Fundamentals of R Packages",
-    "section": "e. soiltestcorr",
-    "text": "e. soiltestcorr\nThis package assists users on reproducible regression analysis of relationships between crop relative yield (ry) and soil test values (stv) under different approaches.\nFor example, we can fit a linear-plateu model the a dataset with:\n\nlibrary(soiltestcorr)\n\ndata_freitas &lt;- soiltestcorr::freitas1966\n\nplot_lp &lt;- linear_plateau(data = data_freitas,\n                          stv = STK, ry = RY, plot = TRUE)\n\nplot_lp",
+    "section": "e. Native pipe operator ‘|>’:",
+    "text": "e. Native pipe operator ‘|&gt;’:\nWith the introduction of R 4.1.0, base R now includes its own native pipe operator |&gt;, which serves a similar purpose to the %&gt;% operator from the ‘magrittr’ package. This operator allows you to pass the result of one expression as the first argument to the next expression, enhancing code readability without the need for additional packages.\n\n# Using the native pipe operator\nrothamsted.oats |&gt;\n  group_by(trt) |&gt;\n  summarize(.data = _, mean_grain = mean(grain))\n\n# A tibble: 12 × 2\n   trt   mean_grain\n   &lt;fct&gt;      &lt;dbl&gt;\n 1 1me         82.8\n 2 1ml         86.5\n 3 1se         81.1\n 4 1sl         80.8\n 5 2me         81.5\n 6 2ml         82.3\n 7 2se         81.2\n 8 2sl         81.2\n 9 oa          77.6\n10 ob          79.2\n11 oc          78.4\n12 od          81.4\n\n\n\n\n\n\n\n\nWarning\n\n\n\nNotice when using the %&gt;% the placeholder . is used to indicate where the piped value should be inserted if it’s not the first argument. Similarly, with the native pipe |&gt;, the placeholder _ can be used to indicate where the piped value should be inserted if it’s not the first argument.\n\n\n\n\n\n\n\n\nDoes any work “better” than the other?\n\n\n\n\nWhere |&gt; tends to be better\n\nNo package needed (it’s base R syntax), so it works everywhere without loading magrittr.\nUsually less overhead than %&gt;% because %&gt;% is a function-based pipe, while |&gt; is language syntax.\nIn practice, the difference is rarely noticeable compared to the cost of dplyr verbs, but it can matter in tight loops.\nPlays nicely with modern R style and is increasingly common in new code.\n\n\n\nWhere %&gt;% is more flexible\n\nPlaceholder power: %&gt;% uses . to place the LHS wherever you want. Base |&gt; uses _ but it’s more restricted (notably, it’s tied to named arguments).\n%&gt;% can do extras like creating functions from a pipeline (and other magrittr variants like %T&gt;%, %&lt;&gt;%, etc.). Base |&gt; doesn’t include those.\n%&gt;% lets you pipe into a bare function name (x %&gt;% sqrt).\nBase |&gt; generally requires a call: x |&gt; sqrt()",
+    "crumbs": [
+      "Lessons",
+      "02-Fundamentals of packages"
+    ]
+  },
+  {
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#f.-agricolae",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#f.-agricolae",
+    "title": "Fundamentals of R Packages",
+    "section": "f. agricolae",
+    "text": "f. agricolae\nThe agricolae package in R is a comprehensive toolset designed for statistical analysis and visualization of agricultural experiments. It is particularly useful for researchers and practitioners working in crop science, agronomy, and other fields of agricultural research.\nIt provides methods for designing experiments, analyzing experimental data, and visualizing results, particularly for data collected in agricultural and biological research.\n\n\n\n\n\n\nNote\n\n\n\nIt supports:\n\nExperimental Designs: Generate designs for field experiments like randomized complete block design (RCBD), Latin square, factorial experiments, and others.\nStatistical Analysis: Analyze variance (ANOVA), perform post-hoc tests (e.g., LSD, Tukey HSD), and assess experimental data.\nVisualization: Create plots for results, including mean comparisons, dendrograms, and histograms.\nAgronomic Tools: Calculate indices like stability for crop yields or pest/disease control measures.\n\n\n\n\ni. Data analysis\n\n# Load agricolae package\nlibrary(agricolae)\n\n# Simulate agricultural data\ndata &lt;- data.frame(\n  treatment = rep(c(\"A\", \"B\", \"C\"), each = 5),\n  yield = c(50, 55, 52, 51, 54,   # Yields for Treatment A\n            60, 62, 59, 61, 63,   # Yields for Treatment B\n            48, 46, 50, 49, 47)   # Yields for Treatment C\n)\n\n# Display the dataset\nprint(data)\n\n   treatment yield\n1          A    50\n2          A    55\n3          A    52\n4          A    51\n5          A    54\n6          B    60\n7          B    62\n8          B    59\n9          B    61\n10         B    63\n11         C    48\n12         C    46\n13         C    50\n14         C    49\n15         C    47\n\n# Perform ANOVA\nanova_result &lt;- aov(yield ~ treatment, data = data)\nsummary(anova_result)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ntreatment    2  437.2   218.6   70.52 2.32e-07 ***\nResiduals   12   37.2     3.1                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Perform LSD test for pairwise comparison\nlsd_result &lt;- LSD.test(anova_result, \"treatment\", console = TRUE)\n\n\nStudy: anova_result ~ \"treatment\"\n\nLSD t Test for yield \n\nMean Square Error:  3.1 \n\ntreatment,  means and individual ( 95 %) CI\n\n  yield      std r        se     LCL     UCL Min Max Q25 Q50 Q75\nA  52.4 2.073644 5 0.7874008 50.6844 54.1156  50  55  51  52  54\nB  61.0 1.581139 5 0.7874008 59.2844 62.7156  59  63  60  61  62\nC  48.0 1.581139 5 0.7874008 46.2844 49.7156  46  50  47  48  49\n\nAlpha: 0.05 ; DF Error: 12\nCritical Value of t: 2.178813 \n\nleast Significant Difference: 2.426223 \n\nTreatments with the same letter are not significantly different.\n\n  yield groups\nB  61.0      a\nA  52.4      b\nC  48.0      c\n\n# Could also run Tukey HSD, & Duncan's Test\n\n# Plot LSD results\nplot(lsd_result, main = \"LSD Test Results for Treatment Yields\")\n\n\n\n\n\n\n\n\n\n\nii. Experimental Design\nYou can generate layouts for randomized complete block designs (RCBD), Latin squares, Graeco-Latin squares, factorial experiments, and split-plot designs\n\ndesign &lt;- design.rcbd(trt = c(\"A\", \"B\", \"C\"), r = 3)\nprint(design)\n\n$parameters\n$parameters$design\n[1] \"rcbd\"\n\n$parameters$trt\n[1] \"A\" \"B\" \"C\"\n\n$parameters$r\n[1] 3\n\n$parameters$serie\n[1] 2\n\n$parameters$seed\n[1] 838442263\n\n$parameters$kinds\n[1] \"Super-Duper\"\n\n$parameters[[7]]\n[1] TRUE\n\n\n$sketch\n     [,1] [,2] [,3]\n[1,] \"B\"  \"C\"  \"A\" \n[2,] \"A\"  \"B\"  \"C\" \n[3,] \"B\"  \"C\"  \"A\" \n\n$book\n  plots block c(\"A\", \"B\", \"C\")\n1   101     1                B\n2   102     1                C\n3   103     1                A\n4   201     2                A\n5   202     2                B\n6   203     2                C\n7   301     3                B\n8   302     3                C\n9   303     3                A",
+    "crumbs": [
+      "Lessons",
+      "02-Fundamentals of packages"
+    ]
+  },
+  {
+    "objectID": "coding/week_02/02_fundamentals_rpackages.html#g.-soiltestcorr",
+    "href": "coding/week_02/02_fundamentals_rpackages.html#g.-soiltestcorr",
+    "title": "Fundamentals of R Packages",
+    "section": "g. soiltestcorr",
+    "text": "g. soiltestcorr\nThis package assists users on reproducible regression analysis of relationships between crop relative yield (ry) and soil test values (stv) under different approaches.\nFor example, we can fit a linear-plateu model the a dataset with:\n\nlibrary(soiltestcorr)\n\ndata_freitas &lt;- soiltestcorr::freitas1966\n\nplot_lp &lt;- linear_plateau(data = data_freitas,\n                          stv = STK, ry = RY, plot = TRUE)\n\nplot_lp\n\n\n\n\n\n\n\nplot_qp &lt;- quadratic_plateau(data = data_freitas,\n                          stv = STK, ry = RY, plot = TRUE)\n\nplot_qp\n\n\n\n\n\n\n\n# cate-nelson\nplot_cn &lt;- cate_nelson_1965(data = data_freitas,\n                            stv = STK, ry = RY, \n                            target = 90,\n                            plot = TRUE)\n\nplot_cn",
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
