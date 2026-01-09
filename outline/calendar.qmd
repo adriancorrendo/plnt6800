@@ -21,7 +21,7 @@ smooth-scroll: true
 
 -   **Days:** Wednesdays and Fridays
 -   **Time:** 11:30 am - 12:50 pm
--   **Location:** CRSC 202
+-   **Location:** CRSC 121B
 
 ## Calendar
 
@@ -30,7 +30,7 @@ The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the 
 | **Week** | **Date** | **Topic** | **Material** | **Lesson** |
 |---------------|---------------|---------------|---------------|---------------|
 | 1 | Jan 7 | Introductions, Reproducibility | [🌐](https://adriancorrendo.github.io/plnt6530/slides/day1.html) | [🎥](https://zoom.us/rec/share/Dy07MqKf8Lx3VLxAACAzqIXpyB7X4XbhmvZm5tDB9P9quDB4TVwkoMeH2wbAEmqD.kEaLkBlHprEaHDje?startTime=1767803962000) |
-|  | Jan 09 | Essentials of RStudio, R coding | 🌐 | 🎥 |
+|  | Jan 09 | Essentials of Quarto and R | [🌐](https://adriancorrendo.github.io/plnt6530/coding/week_01/essentials_01.html) | [🎥](https://zoom.us/rec/share/9pvpNY1H692JIBCaNP6V2O0X_FT7Wk-NNt-XI--9YBxxPRcLq38Uzj0klFyIuCoa.dH46A2XtLbzb1QSN) |
 | 2 | Jan 14 | Fundamentals of R packages | 🌐 | 🎥 |
 |  | Jan 16 | Basics of version control & GitHub | 🌐 | 🎥 |
 | 3 | Jan 21 | Data Wrangling I | 🌐 | 🎥 |
