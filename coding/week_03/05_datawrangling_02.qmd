@@ -1,7 +1,7 @@
 ---
 title: "Transforming Ag data in R II"
 author: "Dr. Adrian Correndo"
-date: "2025-01-24"
+date: "2026-01-23"
 categories: [data wrangling, dplyr, tidyr, stringr, lubridate, forcats]
 format:
   html:
@@ -10,6 +10,7 @@ format:
     toc-depth: 4
     number-sections: true
     table-class: "table table-striped table-hover"
+    code-tools: true
 editor: source
 smooth-scroll: true
 bibliography: ../../references.bib

@@ -838,7 +838,7 @@
     "href": "outline/calendar.html#calendar",
     "title": "PLNT6530|01 - Calendar",
     "section": "Calendar",
-    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nCode\nLesson\n\n\n\n\n1\nJan 7\nIntroductions, Reproducibility\n-\n-\n\n\n\nJan 09\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 14\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 16\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 21\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 23\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 28\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 30\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n5\nFeb 04\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 06\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n6\nFeb 11\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n\nFeb 13\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 25\nModels I: TBD\n🌐\n🎥\n\n\n\nFeb 27\nModels II: TBD\n🌐\n🎥\n\n\n8\nMar 04\nModels III: TBD\n🌐\n🎥\n\n\n\nMar 06\nModels IV: TBD\n🌐\n🎥\n\n\n9\nMar 11\nModels V: TBD\n🌐\n🎥\n\n\n\nMar 13\nModels VI: TBD\n🌐\n🎥\n\n\n10\nMar 18\nModels VII: TBD\n🌐\n🎥\n\n\n\nMar 20\nModels VIII: TBD\n🌐\n🎥\n\n\n11\nMar 25\nAdvanced Quarto tricks\n🌐\n🎥\n\n\n\nMar 27\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 01\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 03\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 10\nFinal Exam Due (11.59 pm)\n🌐",
+    "text": "Calendar\nThe course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the tentative schedule. Please, note the schedule may vary depending on the progress of the class.\n\n\n\nWeek\nDate\nTopic\nMaterial\nLesson\n\n\n\n\n1\nJan 7\nIntroductions, Reproducibility\n🌐\n🎥\n\n\n\nJan 09\nEssentials of RStudio, R coding\n🌐\n🎥\n\n\n2\nJan 14\nFundamentals of R packages\n🌐\n🎥\n\n\n\nJan 16\nBasics of version control & GitHub\n🌐\n🎥\n\n\n3\nJan 21\nData Wrangling I\n🌐\n🎥\n\n\n\nJan 23\nData Wrangling II\n🌐\n🎥\n\n\n4\nJan 28\nData Wrangling III\n🌐\n🎥\n\n\n\nJan 30\nData Viz I: ggplot2 basics\n🌐\n🎥\n\n\n5\nFeb 04\nData Viz II: Multiple plots\n🌐\n🎥\n\n\n\nFeb 06\nData Viz III: Advanced plots, maps\n🌐\n🎥\n\n\n6\nFeb 11\nIteration: Loops & Mapping\n🌐\n🎥\n\n\n\nFeb 13\nWeather Data: Retrieving & Processing\n🌐\n🎥\n\n\n\n\nWinter Break begins after the end of class\n\n\n\n\n7\nFeb 25\nModels I: TBD\n🌐\n🎥\n\n\n\nFeb 27\nModels II: TBD\n🌐\n🎥\n\n\n8\nMar 04\nModels III: TBD\n🌐\n🎥\n\n\n\nMar 06\nModels IV: TBD\n🌐\n🎥\n\n\n9\nMar 11\nModels V: TBD\n🌐\n🎥\n\n\n\nMar 13\nModels VI: TBD\n🌐\n🎥\n\n\n10\nMar 18\nModels VII: TBD\n🌐\n🎥\n\n\n\nMar 20\nModels VIII: TBD\n🌐\n🎥\n\n\n11\nMar 25\nAdvanced Quarto tricks\n🌐\n🎥\n\n\n\nMar 27\nGeneral Review class\n🌐\n🎥\n\n\n12\nApr 01\nSemester Projects Presentations I\n🌐\n\n\n\n\nApr 03\nSemester Projects Presentations II\n🌐\n\n\n\n13\nApr 10\nFinal Exam Due (11.59 pm)\n🌐",
     "crumbs": [
       "Calendar",
       "Schedule"
@@ -1216,6 +1216,61 @@
     "crumbs": [
       "Lessons",
       "02-Fundamentals of packages"
+    ]
+  },
+  {
+    "objectID": "coding/quarto/quarto.html",
+    "href": "coding/quarto/quarto.html",
+    "title": "Quarto Tips & Tricks",
+    "section": "",
+    "text": "Quarto is a powerful tool for creating dynamic documents, and it supports multiple output formats, including HTML and PDF. This article presents essential tips and tricks to help you customize and optimize your Quarto documents effectively.",
+    "crumbs": [
+      "Quarto",
+      "Quarto Basics"
+    ]
+  },
+  {
+    "objectID": "coding/quarto/quarto.html#rmarkdown-syntax",
+    "href": "coding/quarto/quarto.html#rmarkdown-syntax",
+    "title": "Quarto Tips & Tricks",
+    "section": "\n7.1 Rmarkdown syntax",
+    "text": "7.1 Rmarkdown syntax\n‘{r mtcars-plot1, fig.width=6, fig.height=4, warning=FALSE, message=FALSE}’\n\nShow codelibrary(ggplot2)\nggplot(mtcars, aes(x = wt, y = mpg)) +\n  geom_point() +\n  geom_smooth(method = \"lm\") +\n  theme_minimal()",
+    "crumbs": [
+      "Quarto",
+      "Quarto Basics"
+    ]
+  },
+  {
+    "objectID": "coding/quarto/quarto.html#new-quarto-syntax",
+    "href": "coding/quarto/quarto.html#new-quarto-syntax",
+    "title": "Quarto Tips & Tricks",
+    "section": "\n7.2 New quarto syntax",
+    "text": "7.2 New quarto syntax\nWithin the chunk after closing the braces ‘{}’\n\n#| echo: true\n#| warning: false\n#| message: false\n#| fig-width: 6\n#| fig-height: 4\n\n\nShow codeggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +\n  geom_boxplot() +\n  theme_classic()",
+    "crumbs": [
+      "Quarto",
+      "Quarto Basics"
+    ]
+  },
+  {
+    "objectID": "coding/quarto/quarto.html#from-file",
+    "href": "coding/quarto/quarto.html#from-file",
+    "title": "Quarto Tips & Tricks",
+    "section": "\n11.1 From file",
+    "text": "11.1 From file",
+    "crumbs": [
+      "Quarto",
+      "Quarto Basics"
+    ]
+  },
+  {
+    "objectID": "coding/quarto/quarto.html#from-url",
+    "href": "coding/quarto/quarto.html#from-url",
+    "title": "Quarto Tips & Tricks",
+    "section": "\n11.2 From URL",
+    "text": "11.2 From URL",
+    "crumbs": [
+      "Quarto",
+      "Quarto Basics"
     ]
   }
 ]

@@ -1,13 +1,14 @@
 ---
 title: "Fundamentals of R Packages"
 author: "Dr. Adrian Correndo"
-date: "2025-01-15"
+date: "2026-01-14"
 format:
   html:
     toc: true
     toc-depth: 4
     toc-location: left
-editor: visual
+    code-tools: true
+editor: source
 ---
 
 # Introduction
@@ -150,21 +151,7 @@ When becoming an advanced user, you could implement [renv](https://cran.r-projec
 
 Let's explore some practical applications of a few packages
 
-## a. ggplot2 for data visualization:
-
-```{r}
-library(ggplot2)
-ggplot(mtcars, aes(x = mpg, y = hp)) + geom_point()
-```
-
-## b. dplyr for data manipulation:
-
-```{r}
-library(dplyr)
-mtcars %>% filter(mpg > 20) %>% summarize(mean_hp = mean(hp))
-```
-
-## c. agridat
+## a. agridat
 
 The agridat package contains datasets related to agriculture, such as crop yields, experimental designs, and climate data. Let’s use an example from this package:
 
@@ -175,20 +162,91 @@ library(agridat)
 data(rothamsted.oats, package = 'agridat')
 head(rothamsted.oats)
 
-# Visualize crop yields
-library(ggplot2)
-ggplot(rothamsted.oats, aes(x = trt, y = grain, fill = as.factor(block))) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(
-    title = "Grain Yields in Rothamsted Oats Experiment",
-    x = "Treatment",
-    y = "Grain Yield (grams/plot)",
-    fill = "Block"
-  ) +
-  theme_minimal()
+# view(rothamsted.oats)
 ```
 
-## d. agricolae
+## b. ggplot2 for data visualization:
+
+```{r}
+library(ggplot2)
+ggplot(rothamsted.oats, aes(x = trt, y = grain)) +
+  geom_point(aes(color = trt))
+
+ggplot(rothamsted.oats, aes(x = trt, y = grain)) +
+  geom_boxplot(aes(color = trt))
+
+ggplot(data = rothamsted.oats, 
+       aes(x = trt, y = grain, fill = trt)) +
+  geom_bar(stat = "identity")+
+  facet_wrap(~block)
+```
+
+## c. dplyr for data manipulation:
+
+```{r}
+library(dplyr)
+
+# Basic dplyr operations
+filter(.data = rothamsted.oats, straw > 150)
+
+# Get mean grain yield
+summarize(.data = rothamsted.oats, mean_hp = mean(grain))
+
+```
+
+::: callout-note
+What if we'd like to run several commands in a row? There are three main options:
+1. overwrite an object at each step,
+2. create intermediate objects and pass them along, or...
+3. use pipe operators to chain commands
+:::
+
+## d. Pipe operator '%>%':
+The 'dplyr' package heavily utilizes the pipe operator `%>%` from the 'magrittr' package to streamline data manipulation workflows. This operator allows you to pass the output of one function directly into the next function, making your code more readable and easier to follow.
+```{r}
+# Group by treatment and summarize
+# Using the pipe operator for chaining commands
+rothamsted.oats %>%
+  group_by(trt) %>%
+  summarize(mean_grain = mean(grain))
+
+# The best practice is to specify the data using the .data argument
+rothamsted.oats %>%
+  group_by(trt) %>%
+  summarize(.data = ., mean_grain = mean(grain))
+```
+
+## e. Native pipe operator '|>':
+With the introduction of R 4.1.0, base R now includes its own native pipe operator `|>`, which serves a similar purpose to the `%>%` operator from the 'magrittr' package. This operator allows you to pass the result of one expression as the first argument to the next expression, enhancing code readability without the need for additional packages.
+
+```{r}
+# Using the native pipe operator
+rothamsted.oats |>
+  group_by(trt) |>
+  summarize(.data = _, mean_grain = mean(grain))
+```
+::: callout-warning
+Notice when using the `%>%` the placeholder `.` is used to indicate where the piped value should be inserted if it's not the first argument. Similarly, with the native pipe `|>`, the placeholder `_` can be used to indicate where the piped value should be inserted if it's not the first argument.
+:::
+
+::: callout-tip
+### Does any work “better” than the other?
+
+#### Where `|>` tends to be better
+- No package needed (it’s base R syntax), so it works everywhere without loading magrittr.
+- Usually less overhead than %>% because %>% is a function-based pipe, while |> is language syntax.
+- In practice, the difference is rarely noticeable compared to the cost of dplyr verbs, but it can matter in tight loops.
+-	Plays nicely with modern R style and is increasingly common in new code.
+
+#### Where `%>%` is more flexible
+- Placeholder power: %>% uses . to place the LHS wherever you want. Base |> uses _ but it’s more restricted (notably, it’s tied to named arguments).
+- `%>%` can do extras like creating functions from a pipeline (and other magrittr variants like `%T>%`, `%<>%`, etc.). Base `|>` doesn’t include those.
+- `%>%` lets you pipe into a bare function name (x %>% sqrt). 
+- Base `|>` generally requires a call: x |> sqrt()
+
+:::
+
+## f. agricolae
 
 The agricolae package in R is a comprehensive toolset designed for statistical analysis and visualization of agricultural experiments. It is particularly useful for researchers and practitioners working in crop science, agronomy, and other fields of agricultural research.
 
@@ -235,7 +293,7 @@ lsd_result <- LSD.test(anova_result, "treatment", console = TRUE)
 plot(lsd_result, main = "LSD Test Results for Treatment Yields")
 ```
 
-### ii. Design of experiments
+### ii. Experimental Design
 
 You can generate layouts for randomized complete block designs (RCBD), Latin squares, Graeco-Latin squares, factorial experiments, and split-plot designs
 
@@ -244,7 +302,7 @@ design <- design.rcbd(trt = c("A", "B", "C"), r = 3)
 print(design)
 ```
 
-## e. soiltestcorr
+## g. soiltestcorr
 
 This package assists users on reproducible regression analysis of relationships between crop relative yield (ry) and soil test values (stv) under different approaches.
 
@@ -259,4 +317,17 @@ plot_lp <- linear_plateau(data = data_freitas,
                           stv = STK, ry = RY, plot = TRUE)
 
 plot_lp
+
+plot_qp <- quadratic_plateau(data = data_freitas,
+                          stv = STK, ry = RY, plot = TRUE)
+
+plot_qp
+
+# cate-nelson
+plot_cn <- cate_nelson_1965(data = data_freitas,
+                            stv = STK, ry = RY, 
+                            target = 90,
+                            plot = TRUE)
+
+plot_cn
 ```

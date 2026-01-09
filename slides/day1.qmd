@@ -1,10 +1,14 @@
 ---
-title: "Reproducible Ag Data Science with R"
+title: "Reproducible<br>Data Science for Ag"
 author: "Adrian A. Correndo"
-date: "2025-01-08"
 editor: source
 format:
   revealjs: 
+    logo: ../images/2026_logo.png
+    css: ..//styles.css
+    theme: simple
+    center: false
+    margin: 0.04
     incremental: true
     slide-number: true
     show-slide-number: all
@@ -16,44 +20,96 @@ format:
     smaller: true
     scrollable: false
     preview-links: auto
-    logo: ../images/plnt6800_logo.png
-    css: styles.css
-    footer: <https://adriancorrendo.github.io>
     menu:
       side: right
       width: wide
     code-tools:
       code-block-bg: true
+title-slide-attributes:
+  data-background-image: ../images/cover4.png
 highlight-style: pygments
 link-citations: TRUE
 ---
 
-## Welcome 👋
+## Introductions 💬
 
--   **Goal**: Gain foundational knowledge and understand how data science can improve agricultural practices.
--   Let's dive into it with an emphasis on reproducibility and data literacy.
+::: fragment
+<br/>
+
+### i. Who are you and why enrolling on this course? {style="color:#bc4749"}
+
+<br/>
+:::
 
 :::: fragment
 ::: callout-tip
--   **Remember**: Questions and discussions are encouraged! 💬
+-   Research project, career goals...
 :::
 ::::
 
-## Objectives for Today 📌
+# 1. How this course works
 
--   Define core concepts:
-    -   Data Science,
-    -   Data Literacy,
-    -   Reproducibility.
--   Understand the role of **reproducible data science** in agriculture.
--   Explore **challenges** and **opportunities**.
+## Learning Goals 📌
 
-# Core concepts
+1. **Reproducibility**: understand the principles and importance of reproducible data analysis.
 
-## What is Data Science in Agriculture? 🌱
+2. **Data manipulation**: develop proficiency in R, including key data structures, packages, and functions to read, clean, transform, and organize datasets.
 
--   Applying data engineering, analysis, statistics, and machine learning to solve agricultural problems.
--   **Examples**: Precision agriculture, yield forecasting, environmental monitoring.
+3. **Data visualization**: create informative and aesthetically pleasing visualizations of data.
+
+4. **Modelling and iteration**: apply various algorithms and statistical models common to plant agriculture, and implement techniques to handle multiple datasets simultaneously.
+
+5. **Professional reporting**: produce professional reports for sharing results.
+
+6. **Version control**: manage the basics of Git and Github for collaborative projects.
+
+## A hands-on learning model
+
+-   **Live coding sessions** (you code along with me)
+-   Focus on **doing**, not just reading about tools
+-   Class time is for:
+    -   building workflows
+    -   troubleshooting together
+    -   practicing reproducible habits
+
+## What you’ll leave with
+
+-   The ability to complete a reproducible analysis workflow
+-   An understanding of main models used in agriculture data science
+-   Confidence reading/writing **Quarto** (`.qmd`) documents
+-   A lot of templates to re-use in the future
+-   A portfolio-ready project
+
+## Course-Assessment
+
+### [ Three main components ]{style="color:#1f77b4;"}
+
+-   **Quizzes / short coding assignments — 30%**
+    -   5 total (*asynchronous*)
+    -   lowest 2 dropped
+-   **Semester project — 50%**
+    -   *groups of 2*
+    -   Analysis of your **own dataset** (or provided if you don't have one)
+-   **Final exam — 20%**
+    -   On-line, asynchronous, open-book
+
+## Semester project (50%)
+
+::: callout-note
+**Expectations** <br/> - Use **reproducible** practices throughout (files, code, and narrative) <br/> - Clear questions, clean data, and transparent methods <br/> - Professional communication (figures, tables, interpretation) <br/>
+:::
+
+::: fragment
+### [Milestones ]{style="color:#1f77b4;"}
+
+1.  **Proposal** (10%)
+2.  **Initial report** (20%)
+3.  **Presentation** (20%)
+4.  **Final report** (50%)
+
+:::
+
+# 2. Core concepts
 
 ## Key Definitions 📖
 
@@ -113,14 +169,6 @@ link-citations: TRUE
 
     -   ***Main causes***: selective reporting, weak stats, code/data unavailability, etc.
 
-## GOOD NEWS IS...
-
-:::: fragment
-::: {.column width="100%"}
-![](../images/repbrush.png){.absolute top="50" left="200" height="100%"}
-:::
-::::
-
 ## **Why Reproducibility in Agriculture?**
 
 -   Agriculture research relies heavily on environmental data, often variable and complex.
@@ -162,22 +210,7 @@ link-citations: TRUE
 -   Limited curriculum in applied data science
 :::
 
-## Discussion Prompt 💬
-
-::: fragment
-<br/>
-
-### i. Where do you think improved data literacy & reproducibility could impact agriculture the most? {style="color:#bc4749"}
-
-<br/>
-:::
-
-:::: fragment
-::: callout-tip
--   Consider areas like resource management, market predictions, and farm management.
-:::
-::::
-
+# 3. What is R?
 
 ## What is R? 🧮
 
@@ -187,21 +220,38 @@ link-citations: TRUE
 -   Widely used in fields like **data science**, **bioinformatics**, **agriculture**, and **social sciences**.
 :::
 
-::: fragment
-### Brief History 📜
+## Brief History of R 📜
 
+::: columns
+::: {.column width="70%"}
 -   **Origin**: Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.
 -   **Inspiration**: R is an implementation of the S language, designed at Bell Laboratories for data analysis.
 -   **Open Source**: Released as free, open-source software, leading to a large community of users and contributors.
 -   **Popularity**: Today, R is one of the top programming languages for statistical analysis and data science.
+-   **CRAN**: the Comprehensive R Archive Network, which hosts thousands of packages was developed in 1997 by Kurt Hornik & Fritz Leisch.
 :::
 
-# Alternatives to R
+::: {.column width="30%"}
+![](https://thermanuals.wordpress.com/wp-content/uploads/2014/12/rr.jpg){fig-align="right" width="200"}
+<br/>
+Ihaka, Gentleman
+:::
+:::
+
+## Packages
+
+There are currently 23,052 of packages (on CRAN only). 
+
+::: fragment
+![](../images/cranpackages){fig-align="center" width="800"}
+::: 
+
+# 4. Alternatives to R
 
 ## R vs. Excel for Data Wrangling 📊
 
 ::::: columns
-::: {.column width="65%"}
+::: {.column width="85%"}
 -   **Excel**: Known for ease of use, popular among business and finance professionals.
     -   **Pros**: Intuitive, good for small datasets and quick analysis.
     -   **Cons**: Limited in handling large datasets, lacks reproducibility.
@@ -210,8 +260,8 @@ link-citations: TRUE
     -   **Cons**: Requires programming knowledge, steeper learning curve than Excel.
 :::
 
-::: {.column width="35%"}
-![](https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019–present%29.svg){fig-align="right" width="290"}
+::: {.column width="15%"}
+![](https://upload.wikimedia.org/wikipedia/commons/e/e3/Microsoft_Office_Excel_%282019–2025%29.svg){fig-align="right" width="290"}
 :::
 :::::
 
@@ -224,7 +274,7 @@ link-citations: TRUE
 ## R vs. SAS for Statistical Analysis 📉
 
 ::::::: columns
-::: {.column width="65%"}
+::: {.column width="80%"}
 -   **SAS**: A powerful statistical software suite used widely in industries such as healthcare and finance.
     -   **Pros**: Robust for regulatory environments, highly standardized.
     -   **Cons**: Proprietary and costly, limited community contributions.
@@ -233,7 +283,7 @@ link-citations: TRUE
     -   **Cons**: Requires more coding and configuration for regulatory standards.
 :::
 
-::: {.column width="35%"}
+::: {.column width="20%"}
 ![](../images/SASlogo.svg){fig-align="right" width="290" title="By SAS Institute - http://www.sas.com, Public Domain, https://commons.wikimedia.org/w/index.php?curid=5291445"}
 :::
 
@@ -244,22 +294,20 @@ link-citations: TRUE
 ::::
 :::::::
 
-## R vs Python  🔍
+## R vs Python 🔍
 
 -   R, & Python are popular languages in data science and research.
 -   Each language has unique strengths, ideal use cases, and licensing considerations.
 
-:::::: columns
+::::: columns
 ::: {.column width="34%"}
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/1448px-R_logo.svg.png?20240131042527){fig-align="right" width="290"}
+![](https://upload.wikimedia.org/wikipedia/commons/1/1b/R_logo.svg){fig-align="right" width="290"}
 :::
 
 ::: {.column width="33%"}
 ![](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg){fig-align="right" width="290"}
 :::
-
-
-::::::
+:::::
 
 ## R: Strengths and Use Cases 🧮
 
@@ -309,16 +357,18 @@ link-citations: TRUE
 
 :::: fragment
 ::: callout-note
--   **R**: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.
 -   **Excel**: User-friendly, ideal for simple tasks, but limited for complex data wrangling.
 -   **SAS**: Industry-standard for statistical analysis with regulatory requirements, but costly and less flexible than R.
+-   **R**: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.
 -   **Python**: Strong in ML and AI with highly permissive licensing, making it ideal for production.
 :::
 ::::
 
+<br/>
+
 ::: fragment
 | Feature | R | Python |
-|------------------|------------------|-------------------|
+|------------------------|------------------------|-------------------------|
 | **Primary Strength** | Statistics & Visualization | General-purpose, ML, AI |
 | **Performance** | Moderate | Moderate |
 | **Licensing** | GPL (core), MIT, BSD (some) | PSFL, highly permissive |
@@ -327,35 +377,167 @@ link-citations: TRUE
 
 <br/>
 
+## Comparison Summary II 📊
+
+#### Choosing the right tool depends on:
+
+-   your project's requirements, <br/>
+-   team structure & skills, and <br/>
+-   licensing needs for research vs. production.
+
 :::: fragment
 ::: callout-tip
-Choosing the right tool depends on your project's requirements, team skills, and licensing needs for research vs. production.
+-   **R**: Best for statistical analysis and visualization, but GPL license may restrict use in proprietary products.
+-   **Python**: Strong in ML and AI with highly permissive licensing, making it ideal for production.
 :::
 ::::
+
+# 5. Why R, posit cloud and version control?
+
+## Why R? {.smaller}
+
+::::: columns
+::: {.column width="80%"}
+-   **1. Open-Source**
+    -   Free to use and modify, with contributions from a large community.
+-   **2. Multi-Platform**
+    -   Runs on Windows, macOS, and Linux, making it versatile for collaboration.
+-   **3. Community Support**
+    -   Strong online help through forums, tutorials, and dedicated resources.
+-   **4. Continuous Development**
+    -   Regular updates keep R on the leading edge of data science.
+-   **5. Reproducible Workflows**
+    -   Tools like **Rmarkdown** and **Quarto** facilitates the job.
+:::
+
+::: {.column width="20%"}
+![](https://upload.wikimedia.org/wikipedia/commons/1/1b/R_logo.svg){fig-align="right" width="290"}
+:::
+:::::
+
+## Why RStudio? {.smaller}
+
+::::: columns
+::: {.column width="70%"}
+-   **1. An interface to R**
+    -   Provides a user-friendly environment to work with R.
+-   **2. Integrates various components of an analysis**
+    -   Combines data, code, and output in one place, simplifying the workflow.
+-   **3. Colored syntax**
+    -   Highlights code with colors, making it easier to read and spot errors, improving code clarity.
+-   **4. Syntax suggestions**
+    -   Offers autocomplete suggestions, which speeds up coding and reduces mistakes.
+-   **5. RStudio panels**
+    -   Panels for console, scripts, files, and plots, giving quick access to all elements.
+:::
+
+::: {.column width="30%"}
+![](https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg){fig-align="right" width="400"}
+:::
+:::::
+
+## Rstudio panels
+
+::: fragment
+![](../images/rstudiopanel.png)
+:::
+
+## Why posit cloud?
+
+:::::: columns
+:::: {.column width="70%"}
+::: fragment
+-   **1. Learn how to use a cloud service**
+    -   Gain experience with cloud-based tools, increasingly important in data science.
+-   **2. Access from anywhere**
+    -   Access R and RStudio directly from your web browser without any setup.
+-   **3. Collaboration**
+    -   Share projects easily with others, facilitating teamwork and joint analysis.
+-   **4. It's free for you**
+    -   You'll have free access to Posit Cloud through this course (this semester).
+:::
+::::
+
+::: {.column width="20%"}
+![](https://posit.co/wp-content/uploads/2022/10/thumbnail-63.jpg){fig-align="right" width="400"}
+:::
+::::::
+
+## Why version control? 🔄 {.smaller}
+
+::::: columns
+::: {.column width="80%"}
+::: fragment
+-   **1. Track Changes**
+    -   Maintain a complete history of edits, making it easy to identify when and why changes were made.
+-   **2. Collaborate Seamlessly**
+    -   Multiple users can work together without overwriting each other's work, enhancing teamwork.
+-   **3. Ensure Data Integrity**
+    -   Protect primary data by using branches for experimentation, avoiding accidental overwrites.
+-   **4. Boost Reproducibility**
+    -   Access exact versions of code and data, enabling others to reproduce your work reliably.
+-   **5. Provide Built-in Documentation**
+    -   Changes can be documented, helping to understand workflow.
+
+:::
+:::
+
+::: {.column width="20%"}
+![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg){fig-align="right" width="400"}
+
+<br/>
+
+![](../images/GitHub-logo.png){fig-align="right" width="400"}
+:::
+:::::
+
+## What are Git and GitHub?
+
+::::: columns
+::: {.column width="70%"}
+-   **Git**
+    -   A version control system that tracks changes in files on your local computer, allowing you to manage versions and revert to previous work.
+-   **GitHub**
+    -   An online platform for hosting Git repositories, enabling easy collaboration, project sharing, and cloud storage.
+:::
+
+::: {.column width="30%"}
+![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg){fig-align="right" width="400"}
+
+<br/>
+
+![](../images/GitHub-logo.png){fig-align="right" width="400"}
+:::
+:::::
 
 ------------------------------------------------------------------------
 
 ## THANK YOU!
+### _
 
-acorrend\@uoguelph.ca
+::: columns
+::: {.column width="50%"}
+#### Adrian A. Correndo
+📬 acorrend\@uoguelph.ca
 
-::: {style="text-align: right; font-size: 0.75em"}
-Adrian A. Correndo\
+::: {style="text-align: left; font-size: 0.75em"}
 Assistant Professor\
-Sustainable Cropping Systems\
-Department of Plant Agriculture\
-University of Guelph\
+Pick Family Chair, Sustainable Cropping Systems\
+Rm 226, Crop Science Building
 :::
 
-Rm 226, Crop Science Bldg \| Department of Plant Agriculture
+:::
 
-Ontario Agricultural College \| University of Guelph \| 50 Stone Rd E, Guelph, ON-N1G 2W1, Canada.
+::: {.column width="50%"}
+![](../images/uog.png){fig-align="left" width="900"}
+:::
+:::
 
 <br/>
 
 ### Contact me
 
 |  |  |  |
-|--------------------|----------------------------|-------------------------|
+|--------------------|---------------------------|-------------------------|
 | [![](../images/X_logo.png.webp){fig-align="center" width="60"}](http://twitter.com/aacorrendo) | [![](../images/linkedin-icon.png){fig-align="center" width="60"}](https://www.linkedin.com/in/adriancorrendo/) | [![](../images/github-brands.svg){fig-align="center" width="60" height="60"}](http://github.com/adriancorrendo) |
-| [![](../images/orcid.png){fig-align="center" width="60"}](https://orcid.org/0000-0002-4172-289X) | [![](../images/768px-Google_Scholar_logo.png){fig-align="center" width="60"}](https://scholar.google.com/citations?user=4h88EXkAAAAJ&hl=en) | [![](../images/ResearchGate_icon.png){fig-align="center" width="60"}](https://www.researchgate.net/profile/Adrian-Correndo-2) |
+| [![](../images/orcid.png){fig-align="center" width="60"}](https://orcid.org/0000-0002-4172-289X) | [![](../images/768px-Google_Scholar_logo.png){fig-align="center" width="60"}](https://scholar.google.com/citations?user=8_ZxORIAAAAJ&hl=en) | [![](../images/ResearchGate_icon.png){fig-align="center" width="60"}](https://www.researchgate.net/profile/Adrian-Correndo-2) |

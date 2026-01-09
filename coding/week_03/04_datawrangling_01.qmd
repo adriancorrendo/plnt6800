@@ -1,7 +1,7 @@
 ---
 title: "Transforming Ag data with dplyr"
 author: "Dr. Adrian Correndo"
-date: "2025-01-22"
+date: "2026-01-21"
 categories: [dplyr, data wrangling, mutate, filter, select, arrange]
 format:
   html:
@@ -10,6 +10,7 @@ format:
     toc-depth: 4
     number-sections: true
     table-class: "table table-striped table-hover"
+    code-tools: true
 editor: source
 smooth-scroll: true
 bibliography: ../../references.bib
@@ -162,6 +163,7 @@ df <- df %>%
 
 ```
 :::
+
 
 ## Example 2: filter()
 

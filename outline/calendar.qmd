@@ -1,6 +1,6 @@
 ---
-title: PLNT6800|01 - Calendar
-subtitle: "Winter 2025"
+title: PLNT6530|01 - Calendar
+subtitle: "Winter 2026"
 author: "Dr. Adrian Correndo"
 format: 
   html:
@@ -9,9 +9,6 @@ format:
     toc-location: left
     toc-depth: 4
     number-sections: false
-    theme:
-      light: journal
-      dark: darkly
     code-tools: true
     code-fold: true
     code-summary: 'Show code'
@@ -23,38 +20,38 @@ smooth-scroll: true
 ### Lecture Schedule
 
 -   **Days:** Wednesdays and Fridays
--   **Time:** 1:00 pm - 2:20 pm
+-   **Time:** 11:30 am - 12:50 pm
 -   **Location:** CRSC 202
 
 ## Calendar
 
 The course runs on Wednesdays and Fridays from 1:00 PM to 2:20 PM. Below is the *tentative* schedule. Please, note the schedule may vary depending on the progress of the class.
 
-| **Week** | **Date** | **Topic** | **Code** | **Lesson** |
+| **Week** | **Date** | **Topic** | **Material** | **Lesson** |
 |---------------|---------------|---------------|---------------|---------------|
-| 1 | Jan 8 | Introductions, Reproducibility | \- | \- |
-|  | Jan 10 | Essentials of RStudio, R coding | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_01/fri "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4052644/View "CourseLink - Zoom recording") |
-| 2 | Jan 15 | Fundamentals of R packages | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_02/wed "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4057115/View) |
-|  | Jan 17 | Basics of version control & GitHub | [🌐](https://github.com/adriancorrendo/my-first-repo) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4058352/View) |
-| 3 | Jan 22 | Data Wrangling I | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_03 "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4063612/View) |
-|  | Jan 24 | Data Wrangling II | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_03/fri/05_dw "Private Repo") | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4064215/View) |
-| 4 | Jan 29 | Data Wrangling III | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_04/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4068091/View) |
-|  | Jan 31 | Data Viz I: ggplot2 basics | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_04/fri/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4072220/View) |
-| 5 | Feb 5 | Data Viz II: Multiple plots | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4074843/View) |
-|  | Feb 7 | Data Viz III: Advanced plots, maps | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_05/fri/) | [🎥](https://zoom.us/rec/share/e9BMAGYi6OuOM5ThIpNBjhLYl6XeEbGr0FPr4syMaRMUKxCjYpuubrXcNkJTjobu.QT2dfMIa7iDMLYZe) |
-| 6 | Feb 12 | Iteration: Loops & Mapping | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_06/wed/) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4077032/View) |
-|  | Feb 14 | Weather Data: Retrieving & Processing | [🌐](https://github.com/adriancorrendo/plnt6800_coding/tree/main/lessons/week_06/fri) | [🎥](https://courselink.uoguelph.ca/d2l/le/content/935416/viewContent/4078612/View) |
+| 1 | Jan 7 | Introductions, Reproducibility | [🌐](https://adriancorrendo.github.io/plnt6530/slides/day1.html) | [🎥](https://zoom.us/rec/share/Dy07MqKf8Lx3VLxAACAzqIXpyB7X4XbhmvZm5tDB9P9quDB4TVwkoMeH2wbAEmqD.kEaLkBlHprEaHDje?startTime=1767803962000) |
+|  | Jan 09 | Essentials of RStudio, R coding | 🌐 | 🎥 |
+| 2 | Jan 14 | Fundamentals of R packages | 🌐 | 🎥 |
+|  | Jan 16 | Basics of version control & GitHub | 🌐 | 🎥 |
+| 3 | Jan 21 | Data Wrangling I | 🌐 | 🎥 |
+|  | Jan 23 | Data Wrangling II | 🌐 | 🎥 |
+| 4 | Jan 28 | Data Wrangling III | 🌐 | 🎥 |
+|  | Jan 30 | Data Viz I: ggplot2 basics | 🌐 | 🎥 |
+| 5 | Feb 04 | Data Viz II: Multiple plots | 🌐 | 🎥 |
+|  | Feb 06 | Data Viz III: Advanced plots, maps | 🌐 | 🎥 |
+| 6 | Feb 11 | Iteration: Loops & Mapping | 🌐 | 🎥 |
+|  | Feb 13 | Weather Data: Retrieving & Processing | 🌐 | 🎥 |
 |  |  | *Winter Break begins after the end of class* |  |  |
-| 7 | Feb 26 | Models I: Key concepts | [🌐]() | [🎥]() |
-|  | Feb 28 | Models II: Explanatory vs. Predictive | [🌐]() | [🎥]() |
-| 8 | Mar 5 | Models III: Linear Models | [🌐]() | [🎥]() |
-|  | Mar 7 | Models IV: Fixed, Random, Mixed Effects | [🌐]() | [🎥]() |
-| 9 | Mar 12 | Models V: Regression I | [🌐]() | [🎥]() |
-|  | Mar 14 | Models VI: Regression II | [🌐]() | [🎥]() |
-| 10 | Mar 19 | Models VII: Review LMs | [🌐]() | [🎥]() |
-|  | Mar 21 | Models VIII: Principal Components | [🌐]() | [🎥]() |
-| 11 | Mar 26 | Quarto / Rmarkdown tricks | [🌐]() | [🎥]() |
-|  | Mar 28 | General Review class | [🌐]() | [🎥]() |
-| 12 | Apr 2 | Semester Projects Presentations I | [🌐]() |  |
-|  | Apr 4 | Semester Projects Presentations II | [🌐]() |  |
-| 13 | Apr 11 | Final Exam Due (11.59 pm) | [🌐]() |  |
+| 7 | Feb 25 | Models I: TBD | 🌐 | 🎥 |
+|  | Feb 27 | Models II: TBD | 🌐 | 🎥 |
+| 8 | Mar 04 | Models III: TBD | 🌐 | 🎥 |
+|  | Mar 06 | Models IV: TBD | 🌐 | 🎥 |
+| 9 | Mar 11 | Models V: TBD | 🌐 | 🎥 |
+|  | Mar 13 | Models VI: TBD | 🌐 | 🎥 |
+| 10 | Mar 18 | Models VII: TBD | 🌐 | 🎥 |
+|  | Mar 20 | Models VIII: TBD | 🌐 | 🎥 |
+| 11 | Mar 25 | Advanced Quarto tricks | 🌐 | 🎥 |
+|  | Mar 27 | General Review class | 🌐 | 🎥 |
+| 12 | Apr 01 | Semester Projects Presentations I | 🌐 |  |
+|  | Apr 03 | Semester Projects Presentations II | 🌐 |  |
+| 13 | Apr 10 | Final Exam Due (11.59 pm) | 🌐 |  |

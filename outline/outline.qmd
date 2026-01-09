@@ -1,6 +1,6 @@
 ---
-title: PLNT6800|01 - Course Outline
-subtitle: "Winter 2025"
+title: PLNT6530|01 - Course Outline
+subtitle: "Winter 2026"
 author: "Dr. Adrian Correndo"
 format: 
   html:
@@ -9,9 +9,6 @@ format:
     toc-location: left
     toc-depth: 4
     number-sections: false
-    theme:
-      light: journal
-      dark: darkly
     code-tools: true
     code-fold: true
     code-summary: 'Show code'
@@ -22,15 +19,15 @@ smooth-scroll: true
 
 ## 1. Course Information
 
--   **Course Code:** PLNT6800
--   **Course Title:** Reproducible Ag Data Science with R
+-   **Course Code:** PLNT6530
+-   **Course Title:** Reproducible Data Sci for Ag
 -   **Term:** Winter
 -   **Credits:** 0.50
 
 ### Lecture Schedule
 
 -   **Days:** Wednesdays and Fridays
--   **Time:** 1:00 pm - 2:20 pm
+-   **Time:** 11:30 am - 12:50 pm
 -   **Location:** CRSC 202
 
 ### Instructor Information
@@ -40,7 +37,7 @@ smooth-scroll: true
 
 ## 2. Course Description
 
-Reproducible Ag Data Science with R is designed for graduate students in crop and soil sciences to develop key skills in data science using R. This course emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
+This course is designed for graduate students in crop and soil sciences to develop key skills in data science using R. It emphasizes reproducibility in data analysis, ensuring that results can be consistently replicated. Students will learn essential data science concepts, and how to use functions, packages, and version control to effectively manage their data and collaborate with peers. Following tidy principles, the course promotes best coding practices for data wrangling, effective visualization, and clean deployment of statistical models common in agriculture. By the end of the course, students will be equipped to handle a variety of agricultural datasets and produce reliable, reproducible research outcomes.
 
 ### Prerequisite(s)
 
@@ -58,19 +55,21 @@ A basic understanding of R or any programming language is recommended but not re
 
 By the end of this course, students will be able to:
 
-1.  Understand and apply the principles of reproducible research in data science.
+1.  **Reproducibility**: understand the principles and importance of reproducible data analysis.
 
-2.  Use version control tools like GitHub for managing code and collaborative projects.
+2.  **Data manipulation**: develop proficiency in R, including key data structures, packages, and functions to read, clean, transform, and organize datasets.
 
-3.  Develop proficiency in R, including data wrangling, data visualization, and the use of relevant packages for agricultural datasets.
+3.  **Data visualization**: create informative and aesthetically pleasing visualizations of data.
 
-4.  Apply statistical models to agricultural data and interpret the results.
+4.  **Modelling and iteration**: apply various algorithms and statistical models common to plant agriculture, and implement techniques to handle multiple datasets simultaneously.
 
-5.  Produce professional reports using RMarkdown and Quarto, ensuring reproducibility and clarity.
+5.  **Professional reporting**: produce professional reports for sharing results.
+
+6.  **Version control**: manage the basics of Git and Github for collaborative projects.
 
 ## 4. Calendar
 
-See <http://adriancorrendo.github.io/plnt6800/calendar.html>
+See <http://adriancorrendo.github.io/plnt6530/calendar.html>
 
 ### Last Day to Drop Course
 
@@ -79,14 +78,14 @@ TBD
 ## 5. Assessment Breakdown
 
 | Component | Weight (%) | Details |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Weekly Exercises | 30% | Hands-on exercises to practice skills covered in each week's topic. |
 | Semester Project | 50% | Complete data analysis project, report, and presentation. |
 | Final Exam | 20% | Cumulative assessment covering all topics from the course. |
 
 ### Final Exam
 
--   **Date:** Apr 11, 11.59 pm.
+-   **Date:** April 10th (asynchronous).
 
 ## 6. Course Grading Policies
 
@@ -114,9 +113,9 @@ Please adhere to the following guidelines when working on assignments for this c
 
 During the course, your instructor will interact with you on various course matters on the course website using the following ways of communication:
 
--   **Announcements**: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Pleasecheck this section frequently for course updates from your instructor.
+-   **Announcements**: The instructor will use Announcements on the Course Home page to provide you with course reminders and updates. Please, check this section frequently for course updates from your instructor.
 
--   **Email**: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you cansend your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.
+-   **Email**: If you have a conflict that prevents you from completing course requirements, or have a question concerning a personal matter, you can send your instructor a private message by email. The instructor will attempt to respond to your email within 24 hours.
 
 -   **Video Call**: If you have a complex question you would like to discuss with your instructor, you may book a video meeting on **Zoom** or **Teams**. Video meetings depend on the availability and are booked on a first come first served basis.
 

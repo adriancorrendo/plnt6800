@@ -1,15 +1,21 @@
 ---
 title: "Essentials of R coding I"
 author: "Dr. Adrian Correndo"
-date: "2025-01-10"
+date: "2026-01-09"
 format:
   html:
     toc: true
     toc-depth: 4
-editor: visual
+    code-tools: true
+editor: source
+execute:
+  warning: false
+  message: false
 ---
 
 ```{r setup, include=FALSE}
+# This is the old-fashioned way to set global chunk options
+# Now we manage just with the "execute" field in the YAML header
 knitr::opts_chunk$set(warning = FALSE,message = FALSE)
 ```
 
@@ -446,11 +452,11 @@ fx <- function(x, y, remove_na = NULL) {
         # First operation is a sum, removing NAs
         first <- sum(c(x, y), na.rm = remove_na)
         # Add a text message
-        text <- "This function is so cool"
+        second <- "This function is so cool"
         # Store result
         result <- first + x
         # Print output
-        print(list("Message" = text,
+        print(list("Message" = second,
                    "1st" = first,
                    "end" = result))
                    }
