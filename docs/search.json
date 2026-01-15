@@ -1155,7 +1155,7 @@
   {
     "objectID": "coding/week_02/03_versioncontrol.html",
     "href": "coding/week_02/03_versioncontrol.html",
-    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "title": "Git and GitHub for Ag Data Science 🌱",
     "section": "",
     "text": "Have you ever struggled with:\n\nMessy file versions? 📂 Naming files like code.R, code_final.R, code_final_final.R, codefinal3.R, or code_seethis.R? 🤯\nLost in email threads? 📧 Collaborating with colleagues by sending multiple file versions via email, leading to confusion and mistakes?\nUntracked changes? 🔄 Making edits but forgetting what changed and why?\n\nIf so, you’re not alone! These are common challenges in agriculture data science and research projects. Fortunately, Git and GitHub provide an efficient way to manage and collaborate on code without the chaos.",
     "crumbs": [
@@ -1166,7 +1166,7 @@
   {
     "objectID": "coding/week_02/03_versioncontrol.html#install-git",
     "href": "coding/week_02/03_versioncontrol.html#install-git",
-    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "title": "Git and GitHub for Ag Data Science 🌱",
     "section": "5.1 1️⃣ Install Git",
     "text": "5.1 1️⃣ Install Git\nGit is a version control system that runs locally on your computer. To install it:\n\n📥 Download Git from git-scm.com\nFollow the installation instructions for your OS (Windows, macOS, Linux)\nOpen RStudio, go to the “Terminal” tab,\nVerify the installation by running this line:\n\ngit --version",
     "crumbs": [
@@ -1177,7 +1177,7 @@
   {
     "objectID": "coding/week_02/03_versioncontrol.html#create-a-github-account",
     "href": "coding/week_02/03_versioncontrol.html#create-a-github-account",
-    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "title": "Git and GitHub for Ag Data Science 🌱",
     "section": "5.2 2️⃣ Create a GitHub Account",
     "text": "5.2 2️⃣ Create a GitHub Account\nGitHub is a cloud-based platform that stores your Git repositories online.\n\n🌍 Go to GitHub and sign up.\nSet up your GitHub profile and SSH key (optional but recommended for authentication).",
     "crumbs": [
@@ -1188,7 +1188,7 @@
   {
     "objectID": "coding/week_02/03_versioncontrol.html#creating-a-github-repository",
     "href": "coding/week_02/03_versioncontrol.html#creating-a-github-repository",
-    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "title": "Git and GitHub for Ag Data Science 🌱",
     "section": "9.1 ✅ Creating a GitHub Repository",
     "text": "9.1 ✅ Creating a GitHub Repository\n\nOpen GitHub and click New Repository ➕.\nName the repository (e.g., my-first-repo) and choose Public or Private.\nClick Create Repository 🚀.",
     "crumbs": [
@@ -1199,9 +1199,9 @@
   {
     "objectID": "coding/week_02/03_versioncontrol.html#creating-an-r-script-and-committing-changes",
     "href": "coding/week_02/03_versioncontrol.html#creating-an-r-script-and-committing-changes",
-    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "title": "Git and GitHub for Ag Data Science 🌱",
     "section": "9.2 📂 Creating an R Script and Committing Changes",
-    "text": "9.2 📂 Creating an R Script and Committing Changes\n\nOpen GitHub Desktop and click Clone a Repository.\nSelect your repository and choose a local directory.\nOpen RStudio and create a new file named hello.R.\nAdd the following content:\nprint(\"Hello R world!\")\nSave the file and return to GitHub Desktop.\nYou should see the file listed under Changes.\nWrite a commit message (e.g., “Added hello.R”) and click Commit to main.\nClick Push Origin to upload the changes to GitHub.",
+    "text": "9.2 📂 Creating an R Script and Committing Changes\n\nOpen GitHub Desktop and click Clone a Repository.\nSelect your repository and choose a local directory.\nCreate a new Quarto file:\n\nGo to File → New File → Quarto Document…\nTitle: Hello Quarto\nFormat: HTML\nClick Create\n\nSave the file inside your repository folder as hello.qmd.\nAdd the following content to hello.qmd:\n\n---\ntitle: \"Hello Quarto\"\nformat: html\n---\n\n# My first Quarto file\nThis document includes text and an R code chunk.\n\nCreate your first code chunk\n\n\n## My first chunk:\n    print(\"Hello Quarto world!\")\n\n[1] \"Hello Quarto world!\"\n\n\n\nRender the document in RStudio:\n\nClick Render\nThis should create an output file like hello.html in the same folder.\n\nReturn to GitHub Desktop.\nYou should see changes listed (often hello.qmd and hello.html).\nWrite a commit message (e.g., “Added hello.qmd”) and click Commit to main.\nClick Push origin to upload the changes to GitHub.",
     "crumbs": [
       "Lessons",
       "03-Git & GitHub"
@@ -1210,7 +1210,7 @@
   {
     "objectID": "coding/week_02/03_versioncontrol.html#cloning-or-pulling-changes",
     "href": "coding/week_02/03_versioncontrol.html#cloning-or-pulling-changes",
-    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "title": "Git and GitHub for Ag Data Science 🌱",
     "section": "9.3 🔄 Cloning or Pulling Changes",
     "text": "9.3 🔄 Cloning or Pulling Changes\n\nIf you want to work on an existing repository, click Clone Repository in GitHub Desktop.\nSelect a repository and choose a local directory.\nIf changes have been made remotely, click Fetch Origin and then Pull Origin to update your local version.",
     "crumbs": [
@@ -1271,6 +1271,39 @@
     "crumbs": [
       "Quarto",
       "Quarto Basics"
+    ]
+  },
+  {
+    "objectID": "coding/week_02/03_versioncontrol.html#create-a-github-account-1",
+    "href": "coding/week_02/03_versioncontrol.html#create-a-github-account-1",
+    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "section": "9.3 2️⃣ Create a GitHub Account",
+    "text": "9.3 2️⃣ Create a GitHub Account\nGitHub is a cloud-based platform that stores your Git repositories online.\n\n🌍 Go to GitHub and sign up.\nSet up your GitHub profile and SSH key (optional but recommended for authentication).",
+    "crumbs": [
+      "Lessons",
+      "03-Git & GitHub"
+    ]
+  },
+  {
+    "objectID": "coding/week_02/03_versioncontrol.html#creating-a-github-repository-1",
+    "href": "coding/week_02/03_versioncontrol.html#creating-a-github-repository-1",
+    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "section": "13.1 ✅ Creating a GitHub Repository",
+    "text": "13.1 ✅ Creating a GitHub Repository\n\nOpen GitHub and click New Repository ➕.\nName the repository (e.g., my-first-repo) and choose Public or Private.\nClick Create Repository 🚀.",
+    "crumbs": [
+      "Lessons",
+      "03-Git & GitHub"
+    ]
+  },
+  {
+    "objectID": "coding/week_02/03_versioncontrol.html#creating-an-r-script-and-committing-changes-1",
+    "href": "coding/week_02/03_versioncontrol.html#creating-an-r-script-and-committing-changes-1",
+    "title": "🌱 Getting Started with Git and GitHub for Ag Data Science",
+    "section": "13.2 📂 Creating an R Script and Committing Changes",
+    "text": "13.2 📂 Creating an R Script and Committing Changes\n\nOpen GitHub Desktop and click Clone a Repository.\nSelect your repository and choose a local directory.\nCreate a new Quarto file:\n\nGo to File → New File → Quarto Document…\nTitle: Hello Quarto\nFormat: HTML\nClick Create\n\nSave the file inside your repository folder as hello.qmd.\nAdd the following content to hello.qmd:\n\n---\ntitle: \"Hello Quarto\"\nformat: html\n---\n\n# My first Quarto file\n\nThis document includes text and an R code chunk.\n\n## My first chunk:\n  ``` {r}\n    print(\"Hello Quarto world!\")\n\n7. Render the document in RStudio:\n   - Click **Render**\n   - This should create an output file like `hello.html` in the same folder.\n\n8. Return to **GitHub Desktop**.\n\n9. You should see changes listed (often `hello.qmd` and `hello.html`).\n\n10. Write a commit message (e.g., \"Added hello.qmd\") and click **Commit to main**.\n\n11. Click **Push origin** to upload the changes to GitHub.\n\n## 🔄 Cloning or Pulling Changes\n\n1.  If you want to work on an existing repository, click **Clone Repository** in GitHub Desktop.\n\n2.  Select a repository and choose a local directory.\n\n3.  If changes have been made remotely, click **Fetch Origin** and then **Pull Origin** to update your local version.\n\n------------------------------------------------------------------------\n\n# 📚 Further Learning\n\n-   📘 [Pro Git Book (Free)](https://git-scm.com/book/en/v2)\n-   🎥 [GitHub Docs & Tutorials](https://docs.github.com/en/get-started)\n-   🏆 [Awesome GitHub Repositories](https://github.com/topics/git)\n::::::\n:::::::",
+    "crumbs": [
+      "Lessons",
+      "03-Git & GitHub"
     ]
   }
 ]

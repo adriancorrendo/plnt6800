@@ -1,5 +1,5 @@
 ---
-title: "🌱 Getting Started with Git and GitHub for Ag Data Science"
+title: "Git and GitHub for Ag Data Science 🌱"
 description: "A beginner-friendly introduction to version control and collaboration in R projects using GitHub and GitHub Desktop."
 author: "Dr. Adrian Correndo"
 date: "2026-01-16"
@@ -199,21 +199,42 @@ For those who prefer a graphical user interface (GUI), **GitHub Desktop** 🖥 s
 
 2.  Select your repository and choose a local directory.
 
-3.  Open RStudio and create a new file named `hello.R`.
+4. Create a new Quarto file:
+   - Go to **File → New File → Quarto Document…**
+   - Title: `Hello Quarto`
+   - Format: **HTML**
+   - Click **Create**
+5. Save the file inside your repository folder as `hello.qmd`.
 
-4.  Add the following content:
+6. Add the following content to `hello.qmd`:
 
-    ``` r
-    print("Hello R world!")
-    ```
+```{.markdown}
+---
+title: "Hello Quarto"
+format: html
+---
 
-5.  Save the file and return to GitHub Desktop.
+# My first Quarto file
+This document includes text and an R code chunk.
+```
 
-6.  You should see the file listed under **Changes**.
+7. Create your first code chunk
+``` {r}
+## My first chunk:
+    print("Hello Quarto world!")
+```
 
-7.  Write a commit message (e.g., "Added hello.R") and click **Commit to main**.
+7. Render the document in RStudio:
+   - Click **Render**
+   - This should create an output file like `hello.html` in the same folder.
 
-8.  Click **Push Origin** to upload the changes to GitHub.
+8. Return to **GitHub Desktop**.
+
+9. You should see changes listed (often `hello.qmd` and `hello.html`).
+
+10. Write a commit message (e.g., "Added hello.qmd") and click **Commit to main**.
+
+11. Click **Push origin** to upload the changes to GitHub.
 
 ## 🔄 Cloning or Pulling Changes
 
