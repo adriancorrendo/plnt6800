@@ -67,6 +67,10 @@ website:
         contents:
           - href: coding/quarto/quarto.qmd
             text: "Quarto Basics"
+      - section: "FAIR Data"
+        contents:
+          - href: coding/fair_care/fair_care.qmd
+            text: "Fair & Care"
       - section: "Calendar"
         contents:
           - href: outline/calendar.qmd

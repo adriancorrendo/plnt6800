@@ -1,0 +1,161 @@
+---
+title: "🛡️ Protecting Data Value: FAIR + CARE in Practice"
+author: "Dr. Adrian Correndo"
+date: "2026-01-16"
+categories: [FAIR, CARE, data sharing, data ethics, data management]
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 4
+    number-sections: true
+    code-tools: true
+---
+
+## 🎓 Why talk about data protection in a coding class?
+
+When we learn coding, we often focus on *how* to analyze data. But in real projects, the hardest (and most important) questions are often:
+
+- Should we collect/share this data at all?
+- Who could be harmed if it’s misused?
+- How do we make data useful without losing trust or violating rights?
+
+Good data management protects three things:
+
+1. **Privacy** 🔒 — preventing inappropriate exposure of personal or sensitive information  
+2. **Integrity** ✅ — ensuring data aren’t altered, corrupted, or misrepresented  
+3. **Value** 💡 — making data understandable and reusable so it can support learning, decisions, and research  
+
+---
+
+## ✨ FAIR principles 
+
+**FAIR** is about making data (and metadata) *easy to discover and reuse*—by both people and computers.
+
+- **Findable:** others can locate the dataset (titles, keywords, metadata, persistent links)
+- **Accessible:** it can be retrieved in a controlled way (open when possible, restricted when needed)
+- **Interoperable:** it uses standard formats and vocabularies so tools can combine it with other data
+- **Reusable:** it includes enough context (methods, units, codes, license) to be reused correctly
+
+::: {.callout-note}
+### ✅ Key idea
+**FAIR does *not* mean “open.”**  
+Data can be restricted and still be FAIR if it is well-described and the access conditions are clear.
+:::
+
+---
+
+## 🌿 CARE principles
+
+**CARE** focuses on the *people and communities behind data*, especially when data relate to **Indigenous Peoples** and Indigenous Knowledge.
+
+- **Collective benefit:** data use should support community wellbeing (not just outside interests)
+- **Authority to control:** communities have rights and interests in how data are collected, accessed, and used
+- **Responsibility:** users of data must be accountable and support respectful relationships
+- **Ethics:** data use should minimize harm and align with community values and consent
+
+::: {.callout-important}
+### 🧭 Key idea
+CARE emphasizes **rights, power, relationships, and purpose**—not just technical usability.
+:::
+
+---
+
+## 🧩 FAIR + CARE together
+
+FAIR and CARE answer different questions:
+
+- **FAIR asks:** *Can this dataset be found and reused properly?*
+- **CARE asks:** *Should it be used this way, and who benefits or could be harmed?*
+
+They complement each other:
+
+- You can make data technically reusable (**FAIR**) while still respecting rights, consent, and community governance (**CARE**).
+- A dataset can be well-organized but still inappropriate to share if it ignores authority, consent, or potential harm.
+
+::: {.callout-tip}
+### ⭐ Takeaway
+**FAIR improves reusability. CARE protects people and communities.**  
+Strong data practice needs both.
+:::
+
+---
+
+## ✅ Practical checklist for student projects
+
+Use this before sharing data, code, or a repository.
+
+### 🔒 1) Privacy & sensitivity
+- Does the dataset include personal, confidential, location-based, or culturally sensitive information?
+- Have you removed identifiers (when appropriate) and documented what was removed?
+- Are access rules clear (open vs restricted)?
+
+::: {.callout-warning}
+### ⚠️ Caution
+Even if you remove names, **small datasets + detailed locations + rare characteristics** can still identify people or communities.
+:::
+
+### ✅ 2) Integrity & trust
+- Do you track versions of files (e.g., Git commits, file naming, or release tags)?
+- Can someone reproduce your results from your code + data description?
+- Did you document cleaning steps and assumptions?
+
+### ✨ 3) FAIR basics
+- Is there a clear `README` describing what the dataset is and how to use it?
+- Are variables explained (a data dictionary)?
+- Are formats standard (e.g., `.csv`, consistent units, consistent column names)?
+- Is there a license or clear re-use statement?
+
+### 🌿 4) CARE basics
+- Who does the data describe, and who should have a say in how it is used?
+- Does the project involve Indigenous data or knowledge?
+- Do you have permission/consent and the right governance process for use and sharing?
+- Can you explain who benefits from this work and how potential harms are reduced?
+
+---
+
+
+## 🏁 In a nutshell
+
+* **FAIR helps others use data well.**  <br/>
+* **CARE helps ensure data use is right and respectful.**   <br/>
+* Together, they help protect **privacy**, **integrity**, and the **value** of data. 🛡️
+
+## 🗣️To think about...
+
+Pick one scenario:
+
+1. A dataset contains farm trial results with GPS coordinates  
+2. A dataset includes survey responses from a small community  
+3. A dataset includes information related to Indigenous lands, communities, or knowledge  
+
+Consider the following questions:
+- What could go wrong if the data are shared publicly?
+- What would you do to make the project more FAIR?
+- What CARE questions should be asked before publishing?
+
+::: {.callout-note}
+### 🧠 Optional prompt
+Write a 3–4 sentence “sharing decision” for your scenario: <br/>
+- **What will be shared?** <br/>
+- **What will be restricted (and why)?**  <br/>
+- **How will you document access conditions and responsibilities?**  <br/>
+:::
+
+---
+
+## 📚 Suggested reading
+
+### ✨ FAIR
+- FAIR Guiding Principles [(Wilkinson et al., 2016)](https://www.nature.com/articles/sdata201618)  
+- [GO FAIR overview](https://www.go-fair.org/fair-principles/)  
+- [The Turing Way Book](https://book.the-turing-way.org/reproducible-research/rdm/rdm-fair/)
+
+### 🌿 CARE + Indigenous Data Governance
+- Global Indigenous Data Alliance (CARE): [https://www.gida-global.org/care](https://www.gida-global.org/care)  
+- CARE principles paper [(Carroll et al., 2020)](https://datascience.codata.org/articles/10.5334/dsj-2020-043/)  
+
+### 🧩 FAIR + CARE together
+- Operationalizing FAIR + CARE [(Carroll et al., 2021)]( https://www.nature.com/articles/s41597-021-00892-0)  
+
+---
